@@ -26,7 +26,7 @@
 <!ENTITY textPick.accesskey    "W">
 <!ENTITY needRestart.label     "*Changes to this setting will take effect after you restart Mozilla.">
 
-<!ENTITY leaveBlank.tooltip    "Leave blank to use the default tagline file">
+<!ENTITY leaveBlank.tooltip    "Leave blank to use the default tagline file.">
 
 
 <!ENTITY treeFormat.label      "Formatting">
@@ -50,6 +50,7 @@
 
 <!ENTITY treeMultiline.label   "Multi-line">
 <!ENTITY prefMultiline.label   "TagZilla: Multi-line taglines">
+<!ENTITY multiline.caption     "Multi-line taglines">
 
 <!ENTITY convNewline.label     "Convert \n to newline in taglines">
 <!ENTITY convNewline.accesskey "n">
@@ -67,3 +68,8 @@
 based on the presence of the separator line below.  If it is found, it is used to
 separate individual taglines from each other.  If it is not found, the file
 is loaded as if it contained single-line taglines.">
+
+<!ENTITY tab.general            "General">
+<!ENTITY tab.browser            "Browser">
+<!ENTITY tab.mailnews           "Mail/News">
+<!ENTITY tab.about              "About">

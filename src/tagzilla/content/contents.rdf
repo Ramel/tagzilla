@@ -8,13 +8,15 @@
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:tagzilla"
-    chrome:displayName="TagZilla 0.041"
+    chrome:displayName="TagZilla 0.049"
     chrome:author="David Perry - d.perry@utoronto.ca"
     chrome:name="tagzilla"
     chrome:extension="true"
-    chrome:description="This is a tagline theft and management system for Phoenix and Mozilla."
-    chrome:localeVersion="0.041"
-    chrome:skinVersion="0.041">
+    chrome:description="A tagline theft and management system for Mozilla Browser, Firebird and Thunderbird."
+    chrome:authorURL="http://tagzilla.mozdev.org"
+    chrome:settingsURL="chrome://tagzilla/content/pref/tagzillaPrefDialog.xul"
+    chrome:localeVersion="0.049"
+    chrome:skinVersion="0.049">
   </RDF:Description>
 
   <RDF:Seq about="urn:mozilla:overlays">
@@ -38,7 +40,7 @@
   </RDF:Seq>
 
   <RDF:Seq about="chrome://browser/content/browser.xul">
-    <RDF:li>chrome://tagzilla/content/tagzillaPhoenixOverlay.xul</RDF:li>
+    <RDF:li>chrome://tagzilla/content/tagzillaFirebirdOverlay.xul</RDF:li>
   </RDF:Seq>
 
   <RDF:Seq about="chrome://communicator/content/contentAreaContextOverlay.xul">
@@ -47,23 +49,16 @@
 
   <RDF:Seq about="chrome://messenger/content/mailWindowOverlay.xul">
     <RDF:li>chrome://tagzilla/content/tagzillaMailOverlay.xul</RDF:li>
+    <RDF:li>chrome://tagzilla/content/tagzillaThunderbirdOverlay.xul</RDF:li>
   </RDF:Seq>
 
   <RDF:Seq about="chrome://messenger/content/messengercompose/messengercompose.xul">
     <RDF:li>chrome://tagzilla/content/tagzillaComposeOverlay.xul</RDF:li>
+    <RDF:li>chrome://tagzilla/content/tagzillaThunderbirdOverlay.xul</RDF:li>
   </RDF:Seq>
 
   <RDF:Seq about="chrome://communicator/content/pref/preftree.xul">
     <RDF:li>chrome://tagzilla/content/pref/tagzillaPrefOverlay.xul</RDF:li>
-  </RDF:Seq>
-
-  <!-- this went out in Phoenix 0.3 or so; is kept here for compatibility -->
-  <RDF:Seq about="chrome://browser/content/pref/preftree.xul">
-    <RDF:li>chrome://tagzilla/content/pref/tagzillaMiniPrefOverlay.xul</RDF:li>
-  </RDF:Seq>
-
-  <RDF:Seq about="chrome://browser/content/pref/pref.xul">
-    <RDF:li>chrome://tagzilla/content/pref/tagzillaMiniPrefOverlay.xul</RDF:li>
   </RDF:Seq>
 
 </RDF:RDF>

@@ -1,60 +1,45 @@
-// customizable behavior
-var shortName = "tagzilla";
-var longName = "TagZilla 0.041";
-var gVersion = "0.041";
-var srDest = 180;
+const APP_DISPLAY_NAME = "TagZilla";
+const APP_NAME = "tagzilla";
+const APP_PACKAGE = "/tagzilla.mozdev.org/tagzilla";
+const APP_VERSION = "0.049";
 
-// this function verifies disk space in kilobytes
-function verifyDiskSpace(dirPath, spaceRequired)
-{
-  var spaceAvailable;
+const APP_JAR_FILE = "tagzilla.jar";
+const APP_CONTENT_FOLDER = "tagzilla/content/";
+const APP_LOCALE_FOLDER  = "tagzilla/locale/en-US/";
 
-  // Get the available disk space on the given path
-  spaceAvailable = fileGetDiskSpaceAvailable(dirPath);
+const APP_SUCCESS_MESSAGE = "You may need to restart Thunderbird first.";
 
-  // Convert the available disk space into kilobytes
-  spaceAvailable = parseInt(spaceAvailable / 1024);
 
-  // do the verification
-  if (spaceAvailable < spaceRequired)
-  {
-    logComment("Insufficient disk space: " + dirPath);
-    logComment("  required : " + spaceRequired + " K");
-    logComment("  available: " + spaceAvailable + " K");
-    return false;
+const INST_TO_PROFILE = "Do you wish to install "+APP_DISPLAY_NAME+" to your profile?\nThis will mean it does not need reinstalling when you update Mozilla Thunderbird.\n(Click Cancel if you want "+APP_DISPLAY_NAME+" installing to the Thunderbird directory.)";
+
+initInstall(APP_NAME, APP_PACKAGE, APP_VERSION);
+
+// profile installs only work since 2003-03-06
+var instToProfile = confirm(INST_TO_PROFILE);
+
+var chromef = instToProfile ? getFolder("Profile", "chrome") : getFolder("chrome");
+var err = addFile(APP_PACKAGE, APP_VERSION, APP_JAR_FILE, chromef, null)
+
+if(err == SUCCESS) {
+	var jar = getFolder(chromef, APP_JAR_FILE);
+	if(instToProfile) {
+  	registerChrome(CONTENT | PROFILE_CHROME, jar, APP_CONTENT_FOLDER);
+  	registerChrome(LOCALE  | PROFILE_CHROME, jar, APP_LOCALE_FOLDER);
+  } else {
+  	registerChrome(CONTENT | DELAYED_CHROME, jar, APP_CONTENT_FOLDER);
+  	registerChrome(LOCALE  | DELAYED_CHROME, jar, APP_LOCALE_FOLDER);
   }
-
-  return true;
+	err = performInstall();
+	if(err == SUCCESS || err == 999) {
+		alert(APP_DISPLAY_NAME+" "+APP_VERSION+" has been succesfully installed.\n"+APP_SUCCESS_MESSAGE);
+	} else {
+		alert("Install failed. Error code:" + err);
+		cancelInstall(err);
+	}
+} else {
+	alert("Failed to create " +APP_JAR_FILE +"\n"
+		+"You probably don't have appropriate permissions \n"
+		+"(write access to your profile or chrome directory). \n"
+		+"_____________________________\nError code:" + err);
+	cancelInstall(err);
 }
-
-// main code block
-var err = initInstall(longName, shortName, gVersion);
-logComment("initInstall: " + err);
-
-var fProgram = getFolder("Program");
-var fChrome = getFolder("Chrome");
-var fIcons = getFolder("Chrome","icons");
-
-if (verifyDiskSpace(fProgram, srDest))
-{
-  err = addDirectory("", gVersion, shortName, fChrome, shortName, true);
-  logComment("addDirectory: " + err);
-  err = addDirectory("", "", "icons", fIcons, "", true);
-  logComment("addDirectory(2): " + err);
-
-  registerChrome(CONTENT | DELAYED_CHROME, getFolder(fChrome, shortName),
-    "content/");
-  registerChrome(LOCALE | DELAYED_CHROME, getFolder(fChrome, shortName),
-    "locale/en-US/");
-
-  if (getLastError() == SUCCESS)
-  {
-    err = performInstall(); 
-    logComment("performInstall: " + err);
-  }
-  else
-  {
-    cancelInstall(err);
-  }
-}
-// end main

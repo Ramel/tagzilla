@@ -1,5 +1,5 @@
 <?xml version="1.0"?> 
-
+<!-- vim: set et ts=2 sw=2 sts=2: -->
 <!--
  * The contents of this file are subject to the Mozilla Public
  * License Version 1.1 (the "License") you may not use this file
@@ -33,33 +33,24 @@
  * GPL.
    -->
 
-<!DOCTYPE window [
-<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
-%brandDTD;
-<!ENTITY % identityDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" >
-%identityDTD;
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % tzprefsDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" > %tzprefsDTD;
 ]>
 
-<overlay id="tagzillaPrefOverlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      buttons="accept,cancel"
+      width="600" height="450"
+      ondialogaccept="document.getElementById('panel').contentDocument.defaultView.savePrefs()"
+      title="&prefMain.label;">
 
-  <treechildren id="panelChildren">
-    <treeitem id="tagzilla" container="true">
-      <treerow>
-        <treecell class="treecell-indent" id="tagzilla"
-                  url="chrome://tagzilla/content/pref/pref-tagzilla-mini.xul"
-                  label="&treeMain.label;"/>
-      </treerow>
-      <treechildren>
-        <treeitem>
-          <treerow>
-            <treecell id="tagzilla-multiline" class="treecell-indent"
-                      url="chrome://tagzilla/content/pref/pref-tagzilla-multiline.xul"
-                      label="&treeMultiline.label;"/>
-          </treerow>
-        </treeitem>
-      </treechildren>
-    </treeitem>
-  </treechildren>
+  <script type="application/x-javascript">
+  <![CDATA[
+    var tzDIYdialog = true;
+  ]]>
+  </script>
+  <iframe id="panel" flex="1"
+    src="chrome://tagzilla/content/pref/tagzillaBirdPrefs.xul"/>
 
-</overlay>
+</dialog>

@@ -6,3 +6,6 @@ CVS/*
 exclude.lst
 tbstyle
 tbstyle/*
+*/.xvpics
+*/.xvpics/*
+install.js

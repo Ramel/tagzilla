@@ -17,10 +17,10 @@
   cursor: pointer;
 }
 
-/* Large Phoenix toolbar icon */
+/* Large Bird toolbar icon */
 
 #launchTagzilla {
-  list-style-image: url("chrome://tagzilla/content/tagzilla-phoenix.png") !important;
+  list-style-image: url("chrome://tagzilla/content/tagzilla-toolbar.png");
   -moz-image-region: rect(0px 43px 43px 0px);
 }
 
@@ -32,10 +32,10 @@
   -moz-image-region: rect(0px 129px 43px 86px);
 }
 
-/* Small Phoenix toolbar icon */
+/* Small Bird toolbar icon */
 
 toolbar[iconsize="small"] #launchTagzilla {
-  list-style-image: url("chrome://tagzilla/content/tagzilla-phoenix-small.png") !important;
+  list-style-image: url("chrome://tagzilla/content/tagzilla-toolbar-small.png");
   -moz-image-region: rect(0px 25px 25px 0px);
 }
 

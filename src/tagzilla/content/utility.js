@@ -1,3 +1,4 @@
+// vim: set et ts=2 sw=2 sts=2:
 /*
  * The contents of this file are subject to the Mozilla Public
  * License Version 1.1 (the "License") you may not use this file
@@ -35,6 +36,8 @@
 // Globals
 ////////////////////////////////////////////////////////////////////////////////
 
+var tzuDEBUG = false;
+
 var tzIsupports;
 var tzIStr;
 if(Components.classes["@mozilla.org/supports-wstring;1"]) {
@@ -44,6 +47,15 @@ if(Components.classes["@mozilla.org/supports-wstring;1"]) {
 else {
   tzIsupports = "@mozilla.org/supports-string;1";
   tzIStr = Components.interfaces.nsISupportsString;
+}
+
+var tzDump;
+if(tzuDEBUG) {
+  tzDump = function(aMsg) { dump(aMsg); };
+}
+else
+{
+  tzDump = function() { };
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,77 +75,88 @@ else {
 function readMyPref( prefIdentifier, prefType, defaultSetup )
 {
   var prefValue;
-  var mvPreference = Components.classes[ "@mozilla.org/preferences;1" ]
-                               .getService( Components.interfaces.nsIPrefBranch );
+  var mvPreference = Components.classes[ "@mozilla.org/preferences-service;1" ]
+                      .getService( Components.interfaces.nsIPrefBranch );
 
+  tzDump( "readMyPref: "+prefType+" "+prefIdentifier+": " );
   switch( prefType )
-    {
-      case "bool": 
-        {
-          try {
-            prefValue = mvPreference.getBoolPref( prefIdentifier ); 
-          }
-          catch( ex ) {
-            writePref( prefType, prefIdentifier, defaultSetup );
-            return ( defaultSetup );
-          }
-          if ( prefValue || !prefValue ) 
-            return ( prefValue );
-          else return ( defaultSetup );
-          break;
+  {
+    case "bool":
+      {
+        try {
+          prefValue = mvPreference.getBoolPref( prefIdentifier );
+          tzDump( "got bool '"+prefValue+"'\n");
         }
-      case "int":
-        {
-          try {
-            prefValue = mvPreference.getIntPref( prefIdentifier );
-          }
-          catch( ex ) {
-            writePref( prefType, prefIdentifier, defaultSetup );
-            return ( defaultSetup );
-          }
+        catch( ex ) {
+          tzDump( "not set, writing default\n" );
+          writePref( prefType, prefIdentifier, defaultSetup );
+          return ( defaultSetup );
+        }
+        if ( prefValue || !prefValue )
           return ( prefValue );
-          break;
+        else return ( defaultSetup );
+        break;
+      }
+    case "int":
+      {
+        try {
+          prefValue = mvPreference.getIntPref( prefIdentifier );
+          tzDump( "got int '"+prefValue+"'\n");
         }
-      case "string":
-        {
-          try {
-            prefValue = mvPreference.getComplexValue( prefIdentifier,
-                                     tzIStr );
-          }
-          catch( ex ) {
-            writePref( prefType, prefIdentifier, defaultSetup );
-            return ( defaultSetup );
-          }
-          return prefValue.data.length ? prefValue.data : defaultSetup;
+        catch( ex ) {
+          tzDump( "not set, writing default\n" );
+          writePref( prefType, prefIdentifier, defaultSetup );
+          return ( defaultSetup );
         }
-      case "char":
-        {
-          try {
-            prefValue = mvPreference.getCharPref( prefIdentifier );
-          }
-          catch( ex ) {
-            writePref( prefType, prefIdentifier, defaultSetup );
-            return ( defaultSetup );
-          }
-	        break;
+        return ( prefValue );
+        break;
+      }
+    case "string":
+      {
+        try {
+          prefValue = mvPreference.getComplexValue( prefIdentifier,
+                                   tzIStr );
+          tzDump( "got string '"+prefValue+"'\n");
         }
-      case "url":
-        {
-          try {
-            prefValue = mvPreference.getComplexValue( prefIdentifier,
-                                     Components.interfaces.nsIPrefLocalizedString );
-          }
-          catch( ex ) {
-            writePref( prefType, prefIdentifier, defaultSetup );
-            return ( defaultSetup );
-          }
-          return prefValue.data.length ? prefValue.data : defaultSetup;
+        catch( ex ) {
+          tzDump( "not set, writing default\n" );
+          writePref( prefType, prefIdentifier, defaultSetup );
+          return ( defaultSetup );
         }
-      default:
-        {
-          dump( 'readMyPref: Unsupported pref type "'+prefType+'" used\n' );
+        return prefValue.data.length ? prefValue.data : defaultSetup;
+      }
+    case "char":
+      {
+        try {
+          prefValue = mvPreference.getCharPref( prefIdentifier );
+          tzDump( "got char '"+prefValue+"'\n");
         }
+        catch( ex ) {
+          tzDump( "not set, writing default\n" );
+          writePref( prefType, prefIdentifier, defaultSetup );
+          return ( defaultSetup );
+        }
+        break;
+      }
+    case "url":
+      {
+        try {
+          prefValue = mvPreference.getComplexValue( prefIdentifier,
+            Components.interfaces.nsIPrefLocalizedString );
+          tzDump( "got url '"+prefValue+"'\n");
+        }
+        catch( ex ) {
+          tzDump( "not set, writing default\n" );
+          writePref( prefType, prefIdentifier, defaultSetup );
+          return ( defaultSetup );
+        }
+        return prefValue.data.length ? prefValue.data : defaultSetup;
+      }
+    default:
+    {
+      tzDump( "unsupported type\n" );
     }
+  }
   return ( prefValue );
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,19 +175,28 @@ function readMyPref( prefIdentifier, prefType, defaultSetup )
 ////////////////////////////////////////////////////////////////////////////////
 function writePref( prefType, prefString, prefValue )
 {
-  var mvPreference = Components.classes[ "@mozilla.org/preferences;1" ]
+  var mvPreference = Components.classes[ "@mozilla.org/preferences-service;1" ]
                      .getService( Components.interfaces.nsIPrefBranch );
 
+  tzDump( "writePref: "+prefType+" "+prefString+" '"+prefValue+"': " );
   try {
     switch ( prefType ) {
       case "bool":
         {
-          mvPreference.setBoolPref( prefString, prefValue );
+          if( !prefValue || String(prefValue).match(/^(false|no|off)$/i) ) {
+            mvPreference.setBoolPref( prefString, false );
+            tzDump( "wrote False\n" );
+          }
+          else {
+            mvPreference.setBoolPref( prefString, true );
+            tzDump( "wrote True\n" );
+          }
           break;
         }
       case "int":
         {
-          mvPreference.setIntPref( prefString, prefValue );
+          mvPreference.setIntPref( prefString, parseInt(prefValue) );
+          tzDump( "wrote int '"+parseInt(prefValue)+"'\n" );
           break;
         }
       case "string":
@@ -172,26 +204,30 @@ function writePref( prefType, prefString, prefValue )
           var str = Components.classes[ tzIsupports ].createInstance(tzIStr);
           str.data = prefValue;
           mvPreference.setComplexValue( prefString, tzIStr, str );
+          tzDump( "wrote string\n" );
           break;
         }
       case "url":
         {
           mvPreference.setComplexValue( prefIdentifier, Components.interfaces.nsIPrefLocalizedString, 
                                         prefValue );
+          tzDump( "wrote url\n" );
           break;
         }
       case "char":
         {
           mvPreference.setCharPref( prefString, prefValue );
+          tzDump( "wrote char\n" );
           break;
         }
       default:
         {
-          dump( 'writePref: Unsupported pref type "'+prefType+'" used\n' );
+          tzDump( "unsupported type\n" );
         }
     }
   }
-  catch ( ex ) { // die silently 
+  catch ( ex ) { // die silently
+    tzDump( "...\n" );
     dump("writePref:"+ex+"\n");
   }
 }
@@ -232,7 +268,7 @@ function getText(aStr) {
 //    This must be an nsILocalFile.  new Dir("foo") in jslib/io/dir.js will
 //    do the trick, but you have to do it yourself.
 // Returns:
-//  Name of file picked, in URL format, or null if cancelled
+//  Name of file picked, in path format, or null if cancelled
 ////////////////////////////////////////////////////////////////////////////////
 function txtFilePicker(aTitle, aSave, aStart) {
   var retVal = null;
@@ -300,3 +336,5 @@ function openUrl(aUrl) {
     window.open(aUrl);
   }
 }
+
+tzDump( "tagzilla/utility.js loaded\n" );

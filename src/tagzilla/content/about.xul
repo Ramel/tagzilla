@@ -58,7 +58,7 @@
 <groupbox align="center" orient="horizontal">
 <vbox>
   <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
-  <text value="0.041"/>
+  <text value="0.049"/>
   <separator class="thin"/>
   <text value="&author.label;" style="font-weight: bold;"/>
   <text value="David Perry"/>

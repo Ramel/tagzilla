@@ -76,7 +76,7 @@
       <spring flex="1"/>
       <toolbarbutton id="openPrefs" label="&prefs.label;"
                      accesskey="&prefs.accessKey;"
-                     oncommand="goPreferences('tagzilla','chrome://tagzilla/content/pref/pref-tagzilla.xul','tagzilla')"/>
+                     oncommand="window.openDialog('chrome://tagzilla/content/pref/tagzillaPrefDialog.xul', 'tagzillaPrefWin', 'chrome')"/>
       <toolbarbutton id="aboutTagzilla" label="&about.label;"
                      accesskey="&about.accessKey;"
                      oncommand="showAboutDialog()"/>

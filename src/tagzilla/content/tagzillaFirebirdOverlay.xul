@@ -40,12 +40,14 @@
 %tagzillaDTD;
 ]>
 
-<overlay id="tagzillaTasksOverlay"
+<overlay id="tagzillaFirebirdOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   onload="tzOverlayLoad()">
 
+  <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
-
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaNavigatorOverlay.js"/>
   <script type="application/x-javascript">
     <![CDATA[
       window.addEventListener("load",tzOverlayLoad,true);
@@ -60,12 +62,8 @@
         // initialize default preferences
         readMyPref("tagzilla.default.file","string","");
         readMyPref("tagzilla.default.autosave","bool",true);
-        readMyPref("tagzilla.mail.prefix","string","\\n-=-=-\\n... ");
-        readMyPref("tagzilla.mail.suffix","string","\\n* TagZilla 0.049");
         readMyPref("tagzilla.clipboard.prefix","string","");
         readMyPref("tagzilla.clipboard.suffix","string","");
-        readMyPref("tagzilla.mail.auto","bool",true);
-        readMyPref("tagzilla.mail.pick","bool",false);
         readMyPref("tagzilla.newline.convert","bool",true);
         readMyPref("tagzilla.textbox.trapkey","bool",true);
         readMyPref("tagzilla.textbox.pick","bool",false);
@@ -73,23 +71,47 @@
         readMyPref("tagzilla.multiline.delimiter","string","%");
       }
 
+      function tzStealTagline() {
+        var focusedWindow = document.commandDispatcher.focusedWindow;
+        if (focusedWindow == window)
+          focusedWindow = _content;
+        var docCharset = null;
+        if (focusedWindow)
+          docCharset = "charset=" + focusedWindow.document.characterSet;
+        var stolenTag = focusedWindow.__proto__.getSelection.call(focusedWindow);
+        
+        window.openDialog("chrome://tagzilla/content/tagzillaSteal.xul",
+          "_blank", "chrome,all,dialog", stolenTag);
+      }
+
     ]]>
   </script>
 
-  <keyset id="tasksKeys">
-    <key id="key_tagzilla" command="Tasks:TagZilla"
+  <keyset>
+    <key id="key_tagzilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
          key="&tagzilla.keybinding;" modifiers="&tagzilla.keymods;"/>
   </keyset>
 
-  <commandset id="tasksCommands">
-    <command id="Tasks:TagZilla" oncommand="toTagZilla('TZ_CLIPBOARD');"/>
-    <command id="cmd_tagzilla_mail" oncommand="toTagZilla('TZ_MAIL');"/>
-  </commandset>
-
-  <menupopup id="windowPopup">
-    <menuitem id="tasksMenuTagZilla" command="Tasks:TagZilla"
+  <menupopup id="menu_FilePopup">
+    <menuseparator/>
+    <menuitem id="tasksMenuTagZilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
       class="menuitem-iconic menu-iconic icon-tagzilla16"
-      insertafter="tasksMenuNavigator" key="key_tagzilla"
-      label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
+      key="key_tagzilla" label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
   </menupopup>
+
+  <popup id="contentAreaContextMenu"
+         onpopupshown="gContextMenu.showItem('tagzilla-context',
+         gContextMenu.isTextSelected);">
+    <menuitem id="tagzilla-context" insertafter="context-sep-properties"
+              class="menuitem-iconic menu-iconic icon-tagzilla16"
+              label="&tzSteal.label;" accesskey="&tzSteal.accessKey;"
+              oncommand="tzStealTagline()"/>
+  </popup>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="launchTagzilla"
+                   label="&tagzilla.appName;"
+                   oncommand="toTagZilla('TZ_CLIPBOARD')"/>
+  </toolbarpalette>
+
 </overlay>

@@ -40,14 +40,13 @@
 %tagzillaDTD;
 ]>
 
-<overlay id="tagzillaPhoenixOverlay"
+<overlay id="tagzillaThunderbirdOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   onload="tzOverlayLoad()">
 
   <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
-  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaNavigatorOverlay.js"/>
   <script type="application/x-javascript">
     <![CDATA[
       window.addEventListener("load",tzOverlayLoad,true);
@@ -69,19 +68,6 @@
         readMyPref("tagzilla.textbox.pick","bool",false);
         readMyPref("tagzilla.multiline.file","bool",false);
         readMyPref("tagzilla.multiline.delimiter","string","%");
-      }
-
-      function tzStealTagline() {
-        var focusedWindow = document.commandDispatcher.focusedWindow;
-        if (focusedWindow == window)
-          focusedWindow = _content;
-        var docCharset = null;
-        if (focusedWindow)
-          docCharset = "charset=" + focusedWindow.document.characterSet;
-        var stolenTag = focusedWindow.__proto__.getSelection.call(focusedWindow);
-        
-        window.openDialog("chrome://tagzilla/content/tagzillaSteal.xul",
-          "_blank", "chrome,all,dialog", stolenTag);
       }
 
     ]]>
@@ -108,11 +94,20 @@
               oncommand="tzStealTagline()"/>
   </popup>
 
-  <toolbarpalette id="BrowserToolbarPalette">
+  <commandset id="composeCommands">
+    <command id="cmd_tagzilla_mail" oncommand="toTagZilla('TZ_MAIL');"/>
+  </commandset>
+
+  <toolbarpalette id="MailToolbarPalette">
     <toolbarbutton id="launchTagzilla"
                    label="&tagzilla.appName;"
-                   class="toolbarbutton-1"
                    oncommand="toTagZilla('TZ_CLIPBOARD')"/>
+  </toolbarpalette>
+
+  <toolbarpalette id="MsgComposeToolbarPalette">
+    <toolbarbutton id="launchTagzilla"
+                   label="&tagzilla.appName;"
+                   observes="cmd_tagzilla_mail"/>
   </toolbarpalette>
 
 </overlay>

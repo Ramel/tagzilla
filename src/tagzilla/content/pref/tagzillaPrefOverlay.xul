@@ -44,28 +44,12 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <treechildren id="panelChildren">
-    <treeitem id="tagzilla" container="true">
+    <treeitem id="tagzilla" container="false">
       <treerow>
         <treecell class="treecell-indent" id="tagzilla"
-                  url="chrome://tagzilla/content/pref/pref-tagzilla.xul"
+                  url="chrome://tagzilla/content/pref/tagzillaBirdPrefs.xul"
                   label="&treeMain.label;"/>
       </treerow>
-      <treechildren>
-        <treeitem>
-          <treerow>
-            <treecell id="tagzilla-format" class="treecell-indent"
-                      url="chrome://tagzilla/content/pref/pref-tagzilla-format.xul"
-                      label="&treeFormat.label;"/>
-          </treerow>
-        </treeitem>
-        <treeitem>
-          <treerow>
-            <treecell id="tagzilla-multiline" class="treecell-indent"
-                      url="chrome://tagzilla/content/pref/pref-tagzilla-multiline.xul"
-                      label="&treeMultiline.label;"/>
-          </treerow>
-        </treeitem>
-      </treechildren>
     </treeitem>
   </treechildren>
 

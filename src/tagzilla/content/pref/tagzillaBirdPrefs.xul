@@ -1,0 +1,329 @@
+<?xml version="1.0"?> 
+<!-- vim: set et ts=2 sw=2 sts=2: -->
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on December 10, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU General Public License Version 2 or later (the
+ * "GPL"), in which case the provisions of the GPL are applicable
+ * instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of the GPL and not to
+ * allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by
+ * the GPL.  If you do not delete the provisions above, a recipient
+ * may use your version of this file under either the MPL or the
+ * GPL.
+   -->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<!-- ?xul-overlay href="chrome://global/content/globalOverlay.xul"? -->
+
+<!DOCTYPE page [
+  <!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" > %brandDTD;
+  <!ENTITY % tzmainDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" > %tzmainDTD;
+  <!ENTITY % tzprefsDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" > %tzprefsDTD;
+]>
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="onLoad()"
+      onunload="onUnload()"
+      headertitle="&prefMain.label;">
+
+<script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+<script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+<script type="application/x-javascript" src="chrome://tagzilla/content/pref/tagzillaBirdPrefs.js"/>
+<script type="application/x-javascript">
+  <![CDATA[
+    var _elementIDs = [ "tzPref-defaultFile",
+                        "tzPref-defaultSave",
+                        "tzPref-textkey",
+                        "tzPref-convNewline",
+                        "tzPref-mailPrefix",
+                        "tzPref-mailSuffix",
+                        "tzPref-clipPrefix",
+                        "tzPref-clipSuffix",
+                        "tzPref-textPick",
+                        "tzPref-tagMode",
+                        "tzPref-separator"];
+
+  ]]>
+</script>
+
+  <groupbox orient="vertical" id="noJSlib">
+    <caption label="&noJSlib.caption;"/>
+    <description>&noJSlib.desc;</description>
+    <separator />
+    <hbox align="center">
+      <spring flex="1"/>
+      <text value="http://jslib.mozdev.org" class="url"
+          onclick="openUrl('http://jslib.mozdev.org')"/>
+      <spring flex="1"/>
+    </hbox>
+  </groupbox>
+
+  <tabbox id="tzSettingsTabbox" flex="1" style="margin:0px 7px 2px 7px;">
+    <tabs>
+      <tab label="&tab.general;" id="tzGeneralTab"/>
+      <tab label="&tab.browser;" id="tzBrowserTab"/>
+      <tab label="&tab.mailnews;" id="tzMailNewsTab"/>
+    </tabs>
+
+    <tabpanels flex="1">
+
+      <tabpanel id="tzGeneral" orient="vertical">
+        <groupbox orient="vertical" id="tzDefaultFile" align="start">
+          <caption label="&fileCaption.label;"/>
+
+          <hbox autostretch="never" align="center">
+            <textbox id="tzPref-defaultFile"
+                     flex="1"
+                     autostretch="never"
+                     align="center"
+                     size="100%"
+                     prefstring="tagzilla.default.file"
+                     preftype="string"
+                     prefattribute="value"/>
+            <button label="&chooseFile.label;"
+                    accesskey="&chooseFile.accesskey;"
+                    oncommand="pickFile(document.getElementById('tzPref-defaultFile'))"/>
+          </hbox>
+
+          <checkbox id="tzPref-defaultSave"
+                    label="&saveDefault.label;"
+                    accesskey="&saveDefault.accesskey;"
+                    prefstring="tagzilla.default.autosave"
+                    preftype="bool"
+                    prefattribute="checked"/>
+        </groupbox>
+
+        <groupbox orient="vertical" id="tzMultiLine" align="start">
+          <caption label="&multiline.caption;"/>
+
+          <vbox>
+            <description>&multi.desc;</description>
+            <hbox autostretch="never" align="center">
+              <label value="&separator.label;"/>
+              <textbox id="tzPref-separator"
+                       flex="1"
+                       accesskey="&separator.accesskey;"
+                       autostretch="never"
+                       align="center"
+                       size="100%"
+                       preftype="string"
+                       prefstring="tagzilla.multiline.delimiter"
+                       prefattribute="value"/>
+            </hbox>
+
+            <label value="&multiType.caption;"/>
+            <vbox>
+              <radiogroup orient="vertical"
+                          id="tzPref-tagMode"
+                          preftype="bool"
+                          prefattribute="value"
+                          prefstring="tagzilla.multiline.file">
+                <radio label="&singleLine.label;" accesskey="&singleLine.accesskey;"
+                       value="false"/>
+                <radio label="&multiLine.label;" accesskey="&multiLine.accesskey;"
+                       value="true"/>
+              </radiogroup>
+
+              <checkbox id="tzPref-convNewline"
+                        label="&convNewline.label;"
+                        accesskey="&convNewline.accesskey;"
+                        prefstring="tagzilla.newline.convert"
+                        preftype="bool"
+                        prefattribute="checked"/>
+            </vbox>
+          </vbox>
+
+        </groupbox>
+        <spacer flex="1"/>
+        <hbox pack="start">
+          <button label="&about.label;" accesskey="&about.accessKey;"
+            oncommand="window.openDialog('chrome://tagzilla/content/about.xul',
+              getText('about'),'chrome,resizable')"/>
+        </hbox>
+      </tabpanel>
+
+      <tabpanel id="tzBrowser" orient="vertical">
+        <groupbox orient="vertical" id="tzTextboxes" align="start">
+          <caption label="&textarea.caption;"/>
+          <vbox>
+            <checkbox id="tzPref-textkey"
+                      label="&textkey.label;"
+                      accesskey="&textkey.accesskey;"
+                      prefstring="tagzilla.textbox.trapkey"
+                      preftype="bool"
+                      onclick="setTimeout(checkTextPrefs,10)"
+                      prefattribute="checked"/>
+            <hbox>
+              <label value="  "/>
+              <checkbox id="tzPref-textPick"
+                        label="&textPick.label;"
+                        accesskey="&textPick.accesskey;"
+                        prefstring="tagzilla.textbox.pick"
+                        preftype="bool"
+                        prefattribute="checked"/>
+            </hbox>
+            <description disabled="true">&needRestart.label;</description>
+          </vbox>
+        </groupbox>
+
+        <groupbox orient="vertical" id="tzClipboardPrefs" align="start">
+          <caption label="&appearance.label;"/>
+          <grid>
+            <columns>
+              <column/>
+              <column flex="1"/>
+            </columns>
+            <rows>
+              <row align="center">
+                <label
+                      accesskey="&clipPrefix.accesskey;"
+                      value="&prefix.label;"
+                      for="tzPref-clipPrefix"/>
+                <textbox id="tzPref-clipPrefix"
+                         size="100%"
+                         oninput="onClipUpdate()"
+                         accesskey="&clipPrefix.accesskey;"
+                         flex="1"
+                         preftype="string"
+                         prefstring="tagzilla.clipboard.prefix"
+                         prefattribute="value"/>
+              </row>
+              <row align="center">
+                <label
+                      accesskey="&clipSuffix.accesskey;"
+                      value="&suffix.label;"
+                      for="tzPref-clipSuffix"/>
+                <textbox id="tzPref-clipSuffix"
+                         size="100%"
+                         oninput="onClipUpdate()"
+                         accesskey="&clipSuffix.accesskey;"
+                         flex="1"
+                         preftype="string"
+                         prefstring="tagzilla.clipboard.suffix"
+                         prefattribute="value"/>
+              </row>
+            </rows>
+          </grid>
+          <vbox>
+            <textbox multiline="true" readonly="true" flex="1" size="100%"
+              oninput="onClipUpdate()" rows="3" cols="25"
+              wrap="off" value="&sample.tagline;" id="clipSample"/>
+          </vbox>
+          <description disabled="true">&newline.desc;</description>
+        </groupbox>
+      </tabpanel>
+
+      <tabpanel id="tzMailNews" orient="vertical">
+        <groupbox orient="vertical" id="tzAccounts" align="start">
+          <caption label="&message.label;"/>
+          <hbox align="center">
+            <label value="&forAccount.label;"/>
+            <menulist id="msgIdentity" label="..." style="min-width: 175px" flex="1"><!--onCommand="popupCommand()"-->
+              <menupopup id="msgIdentityPopup"/>
+            </menulist>
+          </hbox>
+          <hbox autostretch="never" align="center">
+            <label value="&mailFile.label;"/>
+            <textbox id="mailFile"
+                     flex="1"
+                     autostretch="never"
+                     align="center"
+                     size="100%"/>
+            <button label="&chooseFile.label;"
+                    accesskey="&chooseFile.accesskey;"
+                    oncommand="pickFile(document.getElementById('mailFile'))"/>
+          </hbox>
+          <label value="&leaveBlank.tooltip;"/>
+          <checkbox id="mailAuto"
+                    label="&mailAuto.label;"
+                    accesskey="&mailAuto.accesskey;"
+                    prefstring="tagzilla.mail.auto"
+                    preftype="bool"
+                    onclick="setTimeout(checkMailPrefs,10)"
+                    prefattribute="checked"/>
+          <hbox>
+            <label value="  "/>
+            <checkbox id="mailPick"
+                      label="&mailPick.label;"
+                      accesskey="&mailPick.accesskey;"
+                      prefstring="tagzilla.mail.pick"
+                      preftype="bool"
+                      prefattribute="checked"/>
+          </hbox>
+        </groupbox>
+
+        <groupbox orient="vertical" id="tzMailPrefs" align="start">
+          <caption label="&appearance.label;"/>
+          <grid>
+            <columns>
+              <column/>
+              <column flex="1"/>
+            </columns>
+            <rows>
+              <row align="center">
+                <label
+                      accesskey="&mailPrefix.accesskey;"
+                      value="&prefix.label;"
+                      for="tzPref-mailPrefix"/>
+                <textbox id="tzPref-mailPrefix"
+                         size="100%"
+                         oninput="onMailUpdate()"
+                         accesskey="&mailPrefix.accesskey;"
+                         flex="1"
+                         preftype="string"
+                         prefstring="tagzilla.mail.prefix"
+                         prefattribute="value"/>
+              </row>
+              <row align="center">
+                <label
+                      accesskey="&mailSuffix.accesskey;"
+                      value="&suffix.label;"
+                      for="tzPref-mailSuffix"/>
+                <textbox id="tzPref-mailSuffix"
+                         size="100%"
+                         oninput="onMailUpdate()"
+                         accesskey="&mailSuffix.accesskey;"
+                         flex="1"
+                         preftype="string"
+                         prefstring="tagzilla.mail.suffix"
+                         prefattribute="value"/>
+              </row>
+            </rows>
+          </grid>
+          <vbox>
+            <textbox multiline="true" readonly="true" flex="1" size="100%"
+              oninput="onMailUpdate()" rows="3" cols="25"
+              wrap="off" value="&sample.tagline;" id="mailSample"/>
+          </vbox>
+          <description disabled="true">&newline.desc;</description>
+        </groupbox>
+
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>
+
+
+</page>
