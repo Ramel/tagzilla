@@ -32,6 +32,9 @@ if(err == SUCCESS) {
     var prefFolder = getFolder('Program', 'defaults/pref/');
     addFile("tagzilla", "defaults/preferences/tagzilla_prefs.js", prefFolder, '');
 
+    var compFolder = getFolder('Components');
+    addFile("tagzilla", "components/tzprefs-service.js", compFolder, '');
+
     var jar = getFolder(chromef, APP_JAR_FILE);
     registerChrome( CONTENT    | cflag, jar, APP_CONTENT_FOLDER);
 
