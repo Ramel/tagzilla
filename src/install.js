@@ -2,7 +2,7 @@
 var shortName = "tagzilla";
 var longName = "TagZilla 0.025";
 var gVersion = "0.025";
-var srDest = 100;
+var srDest = 130;
 
 // this function verifies disk space in kilobytes
 function verifyDiskSpace(dirPath, spaceRequired)
