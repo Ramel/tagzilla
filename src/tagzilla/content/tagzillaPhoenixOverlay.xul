@@ -54,7 +54,7 @@
 
       function toTagZilla(aAction) {
         return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
-          "_blank", "chrome,all,dialog", aAction, document);
+          "_blank", "chrome,all,dialog", aAction, window);
       }
 
       function tzOverlayLoad() {

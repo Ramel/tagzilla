@@ -43,6 +43,7 @@ var insButton;  // the Insert (and close) button
 
 var tzCmd;      // command
 var tzDoc;      // window's calling document
+var tzWin;      // window's calling window
 
 var tzList = []; // the actual tagline list
 
@@ -114,7 +115,14 @@ function tzOnLoad() {
   lBox.view = tzTreeView;
 
   tzCmd = window.arguments[0];
-  tzDoc = window.arguments[1];
+  if(window.arguments[1].tagName == 'TEXTAREA') {
+    tzDoc = window.arguments[1];
+  }
+  else {
+    tzWin = window.arguments[1];
+    tzDoc = tzWin.document;
+  }
+
 
   //tzList = new Array();
 
@@ -171,7 +179,18 @@ function tzInsert() {
       if(controller) {
         controller.doCommand('cmd_moveBottom');
       }
-      msgPane.editorShell.InsertText(prefix+selTagline+suffix);
+      if(msgPane.editorShell) {
+        msgPane.editorShell.InsertText(prefix+selTagline+suffix);
+      }
+      else if(tzWin.GetCurrentEditor)
+      {
+        var ed = tzWin.GetCurrentEditor();
+        ed.insertText(prefix+selTagline+suffix);
+      }
+      else {
+        alert("I'm afraid I don't know how to insert taglines in this version\n"+
+              "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
+      }
       setTimeout(tzExit, 10);
     }
   }

@@ -106,8 +106,21 @@ function tzSendCmd(aCmd) {
         if(msgPane) {
           var controller = document.commandDispatcher.getControllerForCommand('cmd_moveBottom');
           controller.doCommand('cmd_moveBottom');
-          msgPane.editorShell.InsertText(prefix+tag+suffix);
+
+          if(msgPane.editorShell) {
+            msgPane.editorShell.InsertText(prefix+tag+suffix);
+          }
+          else if(window.GetCurrentEditor)
+          {
+            var ed = window.GetCurrentEditor();
+            ed.insertText(prefix+tag+suffix);
+          }
+          else {
+            alert("I'm afraid I don't know how to insert taglines in this version\n"+
+                  "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
+          }
         }
+        else alert("Arg");
         eval(tzCmdActions[aCmd]);
       }
       catch(ex) {
