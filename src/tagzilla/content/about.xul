@@ -46,13 +46,24 @@
   title="&tzAbout.title;"
   orient="vertical"
   autostretch="always"
-  onload="sizeToContent()"
+  onload="onAboutLoad()"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml">
 
 <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+<script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
 <script type="application/x-javascript">
 <![CDATA[
+function onAboutLoad() {
+    if( typeof jslibUninstall != "function" )
+        document.getElementById("uninstallButton").setAttribute("disabled","true");
+    sizeToContent();
+}
+
+function uninstallTagzilla() {
+    if( window.confirm( getText("uninstallConfirm") ) )
+        jslibUninstall( "tagzilla" );
+}
 ]]>
 </script>
 
@@ -88,10 +99,12 @@
 </groupbox>
 
 <hbox align="center">
+  <button label="&tzUninstall.label;" accesskey="&tzUninstall.accessKey;"
+          id="uninstallButton"
+          oncommand="uninstallTagzilla()"/>
   <spring flex="1"/>
   <button label="&aClose.label;" accesskey="&aClose.accessKey;"
           oncommand="window.close()"/>
-  <spring flex="1"/>
 </hbox>
 
 </window>

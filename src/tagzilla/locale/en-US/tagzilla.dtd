@@ -62,6 +62,8 @@
 <!ENTITY home.label            "Home page">
 <!ENTITY aClose.label          "Alright, already">
 <!ENTITY aClose.accessKey      "A">
+<!ENTITY tzUninstall.label     "Uninstall">
+<!ENTITY tzUninstall.accessKey "U">
 
 <!ENTITY madprops.label        "With Thanks To">
 <!ENTITY mozdev.label          "mozdev.org">
