@@ -368,6 +368,9 @@ function loadTaglineFile(aUrl) {
     if(tzList[tzList.length-1]=="")
       tzList.pop();
   }
+  for(var i=0; i<tzList.length; i++) {
+    tzList[i] = tzUnescape(tzList[i]);
+  }
   tzTreeView.rowCount = tzList.length;
   lBox.setAttribute("changed","false");
   lBox.treeBoxObject.view.selection.select(-1);
@@ -397,12 +400,16 @@ function saveTaglineFile(aUrl) {
     alert(getText("saveErrMsg"));
     return false;
   }
+  var scratchList = new Array();
+  for(var i=0; i<tzList.length; i++) {
+    scratchList[i] = tzEscape(tzList[i]);
+  }
   var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
   if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
-    f.write(tzList.join(tzNL+delim+tzNL));
+    f.write(scratchList.join(tzNL+delim+tzNL));
   }
   else {
-    f.write(tzList.join(tzNL)+tzNL);
+    f.write(scratchList.join(tzNL)+tzNL);
   }
   f.close();
 

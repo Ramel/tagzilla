@@ -58,6 +58,8 @@ else
   tzDump = function() { };
 }
 
+var tzConv = new ucConverter();
+
 ////////////////////////////////////////////////////////////////////////////////
 // readMyPref
 //
@@ -336,5 +338,99 @@ function openUrl(aUrl) {
     window.open(aUrl);
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// tzEscape
+//  Escapes a string so it'll survive intact on disk
+//
+// Parameters: aStr: the string to be escaped
+// Returns: the escaped string
+////////////////////////////////////////////////////////////////////////////////
+function tzEscape(aStr){
+  return tzConv.fromUnicode(aStr);
+  return aStr;
+  return escape(aStr);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// tzUnescape
+//  Unescapes a string encoded with tzEscape
+//
+// Parameters: aStr: the string to be unescaped
+// Returns: the unescaped string
+////////////////////////////////////////////////////////////////////////////////
+function tzUnescape(aStr){
+  return tzConv.toUnicode(aStr);
+  return aStr;
+  return unescape(aStr);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// ucConverter -- a class to convert to/from unicode (hopefully)
+//
+// Based on MessageManager() from chatzilla, by Rob Ginda
+// Used here under the terms of the GPL
+////////////////////////////////////////////////////////////////////////////////
+function ucConverter()
+{
+  const UC_CTRID = "@mozilla.org/intl/scriptableunicodeconverter";
+  const nsIUnicodeConverter =
+    Components.interfaces.nsIScriptableUnicodeConverter;
+
+  this.ucConverter =
+      Components.classes[UC_CTRID].getService(nsIUnicodeConverter);
+  this.defaultBundle = null;
+  this.bundleList = new Array();
+
+  this.toUnicode = function (msg, charset) {
+    if (!charset)
+      charset = "UTF-8";
+      //return msg;
+
+    try
+    {
+      this.ucConverter.charset = charset;
+      msg = this.ucConverter.ConvertToUnicode(msg);
+    }
+    catch (ex)
+    {
+      tzDump ("caught exception " + ex + " converting '" + msg
+        + "' to charset " + charset);
+    }
+
+    return msg;
+  };
+
+  this.fromUnicode = function (msg, charset) {
+    if (!charset)
+      charset = "UTF-8";
+      //return msg;
+
+    if (charset != this.ucConverter.charset)
+      this.ucConverter.charset = charset;
+
+    try
+    {
+      if ("Finish" in this.ucConverter)
+      {
+        msg = this.ucConverter.ConvertFromUnicode(msg);
+        this.ucConverter.Finish();
+      }
+      else
+      {
+        msg = this.ucConverter.ConvertFromUnicode(msg + " ");
+        msg = msg.substr(0, msg.length - 1);
+      }
+    }
+    catch (ex)
+    {
+      tzDump ("caught exception " + ex + " converting '" + msg
+        + "' to charset " + charset);
+    }
+
+    return msg;
+  };
+}
+
 
 tzDump( "tagzilla/utility.js loaded\n" );

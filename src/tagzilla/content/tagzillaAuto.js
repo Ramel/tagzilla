@@ -82,7 +82,7 @@ function tzRandTaglineFromFile(aUrl) {
     if(readMyPref("tagzilla.newline.convert","bool",true)) {
       tag = tag.replace(/\\n/g,"\n");
     }
-    return tag;
+    return tzUnescape(tag);
   }
   catch(ex) {
     alert(getText("cantRead"));

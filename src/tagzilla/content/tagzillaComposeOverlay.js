@@ -68,6 +68,14 @@ function tzComposeLoad(aWin) {
     aWin.haveJSlib = false;
     return;
   }
+
+  var prefPrefix = "tagzilla."+gCurrentIdentity.key;
+  if(readMyPref(prefPrefix+".mailAuto","bool",true) &&
+    readMyPref(prefPrefix+".mailPick","bool",false)) {
+
+    tzInsertTagline();
+    return;
+  }
   /*
      The following method of overriding the commands was found in EnigMail.
      A bit ironic, considering I'm doing this to be able to coexist with EnigMail.
@@ -84,6 +92,53 @@ function tzComposeLoad(aWin) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// tzInsertTagline
+//  inserts the tagline
+//
+// Parameters: none
+// Returns: true if it seemed to insert successfully, false otherwise
+////////////////////////////////////////////////////////////////////////////////
+function tzInsertTagline() {
+  var prefPrefix = "tagzilla."+gCurrentIdentity.key;
+  var tFile = readMyPref(prefPrefix+".mailFile","string","");
+  if(tFile=="") tFile = readMyPref("tagzilla.default.file","string","");
+  try {
+    var tag = tzRandTaglineFromFile(tFile);
+    var prefix = readMyPref("tagzilla.mail.prefix","string","")
+      .replace(/\\n/g,"\n");
+    var suffix = readMyPref("tagzilla.mail.suffix","string","")
+      .replace(/\\n/g,"\n");
+    var msgPane = document.getElementById("content-frame");
+    if(msgPane) {
+      var controller = document.commandDispatcher.getControllerForCommand('cmd_moveBottom');
+      controller.doCommand('cmd_moveBottom');
+
+      if(msgPane.editorShell) {
+        msgPane.editorShell.InsertText(prefix+tag+suffix);
+      }
+      else if(window.GetCurrentEditor)
+      {
+        var ed = window.GetCurrentEditor();
+        ed.insertText(prefix+tag+suffix);
+      }
+      else {
+        alert("I'm afraid I don't know how to insert taglines in this version\n"+
+              "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
+        return false;
+      }
+      controller.doCommand('cmd_moveTop');
+    }
+    else alert("Arg");
+  }
+  catch(ex) {
+    //alert(getText("cantRead"));
+    dump("tzInsertTagline: "+ex+"\n");
+    return false;
+  }
+  return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // tzSendCmd
 //
 // Parameters:
@@ -93,48 +148,18 @@ function tzComposeLoad(aWin) {
 function tzSendCmd(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
-    var tFile = readMyPref(prefPrefix+".mailFile","string","");
-    if(tFile=="") tFile = readMyPref("tagzilla.default.file","string","");
+    /*
     if(readMyPref(prefPrefix+".mailPick","bool",false)) {
-      try {
-        var tag = tzRandTaglineFromFile(tFile);
-        var prefix = readMyPref("tagzilla.mail.prefix","string","")
-          .replace(/\\n/g,"\n");
-        var suffix = readMyPref("tagzilla.mail.suffix","string","")
-          .replace(/\\n/g,"\n");
-        var msgPane = document.getElementById("content-frame");
-        if(msgPane) {
-          var controller = document.commandDispatcher.getControllerForCommand('cmd_moveBottom');
-          controller.doCommand('cmd_moveBottom');
-
-          if(msgPane.editorShell) {
-            msgPane.editorShell.InsertText(prefix+tag+suffix);
-          }
-          else if(window.GetCurrentEditor)
-          {
-            var ed = window.GetCurrentEditor();
-            ed.insertText(prefix+tag+suffix);
-          }
-          else {
-            alert("I'm afraid I don't know how to insert taglines in this version\n"+
-                  "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
-          }
-        }
-        else alert("Arg");
-        eval(tzCmdActions[aCmd]);
-      }
-      catch(ex) {
-        //alert(getText("cantRead"));
-        dump(ex+"\n");
-        return;
-      }
+      tzInsertTagline();
+      eval(tzCmdActions[aCmd]);
     }
     else {
+    */
       document.firstChild.setAttribute("tzPrefPrefix",prefPrefix); // hack, but it works
       tzCmd=aCmd;
       tagzillaWindow=toTagZilla(aCmd);
       tagzillaWindow.addEventListener("unload",tzPickedTagline, true);
-    }
+    //}
   }
   else {
     eval(tzCmdActions[aCmd]);

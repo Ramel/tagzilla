@@ -77,7 +77,7 @@
   </popup>
 
   <menupopup id="menu_FilePopup">
-    <menuitem id="edTagzilla" key="key_tagzilla_mail" 
+    <menuitem id="edTagzilla" key="key_tagzilla_mail"
               label="&tzCommand.label;" accesskey="&tzCommand.accessKey;"
               class="menuitem-iconic menu-iconic icon-tagzilla16"
               insertbefore="menu_close"

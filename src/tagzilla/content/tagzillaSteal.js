@@ -122,10 +122,10 @@ function doSteal() {
     tzNL = oldFile.match(/\r?\n|\r\n?/) || tzNL;
     var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
     if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
-      oldFile += tzNL+delim+tzNL+tagline.value+tzNL;
+      oldFile += tzNL+delim+tzNL+tzEscape(tagline.value)+tzNL;
     }
     else {
-      oldFile += tagline.value+tzNL;
+      oldFile += tzEscape(tagline.value)+tzNL;
     }
     f.open("w");
     f.write(oldFile);
