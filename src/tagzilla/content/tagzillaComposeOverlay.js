@@ -40,52 +40,35 @@ var haveJSlib = true;   // whether JSLib is installed
 var tzCmdActions;       // Array storing the send commands we're overriding
 //  gCurrentIdentity;   // from parent window
 var tzTimer;            // hold timer of setTimeout so it doesn't get set off prematurely
-
-////////////////////////////////////////////////////////////////////////////////
-// tzFakeLoad
-//
-// Parameters: none
-// Returns: nothing
-////////////////////////////////////////////////////////////////////////////////
-function tzFakeLoad() {
-  //window.removeEventListener("load",tzFakeLoad,true);
-  if( window.tzLoaded ) return;
-  window.tzLoaded = true;
-  tzTimer=setTimeout(tzComposeLoad, 1000, window);
-}
+var tzEditorObj;        // Editor object (?? see tzComposeStateListener below)
+var tzAddedTagline = false; // Have we already added a tagline?
 
 ////////////////////////////////////////////////////////////////////////////////
 // tzComposeLoad
 //
-// Parameters:
-//   aWin: the window whose variables are to be set
+// Parameters: none
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
-function tzComposeLoad(aWin) {
+function tzComposeLoad() {
   try {
     include('chrome://jslib/content/io/file.js');
   }
   catch(ex) {
     //alert(getText("noJSlib"));
-    aWin.haveJSlib = false;
+    window.haveJSlib = false;
     return;
   }
-  aWin.addedTagline = false;
+  tzAddedTagline = false;
 
-  tzOverrideCommands(aWin);
+  var compStateListener = new tzComposeStateListener();
+  gMsgCompose.RegisterStateListener(compStateListener);
 
-  tzComposeReload();
+  //tzOverrideCommands(aWin);
 }
 
 function tzComposeReload() {
   if( !haveJSlib ) return;
-  window.addedTagline = false;
-  var prefPrefix = "tagzilla."+gCurrentIdentity.key;
-  if(readMyPref(prefPrefix+".mailAuto","bool",true) &&
-    readMyPref(prefPrefix+".mailPick","bool",false)) {
-
-    tzInsertTagline();
-  }
+  tzAddedTagline = false;
 }
 
 function tzOverrideCommands(aWin) {
@@ -112,6 +95,9 @@ function tzOverrideCommands(aWin) {
 // Returns: true if it seemed to insert successfully, false otherwise
 ////////////////////////////////////////////////////////////////////////////////
 function tzInsertTagline() {
+  tzDump("tzInsertTagline()\n");
+  tzAddedTagline = true;    // assume success for the moment
+  var cbSaver = new tzClipboardSaver();
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   var tFile = readMyPref(prefPrefix+".mailFile","string","");
   if(tFile=="") tFile = readMyPref("tagzilla.default.file","string","");
@@ -136,6 +122,7 @@ function tzInsertTagline() {
         /* We want to re-select the current selection after we insert the
            tagline.  First we need to save it */
         ed.beginTransaction();
+        cbSaver.save();
         var selection = ed.selection;
         var ranges = [];
         if( selection && selection.rangeCount )
@@ -162,6 +149,7 @@ function tzInsertTagline() {
                 selection.collapse( r.range.startContainer, r.start );
         }
         // And we're done
+        cbSaver.restore();
         ed.endTransaction();
       }
       else {
@@ -176,9 +164,12 @@ function tzInsertTagline() {
   catch(ex) {
     //alert(getText("cantRead"));
     dump("tzInsertTagline: "+ex+"\n");
+    ed.endTransaction();
+    ed.undo(1);
+    cbSaver.restore();
+    tzAddedTagline = false;
     return false;
   }
-  window.addedTagline = true;
   return true;
 }
 
@@ -192,7 +183,7 @@ function tzInsertTagline() {
 function tzSendCmd(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true) &&
-    !window.addedTagline ) {
+    !tzAddedTagline ) {
     /*
     if(readMyPref(prefPrefix+".mailPick","bool",false)) {
       tzInsertTagline();
@@ -219,6 +210,98 @@ function tzSendCmd(aCmd) {
 ////////////////////////////////////////////////////////////////////////////////
 function tzPickedTagline() {
   tagzillaWindow.removeEventListener("unload", tzPickedTagline, true);
-  window.addedTagline = true;
+  tzAddedTagline = true;
   eval(tzCmdActions[tzCmd]);
 }
+
+/*
+ * The listeners that detect when the window is ready to be screwed with
+ * ---------------------------------------------------------------------
+ * This mechanism was observed in Enigmail (http://enigmail.mozdev.org).
+ * My understanding of it is a bit shaky, but hey, it seems to work.
+ * The first listener gets attached onload, and then it attaches the second,
+ * which gets called when the document is editable.
+ */
+
+function tzComposeStateListener() {
+}
+
+tzComposeStateListener.prototype = {
+  NotifyComposeFieldsReady : function() {
+    tzDump("tzComposeStateListener.NotifyComposeFieldsReady()\n");
+    try {
+      tzEditorObj = gMsgCompose.editor.QueryInterface(Components.interfaces.nsIEditor);
+    }
+    catch(ex){}
+    if( !tzEditorObj ) return;
+
+    var docStateListener = new tzDocStateListener();
+    tzEditorObj.addDocumentStateListener(docStateListener);
+    tzOverrideCommands(window);
+  }
+};
+
+function tzDocStateListener() {
+}
+
+tzDocStateListener.prototype = {
+  QueryInterface: function (iid) {
+    if (!iid.equals(Components.interfaces.nsIDocumentStateListener) &&
+      !iid.equals(Components.interfaces.nsISupports))
+    {
+      throw Components.results.NS_ERROR_NO_INTERFACE;
+    }
+    return this;
+  },
+
+  NotifyDocumentStateChanged: function(nowDirty) {
+    dump("tzDocStateListener.NotifyDocumentStateChanged("+nowDirty+"): ");
+    var isEmpty = tzEditorObj.documentIsEmpty;
+    var isEditable = tzEditorObj.isDocumentEditable;
+    dump( (isEmpty?"empty":"not empty")+", "
+      +(isEditable?"editable":"not editable")+"\n" );
+
+    if( !isEditable )
+      return;
+
+    /* Don't add a tagline if there's one already added (eg, editing a
+       draft) -- experimental!  May break if a tagline is quoted in a
+       reply */
+    if( !isEmpty && !tzAddedTagline ) {
+      var msgBody;  // Message body for our perusal
+      // indicators for detecting tagline
+      var prefix = readMyPref("tagzilla.mail.prefix","string","");
+      var suffix = readMyPref("tagzilla.mail.suffix","string","");
+
+      if( window.GetCurrentEditor ) {
+        var ed = window.GetCurrentEditor();
+        /* 1026 = 2 (output formatted) | 1024 (LF linebreak)
+           taken from enigmailMsgComposeOverlay.js */
+        msgBody = ed.outputToString("text/plain", 1026);
+      }
+      /*
+      else if(msgPane.editorShell) {
+        // FIXME
+      }
+      */
+
+      msgBody = msgBody.replace(/\n/g,"\\n");
+      if( msgBody.indexOf(prefix) >= 0 && msgBody.indexOf(suffix) >= 0 ) {
+        tzDump( "tzDocStateListener detected previous tagline\n" );
+        tzAddedTagline = true;
+      }
+    }
+
+    if( !tzAddedTagline ) {
+      var prefPrefix = "tagzilla."+gCurrentIdentity.key;
+      if(readMyPref(prefPrefix+".mailAuto","bool",true) &&
+        readMyPref(prefPrefix+".mailPick","bool",false)) {
+
+        tzDump("tzDocStateListener inserting tagline\n");
+        setTimeout(tzInsertTagline, 150);
+      }
+    }
+  }
+};
+
+// EOF

@@ -50,7 +50,7 @@
   <script type="application/x-javascript">
   <![CDATA[
     if( ! window.tzLoaded ) {
-        window.addEventListener("load",tzFakeLoad,true);
+        window.addEventListener("load",tzComposeLoad,false);
         window.addEventListener("compose-window-reopen",tzComposeReload,true);
     }
   ]]>

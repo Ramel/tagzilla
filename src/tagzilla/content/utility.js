@@ -435,6 +435,54 @@ function ucConverter()
   };
 }
 
+/*
+ * ClipboardSaver
+ * --------------
+ * Some selection manipulation can destroy the X11 selection clipboard.
+ * This saves and restores it.
+ */
+
+function tzClipboardSaver() {
+  this.dataStack = new Array();
+  this.clipBoard = Components.classes["@mozilla.org/widget/clipboard;1"]
+    .getService(Components.interfaces.nsIClipboard);
+  this.needed = this.clipBoard.supportsSelectionClipboard();
+}
+
+tzClipboardSaver.prototype = {
+  save: function()
+  {
+    if( !this.needed ) return;
+    try
+    {
+      var transferable = Components.classes["@mozilla.org/widget/transferable;1"]
+        .createInstance(Components.interfaces.nsITransferable);
+      transferable.addDataFlavor("text/unicode");
+      this.clipBoard.getData(transferable, this.clipBoard.kSelectionClipboard);
+      var flavour = {};
+      var data = {};
+      var length = {};
+      transferable.getAnyTransferData(flavour, data, length);
+      this.dataStack.push(data);
+    }
+    catch(ex) { }
+  },
+  restore: function()
+  {
+    if( !this.needed ) return;
+    try
+    {
+      var data = this.dataStack.pop();
+      var pasteClipboard = Components.classes["@mozilla.org/widget/clipboardhelper;1"]
+        .getService(Components.interfaces.nsIClipboardHelper);
+      data = data.value.QueryInterface(Components.interfaces.nsISupportsString).data;
+      pasteClipboard.copyStringToClipboard(data, this.clipBoard.kSelectionClipboard);
+    }
+    catch(ex) { }
+  }
+};
+
+
 function tzDumpObj( aObj, objName )
 {
   if(!tzuDEBUG) return;
