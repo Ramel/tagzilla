@@ -20,7 +20,7 @@
 <!ENTITY forAccount.label      "Account:">
 
 <!ENTITY textarea.caption      "Text Areas">
-<!ENTITY textkey.label         "Ctrl-T within a textarea inserts a tagline*">
+<!ENTITY textkey.label         "Ctrl-K within a textarea inserts a tagline*">
 <!ENTITY textkey.accesskey     "C">
 <!ENTITY textPick.label        "Without opening TagZilla window">
 <!ENTITY textPick.accesskey    "W">

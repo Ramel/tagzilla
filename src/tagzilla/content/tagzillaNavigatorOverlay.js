@@ -64,7 +64,7 @@ function tagzillaNavLoad() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzTextarea(e) {
-    if(!(e.ctrlKey && e.which == 116)) return;
+    if(!(e.ctrlKey && (e.charCode == 75 || e.charCode==107))) return;
     e.preventDefault();
     if(readMyPref("tagzilla.textbox.pick","bool",false)) {
       var tag = tzRandTaglineFromFile(readMyPref("tagzilla.default.file","string",""));
