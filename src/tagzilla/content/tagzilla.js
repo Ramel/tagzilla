@@ -76,8 +76,10 @@ function tzOnLoad() {
     loadList();
   }
   else {
-    loadTaglineFile(tFile);
-    setTimeout(tzOnSel,10);
+    if(loadTaglineFile(tFile)==-1)
+      loadList();
+    else
+      setTimeout(tzOnSel,10);
   }
 }
 
@@ -96,11 +98,8 @@ function tzInsert() {
   }
   
   if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
-    var prefix = readMyPref("tagzilla.mail.prefix","string","");
-    var suffix = readMyPref("tagzilla.mail.suffix","string","");
-
-    if(prefix != '') prefix = prefix.replace(/\\n/g,"\n");
-    if(suffix != '') suffix = suffix.replace(/\\n/g,"\n");
+    var prefix = readMyPref("tagzilla.mail.prefix","string","").replace(/\\n/g,"\n");
+    var suffix = readMyPref("tagzilla.mail.suffix","string","").replace(/\\n/g,"\n");
 
     var msgPane = tzDoc.getElementById("content-frame");
     if(msgPane) {
@@ -112,8 +111,8 @@ function tzInsert() {
   }
   else if(tzCmd=="TZ_CLIPBOARD") {
     try {
-      var prefix = readMyPref("tagzilla.clipboard.prefix","string","");
-      var suffix = readMyPref("tagzilla.clipboard.suffix","string","");
+      var prefix = readMyPref("tagzilla.clipboard.prefix","string","").replace(/\\n/g,"\n");
+      var suffix = readMyPref("tagzilla.clipboard.suffix","string","").replace(/\\n/g,"\n");
       var textToAdd = prefix+selTagline+suffix;
 
       var clipboard = Components.classes[ "@mozilla.org/widget/clipboard;1" ]
