@@ -2,20 +2,10 @@
 <!-- ***************** INFO/NEWS *************** -->
 <div id="infoTabs">
 <div class="infoTab" id="whats-new">
-<h5 class="infoHeader">Really old news</h5>
+<h5 class="infoHeader">News</h5>
 <ul>
-<li><b>Jun 29</b>
-<a href="http://mozilla.org/projects/thunderbird/">Thunderbird Mail</a>
-now supports
-<a href="http://extensionroom.mozdev.org">extensions</a> as of the
-20030617 build.  And TagZilla supports it!
-</li>
-<li><b>Feb 8</b> Those great guys at <a href="http://jslib.mozdev.org">JSLib</a>
-have posted a new version that works in recent Mozilla builds</li>
-<li><b>Jan 31</b> Mozilla 1.3b breaks JSLib, which breaks TagZilla.
-See <a href="http://mozdev.org/bugs/show_bug.cgi?id=2954">this bug</a></li>
-<li><b>Dec 15</b> When I go off on a <a href="tangents.html">tangent</a>,
-I do it in <a href="tbstyle.html">style</a></li>
+<li><b>Jul 2</b>
+TagZilla 0.052 finally <a href="installation.html">released</a></li>
 </ul>
 </div>
 
@@ -45,55 +35,49 @@ this page's taglines</li>
 <!-- ***************** INFO/NEWS *************** -->
 
 <!-- MAIN CONTENT -->
-<h3>TagZilla doesn't support Thunderbird 0.7 ...yet ...officially</h3>
+<h3>TagZilla 0.052 released</h3>
 <p>
-Firefox 0.9, Thunderbird 0.7, and (presumably) the next release of the Mozilla
-Suite use a
-<a href="http://www.bengoodger.com/software/mb/extensions/packaging/extensions.html">new installer format for XPIs</a>, and I don't yet have a package
-ready for you that uses that new format.  Sorry about that.  I am planning
-on getting one put together Real Soon Now.
+After over a year, TagZilla has <i>finally</i> been updated!
 </p>
-<p>
-However, you should be warned that, since I'll be 'rushing' it out, you
-may get a bit more than you expected.  TagZilla is a work in progress --
-very slow progress sometimes, but progress nonetheless -- and I've been
-making tweaks and fixes here and there.  Something I've done may make it better
-(I think it adds the tagline when you first hit Compose now, rather than
-Send), or it may have made it worse.  And I haven't had a chance to test
-it on any of the above-mentioned platforms yet, either.  But I think
-that's still better than leaving you hanging; I think I've done that
-enough already.
-</p>
-<p>
-<em>Update</em> If you're desperate for some sweet sweet tagline lovin', it's  been said
-on the <a href="feedback.html">mailing list</a> that
-at least one person has had success making TagZilla work with the
-<a href="http://update.mozilla.org/extensions/moreinfo.php?id=49&vid=52&category=">Show Old Extensions</a>
-extension.  I do <i>not</i> officially support that method, but it may
-work for you.  (Back up your stuff before you try it!)
-</p>
-<h3>TagZilla 0.049</h3>
 <ul>
 <li>One xpi, three platforms: supports
 <a href="http://mozilla.org">Mozilla Suite</a>,
-<a href="http://mozilla.org/projects/firebird/">Firebird</a> and
+<a href="http://mozilla.org/projects/firefox/">Firefox</a> and
 <a href="http://mozilla.org/projects/thunderbird/">Thunderbird</a>
 </li>
-<li>Prefs window works on all three platforms now</li>
-<li>Improved handling of DOS/Windows, Mac, and *nix-flavoured newlines
-in tagline files</li>
-<li>Small but important bug fixes</li>
-<li>Can be installed to a profile or to the system (but see below)</li>
-<li>Jar-based installation saves disk space</li>
+<li>Supports Firefox 0.9 and Thunderbird 0.7's <a href="http://www.bengoodger.com/software/mb/extensions/packaging/extensions.html">new installer format</a></li>
+<li>Automated uninstall button (requires suitably recent version of JSLib)</li>
+<li>Several bugfixes, hopefully tagline insertion won't be so broken now</li>
+<li>Ability to select the character set used in your tagline files</li>
+<li>Seems to work with <a href="http://enigmail.mozdev.org">EnigMail</a>
+(On my computer, anyway; your mileage may vary!
+Install EnigMail <i>before</i> TagZilla for best results)</li>
 </ul>
-Known bugs:
+Known bugs/issues:
 <ul>
-<li>The install process has been known to fail for No Good Reason. I'm not
-sure if it's a bug in one or more of the Mozilla programs, or if I've broken
-my content/chrome.rdf again.  If you can't install to your profile directory,
-try to install to your program directory, or vice versa.  Help wanted in
-determining what I can do to TagZilla to help alleviate the problem.</li>
-<li>The toolbar icons in *bird don't show up in the toolbar palette</li>
+<li>Despite being over a year in coming, this release was still "rushed".
+(That's the downside to being gainfully employed.)
+You may encounter strange behaviour.  If you do, email me or file a bug.</li>
+<li>In Firefox 0.9+ and Thunderbird 0.7+, you <b style="font-size:larger">absolutely positively
+<u style="font-size:larger">MUST</u></b> install
+<a href="http://jslib.mozdev.org/installation.html">JSLib</a>
+<b style="font-size:larger">BEFORE</b> you install TagZilla!  Otherwise, the program won't appear
+to start once you install TagZilla.  If you get yourself stuck like this,
+here's how to recover:
+    <ol>
+    <li>Ensure the program isn't running at all (check your process list,
+        however your host OS makes you do that, to be sure)</li>
+    <li>Run the program in Safe Mode (there's a shortcut in Windows, or
+        use the <code>--safe-mode</code> option on the command line)</li>
+    <li>Either install JSLib now, or uninstall TagZilla</li>
+    <li>Exit the program and restart it normally</li>
+    </ol>
+</li>
+<li>In Firefox and Thunderbird, the character set selector in the Preferences
+window will show up as empty the first time
+(<a href="http://mozdev.org/bugs/show_bug.cgi?id=2098">Bug 2098</a>).
+Your setting was indeed saved and will be used.  Workaround: close
+and reopen the preferences window.</li>
 </ul>
 
 <h3>What is TagZilla?</h3>

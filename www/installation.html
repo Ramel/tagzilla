@@ -14,17 +14,7 @@ function triggerURL(url) {
 
 <!-- MAIN CONTENT -->
 <h3 class="page-header">Installation</h3>
-<h3>Note to Linux users</h3>
-<p>If you installed Mozilla as <em>root</em>, <b>you must be <em>root</em></b>
-to install TagZilla and other such Mozilla extensions to the program
-directory.  In addition, you have to <b>restart Mozilla as <em>root</em>
-after you've installed TagZilla</b>, so it can update its chrome registry.  
-<i>(That probably goes for other multi-user OSes too, but I don't know
-which off the top of my head.)</i> If you installed Mozilla into your own home
-directory, or another directory for which you have write access, this won't
-be a problem for you.</p>
-
-<h3>TagZilla 0.049</h3>
+<h3>TagZilla 0.052</h3>
 <p>Don't let the version number scare you.  I've been dogfooding it since I started,
 so it should be pretty stable.  Of course, having said that, you're trying this at
 your own risk.</p>
@@ -37,20 +27,59 @@ your own risk.</p>
 <a href="http://jslib.mozdev.org">JSLib</a></b> in order
 to run.  Find its installation page
 <a href="http://jslib.mozdev.org/installation.html">here</a>.</p>
-<p><b>Note about the most recent JSLib build:</b>
-I had to delete my old JSLib install before Mozilla would find the
-new one.  You might want to keep that in mind for your own machine.</p>
+<p>
+In Firefox 0.9+ and Thunderbird 0.7+, you <b style="font-size:larger">absolutely positively
+<u style="font-size:larger">MUST</u></b> install
+<a href="http://jslib.mozdev.org/installation.html">JSLib</a>
+<b style="font-size:larger">BEFORE</b> you install TagZilla!  Otherwise, the program won't appear
+to start once you install TagZilla.  If you get yourself stuck like this,
+here's how to recover:
+    <ol>
+    <li>Ensure the program isn't running at all (check your process list,
+        however your host OS makes you do that, to be sure)</li>
+    <li>Run the program in Safe Mode (there's a shortcut in Windows, or
+        use the <code>--safe-mode</code> option on the command line)</li>
+    <li>Either install JSLib now, or uninstall TagZilla</li>
+    <li>Exit the program and restart it normally</li>
+    </ol>
+</p>
 
 <p style="font-weight:bold">Double-check your TagZilla preferences
 before you try to use it.  Your mail settings won't carry over from 0.011 or below.</p>
 
 <p><ul>
-<li><a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.049.xpi');">XPI Install Link</a></li>
-<li><a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.049.xpi">XPI Download Link</a> (Shift-click, or Right-click | Save As... to save)</li>
+<li><a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.052.xpi');">XPI Install Link</a></li>
+<li><a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.052.xpi">XPI Download Link</a> (Shift-click, or Right-click | Save As... to save)</li>
 </ul>
 </p>
 
+<h3>Uninstallation</h3>
+<ul>
+    <li><b>Firefox 0.9+, Thunderbird 0.7+:</b>
+        Use the Extension Manager to uninstall TagZilla.
+    </li>
+    <li><b>If you have a recent version of TagZilla and of JSLib:</b>
+        Use the Uninstall button that appears on TagZilla's About window.
+    </li>
+    <li><b>None of the above:</b>
+        Follow the instructions given
+        <a href="http://extensionroom.mozdev.org/uninstalling.html">here</a>.
+    </li>
+</ul>
+
+<h3>Note to Linux users</h3>
+<p>If you installed Mozilla as <em>root</em>, <b>you must be <em>root</em></b>
+to install TagZilla and other such Mozilla extensions to the program
+directory.  In addition, you have to <b>restart Mozilla as <em>root</em>
+after you've installed TagZilla</b>, so it can update its chrome registry.  
+<i>(That probably goes for other multi-user OSes too, but I don't know
+which off the top of my head.)</i> If you installed Mozilla into your own home
+directory, or another directory for which you have write access, this won't
+be a problem for you.</p>
+
+
 <h3>Older Versions</h3>
+<p><em>TagZilla 0.049</em> <a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.049.xpi');">XPI Install Link</a> or <a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.049.xpi">XPI Download Link</a></p>
 <p><em>TagZilla 0.041</em> <a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.041.xpi');">XPI Install Link</a> or <a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.041.xpi">XPI Download Link</a></p>
 <p><em>TagZilla 0.030</em> <a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.030.xpi');">XPI Install Link</a> or <a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.030.xpi">XPI Download Link</a></p>
 <p><em>TagZilla 0.029</em> <a href="#" onclick="triggerURL('http://downloads.mozdev.org/tagzilla/tagzilla-0.029.xpi');">XPI Install Link</a> or <a href="http://downloads.mozdev.org/tagzilla/tagzilla-0.029.xpi">XPI Download Link</a></p>
@@ -68,10 +97,3 @@ before you try to use it.  Your mail settings won't carry over from 0.011 or bel
 </ul>
 </p>
 
-<h3>Uninstallation</h3>
-<p>
-No Mozilla program currently provides an easy way to uninstall any extension
-XPIs you may not like.  I recommend that you back up your chrome/ directory
-<i>and</i> your profile directory
-before you install any XPI (whether TagZilla or otherwise), so you can
-"uninstall" it by restoring your backup.</p>
