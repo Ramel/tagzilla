@@ -86,8 +86,8 @@
 
 em {
   color: #990000;
-  font-weight: normal;
-  font-style: normal;
+  font-weight: inherit;
+  font-style: inherit;
 }
 
 strong {
@@ -109,5 +109,5 @@ p:active {
 h3 {
   font-family: sans-serif;
   color: #990000;
-  line-height: 0.5em;
+  /* line-height: 0.5em; */
 }
