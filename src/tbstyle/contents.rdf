@@ -1,12 +1,19 @@
 <?xml version="1.0"?>
+<!-- This file is used by Mozilla to know where to add the content
+     presented in this XPI.  It's read when the add-on is first
+     installed, and whenever you regchrome. -->
 
+<!-- This is like the <html> tag.
+     We need to define namespaces for the elements we'll use. -->
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 
+  <!-- list the resources provided by this XPI -->
   <RDF:Seq about="urn:mozilla:package:root">
     <RDF:li resource="urn:mozilla:package:tbstyle"/>
   </RDF:Seq>
 
+  <!-- Describe the package we've created -->
   <RDF:Description about="urn:mozilla:package:tbstyle"
     chrome:displayName="Toolbar Style Menu 0.001"
     chrome:author="David Perry - d.perry@utoronto.ca"
@@ -15,11 +22,15 @@
     chrome:description="A menu for the Link Toolbar that shows a page's alternate styles">
   </RDF:Description>
 
+  <!-- List the parts of Mozilla we'll be overlaying -->
   <RDF:Seq about="urn:mozilla:overlays">
     <RDF:li resource="chrome://navigator/content/linkToolbarOverlay.xul"/>
   </RDF:Seq>
 
+  <!-- one RDF:Seq element must be given for each RDF:li listed above. -->
   <RDF:Seq about="chrome://navigator/content/linkToolbarOverlay.xul">
     <RDF:li>chrome://tbstyle/content/styleLinkToolbarOverlay.xul</RDF:li>
   </RDF:Seq>
+
+<!-- And we're done here! -->
 </RDF:RDF>

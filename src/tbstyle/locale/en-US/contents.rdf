@@ -1,19 +1,30 @@
 <?xml version="1.0"?>
+<!-- This file is used by Mozilla to declare which language files
+     our add-on provides. -->
 
+<!-- This is like the <html> tag.
+     We need to define namespaces for the elements we'll use. -->
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 
+  <!-- list the resources provided (well, in this case, extended)
+       by this XPI -->
   <RDF:Seq about="urn:mozilla:locale:root">
     <RDF:li resource="urn:mozilla:locale:en-US"/>
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:locale:en-US">
     <chrome:packages>
+      <!-- List the parts of Mozilla we'll be overlaying -->
       <RDF:Seq about="urn:mozilla:locale:en-US:packages">
         <RDF:li resource="urn:mozilla:locale:en-US:tbstyle"/>
       </RDF:Seq>
     </chrome:packages>
   </RDF:Description>
 
+  <!-- One RDF:Description element must be given for each
+       RDF:Seq given above.  But since we have nothing to say
+       about this language file, we leave it as an empty tag.
+       (Notice the slash at the end of the tag.  It's important.) -->
   <RDF:Description about="urn:mozilla:locale:en-US:tbstyle" />
 </RDF:RDF>

@@ -30,25 +30,41 @@
  * the GPL.  If you do not delete the provisions above, a recipient
  * may use your version of this file under either the MPL or the
  * GPL.
+
+ It may seem silly to put a license on a silly little trivet of
+ software like this.  But it's better to think of your software
+ licenses now than when you write a big something that gets used
+ without giving you credit or something like that.
 -->
 
+<!-- Overlays for your XML.  Much like <link> in HTML -->
 <?xml-stylesheet href="chrome://navigator/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://navigator/skin/linkToolbar.css" type="text/css"?> 
 <?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
 
+<!-- Language entity definitions.  The word following !DOCTYPE
+     (in this case, 'overlay') *MUST* match the tag that follows -
+     namely, <overlay>.  -->
 <!DOCTYPE overlay [
 <!ENTITY % toolbarDTD SYSTEM "chrome://tbstyle/locale/styleLinkToolbar.dtd">
 %toolbarDTD;
 ]>
 
+<!-- The opening tag.  Unlike HTML, this isn't the very first tag, but
+     it's pretty close. 
+     Notice again the definition of namespaces. -->
 <overlay id="linkToolbarStyleOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
          xmlns:rdf="http://www.mozilla.org/rdf">
 
+<!-- includes our JavaScript file - this is a XUL command, not an XML one
+     like the above. -->
 <script type="application/x-javascript" src="chrome://tbstyle/content/styleLinkToolbarOverlay.js"/>
 
+<!-- The entity we're overlaying, by id -->
 <toolbar id="linktoolbar">
   <toolbarseparator id="styleseparator" insertafter="more-menu" />
+
   <toolbarbutton id="stylesheets-menu" class="bookmark-item"
                  type="menu"
                  container="true"
@@ -61,5 +77,7 @@
     </menupopup>
   </toolbarbutton>
 </toolbar>
+<!-- Close all your tags -->
 
+<!-- That's all folks! -->
 </overlay>

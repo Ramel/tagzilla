@@ -1,2 +1,13 @@
+<!-- This is the language file.  Each ENTITY given here matches a short
+     reference name (left) to the text that should replace it (right).
+     In XML, any text that looks like "&foo.bar;" and matches an ENTITY
+     like this is replaced.  It's usually good, but sometimes it's a mixed
+     blessing.  Inline JavaScript in your XUL will also be affected, unless
+     you wrap it in <![CDATA[ ... ]]> .  JavaScript included via the
+     <script> tag is not affected. -->
 <!ENTITY tbstyle.menulabel  "Style">
 <!ENTITY tbstyle.plain      "Basic Page Style">
+
+
+<!-- Woo!  All that commenting for two lines of text.  I hope it saves you
+     the PITA it caused me to learn all this stuff the hard way! (: -DP -->
