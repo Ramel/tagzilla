@@ -1,0 +1,72 @@
+<!ENTITY treeMain.label        "TagZilla">
+<!ENTITY prefMain.label        "TagZilla">
+
+<!ENTITY noJSlib.caption       "JSLib wird benötigt">
+<!ENTITY noJSlib.desc          "JSLib ist auf diesem Computer nicht installiert.  TagZilla kann nicht ausgeführt werden..">
+
+<!ENTITY fileCaption.label     "Standard Datei">
+<!ENTITY chooseFile.label      "Wähle...">
+<!ENTITY chooseFile.accesskey  "C">
+<!ENTITY saveDefault.label     "Beim Schließen von TagZilla wird die zuletzt geladene Datei als Standard verwendet.">
+<!ENTITY saveDefault.accesskey "T">
+
+<!ENTITY message.label         "Sende Nachrichten">
+<!ENTITY mailAuto.label        "Tagline automatisch beim Senden einer Nachricht anhängen">
+<!ENTITY mailAuto.accesskey    "A">
+<!ENTITY mailPick.label        "TagZilla-Fenster wird dabei nicht geöffnet">
+<!ENTITY mailPick.accesskey    "W">
+<!ENTITY mailFile.label        "Datei:">
+
+<!ENTITY forAccount.label      "Benutzer:">
+
+<!ENTITY textarea.caption      "Textbereiche">
+<!ENTITY textkey.label         "Ctrl-J innerhalb eines Textbereiches fügt eine tagline ein*">
+<!ENTITY textkey.accesskey     "C">
+<!ENTITY textPick.label        "TagZilla-Fenster wird dabei nicht geöffnet">
+<!ENTITY textPick.accesskey    "W">
+<!ENTITY needRestart.label     "*Veränderungen werden erst nach dem Neustart gültig.">
+
+<!ENTITY leaveBlank.tooltip    "Standard-Datei, wenn Feld leer bleibt.">
+
+
+<!ENTITY treeFormat.label      "Formatieren:">
+<!ENTITY prefFormat.label      "TagZilla: Formatieren">
+
+<!ENTITY mailCaption.label     "Nachricht">
+<!ENTITY prefix.label          "Tagline Vorsilbe">
+<!ENTITY mailPrefix.accesskey  "P">
+<!ENTITY clipPrefix.accesskey  "r">
+<!ENTITY suffix.label          "Tagline Nachsilbe">
+<!ENTITY mailSuffix.accesskey  "S">
+<!ENTITY clipSuffix.accesskey  "u">
+
+<!ENTITY clipCaption.label     "Zwischenablage und Textbereiche">
+
+<!ENTITY samples.label         "So sieht es aus:">
+<!ENTITY sample.tagline        "Dies ist Deine tagline.">
+<!ENTITY newline.desc          "(Mit '\n' wird eine neue Zeile begonnen)">
+
+<!ENTITY appearance.label      "Darstellung">
+
+<!ENTITY treeMultiline.label   "Mehrzeilig">
+<!ENTITY prefMultiline.label   "TagZilla: Mehrzeilige taglines">
+<!ENTITY multiline.caption     "Mehrzeilige taglines">
+
+<!ENTITY convNewline.label     "Konvertiere '\n' um eine neue Zeile innerhalb einer Tagline zu beginnen">
+<!ENTITY convNewline.accesskey "n">
+
+<!ENTITY multiType.caption     "Datei speichern unter">
+<!ENTITY singleLine.label      "Einzeiliges Format">
+<!ENTITY singleLine.accesskey  "S">
+<!ENTITY multiLine.label       "Mehrzeiliges Format (fügt Trennzeichen zwischen Taglines ein)">
+<!ENTITY multiLine.accesskey   "M">
+
+<!ENTITY separator.label       "Tagline Trennlinie:">
+<!ENTITY separator.accesskey   "T">
+
+<!ENTITY multi.desc "Dateien die mehrzeilige Taglines enthalten werden an der unten angegebenen Trennlinie erkannt. Die Linie wird verwendet um die individuellen Taglines voneinander zu unterscheiden. Bei fehlender Linie werden einzeilige Taglines verwendet.">
+
+<!ENTITY tab.general            "Allgemein">
+<!ENTITY tab.browser            "Browser">
+<!ENTITY tab.mailnews           "Mail/News">
+<!ENTITY tab.about              "Über">
