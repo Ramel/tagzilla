@@ -62,7 +62,8 @@
   </script>
 
   <textbox id="tagline" flex="0" autostretch="never"
-           width="50%" accesskey="&tagline.accessKey;"/>
+           multiline="true" rows="5" cols="60"
+           accesskey="&tagline.accessKey;"/>
   <groupbox orient="vertical" align="start">
     <caption label="&saveTo.label;"/>
     <hbox autostretch="never" align="center">

@@ -51,7 +51,8 @@
 <script type="application/x-javascript">
   <![CDATA[
     var panel = "chrome://tagzilla/content/pref/pref-tagzilla-format.xul";
-    var _elementIDs = ["tzPref-convNewline", "tzPref-mailPrefix", "tzPref-mailSuffix",
+    var _elementIDs = ["tzPref-convNewline",
+                       "tzPref-mailPrefix", "tzPref-mailSuffix",
                        "tzPref-clipPrefix", "tzPref-clipSuffix"];
 
     var mailSample, clipSample;
@@ -96,6 +97,7 @@
             prefstring="tagzilla.newline.convert"
             preftype="bool"
             prefattribute="checked"/>
+
   <groupbox orient="vertical" id="tzMailPrefs" align="start">
     <caption label="&mailCaption.label;"/>
     <hbox align="center" autostretch="never"> 

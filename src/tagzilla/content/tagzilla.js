@@ -53,8 +53,18 @@ var tzList = []; // the actual tagline list
 ////////////////////////////////////////////////////////////////////////////////
 var tzTreeView = {
   rowCount : 0,
-  getCellText : function(row, column) {
-    return tzList[row];
+  getCellText : function(row, col) {
+    if(col=="tzListHead") { if(tzList[row].indexOf("\n") >= 0) {
+        return tzList[row].substring(0,tzList[row].indexOf("\n"));
+      }
+      return tzList[row];
+    }
+    else if(col=="tzMultiLine") {
+      if(tzList[row].indexOf("\n") >= 0) {
+        return ">>";
+      }
+      return "";
+    }
   },
   isContainer: function(row) {
     return false;
@@ -78,7 +88,7 @@ var tzTreeView = {
 //
 // Parameters: (passed in through window.arguments)
 //  tzCmd: text string indicating how TagZilla is to be used
-//  tzDoc: TagZilla's calling document
+//  tzDoc: TagZilla's calling document or object
 //
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
@@ -270,10 +280,8 @@ function tzOnSel() {
   }
   else {
     textBox.removeAttribute("disabled");
-    textBox.focus();
-
     if(selectedCount == 1) {
-      textBox.value=lBox.view.getCellText(lBox.currentIndex, 0);
+      textBox.value=tzList[lBox.currentIndex];
       disableButton(addButton,false);
       disableButton(modButton,false);
       disableButton(delButton,false);
@@ -283,8 +291,10 @@ function tzOnSel() {
       disableButton(delButton,true);
       disableButton(modButton,true);
     }
+    textBox.focus();
   }
   taglineChanged(false);
+  tzRefresh();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -317,11 +327,19 @@ function loadTaglineFile(aUrl) {
   f.open("r");
   var fContents = f.read();
   f.close();
-  tzList = fContents.split("\n");
-  if(tzList[tzList.length-1]=="")
-    tzList.pop();
+
+  var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
+  if(delim!="\n\n" && fContents.indexOf(delim)>=0) {
+    tzList = fContents.split(delim);
+  }
+  else {
+    tzList = fContents.split("\n");
+    if(tzList[tzList.length-1]=="")
+      tzList.pop();
+  }
   tzTreeView.rowCount = tzList.length;
   lBox.setAttribute("changed","false");
+  lBox.treeBoxObject.view.selection.select(-1);
   tzRefresh();
 
   return 0;
@@ -348,7 +366,13 @@ function saveTaglineFile(aUrl) {
     alert(getText("saveErrMsg"));
     return false;
   }
-  f.write(tzList.join("\n")+"\n");
+  var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
+  if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
+    f.write(tzList.join("\n"+delim+"\n"));
+  }
+  else {
+    f.write(tzList.join("\n")+"\n");
+  }
   f.close();
 
   lBox.setAttribute("changed","false");
@@ -376,8 +400,8 @@ function taglineChanged(aChg) {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzRefresh() {
-  lBox.treeBoxObject.invalidate();
   lBox.treeBoxObject.invalidateScrollbar();
+  lBox.treeBoxObject.invalidate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

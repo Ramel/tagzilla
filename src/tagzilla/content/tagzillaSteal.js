@@ -56,6 +56,8 @@ function OnLoad() {
 
   tagline = document.getElementById("tagline");
   tagline.value = window.arguments[0];
+  tagline.value = tagline.value.replace(/\n\n/g,"\n");
+/*
   if(readMyPref("tagzilla.newline.convert","bool",true)) {
     tagline.value = tagline.value.replace(/\n/g,"\\n");
     tagline.value = tagline.value.replace(/\\n\\n/g,"\\n");
@@ -63,7 +65,7 @@ function OnLoad() {
   else {
     tagline.value = tagline.value.replace(/\n/g," ");
   }
-
+*/
   tagFile=document.getElementById("filename");
   tagFile.value=readMyPref("tagzilla.default.file","string","");
   sizeToContent();
@@ -108,7 +110,13 @@ function doSteal() {
       oldFile=f.read();
       f.close();
     }
-    oldFile += tagline.value+"\n";
+    var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
+    if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
+      oldFile += "\n"+delim+"\n"+tagline.value+"\n";
+    }
+    else {
+      oldFile += tagline.value+"\n";
+    }
     f.open("w");
     f.write(oldFile);
     f.close();

@@ -57,7 +57,7 @@
 
       function tzOverlayLoad() {
         window.removeEventListener("load",tzOverlayLoad,true);
-        // initialize preferences
+        // initialize default preferences
         readMyPref("tagzilla.default.file","string","");
         readMyPref("tagzilla.default.autosave","bool",true);
         readMyPref("tagzilla.mail.prefix","string","\\n-=-=-\\n... ");
@@ -69,6 +69,8 @@
         readMyPref("tagzilla.newline.convert","bool",true);
         readMyPref("tagzilla.textbox.trapkey","bool",true);
         readMyPref("tagzilla.textbox.pick","bool",false);
+        readMyPref("tagzilla.multiline.file","bool",false);
+        readMyPref("tagzilla.multiline.delimiter","string","%");
       }
 
     ]]>

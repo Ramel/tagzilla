@@ -17,11 +17,21 @@
 <!ENTITY mailPick.accesskey    "W">
 <!ENTITY mailFile.label        "File:">
 
+<!ENTITY forAccount.label      "Settings for account ">
+
+<!ENTITY textarea.caption      "Text Areas">
+<!ENTITY textkey.label         "Ctrl-T within a textarea inserts a tagline*">
+<!ENTITY textkey.accesskey     "C">
+<!ENTITY textPick.label        "Without opening TagZilla window">
+<!ENTITY textPick.accesskey    "W">
+<!ENTITY needRestart.label     "*Changes to this setting will take effect after you restart Mozilla.">
+
+<!ENTITY leaveBlank.tooltip    "Leave blank to use the default tagline file">
+
+
 <!ENTITY treeFormat.label      "Formatting">
 <!ENTITY prefFormat.label      "TagZilla: Formatting">
 
-<!ENTITY convNewline.label     "Convert \n to newline in taglines">
-<!ENTITY convNewline.accesskey "n">
 <!ENTITY mailCaption.label     "Mail message">
 <!ENTITY prefix.label          "Tagline Prefix">
 <!ENTITY mailPrefix.accesskey  "P">
@@ -36,12 +46,22 @@
 <!ENTITY sample.tagline        "This is your tagline.">
 <!ENTITY newline.desc          "(Typing \n enters a carriage return)">
 
-<!ENTITY forAccount.label      "Settings for account ">
+<!ENTITY treeMultiline.label   "Multi-line">
+<!ENTITY prefMultiline.label   "TagZilla: Multi-line taglines">
 
-<!ENTITY textarea.caption      "Text Areas">
-<!ENTITY textkey.label         "Ctrl-T within a textarea inserts a tagline*">
-<!ENTITY textkey.accesskey     "C">
-<!ENTITY textPick.label        "Without opening TagZilla window">
-<!ENTITY textPick.accesskey    "W">
-<!ENTITY needRestart.label     "*These settings will take effect after you restart Mozilla.">
+<!ENTITY convNewline.label     "Convert \n to newline in taglines">
+<!ENTITY convNewline.accesskey "n">
 
+<!ENTITY multiType.caption     "Save files in">
+<!ENTITY singleLine.label      "Single-line format">
+<!ENTITY singleLine.accesskey  "S">
+<!ENTITY multiLine.label       "Multiple-line format (inserts separator between taglines)">
+<!ENTITY multiLine.accesskey   "M">
+
+<!ENTITY separator.label       "Tagline separator line:">
+<!ENTITY separator.accesskey   "T">
+
+<!ENTITY multi.desc "Tagline files containing multi-line taglines are detected
+based on the presence of the separator line below.  If it is found, it is used to
+separate individual taglines from each other.  If it is not found, the file
+is loaded as if it contained single-line taglines.">

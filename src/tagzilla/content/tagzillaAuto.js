@@ -63,10 +63,17 @@ function tzRandTaglineFromFile(aUrl) {
   
   try {
     f.open("r");
-    var arr = f.read().split("\n");
+    var arr = f.read();
     f.close();
-    if(arr[arr.length-1]=="") {
-      arr.pop();
+    
+    var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
+    if(delim!="\n\n" && arr.indexOf(delim)>=0) {
+      arr = arr.split(delim);
+    }
+    else {
+      arr = arr.split("\n");
+      if(arr[arr.length-1]=="")
+        arr.pop();
     }
 
     var rv=parseInt(Math.round(Math.random() * arr.length));

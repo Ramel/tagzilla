@@ -33,6 +33,9 @@
  * GPL.
    -->
 
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
 <!DOCTYPE window [
 <!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
 %brandDTD;
@@ -40,33 +43,47 @@
 %identityDTD;
 ]>
 
-<overlay id="tagzillaPrefOverlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="parent.initPanel( panel )"
+      headertitle="&prefMultiline.label;">
 
-  <treechildren id="panelChildren">
-    <treeitem id="tagzilla" container="true">
-      <treerow>
-        <treecell class="treecell-indent" id="tagzilla"
-                  url="chrome://tagzilla/content/pref/pref-tagzilla.xul"
-                  label="&treeMain.label;"/>
-      </treerow>
-      <treechildren>
-        <treeitem>
-          <treerow>
-            <treecell id="tagzilla-format" class="treecell-indent"
-                      url="chrome://tagzilla/content/pref/pref-tagzilla-format.xul"
-                      label="&treeFormat.label;"/>
-          </treerow>
-        </treeitem>
-        <treeitem>
-          <treerow>
-            <treecell id="tagzilla-multiline" class="treecell-indent"
-                      url="chrome://tagzilla/content/pref/pref-tagzilla-multiline.xul"
-                      label="&treeMultiline.label;"/>
-          </treerow>
-        </treeitem>
-      </treechildren>
-    </treeitem>
-  </treechildren>
+<script type="application/x-javascript">
+  <![CDATA[
+    var panel = "chrome://tagzilla/content/pref/pref-tagzilla-multiline.xul";
+    var _elementIDs = ["tzPref-tagMode", "tzPref-separator"];
 
-</overlay>
+  ]]>
+</script>
+
+<vbox>
+  <description>&multi.desc;</description>
+  <hbox autostretch="never" align="center">
+    <text class="label" value="&separator.label;"/>
+    <textbox id="tzPref-separator"
+             flex="1"
+             accesskey="&separator.accesskey;"
+             autostretch="never"
+             align="center"
+             size="100%"
+             preftype="string"
+             prefstring="tagzilla.multiline.delimiter"
+             prefattribute="value"/>
+  </hbox>
+  <groupbox orient="vertical" id="tzTrueMultiline" align="start">
+  <caption label="&multiType.caption;"/>
+    <vbox>
+      <radiogroup orient="vertical"
+                  id="tzPref-tagMode"
+                  preftype="bool"
+                  prefattribute="value"
+                  prefstring="tagzilla.multiline.file">
+        <radio label="&singleLine.label;" accesskey="&singleLine.accesskey;"
+               value="false"/>
+        <radio label="&multiLine.label;" accesskey="&multiLine.accesskey;"
+               value="true"/>
+      </radiogroup>
+    </vbox>
+  </groupbox>
+</vbox>
+
+</page>
