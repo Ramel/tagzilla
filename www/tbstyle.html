@@ -1,0 +1,68 @@
+<script language="javascript">
+<!--
+
+function triggerURL(url) {
+        if (!InstallTrigger.updateEnabled())
+          return false; 
+        else
+          InstallTrigger.startSoftwareUpdate(url); 
+}
+
+//-->
+</script>
+
+
+<!-- MAIN CONTENT -->
+<h3>Toolbar Style Menu</h3>
+<img src="http://tagzilla.mozdev.org/screenshots/tbstyle-1.png" width="468" height="254">
+<img src="http://tagzilla.mozdev.org/screenshots/tbstyle-2.png" width="466" height="251">
+
+<p>A web page designer, through use of the &lt;LINK REL="alternate stylesheet"&gt;
+tag, can provide many different ways for the same page to be viewed.  Mozilla lets
+you choose between those styles if you go to the View | Use Style menu.  But
+you can't tell if a website actually provides
+extra styles unless you click on the menu, which is a level deeper than
+convenient.</p>
+<p>I found that to be a pain, so I did something about it.  Toolbar Style Menu
+(for lack of a better name) is a quick-and-dirty addition of a "Style" menu
+onto the Link Toolbar (or Site Navigation Bar or whatever they're calling it
+these days).  It disables itself when a web page doesn't support multiple styles,
+and enables itself when it does, so I can tell right away that it's holding extra
+styles for me to choose.</p>
+<p><b><em>This is a quick hack.</em></b> I only made it for myself to use,
+and so it's not
+polished like TagZilla.  I provide it here in case anyone else can find a use for
+it, but before you do, keep in mind that it may be buggy, or
+behave in strange ways.  Please note that I made it to be used with the
+Link Toolbar always visible,
+since that's the way I use it.  I don't know how this will behave if you set your
+own Link Toolbar to be visible "Only when needed".</p>
+
+<h3>Installing</h3>
+<p>I've licensed this add-on under the
+<a href="http://www.mozilla.org/MPL/">Mozilla Public License</a> and the
+<a href="http://www.gnu.org/licenses/licenses.html">GNU General Public License</a>.
+<ul>
+<!--
+<li><a href="#" onclick="triggerURL('http://downloads.us-east2.mozdev.org/tagzilla/tbstyle-0.001.xpi');">XPI Install Link</a></li>
+<li><a href="http://downloads.us-east2.mozdev.org/tagzilla/tbstyle-0.001.xpi">XPI Download Link</a> (Shift-click, or Right-click | Save As... to save)</li>
+-->
+<li><a href="#" onclick="triggerURL('http://tagzilla.mozdev.org/tbstyle-0.001.xpi');">XPI Install Link</a></li>
+<li><a href="http://tagzilla.mozdev.org/tbstyle-0.001.xpi">XPI Download Link</a> (Shift-click, or Right-click | Save As... to save)</li>
+</ul>
+
+<h4>Note to Linux users</h4>
+<p>If you installed Mozilla as <em>root</em>, <b>you must be <em>root</em></b>
+to install this and other Mozilla extensions
+at this time.  In addition, you have to <b>restart Mozilla as <em>root</em>
+after you've installed TagZilla</b>, so it can update its chrome registry.  
+<i>(That probably goes for other multi-user OSes too, but I don't know
+which off the top of my head.)</i> If you installed Mozilla into your own home
+directory, or another directory for which you have write access, this won't
+be a problem for you.</p>
+
+<h3>Uninstallation</h3>
+<p>Neither Phoenix nor Mozilla currently provide an easy way to uninstall any extension XPIs
+you may not like.  I recommend that you back up your chrome/ directory before you install
+any XPI (whether TagZilla or otherwise), so you can "uninstall" it by restoring your
+backup.</p>
