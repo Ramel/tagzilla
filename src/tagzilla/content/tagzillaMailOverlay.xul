@@ -48,14 +48,6 @@
 
   <script type="application/x-javascript">
     <![CDATA[
-/*
-      window.addEventListener("load",tzOverlayLoad,true);
-
-      function tzOverlayLoad() {
-        window.removeEventListener("load",tzOverlayLoad,true);
-      }
-*/
-
       function tzStealTagline() {
         var focusedWindow = document.commandDispatcher.focusedWindow;
         if (focusedWindow == window)

@@ -42,8 +42,7 @@
 ]>
 
 <overlay id="tagzillaTasksOverlay"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="tzOverlayLoad()">
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
@@ -68,26 +67,6 @@
 
         return null;
       }
-
-      function tzOverlayLoad() {
-        window.removeEventListener("load",tzOverlayLoad,true);
-        // initialize default preferences
-        readMyPref("tagzilla.default.file","string","");
-        readMyPref("tagzilla.file.charset","string","UTF-8");
-        readMyPref("tagzilla.default.autosave","bool",true);
-        readMyPref("tagzilla.mail.prefix","string","\\n-=-=-\\n... ");
-        readMyPref("tagzilla.mail.suffix","string","\\n* TagZilla 0.049");
-        readMyPref("tagzilla.clipboard.prefix","string","");
-        readMyPref("tagzilla.clipboard.suffix","string","");
-        readMyPref("tagzilla.mail.auto","bool",true);
-        readMyPref("tagzilla.mail.pick","bool",false);
-        readMyPref("tagzilla.newline.convert","bool",true);
-        readMyPref("tagzilla.textbox.trapkey","bool",true);
-        readMyPref("tagzilla.textbox.pick","bool",false);
-        readMyPref("tagzilla.multiline.file","bool",false);
-        readMyPref("tagzilla.multiline.delimiter","string","%");
-      }
-
     ]]>
   </script>
 

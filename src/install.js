@@ -1,7 +1,7 @@
 const APP_DISPLAY_NAME = "TagZilla";
 const APP_NAME = "tagzilla";
 const APP_PACKAGE = "/tagzilla.mozdev.org/tagzilla";
-const APP_VERSION = "0.049";
+const APP_VERSION = "0.052";
 
 const APP_JAR_FILE = "tagzilla.jar";
 const APP_CONTENT_FOLDER = "tagzilla/content/";
@@ -29,6 +29,9 @@ var cflag   = instToProfile ? PROFILE_CHROME                 : DELAYED_CHROME;
 var err = addFile(APP_PACKAGE, APP_VERSION, APP_JAR_FILE, chromef, null)
 
 if(err == SUCCESS) {
+    var prefFolder = getFolder('Program', 'defaults/pref/');
+    addFile("David Perry", "tagzilla_prefs.js", prefFolder, '');
+
     var jar = getFolder(chromef, APP_JAR_FILE);
     registerChrome( CONTENT    | cflag, jar, APP_CONTENT_FOLDER);
 
@@ -39,6 +42,7 @@ if(err == SUCCESS) {
 
     for(var i in APP_SKINS)
         registerChrome( SKIN   | cflag, jar, APP_SKIN_FOLDER+APP_SKINS[i]+"/" );
+
 
     err = performInstall();
     if(err == SUCCESS || err == 999) {

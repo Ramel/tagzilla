@@ -48,7 +48,7 @@ var tzTimer;            // hold timer of setTimeout so it doesn't get set off pr
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzFakeLoad() {
-  window.removeEventListener("load",tzFakeLoad,true);
+  //window.removeEventListener("load",tzFakeLoad,true);
   tzTimer=setTimeout(tzComposeLoad, 1000, window);
 }
 
@@ -110,8 +110,8 @@ function tzInsertTagline() {
       .replace(/\\n/g,"\n");
     var msgPane = document.getElementById("content-frame");
     if(msgPane) {
-      var controller = document.commandDispatcher.getControllerForCommand('cmd_moveBottom');
-      controller.doCommand('cmd_moveBottom');
+      //var controller = document.commandDispatcher.getControllerForCommand('cmd_moveBottom');
+      //controller.doCommand('cmd_moveBottom');
 
       if(msgPane.editorShell) {
         msgPane.editorShell.InsertText(prefix+tag+suffix);
@@ -119,6 +119,7 @@ function tzInsertTagline() {
       else if(window.GetCurrentEditor)
       {
         var ed = window.GetCurrentEditor();
+        ed.endOfDocument();
         ed.insertText(prefix+tag+suffix);
       }
       else {
@@ -147,7 +148,8 @@ function tzInsertTagline() {
 ////////////////////////////////////////////////////////////////////////////////
 function tzSendCmd(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
-  if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
+  if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true) &&
+    !window.addedTagline ) {
     /*
     if(readMyPref(prefPrefix+".mailPick","bool",false)) {
       tzInsertTagline();
@@ -174,5 +176,6 @@ function tzSendCmd(aCmd) {
 ////////////////////////////////////////////////////////////////////////////////
 function tzPickedTagline() {
   tagzillaWindow.removeEventListener("unload", tzPickedTagline, true);
+  window.addedTagline = true;
   eval(tzCmdActions[tzCmd]);
 }

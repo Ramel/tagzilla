@@ -8,4 +8,7 @@ tbstyle
 tbstyle/*
 */.xvpics
 */.xvpics/*
-install.js*
+install.*
+*.sh
+*.xpi
+*.zip
