@@ -49,8 +49,8 @@
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaComposeOverlay.js"/>
   <script type="application/x-javascript">
   <![CDATA[
-    //window.addEventListener("load",tzFakeLoad,true);
-    window.addEventListener("compose-window-reopen",tzFakeLoad,true);
+    window.addEventListener("load",tzFakeLoad,true);
+    //window.addEventListener("compose-window-reopen",tzFakeLoad,true);
   ]]>
   </script>
 

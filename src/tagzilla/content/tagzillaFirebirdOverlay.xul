@@ -76,12 +76,14 @@
          key="&tagzilla.keybinding;" modifiers="&tagzilla.keymods;"/>
   </keyset>
 
+  <!--
   <menupopup id="menu_FilePopup">
     <menuseparator/>
     <menuitem id="tasksMenuTagZilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
       class="menuitem-iconic menu-iconic icon-tagzilla16"
       key="key_tagzilla" label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
   </menupopup>
+  -->
 
   <popup id="contentAreaContextMenu"
          onpopupshown="gContextMenu.showItem('tagzilla-context',

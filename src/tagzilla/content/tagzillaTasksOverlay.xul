@@ -49,8 +49,6 @@
 
   <script type="application/x-javascript">
     <![CDATA[
-      window.addEventListener("load",tzOverlayLoad,true);
-
       function toTagZilla(aAction) {
         /* Allow manually inserting mail taglines without popping up the
            TagZilla window

@@ -49,6 +49,10 @@ var tzTimer;            // hold timer of setTimeout so it doesn't get set off pr
 ////////////////////////////////////////////////////////////////////////////////
 function tzFakeLoad() {
   //window.removeEventListener("load",tzFakeLoad,true);
+  dump( "tzFakeLoad() called\n" );
+  if( window.tzLoaded ) return;
+  dump( "tzFakeLoad() run\n" );
+  window.tzLoaded = true;
   tzTimer=setTimeout(tzComposeLoad, 1000, window);
 }
 
@@ -127,7 +131,7 @@ function tzInsertTagline() {
               "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
         return false;
       }
-      controller.doCommand('cmd_moveTop');
+      //controller.doCommand('cmd_moveTop');
     }
     else alert("Arg");
   }
