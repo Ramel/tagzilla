@@ -183,7 +183,7 @@
                 onclick="setTimeout(checkTextPrefs,10)"
                 prefattribute="checked"/>
       <hbox>
-        <text class="label" value="  "/>
+        <label value="  "/>
         <checkbox id="tzPref-textPick"
                   label="&textPick.label;"
                   accesskey="&textPick.accesskey;"
@@ -210,7 +210,7 @@
       </columns>
       <rows>
         <row align="center">
-          <text class="label"
+          <label
                 accesskey="&clipPrefix.accesskey;"
                 value="&prefix.label;"
                 for="tzPref-clipPrefix"/>
@@ -224,7 +224,7 @@
                    prefattribute="value"/>
         </row>
         <row align="center">
-          <text class="label"
+          <label
                 accesskey="&clipSuffix.accesskey;"
                 value="&suffix.label;"
                 for="tzPref-clipSuffix"/>

@@ -58,7 +58,7 @@
 <vbox>
   <description>&multi.desc;</description>
   <hbox autostretch="never" align="center">
-    <text class="label" value="&separator.label;"/>
+    <label value="&separator.label;"/>
     <textbox id="tzPref-separator"
              flex="1"
              accesskey="&separator.accesskey;"

@@ -101,7 +101,7 @@
   <groupbox orient="vertical" id="tzMailPrefs" align="start">
     <caption label="&mailCaption.label;"/>
     <hbox align="center" autostretch="never"> 
-      <text class="label"
+      <label
             accesskey="&mailPrefix.accesskey;"
             value="&prefix.label;"
             for="tzPref-mailPrefix"/>
@@ -115,7 +115,7 @@
                prefattribute="value"/>
     </hbox>
     <hbox align="center" autostretch="never">
-      <text class="label"
+      <label
             accesskey="&mailSuffix.accesskey;"
             value="&suffix.label;"
             for="tzPref-mailSuffix"/>
@@ -134,7 +134,7 @@
   <groupbox orient="vertical" id="tzClipboardPrefs" align="start">
     <caption label="&clipCaption.label;"/>
     <hbox align="center" autostretch="never"> 
-      <text class="label"
+      <label
             accesskey="&clipPrefix.accesskey;"
             value="&prefix.label;"
             for="tzPref-clipPrefix"/>
@@ -148,7 +148,7 @@
                prefattribute="value"/>
     </hbox>
     <hbox align="center" autostretch="never">
-      <text class="label"
+      <label
             accesskey="&clipSuffix.accesskey;"
             value="&suffix.label;"
             for="tzPref-clipSuffix"/>
@@ -166,13 +166,13 @@
   <groupbox orient="horizontal">
     <caption label="&samples.label;"/>
     <vbox>
-      <text class="label" value="&mailCaption.label;"/>
+      <label value="&mailCaption.label;"/>
       <textbox multiline="true" readonly="true" flex="1" size="100%"
         oninput="onMailUpdate()" rows="5" cols="25"
         wrap="off" value="&sample.tagline;" id="mailSample"/>
     </vbox>
     <vbox>
-      <text class="label" value="&clipCaption.label;"/>
+      <label value="&clipCaption.label;"/>
       <textbox multiline="true" readonly="true" flex="1" size="100%"
         oninput="onClipUpdate()" rows="5" cols="25"
         wrap="off" value="&sample.tagline;" id="clipSample"/>
