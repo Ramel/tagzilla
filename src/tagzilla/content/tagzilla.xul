@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on July 16, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+-->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+<?xul-overlay href="chrome://communicator/content/communicatorOverlay.xul"?>
+<?xul-overlay href="chrome://communicator/content/utilityOverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
+%tagzillaDTD;
+]>
+
+<window id="tagzilla"
+  title="&tzWindow.title;"
+  orient="vertical"
+  autostretch="always"
+  width="400" height="400"
+  persist="width height x y"
+  onload="tzOnLoad()"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+
+  <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzilla.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+
+  <toolbox>
+    <menubar id="tzMenuBar">
+      <menu id="menu_List" label="&listMenu.label;" accesskey="&listMenu.accessKey;">
+        <menupopup id="menu_ListPopup">
+          <menuitem id="menu_LoadList" oncommand="loadList()"
+                    label="&load.label;" accesskey="&load.accessKey;"/>
+          <menuitem id="menu_SaveList" oncommand="saveList()"
+                    label="&save.label;" accesskey="&save.accessKey;"/>
+          <menuseparator/>
+          <menuitem id="menu_SortList" oncommand="sortList()"
+                    label="&sort.label;" accesskey="&sort.accessKey;"/>
+        </menupopup>
+      </menu>
+<!--
+      <menu id="helpMenu" label="&helpMenu.label;" accesskey="&helpMenu.accessKey;">
+        <menupopup id="helpPopup">
+          <menuseparator/>
+          <menuitem id="aboutTagzilla" oncommand="showAboutDialog()"
+                    label="&about.label;" accesskey="&about.accessKey;"/>
+        </menupopup>
+      </menu>
+-->
+      <spring flex="1"/>
+      <menu id="openPrefs" 
+            label="&prefs.label;" accesskey="&prefs.accessKey;">
+        <menupopup onpopupshowing="goPreferences('tagzilla.xul','chrome://tagzilla/content/pref/pref-tagzilla.xul','tagzilla');return false"/>
+      </menu>
+      <menu id="aboutTagzilla" onclick="showAboutDialog()" oncommand="showAboutDialog()"
+            label="&about.label;" accesskey="&about.accessKey;">
+        <menupopup onpopupshowing="showAboutDialog();return false"/>
+      </menu>
+    </menubar>
+  </toolbox>
+  <hbox autostretch="never" flex="0">
+    <toolbarbutton id="tzRand" flex="0"
+      label="&randButton.label;" tooltiptext="&randButton.tooltip;"
+      accesskey="&randButton.accessKey;" oncommand="selRandTagline()">
+      <image src="chrome://tagzilla/content/tz-rand.png"/>
+    </toolbarbutton>
+    <toolbarbutton id="tzAdd" flex="0"
+      label="&addButton.label;" tooltiptext="&addButton.tooltip;"
+      accesskey="&addButton.accessKey;" oncommand="addTagline(textBox.value)">
+      <deck onclick="addTagline(textBox.value)">
+        <image src="chrome://tagzilla/content/tz-add.png"/>
+        <image src="chrome://tagzilla/content/tz-add-dis.png"/>
+      </deck>
+    </toolbarbutton>
+    <toolbarbutton id="tzModify" flex="0"
+      label="&modButton.label;" tooltiptext="&modButton.tooltip;"
+      accesskey="&modButton.accessKey;" disabled="true"
+      oncommand="changeTagline(textBox.value)">
+      <deck onclick="changeTagline(textBox.value)">
+        <image src="chrome://tagzilla/content/tz-mod.png"/>
+        <image src="chrome://tagzilla/content/tz-mod-dis.png"/>
+      </deck>
+    </toolbarbutton>
+    <toolbarbutton id="tzDel" flex="0"
+      label="&delButton.label;" tooltiptext="&delButton.tooltip;"
+      accesskey="&delButton.accessKey;" disabled="true"
+      oncommand="delTaglines()">
+      <deck onclick="delTaglines()">
+        <image src="chrome://tagzilla/content/tz-del.png"/>
+        <image src="chrome://tagzilla/content/tz-del-dis.png"/>
+      </deck>
+    </toolbarbutton>
+    <textbox id="tagline" flex="1" autostretch="never" width="100%"
+      changed="false" oninput="taglineChanged(true)"/>
+  </hbox>
+  <listbox id="tzListBox" flex="1" seltype="multiple"
+    changed="false" onselect="tzOnSel()">
+    <listhead>
+      <listheader id="tzListHead" label=""/>
+    </listhead>
+  </listbox>
+
+  <hbox autostretch="never">
+<!--    <button id="sortList" label="&sort.label;"
+      accesskey="&sort.accessKey;" oncommand="sortList()"/>
+    <button id="loadList" label="&load.label;"
+      accesskey="&load.accessKey;" oncommand="loadList()"/>
+    <button id="saveList" label="&save.label;"
+      accesskey="&save.accessKey;" oncommand="saveList()"/>
+-->
+    <spring flex="1"/>
+    <button id="insert-button" label="&insert.label;" disabled="true"
+      accesskey="&insert.accessKey;" default="true" oncommand="tzInsert()"/>
+    <button id="close-button" label="&close.label;"
+      accesskey="&close.accessKey;" oncommand="tzExit()"/>
+  </hbox>
+
+</window>

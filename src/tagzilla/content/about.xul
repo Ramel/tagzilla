@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on July 16, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+-->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
+%tagzillaDTD;
+]>
+
+<window id="aboutTagzilla"
+  title="&tzAbout.title;"
+  orient="vertical"
+  width="300" height="160"
+  autostretch="always"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+
+<script type="application/x-javascript">
+<![CDATA[
+// function showWebPage originally appeared in MozGest, http://optimoz.mozdev.org
+// Used here under the terms of the MPL.
+function showWebPage(pageUrl) {
+  //check for an existing browser window
+  const kWindowMediatorContractID = "@mozilla.org/rdf/datasource;1?name=window-mediator";
+  const kWindowMediatorIID = Components.interfaces.nsIWindowMediator;
+  const kWindowMediator = Components.classes[kWindowMediatorContractID].getService(kWindowMediatorIID);
+  var browserWindow = kWindowMediator.getMostRecentWindow("navigator:browser");
+  if (browserWindow) {
+    try {
+      browserWindow.delayedOpenTab(pageUrl);
+    }
+    catch(e) {
+      browserWindow.loadURI(pageUrl);
+    }
+  }
+  else {
+    window.open(pageUrl);
+  }
+}
+]]>
+</script>
+
+<groupbox align="center" orient="vertical">
+  <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
+  <separator/>
+  <text value="&author.label;" style="font-weight: bold;"/>
+  <text value="David Perry"/>
+  <separator class="thin"/>
+  <text value="&home.label;" style="font-weight: bold;"/>
+  <text value="http://tagzilla.mozdev.org"
+        class="tzHomepage"
+        onclick="showWebPage('about:mozilla');window.close()"/>
+</groupbox>
+
+<hbox align="center">
+  <spring flex="1"/>
+  <button label="&aClose.label;" accesskey="&aClose.accessKey;"
+          oncommand="window.close()"/>
+  <spring flex="1"/>
+</hbox>
+
+</window>

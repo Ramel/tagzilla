@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on July 16, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+-->
+
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
+%tagzillaDTD;
+]>
+
+<overlay id="tagzillaComposeOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript">
+  <![CDATA[
+
+    var w;
+    var cmd;
+
+    function tzSendButton(aCmd) {
+      if(readMyPref("tagzilla.mail.auto","bool",true)) {
+        cmd=aCmd;
+        w=toTagZilla(aCmd);
+        w.addEventListener("unload",tzPickedTagline, true);
+      }
+      else {
+        goDoCommand(aCmd);
+      }
+    }
+
+    function tzPickedTagline() {
+      w.removeEventListener("unload", tzPickedTagline, true);
+      goDoCommand(cmd);
+    }
+
+  ]]>
+  </script>
+
+  <commandset id="composeCommands">
+    <command id="cmd_sendNow" oncommand="tzSendButton('cmd_sendNow');"/>
+    <command id="cmd_sendLater" oncommand="tzSendButton('cmd_sendLater');"/>
+    <command id="cmd_sendButton" oncommand="tzSendButton('cmd_sendButton');"/>
+    <command id="cmd_sendWithCheck" oncommand="tzSendButton('cmd_sendWithCheck');"/>
+  </commandset>
+
+  <keyset id="editorKeys">
+    <key id="key_tagzilla_mail" observes="cmd_tagzilla_mail"
+         key="&tzMail.keybinding;" modifiers="&tzMail.keymods;"/>
+  </keyset>
+
+  <popup id="msgComposeContext">
+    <menuseparator />
+    <menuitem id="edContextTagzilla" key="key_tagzilla_mail"
+      label="&tzCommand.label;" accesskey="&tzCommand.accessKey;"
+      class="menuitem-iconic menu-iconic icon-tagzilla16"
+      observes="cmd_tagzilla_mail"/>
+  </popup>
+
+  <menupopup id="menu_FilePopup">
+    <menuitem id="edTagzilla" key="key_tagzilla_mail" 
+              label="&tzCommand.label;" accesskey="&tzCommand.accessKey;"
+              class="menuitem-iconic menu-iconic icon-tagzilla16"
+              insertbefore="menu_close"
+              observes="cmd_tagzilla_mail"/>
+  </menupopup>
+
+</overlay>

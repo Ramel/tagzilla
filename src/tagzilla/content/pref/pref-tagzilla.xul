@@ -1,0 +1,112 @@
+<?xml version="1.0"?> 
+
+<!--
+   - The contents of this file are subject to the Mozilla Public
+   - License Version 1.1 (the "License"); you may not use this file
+   - except in compliance with the License. You may obtain a copy of
+   - the License at http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS
+   - IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+   - implied. See the License for the specific language governing
+   - rights and limitations under the License.
+   -
+   - The Original Code is this file as it was released on July 16, 2002
+   -
+   - Unless otherwise stated, the Initial Developer of the
+   - Original Code is David Perry.  Portions created by David Perry are
+   - Copyright (C) 2002 David Perry.  All rights reserved.
+   -
+   - Contributor(s):
+   -  David Perry <d.perry@utoronto.ca> (Original Author)
+   -
+   -->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % identityDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" >
+%identityDTD;
+]>
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="parent.initPanel( panel ); onLoad()"
+      headertitle="&prefMain.label;">
+
+<script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+<script type="application/x-javascript">
+  <![CDATA[
+    var panel = "chrome://tagzilla/content/pref/pref-tagzilla.xul";
+    var _elementIDs = ["tzPref-mailAuto", "tzPref-defaultFile", "tzPref-defaultSave"];
+
+    function onLoad() {
+      include('chrome://jslib/content/io/fileUtils.js');
+      parent.document.getElementById("tagzilla").setAttribute("open","true");
+    }
+
+    function pickFile() {
+      try {
+        var strBundleService =
+            Components.classes["@mozilla.org/intl/stringbundle;1"].getService();
+        strBundleService =
+          strBundleService.QueryInterface(Components.interfaces.nsIStringBundleService);
+
+        var tzBundle = strBundleService
+             .createBundle("chrome://tagzilla/locale/tagzilla.properties");
+
+        const nsIFilePicker = Components.interfaces.nsIFilePicker;
+
+        var fp = Components.classes["@mozilla.org/filepicker;1"]
+                  .createInstance(nsIFilePicker);
+        fp.init(window, tzBundle.GetStringFromName("loadFile"), nsIFilePicker.modeOpen);
+        fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
+
+        if (fp.show() == nsIFilePicker.returnOK) {
+          var fUtils = new FileUtils();
+          var aPath = fUtils.urlToPath(fp.fileURL.spec);
+          document.getElementById("tzPref-defaultFile").value=aPath;
+        }
+
+      }
+      catch(e) {alert(e);}
+    }
+
+  ]]>
+</script>
+
+  <groupbox orient="vertical" id="tzDefaultFile" align="start">
+    <caption label="&fileCaption.label;"/>
+    <hbox autostretch="never" align="center">
+      <textbox id="tzPref-defaultFile"
+               flex="1"
+               autostretch="never"
+               align="center"
+               size="100%"
+               prefstring="tagzilla.default.file"
+               preftype="string"
+               prefattribute="value"/>
+      <button label="&chooseFile.label;"
+              accesskey="&chooseFile.accesskey;"
+              oncommand="pickFile()"/>
+    </hbox>
+    <checkbox id="tzPref-defaultSave"
+              label="&saveDefault.label;"
+              accesskey="&saveDefault.accesskey;"
+              prefstring="tagzilla.default.autosave"
+              preftype="bool"
+              prefattribute="checked"/>
+  </groupbox>
+  <groupbox orient="vertical" align="start">
+    <caption label="&startup.label;"/>
+    <checkbox id="tzPref-mailAuto"
+              label="&mailAuto.label;"
+              accesskey="&mailAuto.accesskey;"
+              prefstring="tagzilla.mail.auto"
+              preftype="bool"
+              prefattribute="checked"/>
+  </groupbox>
+
+</page>

@@ -1,0 +1,11 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+.icon-tagzilla16 {
+  list-style-image: url("chrome://tagzilla/content/tagzilla-16.png");
+}
+
+.tzHomepage:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

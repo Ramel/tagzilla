@@ -1,0 +1,163 @@
+<?xml version="1.0"?> 
+
+<!--
+   - The contents of this file are subject to the Mozilla Public
+   - License Version 1.1 (the "License"); you may not use this file
+   - except in compliance with the License. You may obtain a copy of
+   - the License at http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS
+   - IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+   - implied. See the License for the specific language governing
+   - rights and limitations under the License.
+   -
+   - The Original Code is this file as it was released on July 16, 2002
+   -
+   - Unless otherwise stated, the Initial Developer of the
+   - Original Code is David Perry.  Portions created by David Perry are
+   - Copyright (C) 2002 David Perry.  All rights reserved.
+   -
+   - Contributor(s):
+   -  David Perry <d.perry@utoronto.ca> (Original Author)
+   -
+   -->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % identityDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" >
+%identityDTD;
+]>
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="parent.initPanel( panel ); onLoad()"
+      onunload="onUnload()"
+      headertitle="&prefFormat.label;">
+
+<script type="application/x-javascript">
+  <![CDATA[
+    var panel = "chrome://tagzilla/content/pref/pref-tagzilla-format.xul";
+    var _elementIDs = ["tzPref-mailPrefix", "tzPref-mailSuffix",
+                       "tzPref-clipPrefix", "tzPref-clipSuffix"];
+
+    var mailSample, clipSample;
+    var mailPrefix, clipPrefix;
+    var mailSuffix, clipSuffix;
+    var sampleText;
+
+    function onLoad() {
+      mailSample = document.getElementById("mailSample");
+      mailPrefix = document.getElementById("tzPref-mailPrefix");
+      mailSuffix = document.getElementById("tzPref-mailSuffix");
+      clipSample = document.getElementById("clipSample");
+      clipPrefix = document.getElementById("tzPref-clipPrefix");
+      clipSuffix = document.getElementById("tzPref-clipSuffix");
+      sampleText = mailSample.getAttribute("value");
+
+      onMailUpdate();
+      onClipUpdate();
+    }
+
+    function onUnload() {
+    }
+
+    function onMailUpdate() {
+      mailSample.value=mailPrefix.value.replace(/\\n/g,"\n")+
+                       sampleText+
+                       mailSuffix.value.replace(/\\n/g,"\n");
+    }
+
+    function onClipUpdate() {
+      clipSample.value=clipPrefix.value.replace(/\\n/g,"\n")+
+                       sampleText+
+                       clipSuffix.value.replace(/\\n/g,"\n");
+    }
+    
+  ]]>
+</script>
+
+  <groupbox orient="vertical" id="tzMailPrefs" align="start">
+    <caption label="&mailCaption.label;"/>
+    <hbox align="center" autostretch="never"> 
+      <text class="label"
+            accesskey="&mailPrefix.accesskey;"
+            value="&prefix.label;"
+            for="tzPref-mailPrefix"/>
+      <textbox id="tzPref-mailPrefix"
+               size="100%"
+               oninput="onMailUpdate()"
+               accesskey="&mailPrefix.accesskey;"
+               flex="1"
+               preftype="string"
+               prefstring="tagzilla.mail.prefix"
+               prefattribute="value"/>
+    </hbox>
+    <hbox align="center" autostretch="never">
+      <text class="label"
+            accesskey="&mailSuffix.accesskey;"
+            value="&suffix.label;"
+            for="tzPref-mailSuffix"/>
+      <textbox id="tzPref-mailSuffix"
+               size="100%"
+               oninput="onMailUpdate()"
+               accesskey="&mailSuffix.accesskey;"
+               flex="1"
+               preftype="string"
+               prefstring="tagzilla.mail.suffix"
+               prefattribute="value"/>
+    </hbox>
+    <description disabled="true">&newline.desc;</description>
+  </groupbox>
+
+  <groupbox orient="vertical" id="tzClipboardPrefs" align="start">
+    <caption label="&clipCaption.label;"/>
+    <hbox align="center" autostretch="never"> 
+      <text class="label"
+            accesskey="&clipPrefix.accesskey;"
+            value="&prefix.label;"
+            for="tzPref-clipPrefix"/>
+      <textbox id="tzPref-clipPrefix"
+               size="100%"
+               oninput="onClipUpdate()"
+               accesskey="&clipPrefix.accesskey;"
+               flex="1"
+               preftype="string"
+               prefstring="tagzilla.clipboard.prefix"
+               prefattribute="value"/>
+    </hbox>
+    <hbox align="center" autostretch="never">
+      <text class="label"
+            accesskey="&clipSuffix.accesskey;"
+            value="&suffix.label;"
+            for="tzPref-clipSuffix"/>
+      <textbox id="tzPref-clipSuffix"
+               size="100%"
+               oninput="onClipUpdate()"
+               accesskey="&clipSuffix.accesskey;"
+               flex="1"
+               preftype="string"
+               prefstring="tagzilla.clipboard.suffix"
+               prefattribute="value"/>
+    </hbox>
+  </groupbox>
+  
+  <groupbox orient="horizontal">
+    <caption label="&samples.label;"/>
+    <vbox>
+      <text class="label" value="&mailCaption.label;"/>
+      <textbox multiline="true" readonly="true" flex="1" size="100%"
+        oninput="onMailUpdate()"
+        wrap="off" value="&sample.tagline;" id="mailSample"/>
+    </vbox>
+    <vbox>
+      <text class="label" value="&clipCaption.label;"/>
+      <textbox multiline="true" readonly="true" flex="1" size="100%"
+        oninput="onClipUpdate()"
+        wrap="off" value="&sample.tagline;" id="clipSample"/>
+    </vbox>
+  </groupbox>
+
+</page>
