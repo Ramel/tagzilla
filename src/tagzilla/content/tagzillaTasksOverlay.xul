@@ -65,6 +65,7 @@
         readMyPref("tagzilla.clipboard.prefix","string","");
         readMyPref("tagzilla.clipboard.suffix","string","");
         readMyPref("tagzilla.mail.auto","bool",true);
+        readMyPref("tagzilla.newline.convert","bool",true);
       }
 
     ]]>

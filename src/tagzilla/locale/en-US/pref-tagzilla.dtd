@@ -14,6 +14,8 @@
 <!ENTITY treeFormat.label      "Formatting">
 <!ENTITY prefFormat.label      "TagZilla: Formatting">
 
+<!ENTITY convNewline.label     "Convert \n to newline in taglines">
+<!ENTITY convNewline.accesskey "n">
 <!ENTITY mailCaption.label     "Mail message">
 <!ENTITY prefix.label          "Tagline Prefix">
 <!ENTITY mailPrefix.accesskey  "P">

@@ -49,8 +49,12 @@ function OnLoad() {
 
   tagline = document.getElementById("tagline");
   tagline.value = window.arguments[0];
-  if(tagline.value.indexOf('\n')!=-1) {
-    tagline.value = tagline.value.substring(0,tagline.value.indexOf('\n'));
+  if(readMyPref("tagzilla.newline.convert","bool",true)) {
+    tagline.value = tagline.value.replace(/\n/g,"\\n");
+    tagline.value = tagline.value.replace(/\\n\\n/g,"\\n");
+  }
+  else {
+    tagline.value = tagline.value.replace(/\n/g," ");
   }
 
   tagFile=document.getElementById("filename");

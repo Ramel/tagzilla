@@ -94,6 +94,10 @@ function tzInsert() {
     selRandTagline();
     selTagline = textBox.value;
   }
+
+  if(readMyPref("tagzilla.newline.convert","bool",true)) {
+    selTagline = selTagline.replace(/\\n/g,"\n");
+  }
   
   if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
     var prefix = readMyPref("tagzilla.mail.prefix","string","").replace(/\\n/g,"\n");
