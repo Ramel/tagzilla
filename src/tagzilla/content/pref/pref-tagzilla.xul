@@ -46,6 +46,7 @@
 
 <page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       onload="parent.initPanel( panel ); onLoad()"
+      onunload="onUnload()"
       headertitle="&prefMain.label;">
 
 <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
@@ -54,7 +55,8 @@
 <script type="application/x-javascript">
   <![CDATA[
     var panel = "chrome://tagzilla/content/pref/pref-tagzilla.xul";
-    var _elementIDs = [ "tzPref-defaultFile", "tzPref-defaultSave"];
+    var _elementIDs = [ "tzPref-defaultFile", "tzPref-defaultSave",
+                        "tzPref-textkey", "tzPref-textPick"];
   ]]>
 </script>
 
@@ -92,29 +94,6 @@
               preftype="bool"
               prefattribute="checked"/>
   </groupbox>
-<!--
-  <groupbox orient="vertical" align="start">
-    <caption label="&message.label;"/>
-    <vbox>
-    <checkbox id="tzPref-mailAuto"
-              label="&mailAuto.label;"
-              accesskey="&mailAuto.accesskey;"
-              prefstring="tagzilla.mail.auto"
-              preftype="bool"
-              onclick="setTimeout(checkMailPrefs,10)"
-              prefattribute="checked"/>
-    <hbox>
-      <text class="label" value="  "/>
-      <checkbox id="tzPref-mailPick"
-                label="&mailPick.label;"
-                accesskey="&mailPick.accesskey;"
-                prefstring="tagzilla.mail.pick"
-                preftype="bool"
-                prefattribute="checked"/>
-    </hbox>
-    </vbox>
-  </groupbox>
--->
   <groupbox orient="vertical" id="tzAccounts" align="start">
     <caption label="&message.label;"/>
     <hbox align="center">
@@ -140,6 +119,28 @@
                 preftype="bool"
                 prefattribute="checked"/>
     </hbox>
+    </vbox>
+  </groupbox>
+  <groupbox orient="vertical" id="tzTextboxes" align="start">
+    <caption label="&textarea.caption;"/>
+    <vbox>
+      <checkbox id="tzPref-textkey"
+                label="&textkey.label;"
+                accesskey="&textkey.accesskey;"
+                prefstring="tagzilla.textbox.trapkey"
+                preftype="bool"
+                onclick="setTimeout(checkTextPrefs,10)"
+                prefattribute="checked"/>
+      <hbox>
+        <text class="label" value="  "/>
+        <checkbox id="tzPref-textPick"
+                  label="&textPick.label;"
+                  accesskey="&textPick.accesskey;"
+                  prefstring="tagzilla.textbox.pick"
+                  preftype="bool"
+                  prefattribute="checked"/>
+      </hbox>
+      <description disabled="true">&needRestart.label;</description>
     </vbox>
   </groupbox>
 

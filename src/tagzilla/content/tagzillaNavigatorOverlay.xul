@@ -40,45 +40,11 @@
 %tagzillaDTD;
 ]>
 
-<overlay id="tagzillaComposeOverlay"
+<overlay id="tagzillaNavigatorOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
-  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaComposeOverlay.js"/>
-  <script type="application/x-javascript">
-  <![CDATA[
-    window.addEventListener("load",tzComposeLoad,true);
-  ]]>
-  </script>
-
-  <commandset id="composeCommands">
-    <command id="cmd_sendNow" oncommand="tzSendButton('cmd_sendNow');"/>
-    <command id="cmd_sendLater" oncommand="tzSendButton('cmd_sendLater');"/>
-    <command id="cmd_sendButton" oncommand="tzSendButton('cmd_sendButton');"/>
-    <command id="cmd_sendWithCheck" oncommand="tzSendButton('cmd_sendWithCheck');"/>
-    <command id="cmd_sendTagZilla" oncommand="tzSendButton('cmd_sendButton');"/>
-  </commandset>
-
-  <keyset id="editorKeys">
-    <key id="key_tagzilla_mail" observes="cmd_tagzilla_mail"
-         key="&tzMail.keybinding;" modifiers="&tzMail.keymods;"/>
-  </keyset>
-
-  <popup id="msgComposeContext">
-    <menuseparator />
-    <menuitem id="edContextTagzilla" key="key_tagzilla_mail"
-      label="&tzCommand.label;" accesskey="&tzCommand.accessKey;"
-      class="menuitem-iconic menu-iconic icon-tagzilla16"
-      observes="cmd_tagzilla_mail"/>
-  </popup>
-
-  <menupopup id="menu_FilePopup">
-    <menuitem id="edTagzilla" key="key_tagzilla_mail" 
-              label="&tzCommand.label;" accesskey="&tzCommand.accessKey;"
-              class="menuitem-iconic menu-iconic icon-tagzilla16"
-              insertbefore="menu_close"
-              observes="cmd_tagzilla_mail"/>
-  </menupopup>
-
+  <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaNavigatorOverlay.js"/>
 </overlay>

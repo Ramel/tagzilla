@@ -86,10 +86,10 @@ function onUnload() {
   clearInterval(popupTimer);
 
   var idStr = gIdentities[popupCurIndex].key;
-  writePref("bool","mail.identity."+idStr+".tagzilla.mailAuto",
-    document.getElementById("mailAuto").getAttribute("checked"));
-  writePref("bool","mail.identity."+idStr+".tagzilla.mailPick",
-    document.getElementById("mailPick").getAttribute("checked"));
+  writePref("bool",String("tagzilla."+idStr+".mailAuto"),
+    Boolean(document.getElementById("mailAuto").hasAttribute("checked")));
+  writePref("bool",String("tagzilla."+idStr+".mailPick"),
+    Boolean(document.getElementById("mailPick").hasAttribute("checked")));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +181,23 @@ function checkMailPrefs() {
   }
   else {
     mailPick.setAttribute("disabled","true");
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// checkTextPrefs
+//
+// Parameters: none
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function checkTextPrefs() {
+  var textAuto = document.getElementById("tzPref-textkey");
+  var textPick = document.getElementById("tzPref-textPick");
+  if(textAuto.getAttribute("checked")) {
+    textPick.removeAttribute("disabled");
+  }
+  else {
+    textPick.setAttribute("disabled","true");
   }
 }
 

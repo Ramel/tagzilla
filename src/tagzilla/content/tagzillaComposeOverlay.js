@@ -74,22 +74,10 @@ function tzComposeLoad() {
 function tzSendButton(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
-    var f;
     var tFile = readMyPref("tagzilla.default.file","string","");
-    if(tFile != "") {
-      f = new File(tFile);
-    }
-    if(readMyPref(prefPrefix+".mailPick","bool",false) && tFile != "" && f.exists()) {
+    if(readMyPref(prefPrefix+".mailPick","bool",false)) {
       try {
-        f.open("r");
-        var arr = f.read().split("\n");
-        f.close();
-
-        var rv=parseInt(Math.round(Math.random() * arr.length));
-        var tag=arr[rv];
-        if(readMyPref("tagzilla.newline.convert","bool",true)) {
-          tag = tag.replace(/\\n/g,"\n");
-        }
+        var tag = tzRandTaglineFromFile(tFile);
         var prefix = readMyPref("tagzilla.mail.prefix","string","")
           .replace(/\\n/g,"\n");
         var suffix = readMyPref("tagzilla.mail.suffix","string","")
@@ -106,7 +94,7 @@ function tzSendButton(aCmd) {
           goDoCommand(aCmd);
       }
       catch(ex) {
-        alert(getText("cantRead"));
+        //alert(getText("cantRead"));
         dump(ex+"\n");
         return;
       }

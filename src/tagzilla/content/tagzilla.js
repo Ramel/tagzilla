@@ -76,7 +76,10 @@ var tzTreeView = {
 ////////////////////////////////////////////////////////////////////////////////
 // tzOnLoad
 //
-// Parameters: none
+// Parameters: (passed in through window.arguments)
+//  tzCmd: text string indicating how TagZilla is to be used
+//  tzDoc: TagZilla's calling document
+//
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzOnLoad() {
@@ -151,6 +154,13 @@ function tzInsert() {
       msgPane.editorShell.InsertText(prefix+selTagline+suffix);
       setTimeout(tzExit, 10);
     }
+  }
+  else if(tzCmd=="TZ_TEXTBOX") {
+    var prefix = readMyPref("tagzilla.clipboard.prefix","string","").replace(/\\n/g,"\n");
+    var suffix = readMyPref("tagzilla.clipboard.suffix","string","").replace(/\\n/g,"\n");
+    var textToAdd = prefix+selTagline+suffix;
+    tzDoc.value += textToAdd;
+    setTimeout(tzExit, 10);
   }
   else if(tzCmd=="TZ_CLIPBOARD") {
     try {

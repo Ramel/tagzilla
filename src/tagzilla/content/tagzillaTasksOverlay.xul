@@ -67,6 +67,8 @@
         readMyPref("tagzilla.mail.auto","bool",true);
         readMyPref("tagzilla.mail.pick","bool",false);
         readMyPref("tagzilla.newline.convert","bool",true);
+        readMyPref("tagzilla.textbox.trapkey","bool",true);
+        readMyPref("tagzilla.textbox.pick","bool",false);
       }
 
     ]]>
