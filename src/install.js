@@ -26,11 +26,11 @@ var instToProfile = confirm(INST_TO_PROFILE);
 var chromef = instToProfile ? getFolder("Profile", "chrome") : getFolder("chrome");
 var cflag   = instToProfile ? PROFILE_CHROME                 : DELAYED_CHROME;
 
-var err = addFile(APP_PACKAGE, APP_VERSION, APP_JAR_FILE, chromef, null)
+var err = addFile(APP_PACKAGE, APP_VERSION, "chrome/"+APP_JAR_FILE, chromef, null)
 
 if(err == SUCCESS) {
     var prefFolder = getFolder('Program', 'defaults/pref/');
-    addFile("David Perry", "tagzilla_prefs.js", prefFolder, '');
+    addFile("tagzilla", "defaults/preferences/tagzilla_prefs.js", prefFolder, '');
 
     var jar = getFolder(chromef, APP_JAR_FILE);
     registerChrome( CONTENT    | cflag, jar, APP_CONTENT_FOLDER);
