@@ -8,7 +8,6 @@
 <li><a href="#list">Tagline Management</a></li>
 <li><a href="#prefs">TagZilla Preferences</a></li>
 <li><a href="#theft">Tagline Theft</a></li>
-<li><a href="#notes">Notes</a></li>
 </ul>
 
 <h3><a name="invocation">Starting TagZilla</a></h3>
@@ -29,7 +28,11 @@ using one of these methods:
 <li>Automatically when sending a message <a href="#prefs">(see below)</a></li>
 <li>Using the TagZilla Composer hotkey, <em>Ctrl-T</em><br>
 <i>(Notice that this hotkey is <b>not</b> the same hotkey as used above!)</i></li>
-</ul><p>
+</ul>
+<p><b>Note:</b> The access keys have been changed in TagZilla 0.041.  They now use
+<b>the J key instead of the T key</b>.
+</p>
+<p>
 When TagZilla is started from within Composer, it works in (oddly enough) Composer
 Mode.  This means that, when you finally select a tagline, it is automatically
 tacked on to the end of your message.<br><i>(Note: it will be tacked on <em>after</em> the
@@ -37,7 +40,8 @@ signature placed there by Mozilla, if you use one.)</i></p>
 
 <p>Starting with TagZilla 0.025, you can insert taglines directly into textboxes
 without having to go through the clipboard.  Just make sure the text box is focused
-(that is, the cursor is there and you can type in it), and press <em>Ctrl-T</em>.</p>
+(that is, the cursor is there and you can type in it), and press <em>Ctrl-T</em>.
+  (Again, it's been changed to Ctrl-J in TagZilla 0.041 and up.)</p>
 
 <h3><a name="basics">Basic Usage</a></h3>
 <p>When you start TagZilla, it will open a file picker, where you can choose a
@@ -94,13 +98,13 @@ when TagZilla starts up.  Set it to blank to be prompted each time.</li>
 <li><b>Set this default to the last loaded tagline file.</b> When TagZilla closes,
 whichever file is currently open will be used as the default tagline file
 for the next time TagZilla starts, unless you clear this checkbox.</li>
-<li><b>Ctrl-T within a textarea inserts a tagline.</b> If you have TagZilla 0.025
+<li><b>Ctrl-T (or J) within a textarea inserts a tagline.</b> If you have TagZilla 0.025
 or higher, you can insert a tagline into a text box as <a href="#invocation">described
 above</a>.  However, this feature comes with a slight performance hit (~2% increase
 in page load times, YMMV).  You can turn off this feature, but you need to restart
 Mozilla for it to take effect.</li>
 <li><b>...without opening TagZilla Window.</b> If you just want a random tagline when
-you press Ctrl-T, check this box.</li>
+you press the hotkey, check this box.</li>
 </ul>
 <p>Starting with TagZilla 0.014, these next few settings can be set differently
 for each of your mail accounts:</p>
@@ -138,6 +142,3 @@ web pages or mail messages.  Simply highlight the tagline with the mouse, then
 right-click and select "Steal Tagline" from the context menu.  You will be given
 a chance to edit the tagline, if desired, and a choice of which tagline file you
 want the tagline saved in.</p>
-
-<h3><a name="notes">Notes</a></h3>
-<?php $author="d.perry@utoronto.ca"; require(ANNOTATE); ?>
