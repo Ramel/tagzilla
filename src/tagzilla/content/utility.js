@@ -239,3 +239,43 @@ function txtFilePicker(aTitle, aSave) {
   }
   return retVal;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// openUrl
+//
+// Parameters:
+//  aUrl: the URL to load
+// Returns: nothing
+//
+// The Initial Developer of this function is R. Saravanan.
+// Copyright (C) 2002 to R. Saravanan.  Used here under the terms of the MPL.
+// Check out his Mozilla project, EnigMail: http://enigmail.mozdev.org
+////////////////////////////////////////////////////////////////////////////////
+function openUrl(aUrl) {
+  var navWindow;
+
+  // if this is a browser window, just use it
+  if ("document" in top) {
+    var possibleNavigator = top.document.getElementById("main-window");
+    if (possibleNavigator &&
+        possibleNavigator.getAttribute("windowtype") == "navigator:browser")
+      navWindow = top;
+  }
+
+  // if not, get the most recently used browser window
+  if (!navWindow) {
+    var wm = Components.classes["@mozilla.org/rdf/datasource;1?name=window-mediator"]
+      .getService(Components.interfaces.nsIWindowMediator);
+    navWindow = wm.getMostRecentWindow("navigator:browser");
+  }
+  if (navWindow) {
+    if ("loadURI" in navWindow)
+      navWindow.loadURI(aUrl);
+    else
+      navWindow._content.location.href = aUrl;
+  }
+  // if all else fails, open a new window
+  else {
+    window.open(aUrl);
+  }
+}
