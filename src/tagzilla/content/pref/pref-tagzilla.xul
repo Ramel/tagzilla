@@ -37,6 +37,7 @@
       headertitle="&prefMain.label;">
 
 <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+<script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
 <script type="application/x-javascript">
   <![CDATA[
     var panel = "chrome://tagzilla/content/pref/pref-tagzilla.xul";
@@ -57,21 +58,17 @@
         var tzBundle = strBundleService
              .createBundle("chrome://tagzilla/locale/tagzilla.properties");
 
-        const nsIFilePicker = Components.interfaces.nsIFilePicker;
-
-        var fp = Components.classes["@mozilla.org/filepicker;1"]
-                  .createInstance(nsIFilePicker);
-        fp.init(window, tzBundle.GetStringFromName("loadFile"), nsIFilePicker.modeOpen);
-        fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
-
-        if (fp.show() == nsIFilePicker.returnOK) {
+        var fName = txtFilePicker(tzBundle.GetStringFromName("loadFile"),0);
+        if(fName==null) {
+        }
+        else {
           var fUtils = new FileUtils();
-          var aPath = fUtils.urlToPath(fp.fileURL.spec);
+          var aPath = fUtils.urlToPath(fName);
           document.getElementById("tzPref-defaultFile").value=aPath;
         }
 
       }
-      catch(e) {alert(e);}
+      catch(e) {dump(e+'\n');}
     }
 
   ]]>

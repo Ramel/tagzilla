@@ -195,3 +195,29 @@ function getText(aStr) {
   return null;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// txtFilePicker
+//
+// Parameters:
+//  aTitle: title to go on file picker window
+//  aSave: 1 if picking file to save/overwrite, 0 if picking file to load
+// Returns:
+//  Name of file picked, in URL format, or null if cancelled
+////////////////////////////////////////////////////////////////////////////////
+function txtFilePicker(aTitle, aSave) {
+  var retVal = null;
+  try {
+    const nsIFilePicker = Components.interfaces.nsIFilePicker;
+    var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+    fp.init(window, aTitle, (aSave ? nsIFilePicker.modeSave : nsIFilePicker.modeOpen));
+    fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
+    var result=fp.show();
+
+    if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace) {
+      retVal=fp.fileURL.spec;
+    }
+  }
+  catch (ex) {
+  }
+  return retVal;
+}

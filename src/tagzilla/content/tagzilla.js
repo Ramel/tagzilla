@@ -363,23 +363,16 @@ function notSavedDlg() {
 // Returns: false if list not loaded, true otherwise
 ////////////////////////////////////////////////////////////////////////////////
 function loadList() {
-  var notSaved=notSavedDlg();
+  var notSaved = notSavedDlg();
   if(notSaved==1) return false;                 // cancel
   if(notSaved==0 && !saveList()) return false;  // save
-  try {
-    const nsIFilePicker = Components.interfaces.nsIFilePicker;
-    var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(window, getText("loadFile"), nsIFilePicker.modeOpen);
-    fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 
-    if (fp.show() == nsIFilePicker.returnOK) {
-      clearList();
-      loadTaglineFile(fp.fileURL.spec);
-    }
-    else
-      return false;
-  } catch (ex) {
-  }
+  var fName=txtFilePicker(getText("loadFile"),0);
+  if(fName==null)
+    return false;
+
+  clearList();
+  loadTaglineFile(fName);
   setTimeout(tzOnSel,10);
   return true;
 }
@@ -391,31 +384,22 @@ function loadList() {
 // Returns: true if list saved, false otherwise
 ////////////////////////////////////////////////////////////////////////////////
 function saveList() {
-  try {
-    const nsIFilePicker = Components.interfaces.nsIFilePicker;
-    var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(window, getText("saveFile"), nsIFilePicker.modeSave);
-    fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
-    var result=fp.show();
+  var fName = txtFilePicker(getText("saveFile"),1);
+  if(fName==null)
+    return false;
 
-    if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace) {
-      var fUtils = new FileUtils();
-      var f = new File(fUtils.urlToPath(fp.fileURL.spec));
-      if(!f.open("w")) {
-        alert(getText("saveErrMsg"));
-        return false;
-      }
-      for(var i=1; i<=lBox.getRowCount(); i++) {
-        f.write(lBox.childNodes[i].firstChild.getAttribute("label")+"\n");
-      }
-      f.close();
-
-      lBox.setAttribute("changed","false");
-    }
-    else
-      return false;
-  } catch (ex) {
+  var fUtils = new FileUtils();
+  var f = new File(fUtils.urlToPath(fName));
+  if(!f.open("w")) {
+    alert(getText("saveErrMsg"));
+    return false;
   }
+  for(var i=1; i<=lBox.getRowCount(); i++) {
+    f.write(lBox.childNodes[i].firstChild.getAttribute("label")+"\n");
+  }
+  f.close();
+
+  lBox.setAttribute("changed","false");
   return true;
 }
 
