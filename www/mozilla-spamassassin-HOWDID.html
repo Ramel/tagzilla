@@ -8,6 +8,8 @@
 <li><a href="#start">Starting Point</a></li>
 <li><a href="#setupfm">Setting up FetchMail</a></li>
 <li><a href="#setupmoz">Mozilla reading Unix mail</a></li>
+<li><a href="#ipupdown">Checking for Mail</a></li>
+<li><a href="#filter">Filtering out Spam</a></li>
 </ul>
 
 <a class="h3" name="#intro" href="#toc">Introduction</a>
@@ -25,6 +27,7 @@ for whatever you do to your computer.</p>
 <li>A Pentium-III computer, running at 666MHz (no kidding)</li>
 <li>A reasonably fresh (less than one month old) install of
 <a href="http://redhat.com/">RedHat Linux 8.0</a></li>
+<li>An intermediate-to-advanced knowledge of how a Linux system works</li>
 <li>A fresh install of <a href="http://mozilla.org/">Mozilla 1.2 beta</a></li>
 <li>A dial-up internet connection</li>
 <li>Two email addresses, both accessible via POP3, which I wanted SpamAssassin to
@@ -209,6 +212,8 @@ mechanism as does procmail, so following Mark's instructions, I created the file
 <tt>/root/.procmailrc</tt> with these contents:</p>
 <pre>:0fw
 | /usr/bin/spamassassin</pre>
+<p>I needed SpamAssassin running in order to do my various tests, so I started it
+with the command '<tt>service spamassassin start</tt>'.</p>
 <p><b>...to grab my email.</b> FetchMail needs its own configuration file to know
 which mail to actually grab, and where to put it.  Mark's instructions had it dumping
 all my mail in <tt>root</tt>'s mail file.  That would mean I'd have to be root to read
@@ -245,8 +250,8 @@ that looked something like this:<br>
 user_pref("mail.server.server5.name", "Movemail");
 user_pref("mail.server.server5.type", "pop3");</pre>
 I just changed the last line to this:<br>
-<pre>user_pref("mail.server.server5.type", "movemail");</pre></li>
-<li>Once I did that and restarted Mozilla, I verified in the account's
+<pre>user_pref("mail.server.server5.type", "movemail");</pre>
+Once I did that and restarted Mozilla, I verified in the account's
 Server Settings window that the new account was now of type "Unix Movemail".</li>
 <li>I wasn't yet able to access my mail, because of the permissions on the
 <tt>/var/spool/mail</tt> directory.  I had to set the "sticky" bit in the directory's
@@ -255,3 +260,70 @@ permissions.  I did this (as root) with the command<br>
 Being "sticky" means that any user can create a file in that directory, but only
 a file's owner can read or delete it.  Once I did that, Mozilla was able to read my
 mail, just like in the good old days.</li></ul>
+
+<a class="h3" name="#ipupdown" href="#toc">Checking for Mail</a>
+<p>FetchMail can be run as a daemon to check mailboxes at regular intervals.
+I could have just added a call to '<tt>/usr/bin/fetchmail -d 600</tt>' to one
+of my startup scripts, and it would automatically check my mail every 600 seconds.
+But I'm a picky guy.  I don't want fetchmail or SpamAssassin running when I don't need
+them (basically, any time I'm not online).  I've had past experience with executing
+commands when a dial-up link comes up or goes down, so I knew that what I wanted
+could be accomplished with the files <tt>/etc/ppp/ip-up.local</tt> and
+<tt>ip-down.local</tt>.
+If you want more information on what they do, you should have a look at
+<tt>/usr/share/doc/ppp-?.?.?/sample/ip-up</tt>.</p>
+<p>Here's what I ended up doing.  Here's my <tt>/etc/ppp/ip-up.local</tt>:</p>
+<pre>#!/bin/sh
+#
+# This script is run by the pppd after the link is established.
+# It should be used to add routes, set IP address, run the mailq
+# etc.
+#
+# This script is called with the following arguments:
+#    Arg  Name               Example
+#    $1   Interface name     ppp0
+#    $2   The tty            ttyS1
+#    $3   The link speed     38400
+#    $4   Local IP number    12.34.56.78
+#    $5   Peer  IP number    12.34.56.99
+#
+
+HOME=/root
+if [ $1 == ppp0 ] ; then
+    service spamassassin start
+    /usr/bin/fetchmail -a -d 600
+fi</pre>
+<p>And here's my <tt>ip-down.local</tt>:</p>
+<pre>#!/bin/bash
+#
+# This script is run by the pppd _after_ the link is brought down.
+# It should be used to delete routes, unset IP addresses etc.
+#
+# This script is called with the following arguments:
+#    Arg  Name               Example
+#    $1   Interface name     ppp0
+#    $2   The tty            ttyS1
+#    $3   The link speed     38400
+#    $4   Local IP number    12.34.56.78
+#    $5   Peer  IP number    12.34.56.99
+#
+
+if [ $1 == ppp0 ]; then
+    killall fetchmail
+    service spamassassin stop
+fi</pre>
+<a class="h3" name="#filter" href="#toc">Filtering out Spam</a>
+<p>SpamAssassin doesn't actually kill spam it finds, it just flags it for you.
+You still have to tell Mozilla to filter out the stuff SpamAssassin flags.
+Fortunately, that's really simple.  In Mozilla Mail, I went to Tools | Message Filters,
+and selected the Movemail account I had made in the dropdown at the top.  Then
+I added one simple filter.</p>
+<img src="http://tagzilla.mozdev.org/spamfilter.png" width="591" height="364"><br>
+<p>I had to use the "Customize..." option in the dropdown to create an entry for
+the X-Spam-Flag header.</p>
+<p>I then tweaked a few of SpamAssassin's settings.  I had to this by editing
+<tt>/root/.spamassassin/user_prefs</tt>.  Don't forget that fetchmail and SpamAssassin
+are running as daemons, which run as user <tt>root</tt>!  That's why I couldn't get
+the filtering I wanted by editing <tt>smiley</tt>'s config file.</p>
+<hr>
+<p>And that's it!  All done.  I hope that was as educational for you as it was for me.</p>
