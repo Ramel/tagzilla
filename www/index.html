@@ -4,11 +4,11 @@
 <div class="infoTab" id="whats-new">
 <h5 class="infoHeader">What's New</h5>
 <ul>
-<li><b>Jun 19</b>
+<li><b>Jun 29</b>
 <a href="http://mozilla.org/projects/thunderbird/">Thunderbird Mail</a>
 now supports
 <a href="http://extensionroom.mozdev.org">extensions</a> as of the
-20030617 build.  Expect a new version of TagZilla soon!
+20030617 build.  And TagZilla supports it!
 </li>
 <li><b>Feb 8</b> Those great guys at <a href="http://jslib.mozdev.org">JSLib</a>
 have posted a new version that works in recent Mozilla builds</li>
@@ -71,13 +71,29 @@ now supports the installation and configuration of
 TagZilla will be forthcoming to support Thunderbird.
 </p>
 
-<h3>TagZilla 0.041 released</h3>
+<h3>TagZilla 0.049 released</h3>
+<p>You have my greatest thanks for your patience in awaiting this release.</p>
 <ul>
+<li>One xpi, three platforms: supports
+<a href="http://mozilla.org">Mozilla Suite</a>,
+<a href="http://mozilla.org/projects/firebird/">Firebird</a> and
+<a href="http://mozilla.org/projects/thunderbird/">Thunderbird</a>
+</li>
+<li>Prefs window works on all three platforms now</li>
+<li>Improved handling of DOS/Windows, Mac, and *nix-flavoured newlines
+in tagline files</li>
 <li>Small but important bug fixes</li>
-<li>Big and major bug fixes - now works in recent Mozilla trunk builds</li>
-<li><b>Access keys changed</b> from (Shift-)Ctrl-T to (Shift-)Ctrl-J.  Now you can use
-those keyboard shortcuts to check for mail again</li>
-<li>Added a spiffy(?) toolbar icon for Phoenix</li>
+<li>Can be installed to a profile or to the system (but see below)</li>
+<li>Jar-based installation saves disk space</li>
+</ul>
+Known bugs:
+<ul>
+<li>The install process has been known to fail for No Good Reason. I'm not
+sure if it's a bug in one or more of the Mozilla programs, or if I've broken
+my content/chrome.rdf again.  If you can't install to your profile directory,
+try to install to your program directory, or vice versa.  Help wanted in
+determining what I can do to TagZilla to help alleviate the problem.</li>
+<li>The toolbar icons in *bird don't show up in the toolbar palette</li>
 </ul>
 
 <h3>What is TagZilla?</h3>
