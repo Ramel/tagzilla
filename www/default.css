@@ -83,6 +83,23 @@
    padding-bottom: 5px;
 }
 
-span.redtext {
-  font-color: #990000 !important;
+em {
+  color: #990000;
+  font-weight: normal;
+  font-style: normal;
+}
+
+strong {
+  color: #990000;
+  font-weight: bold;
+}
+
+p {
+  text-align: justify;
+  padding-right: 1em;
+}
+
+p:active {
+  background-color: #FF9400;
+  color: #000000;
 }
