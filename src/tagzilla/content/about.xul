@@ -65,7 +65,8 @@ function showWebPage(pageUrl) {
 <groupbox align="center" orient="horizontal">
 <vbox>
   <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
-  <separator/>
+  <text value="0.001"/>
+  <separator class="thin"/>
   <text value="&author.label;" style="font-weight: bold;"/>
   <text value="David Perry"/>
   <separator class="thin"/>
