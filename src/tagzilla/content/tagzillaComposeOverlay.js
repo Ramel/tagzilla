@@ -286,7 +286,8 @@ tzDocStateListener.prototype = {
       */
 
       msgBody = msgBody.replace(/\n/g,"\\n");
-      if( msgBody.indexOf(prefix) >= 0 && msgBody.indexOf(suffix) >= 0 ) {
+      if( (prefix && msgBody.indexOf(prefix) >= 0 ) &&
+          (suffix && msgBody.indexOf(suffix) >= 0 ) ) {
         tzDump( "tzDocStateListener detected previous tagline\n" );
         tzAddedTagline = true;
       }
