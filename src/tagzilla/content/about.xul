@@ -32,7 +32,7 @@
 <window id="aboutTagzilla"
   title="&tzAbout.title;"
   orient="vertical"
-  width="300" height="160"
+  width="225" height="160"
   autostretch="always"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml">
@@ -62,7 +62,8 @@ function showWebPage(pageUrl) {
 ]]>
 </script>
 
-<groupbox align="center" orient="vertical">
+<groupbox align="center" orient="horizontal">
+<vbox>
   <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
   <separator/>
   <text value="&author.label;" style="font-weight: bold;"/>
@@ -71,7 +72,10 @@ function showWebPage(pageUrl) {
   <text value="&home.label;" style="font-weight: bold;"/>
   <text value="http://tagzilla.mozdev.org"
         class="tzHomepage"
-        onclick="showWebPage('about:mozilla');window.close()"/>
+        onclick="showWebPage('http://tagzilla.mozdev.org');window.close()"/>
+</vbox>
+<spring flex="1"/>
+<image src="chrome://tagzilla/content/tagzilla-big.png"/>
 </groupbox>
 
 <hbox align="center">
