@@ -1,9 +1,15 @@
 @import url("/hide_from_ns4.css");
 
 .project-name{
- font-family: helvetica,arial,san-serif;
- color:#990000;
+ font-family: serif;
+ color:#419f00;
  padding: 0;
+ margin-bottom: 0;
+}
+
+.tagline{
+  font-style: italic;
+  padding: 0;
 }
 
 .page-header{
