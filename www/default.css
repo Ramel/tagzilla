@@ -83,6 +83,6 @@
    padding-bottom: 5px;
 }
 
-.redtext {
+span.redtext {
   font-color: #990000 !important;
 }
