@@ -74,6 +74,7 @@ function onLoad() {
 
   setInterval(popupCommand,50);
   setTimeout(checkMailPrefs,10);
+  setTimeout(checkTextPrefs,10);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
