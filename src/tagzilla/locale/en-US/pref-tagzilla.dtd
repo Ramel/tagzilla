@@ -1,15 +1,20 @@
 <!ENTITY treeMain.label        "TagZilla">
 <!ENTITY prefMain.label        "TagZilla">
 
+<!ENTITY noJSlib.caption       "JSLib Required">
+<!ENTITY noJSlib.desc          "You do not have JSLib installed on this machine.  TagZilla will not function without it.">
+
 <!ENTITY fileCaption.label     "Default tagline file">
 <!ENTITY chooseFile.label      "Choose...">
 <!ENTITY chooseFile.accesskey  "C">
 <!ENTITY saveDefault.label     "When TagZilla closes, set this default to last loaded tagline file">
 <!ENTITY saveDefault.accesskey "T">
 
-<!ENTITY startup.label         "Startup">
-<!ENTITY mailAuto.label        "Automatically open TagZilla on Message Send">
+<!ENTITY message.label         "Sending Messages">
+<!ENTITY mailAuto.label        "Automatically add a tagline when sending a message">
 <!ENTITY mailAuto.accesskey    "A">
+<!ENTITY mailPick.label        "Without opening TagZilla window">
+<!ENTITY mailPick.accesskey    "W">
 
 <!ENTITY treeFormat.label      "Formatting">
 <!ENTITY prefFormat.label      "TagZilla: Formatting">

@@ -34,6 +34,7 @@
    -->
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
 <?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
 
 <!DOCTYPE window [
@@ -52,11 +53,26 @@
 <script type="application/x-javascript">
   <![CDATA[
     var panel = "chrome://tagzilla/content/pref/pref-tagzilla.xul";
-    var _elementIDs = ["tzPref-mailAuto", "tzPref-defaultFile", "tzPref-defaultSave"];
+    var _elementIDs = ["tzPref-mailAuto", "tzPref-mailPick",
+                       "tzPref-defaultFile", "tzPref-defaultSave"];
 
     function onLoad() {
-      include('chrome://jslib/content/io/fileUtils.js');
+      try {
+        include('chrome://jslib/content/io/fileUtils.js');
+      }
+      catch(ex) {
+        parent.document.getElementById("tagzilla").setAttribute("container","false");
+        var page=document.firstChild;
+
+        for(var i=0; i<page.childNodes.length; i++) {
+          if(page.childNodes[i].getAttribute("id") != "noJSlib")
+            page.childNodes[i].setAttribute("collapsed","true");
+        }
+        return;
+      }
+      document.getElementById("noJSlib").setAttribute("collapsed","true");
       parent.document.getElementById("tagzilla").setAttribute("open","true");
+      setTimeout(checkMailPrefs,10);
     }
 
     function pickFile() {
@@ -73,8 +89,49 @@
       catch(e) {dump(e+'\n');}
     }
 
+    function showWebPage(pageUrl) {
+      //check for an existing browser window
+      const kWindowMediatorContractID = "@mozilla.org/rdf/datasource;1?name=window-mediator";
+      const kWindowMediatorIID = Components.interfaces.nsIWindowMediator;
+      const kWindowMediator = Components.classes[kWindowMediatorContractID].getService(kWindowMediatorIID);
+      var browserWindow = kWindowMediator.getMostRecentWindow("navigator:browser");
+      if (browserWindow) {
+        try {
+          browserWindow.delayedOpenTab(pageUrl);
+        }
+        catch(e) {
+          browserWindow.loadURI(pageUrl);
+        }
+      }
+      else {
+        window.open(pageUrl);
+      }
+    }
+
+    function checkMailPrefs() {
+      var mailAuto = document.getElementById("tzPref-mailAuto");
+      var mailPick = document.getElementById("tzPref-mailPick");
+      if(mailAuto.getAttribute("checked")) {
+        mailPick.removeAttribute("disabled");
+      }
+      else {
+        mailPick.setAttribute("disabled","true");
+      }
+    }
+
   ]]>
 </script>
+  <groupbox orient="vertical" id="noJSlib">
+    <caption label="&noJSlib.caption;"/>
+    <description>&noJSlib.desc;</description>
+    <separator />
+    <hbox align="center">
+      <spring flex="1"/>
+      <text value="http://jslib.mozdev.org" class="url"
+          onclick="showWebPage('http://jslib.mozdev.org')"/>
+      <spring flex="1"/>
+    </hbox>
+  </groupbox>
 
   <groupbox orient="vertical" id="tzDefaultFile" align="start">
     <caption label="&fileCaption.label;"/>
@@ -99,13 +156,25 @@
               prefattribute="checked"/>
   </groupbox>
   <groupbox orient="vertical" align="start">
-    <caption label="&startup.label;"/>
+    <caption label="&message.label;"/>
+    <vbox>
     <checkbox id="tzPref-mailAuto"
               label="&mailAuto.label;"
               accesskey="&mailAuto.accesskey;"
               prefstring="tagzilla.mail.auto"
               preftype="bool"
+              onclick="setTimeout(checkMailPrefs,10)"
               prefattribute="checked"/>
+    <hbox>
+      <text class="label" value="  "/>
+      <checkbox id="tzPref-mailPick"
+                label="&mailPick.label;"
+                accesskey="&mailPick.accesskey;"
+                prefstring="tagzilla.mail.pick"
+                preftype="bool"
+                prefattribute="checked"/>
+    </hbox>
+    </vbox>
   </groupbox>
 
 </page>

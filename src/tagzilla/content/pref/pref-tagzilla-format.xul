@@ -166,13 +166,13 @@
     <vbox>
       <text class="label" value="&mailCaption.label;"/>
       <textbox multiline="true" readonly="true" flex="1" size="100%"
-        oninput="onMailUpdate()"
+        oninput="onMailUpdate()" rows="5" cols="25"
         wrap="off" value="&sample.tagline;" id="mailSample"/>
     </vbox>
     <vbox>
       <text class="label" value="&clipCaption.label;"/>
       <textbox multiline="true" readonly="true" flex="1" size="100%"
-        oninput="onClipUpdate()"
+        oninput="onClipUpdate()" rows="5" cols="25"
         wrap="off" value="&sample.tagline;" id="clipSample"/>
     </vbox>
   </groupbox>

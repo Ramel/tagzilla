@@ -99,32 +99,44 @@
       accesskey="&randButton.accessKey;" oncommand="selRandTagline()">
       <image src="chrome://tagzilla/content/tz-rand.png"/>
     </toolbarbutton>
-    <toolbarbutton id="tzAdd" flex="0"
-      label="&addButton.label;" tooltiptext="&addButton.tooltip;"
-      accesskey="&addButton.accessKey;" oncommand="addTagline(textBox.value)">
-      <deck onclick="addTagline(textBox.value)">
-        <image src="chrome://tagzilla/content/tz-add.png" tooltiptext="&addButton.tooltip;"/>
-        <image src="chrome://tagzilla/content/tz-add-dis.png" tooltiptext="&addButton.tooltip;"/>
-      </deck>
-    </toolbarbutton>
-    <toolbarbutton id="tzModify" flex="0"
-      label="&modButton.label;" tooltiptext="&modButton.tooltip;"
-      accesskey="&modButton.accessKey;" disabled="true"
-      oncommand="changeTagline(textBox.value)">
-      <deck onclick="changeTagline(textBox.value)">
-        <image src="chrome://tagzilla/content/tz-mod.png" tooltiptext="&modButton.tooltip;"/>
-        <image src="chrome://tagzilla/content/tz-mod-dis.png" tooltiptext="&modButton.tooltip;"/>
-      </deck>
-    </toolbarbutton>
-    <toolbarbutton id="tzDel" flex="0"
-      label="&delButton.label;" tooltiptext="&delButton.tooltip;"
-      accesskey="&delButton.accessKey;" disabled="true"
-      oncommand="delTaglines()">
-      <deck onclick="delTaglines()">
-        <image src="chrome://tagzilla/content/tz-del.png" tooltiptext="&delButton.tooltip;"/>
-        <image src="chrome://tagzilla/content/tz-del-dis.png" tooltiptext="&delButton.tooltip;"/>
-      </deck>
-    </toolbarbutton>
+    <deck id="tzAdd">
+      <toolbarbutton id="tzAddEn" flex="0"
+        label="&addButton.label;" tooltiptext="&addButton.tooltip;"
+        accesskey="&addButton.accessKey;" oncommand="addTagline(textBox.value, true)">
+          <image src="chrome://tagzilla/content/tz-add.png"/>
+      </toolbarbutton>
+      <toolbarbutton id="tzAddDis" flex="0" disabled="true"
+        label="&addButton.label;" tooltiptext="&addButton.tooltip;"
+        accesskey="&addButton.accessKey;">
+          <image src="chrome://tagzilla/content/tz-add-dis.png"/>
+      </toolbarbutton>
+    </deck>
+    <deck id="tzModify">
+      <toolbarbutton id="tzModifyEn" flex="0"
+        label="&modButton.label;" tooltiptext="&modButton.tooltip;"
+        accesskey="&modButton.accessKey;"
+        oncommand="changeTagline(textBox.value)">
+          <image src="chrome://tagzilla/content/tz-mod.png"/>
+      </toolbarbutton>
+      <toolbarbutton id="tzModifyDis" flex="0" disabled="true"
+        label="&modButton.label;" tooltiptext="&modButton.tooltip;"
+        accesskey="&modButton.accessKey;">
+          <image src="chrome://tagzilla/content/tz-mod-dis.png"/>
+      </toolbarbutton>
+    </deck>
+    <deck id="tzDel">
+      <toolbarbutton id="tzDelEn" flex="0"
+        label="&delButton.label;" tooltiptext="&delButton.tooltip;"
+        accesskey="&delButton.accessKey;"
+        oncommand="delTaglines()">
+          <image src="chrome://tagzilla/content/tz-del.png"/>
+      </toolbarbutton>
+      <toolbarbutton id="tzDelDis" flex="0" disabled="true"
+        label="&delButton.label;" tooltiptext="&delButton.tooltip;"
+        accesskey="&delButton.accessKey;">
+          <image src="chrome://tagzilla/content/tz-del-dis.png"/>
+      </toolbarbutton>
+    </deck>
     <textbox id="tagline" flex="1" autostretch="never" width="100%"
       changed="false" oninput="taglineChanged(true)"/>
   </hbox>

@@ -4,7 +4,11 @@
   list-style-image: url("chrome://tagzilla/content/tagzilla-16.png");
 }
 
-.tzHomepage:hover {
+.url {
+  color: blue;
+}
+
+.url:hover {
   color: blue;
   text-decoration: underline;
   cursor: pointer;

@@ -52,6 +52,16 @@ var tzDoc;      // window's calling document
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzOnLoad() {
+  try {
+    include('chrome://jslib/content/io/file.js');
+    include('chrome://jslib/content/io/fileUtils.js');
+  }
+  catch(ex) {
+    alert(getText("noJSlib"));
+    window.close();
+    return;
+  }
+
   lBox      = document.getElementById("tzListBox");
   textBox   = document.getElementById("tagline");
   addButton = document.getElementById("tzAdd");
@@ -65,9 +75,6 @@ function tzOnLoad() {
   if(tzCmd=="TZ_CLIPBOARD") {
     insButton.setAttribute("label",getText("clipboardLabel"));
   }
-
-  include('chrome://jslib/content/io/file.js');
-  include('chrome://jslib/content/io/fileUtils.js');
 
   var tFile = readMyPref("tagzilla.default.file","string","");
   if(tFile == "") {
@@ -277,15 +284,21 @@ function taglineChanged(aChg) {
 //  aTagline: the tagline to add to the listbox
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
-function addTagline(aTagline) {
-  if(aTagline) {
-    var aCell = document.createElement("listcell");
-    var aItem = document.createElement("listitem");
-    aCell.setAttribute("label", aTagline);
-    aItem.appendChild(aCell);
-    lBox.appendChild(aItem);
-    taglineChanged(false);
-    lBox.setAttribute("changed","true");
+function addTagline(aTagline, aShow) {
+  if(!aTagline) {
+    return;
+  }
+  var aCell = document.createElement("listcell");
+  var aItem = document.createElement("listitem");
+  aCell.setAttribute("label", aTagline);
+  aItem.appendChild(aCell);
+  lBox.appendChild(aItem);
+  taglineChanged(false);
+  lBox.setAttribute("changed","true");
+
+  if(aShow) {
+    lBox.ensureElementIsVisible(lBox.lastChild);
+    lBox.selectItem(lBox.lastChild);
   }
 }
 
@@ -300,6 +313,8 @@ function addTagline(aTagline) {
 function changeTagline(aTagline) {
   if(aTagline) {
     if(lBox.currentItem) {
+      lBox.ensureElementIsVisible(lBox.currentItem);
+      lBox.selectItem(lBox.currentItem);
       taglineChanged(false);
       lBox.getSelectedItem(0).firstChild.setAttribute("label",aTagline);
       lBox.ensureElementIsVisible(lBox.currentItem);
@@ -335,17 +350,33 @@ function delTaglines() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function sortList() {
-  for(var i=1; i<=lBox.getRowCount(); i++) {
-    for(var j=1; j<=i; j++) {
-      var iTag = lBox.childNodes[i].firstChild;
-      var jTag = lBox.childNodes[j].firstChild;
-      if(iTag.getAttribute("label") < jTag.getAttribute("label")) {
-        var t=iTag.getAttribute("label");
-        iTag.setAttribute("label", jTag.getAttribute("label"));
-        jTag.setAttribute("label",t);
-      }
-    }
+  /* the Array() object has its own sort method, which is quite fast,
+   * so there's no need for us to write our own sort function
+   * like I did in prior versions.
+   */
+
+  window.setCursor("wait");
+
+  var sortFunc = function (a, b) {
+    // fold case when sorting
+    if(a.toLowerCase() == b.toLowerCase())
+      return 0;
+    else if(a.toLowerCase() > b.toLowerCase())
+      return 1;
+    else
+      return -1;
   }
+
+  var sortArr = new Array();
+  for(var i=1; i<=lBox.getRowCount(); i++) {
+    sortArr.push(lBox.childNodes[i].firstChild.getAttribute("label"));
+  }
+  sortArr.sort(sortFunc);
+  for(var i=1; i<=lBox.getRowCount(); i++) {
+    lBox.childNodes[i].firstChild.setAttribute("label",sortArr[i-1]);
+  }
+
+  window.setCursor("auto");
   lBox.setAttribute("changed","true");
 }
 
@@ -484,12 +515,10 @@ function showAboutDialog() {
 function disableButton(aBut, aDis) {
   if(aBut && (aBut==addButton || aBut==delButton || aBut==modButton)) {
     if(aDis) {
-      aBut.setAttribute("disabled","true");
-      aBut.firstChild.selectedIndex=1;
+      aBut.selectedIndex=1;
     }
     else {
-      aBut.setAttribute("disabled","false");
-      aBut.firstChild.selectedIndex=0;
+      aBut.selectedIndex=0;
     }
   }
   return;

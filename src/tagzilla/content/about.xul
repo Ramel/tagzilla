@@ -85,7 +85,7 @@ function showWebPage(pageUrl) {
   <separator class="thin"/>
   <text value="&home.label;" style="font-weight: bold;"/>
   <text value="http://tagzilla.mozdev.org"
-        class="tzHomepage"
+        class="url"
         onclick="showWebPage('http://tagzilla.mozdev.org');window.close()"/>
 </vbox>
 <spring flex="1"/>

@@ -43,47 +43,11 @@
 <overlay id="tagzillaComposeOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+  <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaComposeOverlay.js"/>
   <script type="application/x-javascript">
   <![CDATA[
-
-    var w;
-    var cmd;
-    var enigButton;
-
-    setTimeout(tzWaitedAwhile, 1000);
-
-    function tzSendButton(aCmd) {
-      if(readMyPref("tagzilla.mail.auto","bool",true)) {
-        cmd=aCmd;
-        w=toTagZilla(aCmd);
-        w.addEventListener("unload",tzPickedTagline, true);
-      }
-      else {
-        if(enigButton)
-          enigSendCommand(aCmd);
-        else
-          goDoCommand(aCmd);
-      }
-    }
-
-    function tzPickedTagline() {
-      w.removeEventListener("unload", tzPickedTagline, true);
-      dump("enigButton = "+enigButton+"!\n");
-      if(enigButton)
-        enigSendCommand(cmd);
-      else
-        goDoCommand(cmd);
-    }
-
-    function tzWaitedAwhile() {
-      enigButton = document.getElementById("button-enigmail-send");
-      if(enigButton) {
-        var origCmd = enigButton.getAttribute("command");
-        enigButton.setAttribute("command","cmd_sendTagZilla");
-        //dump("tzWaitedAwhile: origCmd = "+origCmd+"\n");
-      }
-    }
-
+    window.addEventListener("load",tzComposeLoad,true);
   ]]>
   </script>
 

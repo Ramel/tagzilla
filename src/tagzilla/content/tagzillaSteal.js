@@ -44,8 +44,15 @@ var tagFile;  // textbox holding the name of the file to save to
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function OnLoad() {
-  include('chrome://jslib/content/io/file.js');
-  include('chrome://jslib/content/io/fileUtils.js');
+  try {
+    include('chrome://jslib/content/io/file.js');
+    include('chrome://jslib/content/io/fileUtils.js');
+  }
+  catch(ex) {
+    alert(getText("noJSlib"));
+    window.close();
+    return;
+  }
 
   tagline = document.getElementById("tagline");
   tagline.value = window.arguments[0];
@@ -60,6 +67,7 @@ function OnLoad() {
   tagFile=document.getElementById("filename");
   tagFile.value=readMyPref("tagzilla.default.file","string","");
   sizeToContent();
+  tagline.focus();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
