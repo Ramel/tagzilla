@@ -16,5 +16,5 @@
   </RDF:Description>
 
   <RDF:Description about="urn:mozilla:locale:en-US:tagzilla"
-                         chrome:localeVersion="0.030"/>
+                         chrome:localeVersion="0.041"/>
 </RDF:RDF>
