@@ -128,8 +128,37 @@ function tzInsertTagline() {
       else if(window.GetCurrentEditor)
       {
         var ed = window.GetCurrentEditor();
+
+        /* We want to re-select the current selection after we insert the
+           tagline.  First we need to save it */
+        ed.beginTransaction();
+        var selection = ed.selection;
+        var ranges = [];
+        if( selection && selection.rangeCount )
+        {
+            for( var i=0; i < selection.rangeCount; i++ )
+            {
+                var r = selection.getRangeAt(i);
+                ranges.push( { range:r, start: r.startOffset, end:r.endOffset } );
+            }
+        }
+        // Add the tagline at the end of the document
         ed.endOfDocument();
         ed.insertText(prefix+tag+suffix);
+
+        /* Restore the last selection (which may just be the zero-size
+           selection referring to the cursor's location */
+        while( selection && ranges.length )
+        {
+            var r = ranges.shift();
+            if( !r.range.collapsed )
+                r.range.setEnd( r.range.endContainer, r.end );
+            selection.addRange( r.range );
+            if( r.range.collapsed )
+                selection.collapse( r.range.startContainer, r.start );
+        }
+        // And we're done
+        ed.endTransaction();
       }
       else {
         alert("I'm afraid I don't know how to insert taglines in this version\n"+

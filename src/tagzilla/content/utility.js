@@ -435,5 +435,18 @@ function ucConverter()
   };
 }
 
+function tzDumpObj( aObj, objName )
+{
+  if(!tzuDEBUG) return;
+  if( !objName ) objName = "object";
+  tzDump( "--- "+objName+" dump start ---\n" );
+  for( var i in aObj )
+    if( typeof aObj[i] == "function" )
+      tzDump( i+"("+aObj[i].arity+" args)\n" );
+    else
+      tzDump( i+":"+aObj[i]+"\n" );
+  tzDump( "--- "+objName+" dump end ---\n" );
+}
+
 
 tzDump( "tagzilla/utility.js loaded\n" );
