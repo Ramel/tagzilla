@@ -1,8 +1,8 @@
 // customizable behavior
 var shortName = "tagzilla";
-var longName = "TagZilla 0.008";
-var gVersion = "0.008";
-var srDest = 160;
+var longName = "TagZilla 0.011";
+var gVersion = "0.011";
+var srDest = 100;
 
 // this function verifies disk space in kilobytes
 function verifyDiskSpace(dirPath, spaceRequired)
