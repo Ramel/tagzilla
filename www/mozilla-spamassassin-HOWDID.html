@@ -3,6 +3,7 @@
 <a class="h3" name="toc">Table of Contents</a>
 <ul>
 <li><a href="#intro">Introduction</a></li>
+<li><a href="#hist">History</a></li>
 <li><a href="#start">Starting Point</a></li>
 <li><a href="#setupfm">Setting up FetchMail</a></li>
 <li><a href="#setupmoz">Mozilla reading Unix mail</a></li>
@@ -19,6 +20,11 @@ a set of instructions (that would be a
 did, that perhaps you can learn from.  If you try anything you read here, you're
 doing it at your own risk; I hereby accept absolutely <b>no</b> responsibility
 for whatever you do to your computer.</p>
+
+<a class="h3" name="hist" href="#toc">History</a>
+<b>2002-10-18</b> Original version.<br>
+<b>2002-10-19</b> Learned that SpamAssassin uses the <em>receiver</em>'s configuration
+to filter, not <tt>root</tt>'s.<br><br>
 
 <a class="h3" name="start" href="#toc">Starting Point</a>
 <p>Here is what I started off with:</p><ul>
@@ -320,8 +326,9 @@ I added one simple filter.</p>
 <p>I had to use the "Customize..." option in the dropdown to create an entry for
 the X-Spam-Flag header.</p>
 <p>I then tweaked a few of SpamAssassin's settings.  I had to this by editing
-<tt>/root/.spamassassin/user_prefs</tt>.  Don't forget that fetchmail and SpamAssassin
-are running as daemons, which run as user <tt>root</tt>!  That's why I couldn't get
-the filtering I wanted by editing <tt>smiley</tt>'s config file.</p>
+<tt>/home/smiley/.spamassassin/user_prefs</tt>.  Fetchmail is running as a daemon
+(and as user <tt>root</tt>), but SpamAssassin is smart enough to use each user's
+settings to filter their own mail.  And since FetchMail is sending the mail to
+<tt>smiley</tt> because of the "is" in <tt>.fetchmailrc</tt>, it's all good.</p>
 <hr>
 <p>And that's it!  All done.  I hope that was as educational for you as it was for me.</p>
