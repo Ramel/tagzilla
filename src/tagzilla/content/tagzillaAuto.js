@@ -77,7 +77,7 @@ function tzRandTaglineFromFile(aUrl) {
         arr.pop();
     }
 
-    var rv=parseInt(Math.round(Math.random() * arr.length));
+    var rv=parseInt(Math.round(Math.random() * (arr.length-1)));
     var tag=arr[rv];
     if(readMyPref("tagzilla.newline.convert","bool",true)) {
       tag = tag.replace(/\\n/g,"\n");
