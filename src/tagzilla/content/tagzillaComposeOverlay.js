@@ -56,6 +56,11 @@ function tzFakeLoad() {
   tzTimer=setTimeout(tzComposeLoad, 1000, window);
 }
 
+function tzFakeReload() {
+  dump( "tzFakeReload() called and run\n" );
+  tzTimer=setTimeout(tzComposeLoad, 1000, window);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // tzComposeLoad
 //
