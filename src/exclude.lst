@@ -8,4 +8,6 @@ tbstyle
 tbstyle/*
 */.xvpics
 */.xvpics/*
-install.js
+install.js*
+skin
+skin/*

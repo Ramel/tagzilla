@@ -7,10 +7,10 @@ const APP_JAR_FILE = "tagzilla.jar";
 const APP_CONTENT_FOLDER = "tagzilla/content/";
 const APP_LOCALE_FOLDER  = "tagzilla/locale/en-US/";
 
-const APP_SUCCESS_MESSAGE = "You may need to restart Thunderbird first.";
+const APP_SUCCESS_MESSAGE = "You may need to restart this program first.";
 
 
-const INST_TO_PROFILE = "Do you wish to install "+APP_DISPLAY_NAME+" to your profile?\nThis will mean it does not need reinstalling when you update Mozilla Thunderbird.\n(Click Cancel if you want "+APP_DISPLAY_NAME+" installing to the Thunderbird directory.)";
+const INST_TO_PROFILE = "Do you wish to install "+APP_DISPLAY_NAME+" to your profile?\nThis will mean it does not need reinstalling when you update your Mozilla program.\n(Click Cancel if you want "+APP_DISPLAY_NAME+" installing to the system directory.)";
 
 initInstall(APP_NAME, APP_PACKAGE, APP_VERSION);
 
