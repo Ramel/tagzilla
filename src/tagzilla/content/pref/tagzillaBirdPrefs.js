@@ -270,6 +270,7 @@ function popupCommand() {
 function checkMailPrefs() {
   var mailAuto = document.getElementById("mailAuto");
   var mailPick = document.getElementById("mailPick");
+  return;
   if(mailAuto.getAttribute("checked")) {
     mailPick.removeAttribute("disabled");
   }

@@ -36,7 +36,7 @@
 // Globals
 ////////////////////////////////////////////////////////////////////////////////
 
-var tzuDEBUG = false;
+var tzuDEBUG = true;
 
 var tzIsupports;
 var tzIStr;
@@ -340,6 +340,17 @@ function openUrl(aUrl) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// tzSetEscCharset
+//  Sets the character set to be used for tzEscape/tzUnescape
+//
+// Parameters: aSet: the character set string identifier (optional)
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function tzSetEscCharset(aSet){
+  if( !aSet ) aSet = readMyPref("tagzilla.file.charset","string","UTF-8");
+  tzConv.charset = aSet;
+}
+////////////////////////////////////////////////////////////////////////////////
 // tzEscape
 //  Escapes a string so it'll survive intact on disk
 //
@@ -348,8 +359,6 @@ function openUrl(aUrl) {
 ////////////////////////////////////////////////////////////////////////////////
 function tzEscape(aStr){
   return tzConv.fromUnicode(aStr);
-  return aStr;
-  return escape(aStr);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -361,8 +370,6 @@ function tzEscape(aStr){
 ////////////////////////////////////////////////////////////////////////////////
 function tzUnescape(aStr){
   return tzConv.toUnicode(aStr);
-  return aStr;
-  return unescape(aStr);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -384,9 +391,9 @@ function ucConverter()
       Components.classes[UC_CTRID].getService(nsIUnicodeConverter);
   this.defaultBundle = null;
   this.bundleList = new Array();
+  this.charset = readMyPref("tagzilla.file.charset","string","UTF-8");
 
   this.toUnicode = function (msg) {
-    this.charset = readMyPref("tagzilla.file.charset","string","UTF-8");
     try
     {
       this.ucConverter.charset = this.charset;
@@ -402,7 +409,6 @@ function ucConverter()
   };
 
   this.fromUnicode = function (msg) {
-    this.charset = readMyPref("tagzilla.file.charset","string","UTF-8");
     if (this.charset != this.ucConverter.charset)
       this.ucConverter.charset = this.charset;
 

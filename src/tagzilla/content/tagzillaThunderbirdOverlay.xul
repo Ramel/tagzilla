@@ -53,8 +53,20 @@
       window.addEventListener("load",tzOverlayLoad,true);
 
       function toTagZilla(aAction) {
-        return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
-          "_blank", "chrome,all,dialog", aAction, window);
+        /* Allow manually inserting mail taglines without popping up the
+           TagZilla window
+           Keep this function in line with the same one in
+           tagzillaTasksOverlay.xul */
+        if( ! (aAction == 'TZ_MAIL' && readMyPref("tagzilla."+gCurrentIdentity.key+".mailPick","bool",false)) )
+        {
+          return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
+            "_blank", "chrome,all,dialog", aAction, window);
+        }
+
+        include( "chrome://tagzilla/content/tagzillaComposeOverlay.js" );
+        tzInsertTagline();
+
+        return null;
       }
 
       function tzOverlayLoad() {
@@ -102,14 +114,12 @@
 
   <toolbarpalette id="MailToolbarPalette">
     <toolbarbutton id="launchTagzilla"
-                   class="toolbarbutton-1"
                    label="&tagzilla.appName;"
                    oncommand="toTagZilla('TZ_CLIPBOARD')"/>
   </toolbarpalette>
 
   <toolbarpalette id="MsgComposeToolbarPalette">
     <toolbarbutton id="launchTagzilla"
-                   class="toolbarbutton-1"
                    label="&tagzilla.appName;"
                    observes="cmd_tagzilla_mail"/>
   </toolbarpalette>

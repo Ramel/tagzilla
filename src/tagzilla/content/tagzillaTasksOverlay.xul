@@ -46,14 +46,27 @@
   onload="tzOverlayLoad()">
 
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
 
   <script type="application/x-javascript">
     <![CDATA[
       window.addEventListener("load",tzOverlayLoad,true);
 
       function toTagZilla(aAction) {
-        return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
-          "_blank", "chrome,all,dialog", aAction, window);
+        /* Allow manually inserting mail taglines without popping up the
+           TagZilla window
+           Keep this function in line with the same one in
+           tagzillaThunderbirdOverlay.xul */
+        if( ! (aAction == 'TZ_MAIL' && readMyPref("tagzilla."+gCurrentIdentity.key+".mailPick","bool",false)) )
+        {
+          return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
+            "_blank", "chrome,all,dialog", aAction, window);
+        }
+
+        include( "chrome://tagzilla/content/tagzillaComposeOverlay.js" );
+        tzInsertTagline();
+
+        return null;
       }
 
       function tzOverlayLoad() {

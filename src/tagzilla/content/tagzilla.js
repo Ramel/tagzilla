@@ -147,7 +147,9 @@ function tzOnLoad() {
       loadList();
     else {
       tzRefresh();
-      setTimeout(tzOnSel,10);
+      selRandTagline();
+      textBox.select();
+      //setTimeout(tzOnSel,10);
     }
   }
 }
@@ -368,6 +370,7 @@ function loadTaglineFile(aUrl) {
     if(tzList[tzList.length-1]=="")
       tzList.pop();
   }
+  tzSetEscCharset();
   for(var i=0; i<tzList.length; i++) {
     tzList[i] = tzUnescape(tzList[i]);
   }
@@ -400,6 +403,7 @@ function saveTaglineFile(aUrl) {
     alert(getText("saveErrMsg"));
     return false;
   }
+  tzSetEscCharset();
   var scratchList = new Array();
   for(var i=0; i<tzList.length; i++) {
     scratchList[i] = tzEscape(tzList[i]);

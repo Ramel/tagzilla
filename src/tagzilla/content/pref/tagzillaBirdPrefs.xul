@@ -276,17 +276,13 @@
                     accesskey="&mailAuto.accesskey;"
                     prefstring="tagzilla.mail.auto"
                     preftype="bool"
-                    onclick="setTimeout(checkMailPrefs,10)"
                     prefattribute="checked"/>
-          <hbox>
-            <label value="  "/>
-            <checkbox id="mailPick"
-                      label="&mailPick.label;"
-                      accesskey="&mailPick.accesskey;"
-                      prefstring="tagzilla.mail.pick"
-                      preftype="bool"
-                      prefattribute="checked"/>
-          </hbox>
+          <checkbox id="mailPick"
+                    label="&mailPick.label;"
+                    accesskey="&mailPick.accesskey;"
+                    prefstring="tagzilla.mail.pick"
+                    preftype="bool"
+                    prefattribute="checked"/>
         </groupbox>
 
         <groupbox orient="vertical" id="tzMailPrefs" align="start">

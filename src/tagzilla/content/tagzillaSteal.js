@@ -119,6 +119,7 @@ function doSteal() {
       oldFile=f.read();
       f.close();
     }
+    tzSetEscCharset();
     tzNL = oldFile.match(/\r?\n|\r\n?/) || tzNL;
     var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
     if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
