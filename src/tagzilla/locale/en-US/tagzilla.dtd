@@ -39,10 +39,12 @@
 <!ENTITY listMenu.accessKey    "L">
 <!ENTITY sortList.label        "Sort List">
 <!ENTITY sortList.accessKey    "O">
-<!ENTITY loadList.label        "Load List...">
+<!ENTITY loadList.label        "Load List">
 <!ENTITY loadList.accessKey    "L">
-<!ENTITY saveList.label        "Save List...">
+<!ENTITY saveList.label        "Save List">
 <!ENTITY saveList.accessKey    "S">
+<!ENTITY saveListAs.label      "Save As...">
+<!ENTITY saveListAs.accessKey  "A">
 <!ENTITY insert.label          "Insert">
 <!ENTITY insert.accessKey      "I">
 <!ENTITY close.label           "Close">

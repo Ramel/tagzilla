@@ -9,7 +9,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on July 16, 2002
+ * The Original Code in this file was released on August 2, 2002
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
@@ -17,7 +17,18 @@
  * 
  * Contributor(s):
  *   David Perry <d.perry@utoronto.ca> (Original Author)
- * 
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU General Public License Version 2 or later (the
+ * "GPL"), in which case the provisions of the GPL are applicable
+ * instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of the GPL and not to
+ * allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by
+ * the GPL.  If you do not delete the provisions above, a recipient
+ * may use your version of this file under either the MPL or the
+ * GPL.
  */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,8 +47,11 @@ function OnLoad() {
   include('chrome://jslib/content/io/file.js');
   include('chrome://jslib/content/io/fileUtils.js');
 
-  tagline=document.getElementById("tagline");
-  tagline.value=window.arguments[0];
+  tagline = document.getElementById("tagline");
+  tagline.value = window.arguments[0];
+  if(tagline.value.indexOf('\n')!=-1) {
+    tagline.value = tagline.value.substring(0,tagline.value.indexOf('\n'));
+  }
 
   tagFile=document.getElementById("filename");
   tagFile.value=readMyPref("tagzilla.default.file","string","");
