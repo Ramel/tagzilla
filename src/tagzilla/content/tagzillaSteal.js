@@ -36,6 +36,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 var tagline;  // textbox holding the stolen tagline
 var tagFile;  // textbox holding the name of the file to save to
+var tzNL = "\n"; // newline flavour of the file (defaults to unix)
 
 ////////////////////////////////////////////////////////////////////////////////
 // OnLoad
@@ -118,12 +119,13 @@ function doSteal() {
       oldFile=f.read();
       f.close();
     }
+    tzNL = oldFile.match(/\r?\n|\r\n?/) || tzNL;
     var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
     if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
-      oldFile += "\n"+delim+"\n"+tagline.value+"\n";
+      oldFile += tzNL+delim+tzNL+tagline.value+tzNL;
     }
     else {
-      oldFile += tagline.value+"\n";
+      oldFile += tagline.value+tzNL;
     }
     f.open("w");
     f.write(oldFile);

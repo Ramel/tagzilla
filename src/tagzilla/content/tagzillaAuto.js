@@ -65,7 +65,7 @@ function tzRandTaglineFromFile(aUrl) {
     f.open("r");
     var arr = f.read();
     f.close();
-    arr = arr.replace(/\r\n/g, "\n");
+    arr = arr.replace(/\r?\n|\r\n?/g, "\n");
     
     var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
     if(delim!="\n\n" && arr.indexOf(delim)>=0) {

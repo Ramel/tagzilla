@@ -46,6 +46,7 @@ var tzDoc;      // window's calling document
 var tzWin;      // window's calling window
 
 var tzList = []; // the actual tagline list
+var tzNL = "\n"; // newline flavour of the current file (defaults to unix)
 
 ////////////////////////////////////////////////////////////////////////////////
 // tzTreeView object
@@ -168,7 +169,7 @@ function tzInsert() {
   if(readMyPref("tagzilla.newline.convert","bool",true)) {
     selTagline = selTagline.replace(/\\n/g,"\n");
   }
-  
+
   if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
     var prefix = readMyPref("tagzilla.mail.prefix","string","").replace(/\\n/g,"\n");
     var suffix = readMyPref("tagzilla.mail.suffix","string","").replace(/\\n/g,"\n");
@@ -349,7 +350,14 @@ function loadTaglineFile(aUrl) {
   f.open("r");
   var fContents = f.read();
   f.close();
-  fContents = fContents.replace(/\r\n/g, "\n");
+
+  // Determine the newline flavour. unix is \n, mac is \r, dos is \r\n
+  // (If we can't figure it out, stick with the old value)
+  tzNL = fContents.match(/\r?\n|\r\n?/) || tzNL;
+
+  // use \n internally
+  var nlRE = new RegExp(tzNL, "g");
+  fContents = fContents.replace(nlRE, "\n");
 
   var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
   if(delim!="\n\n" && fContents.indexOf(delim)>=0) {
@@ -391,10 +399,10 @@ function saveTaglineFile(aUrl) {
   }
   var delim=readMyPref("tagzilla.multiline.delimiter","string","%");
   if(delim!="" && readMyPref("tagzilla.multiline.file","bool",false)) {
-    f.write(tzList.join("\n"+delim+"\n"));
+    f.write(tzList.join(tzNL+delim+tzNL));
   }
   else {
-    f.write(tzList.join("\n")+"\n");
+    f.write(tzList.join(tzNL)+tzNL);
   }
   f.close();
 
