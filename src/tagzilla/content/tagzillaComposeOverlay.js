@@ -49,15 +49,8 @@ var tzTimer;            // hold timer of setTimeout so it doesn't get set off pr
 ////////////////////////////////////////////////////////////////////////////////
 function tzFakeLoad() {
   //window.removeEventListener("load",tzFakeLoad,true);
-  dump( "tzFakeLoad() called\n" );
   if( window.tzLoaded ) return;
-  dump( "tzFakeLoad() run\n" );
   window.tzLoaded = true;
-  tzTimer=setTimeout(tzComposeLoad, 1000, window);
-}
-
-function tzFakeReload() {
-  dump( "tzFakeReload() called and run\n" );
   tzTimer=setTimeout(tzComposeLoad, 1000, window);
 }
 
@@ -77,14 +70,25 @@ function tzComposeLoad(aWin) {
     aWin.haveJSlib = false;
     return;
   }
+  aWin.addedTagline = false;
 
+  tzOverrideCommands(aWin);
+
+  tzComposeReload();
+}
+
+function tzComposeReload() {
+  if( !haveJSlib ) return;
+  window.addedTagline = false;
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(readMyPref(prefPrefix+".mailAuto","bool",true) &&
     readMyPref(prefPrefix+".mailPick","bool",false)) {
 
     tzInsertTagline();
-    return;
   }
+}
+
+function tzOverrideCommands(aWin) {
   /*
      The following method of overriding the commands was found in EnigMail.
      A bit ironic, considering I'm doing this to be able to coexist with EnigMail.
@@ -174,6 +178,7 @@ function tzInsertTagline() {
     dump("tzInsertTagline: "+ex+"\n");
     return false;
   }
+  window.addedTagline = true;
   return true;
 }
 
