@@ -26,6 +26,7 @@
     <RDF:li resource="chrome://messenger/content/messengercompose/messengercompose.xul"/>
     <RDF:li resource="chrome://browser/content/browser.xul"/>
     <RDF:li resource="chrome://browser/content/pref/preftree.xul"/>
+    <RDF:li resource="chrome://browser/content/pref/pref.xul"/>
   </RDF:Seq>
 
   <RDF:Seq about="chrome://communicator/content/tasksOverlay.xul">
@@ -56,7 +57,12 @@
     <RDF:li>chrome://tagzilla/content/pref/tagzillaPrefOverlay.xul</RDF:li>
   </RDF:Seq>
 
+  <!-- this went out in Phoenix 0.3 or so; is kept here for compatibility -->
   <RDF:Seq about="chrome://browser/content/pref/preftree.xul">
+    <RDF:li>chrome://tagzilla/content/pref/tagzillaMiniPrefOverlay.xul</RDF:li>
+  </RDF:Seq>
+
+  <RDF:Seq about="chrome://browser/content/pref/pref.xul">
     <RDF:li>chrome://tagzilla/content/pref/tagzillaMiniPrefOverlay.xul</RDF:li>
   </RDF:Seq>
 
