@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
+
+  <RDF:Seq about="urn:mozilla:package:root">
+    <RDF:li resource="urn:mozilla:package:tbstyle"/>
+  </RDF:Seq>
+
+  <RDF:Description about="urn:mozilla:package:tbstyle"
+    chrome:displayName="Toolbar Style Menu 0.001"
+    chrome:author="David Perry - d.perry@utoronto.ca"
+    chrome:name="tbstyle"
+    chrome:extension="true"
+    chrome:description="A menu for the Link Toolbar that shows a page's alternate styles">
+  </RDF:Description>
+
+  <RDF:Seq about="urn:mozilla:overlays">
+    <RDF:li resource="chrome://navigator/content/linkToolbarOverlay.xul"/>
+  </RDF:Seq>
+
+  <RDF:Seq about="chrome://navigator/content/linkToolbarOverlay.xul">
+    <RDF:li>chrome://tbstyle/content/styleLinkToolbarOverlay.xul</RDF:li>
+  </RDF:Seq>
+</RDF:RDF>

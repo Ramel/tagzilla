@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!-- 
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ * 
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ * 
+ * The Original Code in this file was released on December 15, 2002
+ * 
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ * 
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU General Public License Version 2 or later (the
+ * "GPL"), in which case the provisions of the GPL are applicable
+ * instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of the GPL and not to
+ * allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by
+ * the GPL.  If you do not delete the provisions above, a recipient
+ * may use your version of this file under either the MPL or the
+ * GPL.
+-->
+
+<?xml-stylesheet href="chrome://navigator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://navigator/skin/linkToolbar.css" type="text/css"?> 
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % toolbarDTD SYSTEM "chrome://tbstyle/locale/styleLinkToolbar.dtd">
+%toolbarDTD;
+]>
+
+<overlay id="linkToolbarStyleOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:rdf="http://www.mozilla.org/rdf">
+
+<script type="application/x-javascript" src="chrome://tbstyle/content/styleLinkToolbarOverlay.js"/>
+
+<toolbar id="linktoolbar">
+  <toolbarseparator id="styleseparator" insertafter="more-menu" />
+  <toolbarbutton id="stylesheets-menu" class="bookmark-item"
+                 type="menu"
+                 container="true"
+                 label="&tbstyle.menulabel;">
+    <menupopup id="stylesheets-menu-popup"
+               onpopupshowing="smPopupShowing()">
+      <menuitem label="&tbstyle.plain;"
+                type="radio"
+                oncommand="stylesheetSwitchAll(window._content,'')"/>
+    </menupopup>
+  </toolbarbutton>
+</toolbar>
+
+</overlay>
