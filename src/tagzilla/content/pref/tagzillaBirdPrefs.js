@@ -95,9 +95,24 @@ function onLoad() {
       Components.interfaces.nsIMsgIdentity);
     gIDpopup = document.getElementById("msgIdentity");
 
-    FillIdentityListPopup(gIDpopup.childNodes[0]);
+    // Hide identity list stuff if our prefs service is loaded
+    // FIXME: is there a better way?
+    var catman = Components.classes["@mozilla.org/categorymanager;1"].getService(Components.interfaces.nsICategoryManager);
+    var catStr;
+    try {
+      catStr = catman.getCategoryEntry("mailnews-accountmanager-extensions",
+                            "TagZilla account manager extension");
+    }
+    catch(ex2) { }
 
-    setInterval(popupCommand,50);
+    if( catStr == "@mozilla.org/accountmanager/extension;1?name=tzprefs" ) {
+      document.getElementById("tzAccounts").setAttribute("collapsed", "true");
+    }
+    else
+    {
+      FillIdentityListPopup(gIDpopup.childNodes[0]);
+      setInterval(popupCommand,50);
+    }
   }
   catch(ex) {
     haveMail = false;

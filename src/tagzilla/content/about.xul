@@ -89,6 +89,10 @@ function uninstallTagzilla() {
         class="url"
         onclick="openUrl('http://optimoz.mozdev.org/gestures/index.html');"/>
   <description>&mozgest.desc;</description>
+  <text value="&enigmail.label;"
+        class="url"
+        onclick="openUrl('http://enigmail.mozdev.org/');"/>
+  <description>&enigmail.desc;</description>
   <text value="&mozillazine.label;"
         class="url"
         onclick="openUrl('http://forums.mozillazine.org/index.php');"/>

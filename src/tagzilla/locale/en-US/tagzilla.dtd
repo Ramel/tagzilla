@@ -70,5 +70,7 @@
 <!ENTITY mozdev.desc           "for the hosting, and its developers for the help">
 <!ENTITY mozgest.label         "MozGest">
 <!ENTITY mozgest.desc          "for the inspiration for the unified prefs page">
+<!ENTITY enigmail.label        "EnigMail">
+<!ENTITY enigmail.desc         "for the inspiration for putting TagZilla in the Account Manager">
 <!ENTITY mozillazine.label     "MozillaZine Forums">
 <!ENTITY mozillazine.desc      "for help with my questions">

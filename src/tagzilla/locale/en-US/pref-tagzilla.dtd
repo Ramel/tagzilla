@@ -75,3 +75,8 @@ is loaded as if it contained single-line taglines.">
 <!ENTITY tab.browser            "Browser">
 <!ENTITY tab.mailnews           "Mail/News">
 <!ENTITY tab.about              "About">
+
+<!ENTITY amPrefTitle.label      "TagZilla">
+<!ENTITY amTagOpts.caption      "Tagline Options">
+<!ENTITY amFullPrefs.label      "More Preferences...">
+<!ENTITY amFullPrefs.accesskey  "P">
