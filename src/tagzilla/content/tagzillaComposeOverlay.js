@@ -35,9 +35,10 @@
 // Global Variables
 ////////////////////////////////////////////////////////////////////////////////
 var tagzillaWindow;     // reference to the TagZilla window
-var cmd;                // stores the mail command used (eg, cmd_sendButton)
+var tzCmd;              // stores the mail command used (eg, cmd_sendButton)
 var enigButton;         // reference to the EnigSend button provided by EnigMail
 var haveJSlib = true;   // whether JSLib is installed
+//  gCurrentIdentity;   // from parent window
 
 ////////////////////////////////////////////////////////////////////////////////
 // tzComposeLoad
@@ -60,7 +61,6 @@ function tzComposeLoad() {
     var origCmd = enigButton.getAttribute("command");
     enigButton.setAttribute("command","cmd_sendTagZilla");
     document.getElementById("button-send").setAttribute("command","cmd_sendTagZilla");
-    //dump("tzWaitedAwhile: origCmd = "+origCmd+"\n");
   }
 }
 
@@ -72,13 +72,14 @@ function tzComposeLoad() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzSendButton(aCmd) {
-  if(haveJSlib && readMyPref("tagzilla.mail.auto","bool",true)) {
+  var prefPrefix = "tagzilla."+gCurrentIdentity.key;
+  if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
     var f;
     var tFile = readMyPref("tagzilla.default.file","string","");
     if(tFile != "") {
       f = new File(tFile);
     }
-    if(readMyPref("tagzilla.mail.pick","bool",false) && tFile != "" && f.exists()) {
+    if(readMyPref(prefPrefix+".mailPick","bool",false) && tFile != "" && f.exists()) {
       try {
         f.open("r");
         var arr = f.read().split("\n");
@@ -111,7 +112,7 @@ function tzSendButton(aCmd) {
       }
     }
     else {
-      cmd=aCmd;
+      tzCmd=aCmd;
       tagzillaWindow=toTagZilla(aCmd);
       tagzillaWindow.addEventListener("unload",tzPickedTagline, true);
     }
@@ -134,7 +135,7 @@ function tzPickedTagline() {
   tagzillaWindow.removeEventListener("unload", tzPickedTagline, true);
   dump("enigButton = "+enigButton+"!\n");
   if(enigButton)
-    enigSendCommand(cmd);
+    enigSendCommand(tzCmd);
   else
-    goDoCommand(cmd);
+    goDoCommand(tzCmd);
 }

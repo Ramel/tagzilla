@@ -34,3 +34,5 @@
 <!ENTITY samples.label         "How it will appear">
 <!ENTITY sample.tagline        "This is your tagline.">
 <!ENTITY newline.desc          "(Typing \n enters a carriage return)">
+
+<!ENTITY forAccount.label      "Settings for account ">

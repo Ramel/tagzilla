@@ -184,6 +184,7 @@ function writePref( prefType, prefString, prefValue )
     }
   }
   catch ( ex ) { // die silently 
+    dump("writePref:"+ex+"\n");
   }
 }
 

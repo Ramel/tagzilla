@@ -50,58 +50,14 @@
 
 <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
 <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+<script type="application/x-javascript" src="chrome://tagzilla/content/pref/pref-tagzilla.js"/>
 <script type="application/x-javascript">
   <![CDATA[
     var panel = "chrome://tagzilla/content/pref/pref-tagzilla.xul";
-    var _elementIDs = ["tzPref-mailAuto", "tzPref-mailPick",
-                       "tzPref-defaultFile", "tzPref-defaultSave"];
-
-    function onLoad() {
-      try {
-        include('chrome://jslib/content/io/fileUtils.js');
-      }
-      catch(ex) {
-        parent.document.getElementById("tagzilla").setAttribute("container","false");
-        var page=document.firstChild;
-
-        for(var i=0; i<page.childNodes.length; i++) {
-          if(page.childNodes[i].getAttribute("id") != "noJSlib")
-            page.childNodes[i].setAttribute("collapsed","true");
-        }
-        return;
-      }
-      document.getElementById("noJSlib").setAttribute("collapsed","true");
-      parent.document.getElementById("tagzilla").setAttribute("open","true");
-      setTimeout(checkMailPrefs,10);
-    }
-
-    function pickFile() {
-      try {
-        var fName = txtFilePicker(getText("chooseFile"),0);
-        if(fName==null) {
-        }
-        else {
-          var fUtils = new FileUtils();
-          var aPath = fUtils.urlToPath(fName);
-          document.getElementById("tzPref-defaultFile").value=aPath;
-        }
-      }
-      catch(e) {dump(e+'\n');}
-    }
-
-    function checkMailPrefs() {
-      var mailAuto = document.getElementById("tzPref-mailAuto");
-      var mailPick = document.getElementById("tzPref-mailPick");
-      if(mailAuto.getAttribute("checked")) {
-        mailPick.removeAttribute("disabled");
-      }
-      else {
-        mailPick.setAttribute("disabled","true");
-      }
-    }
-
+    var _elementIDs = [ "tzPref-defaultFile", "tzPref-defaultSave"];
   ]]>
 </script>
+
   <groupbox orient="vertical" id="noJSlib">
     <caption label="&noJSlib.caption;"/>
     <description>&noJSlib.desc;</description>
@@ -136,6 +92,7 @@
               preftype="bool"
               prefattribute="checked"/>
   </groupbox>
+<!--
   <groupbox orient="vertical" align="start">
     <caption label="&message.label;"/>
     <vbox>
@@ -149,6 +106,34 @@
     <hbox>
       <text class="label" value="  "/>
       <checkbox id="tzPref-mailPick"
+                label="&mailPick.label;"
+                accesskey="&mailPick.accesskey;"
+                prefstring="tagzilla.mail.pick"
+                preftype="bool"
+                prefattribute="checked"/>
+    </hbox>
+    </vbox>
+  </groupbox>
+-->
+  <groupbox orient="vertical" id="tzAccounts" align="start">
+    <caption label="&message.label;"/>
+    <hbox align="center">
+      <text class="label" value="&forAccount.label;"/>
+      <menulist id="msgIdentity" label="..." flex="1"><!--onCommand="popupCommand()"-->
+        <menupopup id="msgIdentityPopup"/>
+      </menulist>
+    </hbox>
+    <vbox>
+    <checkbox id="mailAuto"
+              label="&mailAuto.label;"
+              accesskey="&mailAuto.accesskey;"
+              prefstring="tagzilla.mail.auto"
+              preftype="bool"
+              onclick="setTimeout(checkMailPrefs,10)"
+              prefattribute="checked"/>
+    <hbox>
+      <text class="label" value="  "/>
+      <checkbox id="mailPick"
                 label="&mailPick.label;"
                 accesskey="&mailPick.accesskey;"
                 prefstring="tagzilla.mail.pick"
