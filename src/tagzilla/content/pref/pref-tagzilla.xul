@@ -50,15 +50,7 @@
 
     function pickFile() {
       try {
-        var strBundleService =
-            Components.classes["@mozilla.org/intl/stringbundle;1"].getService();
-        strBundleService =
-          strBundleService.QueryInterface(Components.interfaces.nsIStringBundleService);
-
-        var tzBundle = strBundleService
-             .createBundle("chrome://tagzilla/locale/tagzilla.properties");
-
-        var fName = txtFilePicker(tzBundle.GetStringFromName("loadFile"),0);
+        var fName = txtFilePicker(getText("chooseFile"),0);
         if(fName==null) {
         }
         else {
@@ -66,7 +58,6 @@
           var aPath = fUtils.urlToPath(fName);
           document.getElementById("tzPref-defaultFile").value=aPath;
         }
-
       }
       catch(e) {dump(e+'\n');}
     }

@@ -186,6 +186,13 @@ function writePref( prefType, prefString, prefValue )
 //  the bundled string
 ////////////////////////////////////////////////////////////////////////////////
 function getText(aStr) {
+  var strBundleService =
+      Components.classes["@mozilla.org/intl/stringbundle;1"].getService();
+  strBundleService =
+    strBundleService.QueryInterface(Components.interfaces.nsIStringBundleService);
+  var tzBundle = strBundleService
+       .createBundle("chrome://tagzilla/locale/tagzilla.properties");
+
   if(tzBundle) {
     try {
       return tzBundle.GetStringFromName( aStr );
