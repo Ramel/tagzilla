@@ -8,11 +8,11 @@
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:tagzilla"
-    chrome:displayName="TagZilla 0.008"
+    chrome:displayName="TagZilla 0.011"
     chrome:author="David Perry - d.perry@utoronto.ca"
     chrome:name="tagzilla"
-    chrome:localeVersion="0.008"
-    chrome:skinVersion="0.008">
+    chrome:localeVersion="0.011"
+    chrome:skinVersion="0.011">
   </RDF:Description>
 
   <RDF:Seq about="urn:mozilla:overlays">
