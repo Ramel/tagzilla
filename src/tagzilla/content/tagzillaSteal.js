@@ -41,7 +41,7 @@ function OnLoad() {
 
   tagFile=document.getElementById("filename");
   tagFile.value=readMyPref("tagzilla.default.file","string","");
-  window.sizeToContent();
+  sizeToContent();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

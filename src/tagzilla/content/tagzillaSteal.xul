@@ -36,7 +36,6 @@
   title="&tzSteal.title;"
   orient="vertical"
   autostretch="always"
-  width="500" height="140"
   onload="OnLoad()"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml">
@@ -51,7 +50,7 @@
   </script>
 
   <textbox id="tagline" flex="0" autostretch="never"
-           width="100%" accesskey="&tagline.accessKey;"/>
+           width="50%" accesskey="&tagline.accessKey;"/>
   <groupbox orient="vertical" align="start">
     <caption label="&saveTo.label;"/>
     <hbox autostretch="never" align="center">
