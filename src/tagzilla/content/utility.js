@@ -35,7 +35,16 @@
 // Globals
 ////////////////////////////////////////////////////////////////////////////////
 
-// Nothing here for the moment
+var tzIsupports;
+var tzIStr;
+if(Components.classes["@mozilla.org/supports-wstring;1"]) {
+  tzIsupports = "@mozilla.org/supports-wstring;1";
+  tzIStr = Components.interfaces.nsISupportsWString;
+}
+else {
+  tzIsupports = "@mozilla.org/supports-string;1";
+  tzIStr = Components.interfaces.nsISupportsString;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // readMyPref
@@ -89,7 +98,7 @@ function readMyPref( prefIdentifier, prefType, defaultSetup )
         {
           try {
             prefValue = mvPreference.getComplexValue( prefIdentifier,
-                                     Components.interfaces.nsISupportsWString );
+                                     tzIStr );
           }
           catch( ex ) {
             writePref( prefType, prefIdentifier, defaultSetup );
@@ -160,10 +169,9 @@ function writePref( prefType, prefString, prefValue )
         }
       case "string":
         {
-          var str = Components.classes[ "@mozilla.org/supports-wstring;1" ] 
-                                       .createInstance(Components.interfaces.nsISupportsWString);
+          var str = Components.classes[ tzIsupports ].createInstance(tzIStr);
           str.data = prefValue;
-          mvPreference.setComplexValue( prefString, Components.interfaces.nsISupportsWString, str );
+          mvPreference.setComplexValue( prefString, tzIStr, str );
           break;
         }
       case "url":
