@@ -274,7 +274,7 @@ function openUrl(aUrl) {
   // if not, get the most recently used browser window
   if (!navWindow) {
     try {
-      var wm = Components.classes["@mozilla.org/rdf/datasource;1?name=window-mediator"]
+      var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
         .getService(Components.interfaces.nsIWindowMediator);
       navWindow = wm.getMostRecentWindow("navigator:browser");
     }
