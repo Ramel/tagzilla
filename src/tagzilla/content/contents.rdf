@@ -8,13 +8,13 @@
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:tagzilla"
-    chrome:displayName="TagZilla 0.025"
+    chrome:displayName="TagZilla 0.029"
     chrome:author="David Perry - d.perry@utoronto.ca"
     chrome:name="tagzilla"
     chrome:extension="true"
     chrome:description="This is a tagline theft and management system for Phoenix and Mozilla."
-    chrome:localeVersion="0.025"
-    chrome:skinVersion="0.025">
+    chrome:localeVersion="0.029"
+    chrome:skinVersion="0.029">
   </RDF:Description>
 
   <RDF:Seq about="urn:mozilla:overlays">
