@@ -2,6 +2,8 @@
 <!ENTITY tagzilla.accessKey    "T">
 <!ENTITY tzCommand.label       "Insert Tagline">
 <!ENTITY tzCommand.accessKey   "T">
+<!ENTITY tzSteal.label         "Steal Tagline">
+<!ENTITY tzSteal.accessKey     "S">
 
 <!ENTITY tagzilla.keybinding   "T">
 <!ENTITY tagzilla.keymods      "accel, shift">
