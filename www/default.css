@@ -2,6 +2,7 @@
 
 .project-name{
  font-family: serif;
+ font-size: large;
  color:#419f00;
  padding: 0;
  margin-bottom: 0;
@@ -9,7 +10,7 @@
 
 .tagline{
   font-style: italic;
-  padding: 0;
+  padding: 0.5ex;
 }
 
 .page-header{
