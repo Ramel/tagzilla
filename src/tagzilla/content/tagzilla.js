@@ -34,7 +34,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Global Variables
 ////////////////////////////////////////////////////////////////////////////////
-var lBox;       // the listbox element
+var lBox;       // the listbox element (now it's actually a tree)
 var textBox;    // the entry textbox
 var addButton;  // the Add button
 var modButton;  // the Modify button
@@ -43,6 +43,34 @@ var insButton;  // the Insert (and close) button
 
 var tzCmd;      // command
 var tzDoc;      // window's calling document
+
+var tzList = []; // the actual tagline list
+
+////////////////////////////////////////////////////////////////////////////////
+// tzTreeView object
+//
+// the view generator for the tree
+////////////////////////////////////////////////////////////////////////////////
+var tzTreeView = {
+  rowCount : 0,
+  getCellText : function(row, column) {
+    return tzList[row];
+  },
+  isContainer: function(row) {
+    return false;
+  },
+  setTree: function(tree) {},
+  getImageSrc : function(row,column) {},
+  getProgressMode : function(row,column) {},
+  getCellValue : function(row,column) {},
+  isSeparator : function(index) {return false;},
+  isSorted: function() { return false; },
+  isContainer : function(index) {return false;},
+  cycleHeader : function(aColId, aElt) {},
+  getRowProperties : function(row,column,prop){},
+  getColumnProperties : function(column,columnElement,prop){},
+  getCellProperties : function(row,prop){}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +97,12 @@ function tzOnLoad() {
   delButton = document.getElementById("tzDel");
   insButton = document.getElementById("insert-button");
 
+  lBox.treeBoxObject.view = tzTreeView;
+
   tzCmd = window.arguments[0];
   tzDoc = window.arguments[1];
+
+  //tzList = new Array();
 
   if(tzCmd=="TZ_CLIPBOARD") {
     insButton.setAttribute("label",getText("clipboardLabel"));
@@ -83,8 +115,10 @@ function tzOnLoad() {
   else {
     if(loadTaglineFile(tFile)==-1)
       loadList();
-    else
+    else {
+      tzRefresh();
       setTimeout(tzOnSel,10);
+    }
   }
 }
 
@@ -166,13 +200,38 @@ function tzExit() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// tzNumSelected
+//
+// Parameters: none
+// Returns:
+//  0 if there is no selected tagline
+//  1 if there is exactly one selected tagline
+//  2 if more than one tagline is selected
+////////////////////////////////////////////////////////////////////////////////
+function tzNumSelected() {
+  if(lBox.currentIndex == -1) {
+    return 0;
+  }
+  var numRanges = lBox.treeBoxObject.view.selection.getRangeCount();
+  if(numRanges > 1) {
+    return 2;
+  }
+  var start = new Object();
+  var end = new Object();
+  lBox.treeBoxObject.view.selection.getRangeAt(0,start,end);
+  var numSelected = end.value-start.value+1;
+  return (numSelected > 1 ? 2 : numSelected);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // tzOnSel
 //
 // Parameters: none
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzOnSel() {
-  if(lBox.selectedCount > 1) {
+  var selectedCount = tzNumSelected();
+  if(selectedCount > 1) {
     textBox.setAttribute("disabled",true);
     disableButton(addButton,true);
     disableButton(modButton,true);
@@ -182,8 +241,8 @@ function tzOnSel() {
     textBox.removeAttribute("disabled");
     textBox.focus();
 
-    if(lBox.selectedCount == 1) {
-      textBox.value=lBox.getSelectedItem(0).firstChild.getAttribute("label");
+    if(selectedCount == 1) {
+      textBox.value=lBox.view.getCellText(lBox.currentIndex, 0);
       disableButton(addButton,false);
       disableButton(modButton,false);
       disableButton(delButton,false);
@@ -225,10 +284,14 @@ function loadTaglineFile(aUrl) {
   lTitle.setAttribute("label",aFile);
 
   f.open("r");
-  while(!f.EOF) {
-    addTagline(f.readline());
-  }
+  var fContents = f.read();
+  f.close();
+  tzList = fContents.split("\n");
+  if(tzList[tzList.length-1]=="")
+    tzList.pop();
+  tzTreeView.rowCount = tzList.length;
   lBox.setAttribute("changed","false");
+  tzRefresh();
 
   return 0;
 }
@@ -254,9 +317,7 @@ function saveTaglineFile(aUrl) {
     alert(getText("saveErrMsg"));
     return false;
   }
-  for(var i=1; i<=lBox.getRowCount(); i++) {
-    f.write(lBox.childNodes[i].firstChild.getAttribute("label")+"\n");
-  }
+  f.write(tzList.join("\n")+"\n");
   f.close();
 
   lBox.setAttribute("changed","false");
@@ -272,9 +333,38 @@ function saveTaglineFile(aUrl) {
 ////////////////////////////////////////////////////////////////////////////////
 function taglineChanged(aChg) {
   textBox.setAttribute("changed",aChg);
-  disableButton(modButton,textBox.value=="" || lBox.selectedCount!=1);
+  disableButton(modButton,textBox.value=="" || tzNumSelected()!=1);
   disableButton(addButton,textBox.value=="");
   insButton.setAttribute("disabled",false);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// tzRefresh
+//
+// Parameters: none
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function tzRefresh() {
+  lBox.treeBoxObject.invalidate();
+  lBox.treeBoxObject.invalidateScrollbar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// showTagline
+//
+// Parameters:
+//  aIndex: index of tagline to make visible
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function showTagline(aIndex) {
+  var tbo = lBox.treeBoxObject;
+  var numRows = tbo.getPageCount()-1;
+
+  if(aIndex >= 0)
+    tbo.ensureRowIsVisible(aIndex);
+
+//  while(tzList.length > numRows && tbo.getLastVisibleRow() > tzList.length)
+//    tbo.scrollByLines(-1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -288,18 +378,17 @@ function addTagline(aTagline, aShow) {
   if(!aTagline) {
     return;
   }
-  var aCell = document.createElement("listcell");
-  var aItem = document.createElement("listitem");
-  aCell.setAttribute("label", aTagline);
-  aItem.appendChild(aCell);
-  lBox.appendChild(aItem);
+  tzList.push(aTagline);
+  tzTreeView.rowCount++;
+  lBox.treeBoxObject.rowCountChanged(0,tzList.length);
   taglineChanged(false);
   lBox.setAttribute("changed","true");
 
   if(aShow) {
-    lBox.ensureElementIsVisible(lBox.lastChild);
-    lBox.selectItem(lBox.lastChild);
+    lBox.treeBoxObject.view.selection.select(tzList.length-1);
+    showTagline(tzList.length);
   }
+  tzRefresh();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -312,17 +401,17 @@ function addTagline(aTagline, aShow) {
 ////////////////////////////////////////////////////////////////////////////////
 function changeTagline(aTagline) {
   if(aTagline) {
-    if(lBox.currentItem) {
-      lBox.ensureElementIsVisible(lBox.currentItem);
-      lBox.selectItem(lBox.currentItem);
+    if(tzNumSelected() == 1) {
+      showTagline(lBox.currentIndex);
+      lBox.treeBoxObject.view.selection.select(lBox.currentIndex);
+      tzList[lBox.currentIndex]=textBox.value;
       taglineChanged(false);
-      lBox.getSelectedItem(0).firstChild.setAttribute("label",aTagline);
-      lBox.ensureElementIsVisible(lBox.currentItem);
     }
     else
       addTagline(aTagline);
 
     lBox.setAttribute("changed","true");
+    tzRefresh();
   }
 }
 
@@ -333,14 +422,23 @@ function changeTagline(aTagline) {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function delTaglines() {
-  if(!lBox.selectedCount)
+  if(tzNumSelected() == 0)
     return;
 
-  for(var i=lBox.selectedCount;i>0;i--) {
-    var iItem=lBox.getSelectedItem(i-1);
-    lBox.removeChild(iItem);
+  var numRanges = lBox.treeBoxObject.view.selection.getRangeCount();
+  var start = new Object();
+  var end = new Object();
+  var selIndexes = new Array();
+
+  for(var i=numRanges-1; i>=0; i--) {
+    lBox.treeBoxObject.view.selection.getRangeAt(i,start,end);
+    tzList.splice(start.value,end.value-start.value+1);
   }
+  showTagline();
+  lBox.treeBoxObject.view.selection.select(-1);
+  tzTreeView.rowCount = tzList.length;
   lBox.setAttribute("changed","true");
+  tzRefresh();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -356,28 +454,10 @@ function sortList() {
    */
 
   window.setCursor("wait");
-
-  var sortFunc = function (a, b) {
-    // fold case when sorting
-    if(a.toLowerCase() == b.toLowerCase())
-      return 0;
-    else if(a.toLowerCase() > b.toLowerCase())
-      return 1;
-    else
-      return -1;
-  }
-
-  var sortArr = new Array();
-  for(var i=1; i<=lBox.getRowCount(); i++) {
-    sortArr.push(lBox.childNodes[i].firstChild.getAttribute("label"));
-  }
-  sortArr.sort(sortFunc);
-  for(var i=1; i<=lBox.getRowCount(); i++) {
-    lBox.childNodes[i].firstChild.setAttribute("label",sortArr[i-1]);
-  }
-
+  tzList.sort();
   window.setCursor("auto");
   lBox.setAttribute("changed","true");
+  tzRefresh();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -387,12 +467,10 @@ function sortList() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function clearList() {
-  if(lBox.childNodes.length > 1) 
-    lBox.ensureElementIsVisible(lBox.childNodes[1]);
-  while(lBox.childNodes.length > 1) {
-    lBox.removeChild(lBox.lastChild);
-  }
+  tzList = [];
+  tzTreeView.rowCount = 0;
   document.getElementById("tzListHead").setAttribute("label","");
+  tzRefresh();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -487,9 +565,9 @@ function saveListAs() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function selRandTagline() {
-  var rv=parseInt(Math.round(Math.random() * (lBox.getRowCount()-1)+1));
-  lBox.ensureElementIsVisible(lBox.childNodes[rv]);
-  lBox.selectItem(lBox.childNodes[rv]);
+  var rv=parseInt(Math.round(Math.random() * (tzList.length-1)));
+  lBox.treeBoxObject.view.selection.select(rv);
+  showTagline(rv);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

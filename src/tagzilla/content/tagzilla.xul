@@ -140,12 +140,13 @@
     <textbox id="tagline" flex="1" autostretch="never" width="100%"
       changed="false" oninput="taglineChanged(true)"/>
   </hbox>
-  <listbox id="tzListBox" flex="1" seltype="multiple"
+  <tree id="tzListBox" flex="1" seltype="multiple" hidecolumnpicker="true"
     changed="false" onselect="tzOnSel()">
-    <listhead>
-      <listheader id="tzListHead" label=""/>
-    </listhead>
-  </listbox>
+    <treecols>
+      <treecol id="tzListHead" label="" flex="1"/>
+    </treecols>
+    <treechildren />
+  </tree>
 
   <hbox autostretch="never">
     <spring flex="1"/>
