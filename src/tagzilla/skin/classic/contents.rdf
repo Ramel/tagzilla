@@ -16,7 +16,7 @@
   </RDF:Description>
 
   <RDF:Description about="urn:mozilla:skin:classic/1.0:tagzilla"
-                         chrome:skinVersion="0.056"/>
+                         chrome:skinVersion="0.057"/>
 
   <RDF:Seq about="urn:mozilla:stylesheets">
     <RDF:li resource="chrome://global/content/customizeToolbar.xul"/>
