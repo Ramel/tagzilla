@@ -103,3 +103,9 @@ p:active {
   background-color: #FF9400;
   color: #000000;
 }
+
+h3 {
+  font-family: sans-serif;
+  color: #990000;
+  line-height: 0.5em;
+}
