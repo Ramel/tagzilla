@@ -48,6 +48,9 @@
 
     var w;
     var cmd;
+    var enigButton;
+
+    setTimeout(tzWaitedAwhile, 1000);
 
     function tzSendButton(aCmd) {
       if(readMyPref("tagzilla.mail.auto","bool",true)) {
@@ -56,13 +59,29 @@
         w.addEventListener("unload",tzPickedTagline, true);
       }
       else {
-        goDoCommand(aCmd);
+        if(enigButton)
+          enigSendCommand(aCmd);
+        else
+          goDoCommand(aCmd);
       }
     }
 
     function tzPickedTagline() {
       w.removeEventListener("unload", tzPickedTagline, true);
-      goDoCommand(cmd);
+      dump("enigButton = "+enigButton+"!\n");
+      if(enigButton)
+        enigSendCommand(cmd);
+      else
+        goDoCommand(cmd);
+    }
+
+    function tzWaitedAwhile() {
+      enigButton = document.getElementById("button-enigmail-send");
+      if(enigButton) {
+        var origCmd = enigButton.getAttribute("command");
+        enigButton.setAttribute("command","cmd_sendTagZilla");
+        //dump("tzWaitedAwhile: origCmd = "+origCmd+"\n");
+      }
     }
 
   ]]>
@@ -73,6 +92,7 @@
     <command id="cmd_sendLater" oncommand="tzSendButton('cmd_sendLater');"/>
     <command id="cmd_sendButton" oncommand="tzSendButton('cmd_sendButton');"/>
     <command id="cmd_sendWithCheck" oncommand="tzSendButton('cmd_sendWithCheck');"/>
+    <command id="cmd_sendTagZilla" oncommand="tzSendButton('cmd_sendButton');"/>
   </commandset>
 
   <keyset id="editorKeys">
