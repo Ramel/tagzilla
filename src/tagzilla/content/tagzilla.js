@@ -145,20 +145,10 @@ function tzInsert() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzExit() {
-  if(lBox.getAttribute("changed")=="true") {
-    var promptService = Components.classes[ "@mozilla.org/embedcomp/prompt-service;1" ].
-                        getService(Components.interfaces.nsIPromptService);
-    var promptFlags = promptService.BUTTON_TITLE_CANCEL * promptService.BUTTON_POS_1;
-    promptFlags += promptService.BUTTON_TITLE_SAVE * promptService.BUTTON_POS_0;
-    promptFlags += promptService.BUTTON_TITLE_DONT_SAVE * promptService.BUTTON_POS_2;
+  var notSaved=notSavedDlg();
+  if(notSaved==1) return false;                 // cancel
+  if(notSaved==0 && !saveList()) return false;  // save
 
-    var retVal = promptService.confirmEx( window,getText("notSavedHdr"),
-       getText("notSavedMsg"), promptFlags,
-       "button1", "button2", "button3", null, {value:0});
-
-    if(retVal==1) return false;                 // cancel
-    if(retVal==0 && !saveList()) return false;  // save
-  }
   if(readMyPref("tagzilla.default.autosave","bool",true)) {
     writePref("string", "tagzilla.default.file",
       document.getElementById("tzListHead").getAttribute("label"));
@@ -341,12 +331,15 @@ function clearList() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// loadList
+// notSavedDlg
 //
 // Parameters: none
-// Returns: false if list not loaded, true otherwise
+// Returns:
+//  0 if user wishes to save the modified list
+//  1 if user presses cancel
+//  2 if user does not wish to save (or if list isn't modified)
 ////////////////////////////////////////////////////////////////////////////////
-function loadList() {
+function notSavedDlg() {
   if(lBox.getAttribute("changed")=="true") {
     var promptService = Components.classes[ "@mozilla.org/embedcomp/prompt-service;1" ].
                         getService(Components.interfaces.nsIPromptService);
@@ -357,10 +350,22 @@ function loadList() {
     var retVal = promptService.confirmEx( window,getText("notSavedHdr"),
        getText("notSavedMsg"), promptFlags,
        "button1", "button2", "button3", null, {value:0});
-
-    if(retVal==1) return false;                 // cancel
-    if(retVal==0 && !saveList()) return false;  // save
+    return retVal;
   }
+  else
+    return 2;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// loadList
+//
+// Parameters: none
+// Returns: false if list not loaded, true otherwise
+////////////////////////////////////////////////////////////////////////////////
+function loadList() {
+  var notSaved=notSavedDlg();
+  if(notSaved==1) return false;                 // cancel
+  if(notSaved==0 && !saveList()) return false;  // save
   try {
     const nsIFilePicker = Components.interfaces.nsIFilePicker;
     var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
