@@ -9,7 +9,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on October 4, 2002
+ * The Original Code in this file was released on October 19, 2002
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
@@ -95,7 +95,8 @@ var tzTreeView = {
 function tzOnLoad() {
   try {
     include('chrome://jslib/content/io/file.js');
-    include('chrome://jslib/content/io/fileUtils.js');
+    include('chrome://jslib/content/io/dir.js');
+    //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
     alert(getText("noJSlib"));
@@ -567,7 +568,14 @@ function loadList() {
   if(notSaved==1) return false;                 // cancel
   if(notSaved==0 && !saveList()) return false;  // save
 
-  var fName=txtFilePicker(getText("loadFile"),0);
+  var oldDir = document.getElementById("tzListHead").getAttribute("label");
+  var newDir = null;
+  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
+  if(oldDir) {
+    newDir = new Dir(oldDir);
+  }
+
+  var fName=txtFilePicker(getText("loadFile"),0,newDir);
   if(fName==null)
     return false;
 
@@ -603,7 +611,13 @@ function saveList() {
 // Returns: true if list saved, false otherwise
 ////////////////////////////////////////////////////////////////////////////////
 function saveListAs() {
-  var fName = txtFilePicker(getText("saveFile"),1);
+  var oldDir = document.getElementById("tzListHead").getAttribute("label");
+  var newDir = null;
+  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
+  if(oldDir) {
+    newDir = new Dir(oldDir);
+  }
+  var fName = txtFilePicker(getText("saveFile"),1,newDir);
   if(fName==null)
     return false;
   

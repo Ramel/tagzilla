@@ -9,7 +9,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on October 4, 2002
+ * The Original Code in this file was released on October 19, 2002
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
@@ -228,20 +228,27 @@ function getText(aStr) {
 // Parameters:
 //  aTitle: title to go on file picker window
 //  aSave: 1 if picking file to save/overwrite, 0 if picking file to load
+//  aStart: directory to start from
+//    This must be an nsILocalFile.  new Dir("foo") in jslib/io/dir.js will
+//    do the trick, but you have to do it yourself.
 // Returns:
 //  Name of file picked, in URL format, or null if cancelled
 ////////////////////////////////////////////////////////////////////////////////
-function txtFilePicker(aTitle, aSave) {
+function txtFilePicker(aTitle, aSave, aStart) {
   var retVal = null;
   try {
     const nsIFilePicker = Components.interfaces.nsIFilePicker;
     var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
     fp.init(window, aTitle, (aSave ? nsIFilePicker.modeSave : nsIFilePicker.modeOpen));
     fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
+    if(aStart) {
+      fp.displayDirectory = aStart;
+    }
     var result=fp.show();
 
     if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace) {
-      retVal=fp.fileURL.spec;
+      //retVal=fp.fileURL.spec;
+      retVal=fp.file.path;
     }
   }
   catch (ex) {

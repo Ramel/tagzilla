@@ -9,7 +9,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on October 4, 2002
+ * The Original Code in this file was released on October 19, 2002
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
@@ -46,7 +46,8 @@ var tagFile;  // textbox holding the name of the file to save to
 function OnLoad() {
   try {
     include('chrome://jslib/content/io/file.js');
-    include('chrome://jslib/content/io/fileUtils.js');
+    include('chrome://jslib/content/io/dir.js');
+    //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
     alert(getText("noJSlib"));
@@ -79,10 +80,17 @@ function OnLoad() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function chooseFile() {
-  var fName = txtFilePicker(getText("chooseFile"),0);
+  var oldDir = tagFile.value;
+  var newDir = null;
+  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
+  if(oldDir) {
+    newDir = new Dir(oldDir);
+  }
+  var fName = txtFilePicker(getText("chooseFile"),0,newDir);
   if(fName!=null) {
-    var fUtils = new FileUtils();
-    tagFile.value=fUtils.urlToPath(fName);
+    tagFile.value=fName;
+//    var fUtils = new FileUtils();
+//    tagFile.value=fUtils.urlToPath(fName);
   }
 }
 

@@ -9,7 +9,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on October 4, 2002
+ * The Original Code in this file was released on October 19, 2002
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
@@ -48,7 +48,8 @@ var popupTimer;                // timer to watch the popup
 ////////////////////////////////////////////////////////////////////////////////
 function onLoad() {
   try {
-    include('chrome://jslib/content/io/fileUtils.js');
+    //include('chrome://jslib/content/io/fileUtils.js');
+    include('chrome://jslib/content/io/dir.js');
   }
   catch(ex) {
     parent.document.getElementById("tagzilla").setAttribute("container","false");
@@ -158,13 +159,22 @@ function FillIdentityListPopup(popup)
 ////////////////////////////////////////////////////////////////////////////////
 function pickFile(aTarget) {
   try { 
-    var fName = txtFilePicker(getText("chooseFile"),0);
+    var oldDir = aTarget.value;
+    var newDir = null;
+    oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
+    if(oldDir) {
+      newDir = new Dir(oldDir);
+    }
+    var fName = txtFilePicker(getText("chooseFile"),0,newDir);
+    //dump("pickFile: fName = "+fName+"\n");
     if(fName==null) {
     }
     else {
-      var fUtils = new FileUtils();
+      aTarget.value=fName;
+/*      var fUtils = new FileUtils();
       var aPath = fUtils.urlToPath(fName);
       aTarget.value=aPath;
+*/
     }
   }
   catch(e) {dump(e+'\n');}
