@@ -13,3 +13,11 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+#launchTagzilla {
+  list-style-image: url("chrome://tagzilla/content/tagzilla-phoenix.png") !important;
+}
+
+toolbar[iconsize="small"] #launchTagzilla {
+  list-style-image: url("chrome://tagzilla/content/tagzilla-phoenix-small.png") !important;
+}

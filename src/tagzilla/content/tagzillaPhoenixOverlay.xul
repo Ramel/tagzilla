@@ -108,4 +108,11 @@
               oncommand="tzStealTagline()"/>
   </popup>
 
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="launchTagzilla"
+                   label="&tagzilla.appName;"
+                   class="toolbarbutton-1"
+                   oncommand="toTagZilla('TZ_CLIPBOARD')"/>
+  </toolbarpalette>
+
 </overlay>
