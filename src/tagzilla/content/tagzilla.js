@@ -56,12 +56,15 @@ var tzNL = "\n"; // newline flavour of the current file (defaults to unix)
 var tzTreeView = {
   rowCount : 0,
   getCellText : function(row, col) {
-    if(col=="tzListHead") { if(tzList[row].indexOf("\n") >= 0) {
+    var tzCol = col;
+    if ("nsITreeColumn" in Components.interfaces)
+      tzCol = col.id;
+    if(tzCol=="tzListHead") { if(tzList[row].indexOf("\n") >= 0) {
         return tzList[row].substring(0,tzList[row].indexOf("\n"));
       }
       return tzList[row];
     }
-    else if(col=="tzMultiLine") {
+    else if(tzCol=="tzMultiLine") {
       if(tzList[row].indexOf("\n") >= 0) {
         return ">>";
       }
@@ -456,13 +459,8 @@ function tzRefresh() {
 ////////////////////////////////////////////////////////////////////////////////
 function showTagline(aIndex) {
   var tbo = lBox.treeBoxObject;
-  var numRows = tbo.getPageCount()-1;
-
   if(aIndex >= 0)
     tbo.ensureRowIsVisible(aIndex);
-
-//  while(tzList.length > numRows && tbo.getLastVisibleRow() > tzList.length)
-//    tbo.scrollByLines(-1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
