@@ -316,6 +316,11 @@ if [ $1 == ppp0 ]; then
     killall fetchmail
     service spamassassin stop
 fi</pre>
+<p>On the topic of checking for mail, I've discovered that Mozilla doesn't automatically
+scan your Unix mailbox for you every x minutes, regardless of the settings you give it.
+You have to manually click the "get messages" button to transfer mail from your spool
+to your Mozilla mailbox.  So you might want to run something like <tt>xbiff(1)</tt> to
+alert you when you have new mail.</p>
 <a class="h3" name="filter" href="#toc">Filtering out Spam</a>
 <p>SpamAssassin doesn't actually kill spam it finds, it just flags it for you.
 You still have to tell Mozilla to filter out the stuff SpamAssassin flags.
