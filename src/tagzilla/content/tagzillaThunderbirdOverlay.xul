@@ -34,6 +34,7 @@
 -->
 
 <?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
 <!DOCTYPE window [
 <!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
@@ -100,12 +101,14 @@
 
   <toolbarpalette id="MailToolbarPalette">
     <toolbarbutton id="launchTagzilla"
+                   class="toolbarbutton-1"
                    label="&tagzilla.appName;"
                    oncommand="toTagZilla('TZ_CLIPBOARD')"/>
   </toolbarpalette>
 
   <toolbarpalette id="MsgComposeToolbarPalette">
     <toolbarbutton id="launchTagzilla"
+                   class="toolbarbutton-1"
                    label="&tagzilla.appName;"
                    observes="cmd_tagzilla_mail"/>
   </toolbarpalette>

@@ -16,33 +16,3 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* Large Bird toolbar icon */
-
-#launchTagzilla {
-  list-style-image: url("chrome://tagzilla/content/tagzilla-toolbar.png");
-  -moz-image-region: rect(0px 43px 43px 0px);
-}
-
-#launchTagzilla:hover {
-  -moz-image-region: rect(0px 86px 43px 43px);
-}
-
-#launchTagzilla:active {
-  -moz-image-region: rect(0px 129px 43px 86px);
-}
-
-/* Small Bird toolbar icon */
-
-toolbar[iconsize="small"] #launchTagzilla {
-  list-style-image: url("chrome://tagzilla/content/tagzilla-toolbar-small.png");
-  -moz-image-region: rect(0px 25px 25px 0px);
-}
-
-toolbar[iconsize="small"] #launchTagzilla:hover {
-  -moz-image-region: rect(0px 50px 25px 25px);
-}
-
-toolbar[iconsize="small"] #launchTagzilla:active {
-  -moz-image-region: rect(0px 75px 25px 50px);
-}

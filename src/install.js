@@ -5,7 +5,12 @@ const APP_VERSION = "0.049";
 
 const APP_JAR_FILE = "tagzilla.jar";
 const APP_CONTENT_FOLDER = "tagzilla/content/";
-const APP_LOCALE_FOLDER  = "tagzilla/locale/en-US/";
+
+const APP_LOCALE_FOLDER  = "tagzilla/locale/"
+const APP_LOCALES = [ "en-US", "de-DE", "de-AT" ];
+
+const APP_SKIN_FOLDER = "tagzilla/skin/"
+const APP_SKINS = [ "classic" ];
 
 const APP_SUCCESS_MESSAGE = "You may need to restart this program first.";
 
@@ -18,28 +23,30 @@ initInstall(APP_NAME, APP_PACKAGE, APP_VERSION);
 var instToProfile = confirm(INST_TO_PROFILE);
 
 var chromef = instToProfile ? getFolder("Profile", "chrome") : getFolder("chrome");
+var cflag = instToProfile ? PROFILE_CHROME : DELAYED_CHROME;
 var err = addFile(APP_PACKAGE, APP_VERSION, APP_JAR_FILE, chromef, null)
 
 if(err == SUCCESS) {
-	var jar = getFolder(chromef, APP_JAR_FILE);
-	if(instToProfile) {
-  	registerChrome(CONTENT | PROFILE_CHROME, jar, APP_CONTENT_FOLDER);
-  	registerChrome(LOCALE  | PROFILE_CHROME, jar, APP_LOCALE_FOLDER);
-  } else {
-  	registerChrome(CONTENT | DELAYED_CHROME, jar, APP_CONTENT_FOLDER);
-  	registerChrome(LOCALE  | DELAYED_CHROME, jar, APP_LOCALE_FOLDER);
-  }
-	err = performInstall();
-	if(err == SUCCESS || err == 999) {
-		alert(APP_DISPLAY_NAME+" "+APP_VERSION+" has been succesfully installed.\n"+APP_SUCCESS_MESSAGE);
-	} else {
-		alert("Install failed. Error code:" + err);
-		cancelInstall(err);
-	}
+    var jar = getFolder(chromef, APP_JAR_FILE);
+    registerChrome(CONTENT | cflag, jar, APP_CONTENT_FOLDER);
+
+    for(var i in APP_LOCALES)
+        registerChrome(LOCALE  | cflag, jar, APP_LOCALE_FOLDER+APP_LOCALES[i]+"/" );
+
+    for(var i in APP_SKINS)
+        registerChrome(SKIN  | cflag, jar, APP_SKIN_FOLDER+APP_SKINS[i]+"/" );
+
+    err = performInstall();
+    if(err == SUCCESS || err == 999) {
+        alert(APP_DISPLAY_NAME+" "+APP_VERSION+" has been succesfully installed.\n"+APP_SUCCESS_MESSAGE);
+    } else {
+        alert("Install failed. Error code:" + err);
+        cancelInstall(err);
+    }
 } else {
-	alert("Failed to create " +APP_JAR_FILE +"\n"
-		+"You probably don't have appropriate permissions \n"
-		+"(write access to your profile or chrome directory). \n"
-		+"_____________________________\nError code:" + err);
-	cancelInstall(err);
+    alert("Failed to create " +APP_JAR_FILE +"\n"
+        +"You probably don't have appropriate permissions \n"
+        +"(write access to your profile or chrome directory). \n"
+        +"_____________________________\nError code:" + err);
+    cancelInstall(err);
 }

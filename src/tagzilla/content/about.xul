@@ -35,6 +35,7 @@
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
 <!DOCTYPE window [
 <!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
