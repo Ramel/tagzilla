@@ -30,7 +30,6 @@ var modButton;  // the Modify button
 var delButton;  // the Delete button
 var insButton;  // the Insert (and close) button
 
-var tzBundle;   // string bundle
 var tzCmd;      // command
 var tzDoc;      // window's calling document
 
@@ -51,18 +50,6 @@ function tzOnLoad() {
 
   tzCmd = window.arguments[0];
   tzDoc = window.arguments[1];
-
-  // String bundle code taken from chrome://editor/content/editorUtilities.js
-  // Used under terms of the NPL
-  try {
-    var strBundleService =
-        Components.classes["@mozilla.org/intl/stringbundle;1"].getService();  
-    strBundleService =
-          strBundleService.QueryInterface(Components.interfaces.nsIStringBundleService);
-  
-    tzBundle = strBundleService.createBundle("chrome://tagzilla/locale/tagzilla.properties");
-  }
-  catch(e) {}
 
   if(tzCmd=="TZ_CLIPBOARD") {
     insButton.setAttribute("label",getText("clipboardLabel"));

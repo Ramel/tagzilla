@@ -51,12 +51,12 @@
       <menu id="menu_List" label="&listMenu.label;" accesskey="&listMenu.accessKey;">
         <menupopup id="menu_ListPopup">
           <menuitem id="menu_LoadList" oncommand="loadList()"
-                    label="&load.label;" accesskey="&load.accessKey;"/>
+                    label="&loadList.label;" accesskey="&loadList.accessKey;"/>
           <menuitem id="menu_SaveList" oncommand="saveList()"
-                    label="&save.label;" accesskey="&save.accessKey;"/>
+                    label="&saveList.label;" accesskey="&saveList.accessKey;"/>
           <menuseparator/>
           <menuitem id="menu_SortList" oncommand="sortList()"
-                    label="&sort.label;" accesskey="&sort.accessKey;"/>
+                    label="&sortList.label;" accesskey="&sortList.accessKey;"/>
         </menupopup>
       </menu>
 <!--
