@@ -15,8 +15,8 @@
 }
 
 .page-header{
- font-family: helvetica,arial,san-serif;
- color:#000000;
+// font-family: helvetica,arial,san-serif;
+ color:#419f00;
  padding: 0;
 }
 
@@ -110,5 +110,5 @@ a.h3,
 h3 {
   font-family: sans-serif;
   color: #990000;
-  /* line-height: 0.5em; */
+  line-height: 0.5em;
 }

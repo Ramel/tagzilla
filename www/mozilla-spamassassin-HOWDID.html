@@ -1,0 +1,193 @@
+<!-- MAIN CONTENT -->
+<h3 class="page-header">Mozilla-SpamAssassin-HOWDID</h3>
+<B>I'm not done yet.  Go away and come back later.</b>
+
+<a name="#toc">Table of Contents</a>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#start">Starting Point</a></li>
+</ul>
+
+<a class="h3" name="#intro" href="#toc">Introduction</a>
+<p>This document aims to describe how I combined the stealth ninja goodness of
+<a href="http://spamassassin.org/">SpamAssassin</a> with the sweet sugar-coated
+UI of <a href="http://mozilla.org/">Mozilla</a> Mail.  It's not intended to be
+a set of instructions (that would be a
+<a href="http://www.tldp.org/docs.html#howto">HOWTO</a>), but a record of what I
+did, that perhaps you can learn from.  If you try anything you read here, you're
+doing it at your own risk; I hereby accept absolutely <b>no</b> responsibility
+for whatever you do to your computer.</p>
+
+<a class="h3" name="#start" href="#toc">Starting Point</a>
+<p>Here is what I started off with:</p><ul>
+<li>A Pentium-III computer, running at 666MHz (no kidding)</li>
+<li>A reasonably fresh (less than one month old) install of
+<a href="http://redhat.com/">RedHat Linux 8.0</a></li>
+<li>A fresh install of <a href="http://mozilla.org/">Mozilla 1.2 beta</a></li>
+</ul>
+
+<p>The first step I took in this direction was to beg and plead for guidance from
+someone who had been there and done that, namely Mark Smitka.  He very graciously
+shared his experiences with me.  I didn't follow them to the letter for a few reasons,
+mainly because it required a bit too much stuff to happen as root user for my comfort.
+But it was still very useful.  Here it is:</p>
+<form>
+<textarea rows="10" cols="80">
+On Thursday 17 October 2002 21:45, you wrote:
+
+
+>> Er... *sheepish look* I don't suppose you feel like summarizing what you
+>> did in a mini-HOWTO of sorts? (:`  I'd love to get a setup like that
+>> going, but I haven't looked into it yet.  Actually, just some pointers
+>> will do fine, I could do to exercise my brain, too. (:
+
+
+It turns out, I documented the process.  I can't swear it's without errors, or 
+complete in every respect, but between that and the SpamAssassin site, it's 
+at least a head start.  Info below:
+--
+SpamAssassin Configuration for Linux
+
+
+This procedure documents the configuration of SpamAssassin, fetchmail, and 
+Kmail. When complete, POP3 mail will be retrieved by from the remote server 
+by fetchmail, processed through SpamAssassin, and then passed to and filtered 
+appropriately by Kmail. 
+
+(Note: This document assumes the system is running Redhat Linux 8.0, but I 
+suspect all Linux configurations are similar, if not the same. It is also 
+assumed that you will be setting up SpamAssassin to run via the root user 
+account.)
+
+ The Redhat Linux 8.0 distribution includes SpamAssassin, and it should have 
+been installed when the OS was first loaded. If not, it should be installed 
+via the RPM package manager. The instructions that follow are based on an 
+already installed version of SpamAssassin, and do not include the steps 
+required to compile that application.
+ Copy the SpamAssassin folder found under '/usr/share/spamassassin' to 
+'/root/spamassassin'. Also be sure that within the root directory is a hidden 
+directory named .spamassassin, and that there is a file within named 
+'user_prefs'.  This may be auto-created by SpamAssassin after the first 
+test/execution, so if it's not there just yet, check again after the test 
+process below.
+>From the KDE menu, choose "Server Settings | Services", and start the 
+SpamAssassin service, if it is not already running.
+Within the root directory, create a file (if it doesn't already exist) named 
+'.procmailrc'. Using a text editor, paste or enter the following lines:
+ 
+:0fw
+| /usr/bin/spamassassin
+     
+(Note:Be sure that the above file (and others you will create below) contain 
+one <CR> at the end of the last line.)
+
+For testing purposes, create a file named 'sample-nonspam.txt' in the root 
+directory. It should be formatted as a standard RFC compliant e-mail message, 
+or at least close enough so as not to trigger SpamAssassin's threshold. My 
+sample message looks like this:
+
+From: Mark Geekmaster <myaddress@mydomain.com>
+To: Joe User <j.user@anywhere.net>
+Date: Wed, 08 Oct 2002 21:16:39 -0400
+Subject: A Safe Test
+
+This is sample safe text message. How is everything going?
+
+Mark
+(Note: The "To" and "From" addresses should not be the same in the 
+nonspam.txt, as this will trigger a SpamAssassin rule)
+
+For testing purposes, create a file named 'sample-spam.txt'. It should break 
+enough SpamAssassin rules to trigger the default threshold, which is a 5 
+point total. My sample message looks like this:
+
+From: Mark Geekmaster <myaddress@mydomain.com>
+To: Mark Geekmaster <myaddress@mydomain.com>
+Date: 10/08/2002
+Subject: Stock opt-in offer
+
+This is a viagra text message. How is everything going?
+
+Mark
+
+(Note: The "To" and "From" addresses are the same, the date header is 
+incorrect, and there are keywords in the "Subject" and body that should 
+trigger the SpamAssassin threshold)
+
+Test SpamAssassin with the following commands entered via command-line as 
+root:
+
+spamassassin -t < sample-nonspam.txt > nonspam.out
+spamassassin -t < sample-spam.txt > spam.out
+
+Verify (using a text viewer, ie. "less" or "notepad") that nonspam.out has not 
+been tagged as spam, and that spam.out has.  The files should contain the 
+full text and headers of the messages, the "spam.out" message should be 
+annotated with "****SPAM****" in the subject line and a report from 
+SpamAssassin, and there should be no errors when you run the commands.
+Even though sample-nonspam.txt is not spam, nonspam.out will contain a 
+SpamAssassin report anyway.  This is a side-effect of the "-t" (test) switch.  
+However, there should be less than 5 hits accumulated; when the "-t" switch 
+is not in use, the report text would not be added.
+
+(Note: If the commands do not work, DO NOT PROCEED TO THE NEXT STEP, as you 
+will lose mail!)
+Now, if all is well, you'll most likely want to retrieve your POP mail from a 
+remote server, from one or more accounts, and have it passed to KDE mail 
+after being analyzed by SpamAssassin.  It is the fetchmail process that will 
+retrieve the mail from the POP server(s), and needs to be configured for your 
+account(s).
+Place a file named '.fetchmailrc' in the root directory. In it, format the 
+account parameters as below:
+
+poll mail.server.com with protocol pop3
+user username, with password yourpassword
+
+Repeat the above set of lines for each account that you want polled.
+Since you most likely do not want to manually type fetchmail whenever you want 
+your mail checked, we'll run fetchmail as a daemon process at system startup. 
+It will run as root, and include logging. To accomplish this, you'll edit the 
+file '/etc/rc.d/rc.local, and will include the following lines (customized as 
+you like of course):
+
+HOME=/root
+/usr/bin/fetchmail -a -v -d 600 -L /root/fetchmail.log
+
+The parameters above will cause fetchmail to grab all mail, with verbose data 
+passed back, as a daemon process, at 600 second intervals, and will write the 
+results to the fetchmail log file.
+Create a link on your desktop to the following two files:
+fetchmail.log and maillog
+I highly recommend testing the process above by doing the following:
+Send yourself a test message with localhost specified as the SMTP host. Check 
+the maillog file and be sure it was sent and received by the remote mail 
+server to which you sent it.  Then, after being sure that the account to 
+which you sent it is configured in .fetchmailrc, execute fetchmail without 
+any special parameters from the command line. You shouldn't see any errors. 
+You may encounter an error with respect to the file permissions when you try 
+to execute it. If so, set permissions on fetchmail as necessary. Now, 
+navigate to /var/spool/mail, and you should see a file that represents mail 
+for root (and any other users you may have). If the root file contains your 
+test message (can be read with a text editor), your test was successful!  
+Check the fetchmail.log to verify there were no errors in the fetchmail 
+process. Now, set up Kmail as follows to grab your mail from the root mailbox 
+and have it filtered as necessary:
+Setup a "local" type receiving account in Kmail. The path will be:
+/var/spool/mail/root and the "locking method" will be 'FNCTL'. You can of 
+course set Kmail to poll the root mailbox as often as you like, but it's 
+fetchmail that's actually polling your remote mail.
+
+The filter setup is as follows:
+
+<X-Spam-Flag> <equals> <YES>
+
+The actions of this filter will be to mark the status as read, and move the 
+mail to a folder of your choice, such as Spam Trap. 
+
+That's it!  If all works well, your mail will be retrieved from remote POP 
+servers, passed through SpamAssassin, picked up by Kmail, and be filtered 
+accordingly, based on the presence of the SpamAssassin header info.
+
+-- e-mail: mrksmtka@newsguy.com web: http://kickme.to/marksmitka
+</textarea></form>
+
