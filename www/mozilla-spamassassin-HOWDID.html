@@ -24,7 +24,8 @@ for whatever you do to your computer.</p>
 <a class="h3" name="hist" href="#toc">History</a><br>
 <b>2002-10-18</b> Original version.<br>
 <b>2002-10-19</b> Learned that SpamAssassin uses the <em>receiver</em>'s configuration
-to filter, not <tt>root</tt>'s.<br><br>
+to filter, not <tt>root</tt>'s.  Also added lots of little tweaks and
+clarifications.<br><br>
 
 <a class="h3" name="start" href="#toc">Starting Point</a>
 <p>Here is what I started off with:</p><ul>
@@ -216,6 +217,9 @@ mechanism as does procmail, so following Mark's instructions, I created the file
 <tt>/root/.procmailrc</tt> with these contents:</p>
 <pre>:0fw
 | /usr/bin/spamassassin</pre>
+<p>I also made a <tt>.procmailrc</tt> in my 'normal user' account's home directory
+(<tt>/home/smiley</tt>) with the same contents.  I don't know if it's necessary or not,
+but I think it is.</p>
 <p>I needed SpamAssassin running in order to do my various tests, so I started it
 with the command '<tt>service spamassassin start</tt>'.</p>
 <p><b>...to grab my email.</b> FetchMail needs its own configuration file to know
