@@ -46,6 +46,8 @@
 <!ENTITY sample.tagline        "This is your tagline.">
 <!ENTITY newline.desc          "(Typing \n enters a carriage return)">
 
+<!ENTITY appearance.label      "Appearance">
+
 <!ENTITY treeMultiline.label   "Multi-line">
 <!ENTITY prefMultiline.label   "TagZilla: Multi-line taglines">
 

@@ -1,0 +1,240 @@
+<?xml version="1.0"?> 
+
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on September 14, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU General Public License Version 2 or later (the
+ * "GPL"), in which case the provisions of the GPL are applicable
+ * instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of the GPL and not to
+ * allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by
+ * the GPL.  If you do not delete the provisions above, a recipient
+ * may use your version of this file under either the MPL or the
+ * GPL.
+   -->
+
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % identityDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" >
+%identityDTD;
+]>
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="parent.initPanel( panel ); onLoad()"
+      onunload="onUnload()"
+      headertitle="&prefMain.label;">
+
+<script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+<script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+<script type="application/x-javascript">
+  <![CDATA[
+    var panel = "chrome://tagzilla/content/pref/pref-tagzilla-mini.xul";
+    var _elementIDs = [ "tzPref-defaultFile",
+                        "tzPref-defaultSave",
+                        "tzPref-textkey",
+                        "tzPref-convNewline",
+                        "tzPref-clipPrefix",
+                        "tzPref-clipSuffix",
+                        "tzPref-textPick"];
+    var clipSample;
+    var clipPrefix;
+    var clipSuffix;
+    var sampleText;
+
+    function onLoad() {
+      try {
+        include('chrome://jslib/content/io/fileUtils.js');
+      }
+      catch(ex) {
+        parent.document.getElementById("tagzilla").setAttribute("container","false");
+        var page=document.firstChild;
+
+        for(var i=0; i<page.childNodes.length; i++) {
+          if(page.childNodes[i].getAttribute("id") != "noJSlib")
+            page.childNodes[i].setAttribute("collapsed","true");
+        }
+        return;
+      }
+      document.getElementById("noJSlib").setAttribute("collapsed","true");
+      parent.document.getElementById("tagzilla").setAttribute("open","true");
+
+      clipSample = document.getElementById("clipSample");
+      clipPrefix = document.getElementById("tzPref-clipPrefix");
+      clipSuffix = document.getElementById("tzPref-clipSuffix");
+      sampleText = clipSample.getAttribute("value");
+
+      onClipUpdate();
+    }
+
+    function onUnload() {
+    }
+
+    function onClipUpdate() {
+      clipSample.value=clipPrefix.value.replace(/\\n/g,"\n")+
+                       sampleText+
+                       clipSuffix.value.replace(/\\n/g,"\n");
+    }
+
+    function pickFile(aTarget) {
+      try { 
+        var fName = txtFilePicker(getText("chooseFile"),0);
+        if(fName==null) {
+        }
+        else {
+          var fUtils = new FileUtils();
+          var aPath = fUtils.urlToPath(fName);
+          aTarget.value=aPath;
+        }
+      }
+      catch(e) {dump(e+'\n');}
+    }
+
+    function checkTextPrefs() {
+      var textAuto = document.getElementById("tzPref-textkey");
+      var textPick = document.getElementById("tzPref-textPick");
+      if(textAuto.getAttribute("checked")) {
+        textPick.removeAttribute("disabled");
+      }
+      else {
+        textPick.setAttribute("disabled","true");
+      }
+    }
+
+  ]]>
+</script>
+
+  <groupbox orient="vertical" id="noJSlib">
+    <caption label="&noJSlib.caption;"/>
+    <description>&noJSlib.desc;</description>
+    <separator />
+    <hbox align="center">
+      <spring flex="1"/>
+      <text value="http://jslib.mozdev.org" class="url"
+          onclick="openUrl('http://jslib.mozdev.org')"/>
+      <spring flex="1"/>
+    </hbox>
+  </groupbox>
+
+  <groupbox orient="vertical" id="tzDefaultFile" align="start">
+    <caption label="&fileCaption.label;"/>
+    <hbox autostretch="never" align="center">
+      <textbox id="tzPref-defaultFile"
+               flex="1"
+               autostretch="never"
+               align="center"
+               size="100%"
+               prefstring="tagzilla.default.file"
+               preftype="string"
+               prefattribute="value"/>
+      <button label="&chooseFile.label;"
+              accesskey="&chooseFile.accesskey;"
+              oncommand="pickFile(document.getElementById('tzPref-defaultFile'))"/>
+    </hbox>
+    <checkbox id="tzPref-defaultSave"
+              label="&saveDefault.label;"
+              accesskey="&saveDefault.accesskey;"
+              prefstring="tagzilla.default.autosave"
+              preftype="bool"
+              prefattribute="checked"/>
+  </groupbox>
+  <groupbox orient="vertical" id="tzTextboxes" align="start">
+    <caption label="&textarea.caption;"/>
+    <vbox>
+      <checkbox id="tzPref-textkey"
+                label="&textkey.label;"
+                accesskey="&textkey.accesskey;"
+                prefstring="tagzilla.textbox.trapkey"
+                preftype="bool"
+                onclick="setTimeout(checkTextPrefs,10)"
+                prefattribute="checked"/>
+      <hbox>
+        <text class="label" value="  "/>
+        <checkbox id="tzPref-textPick"
+                  label="&textPick.label;"
+                  accesskey="&textPick.accesskey;"
+                  prefstring="tagzilla.textbox.pick"
+                  preftype="bool"
+                  prefattribute="checked"/>
+      </hbox>
+      <description disabled="true">&needRestart.label;</description>
+    </vbox>
+  </groupbox>
+
+  <groupbox orient="vertical" id="tzClipboardPrefs" align="start">
+    <caption label="&appearance.label;"/>
+    <checkbox id="tzPref-convNewline"
+              label="&convNewline.label;"
+              accesskey="&convNewline.accesskey;"
+              prefstring="tagzilla.newline.convert"
+              preftype="bool"
+              prefattribute="checked"/>
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row align="center">
+          <text class="label"
+                accesskey="&clipPrefix.accesskey;"
+                value="&prefix.label;"
+                for="tzPref-clipPrefix"/>
+          <textbox id="tzPref-clipPrefix"
+                   size="100%"
+                   oninput="onClipUpdate()"
+                   accesskey="&clipPrefix.accesskey;"
+                   flex="1"
+                   preftype="string"
+                   prefstring="tagzilla.clipboard.prefix"
+                   prefattribute="value"/>
+        </row>
+        <row align="center">
+          <text class="label"
+                accesskey="&clipSuffix.accesskey;"
+                value="&suffix.label;"
+                for="tzPref-clipSuffix"/>
+          <textbox id="tzPref-clipSuffix"
+                   size="100%"
+                   oninput="onClipUpdate()"
+                   accesskey="&clipSuffix.accesskey;"
+                   flex="1"
+                   preftype="string"
+                   prefstring="tagzilla.clipboard.suffix"
+                   prefattribute="value"/>
+        </row>
+      </rows>
+    </grid>
+    <vbox>
+      <textbox multiline="true" readonly="true" flex="1" size="100%"
+        oninput="onClipUpdate()" rows="3" cols="25"
+        wrap="off" value="&sample.tagline;" id="clipSample"/>
+    </vbox>
+    <description disabled="true">&newline.desc;</description>
+  </groupbox>
+
+</page>

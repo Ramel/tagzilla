@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!--
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License") you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Original Code in this file was released on September 14, 2002
+ *
+ * Unless otherwise stated, the Initial Developer of the
+ * Original Code is David Perry.  Portions created by David Perry are
+ * Copyright (C) 2002 David Perry.  All rights reserved.
+ *
+ * Contributor(s):
+ *   David Perry <d.perry@utoronto.ca> (Original Author)
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU General Public License Version 2 or later (the
+ * "GPL"), in which case the provisions of the GPL are applicable
+ * instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of the GPL and not to
+ * allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by
+ * the GPL.  If you do not delete the provisions above, a recipient
+ * may use your version of this file under either the MPL or the
+ * GPL.
+-->
+
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
+%tagzillaDTD;
+]>
+
+<overlay id="tagzillaPhoenixOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  onload="tzOverlayLoad()">
+
+  <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+  <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaNavigatorOverlay.js"/>
+  <script type="application/x-javascript">
+    <![CDATA[
+      window.addEventListener("load",tzOverlayLoad,true);
+
+      function toTagZilla(aAction) {
+        return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
+          "_blank", "chrome,all,dialog", aAction, document);
+      }
+
+      function tzOverlayLoad() {
+        window.removeEventListener("load",tzOverlayLoad,true);
+        // initialize default preferences
+        readMyPref("tagzilla.default.file","string","");
+        readMyPref("tagzilla.default.autosave","bool",true);
+        readMyPref("tagzilla.clipboard.prefix","string","");
+        readMyPref("tagzilla.clipboard.suffix","string","");
+        readMyPref("tagzilla.newline.convert","bool",true);
+        readMyPref("tagzilla.textbox.trapkey","bool",true);
+        readMyPref("tagzilla.textbox.pick","bool",false);
+        readMyPref("tagzilla.multiline.file","bool",false);
+        readMyPref("tagzilla.multiline.delimiter","string","%");
+      }
+
+      function tzStealTagline() {
+        var focusedWindow = document.commandDispatcher.focusedWindow;
+        if (focusedWindow == window)
+          focusedWindow = _content;
+        var docCharset = null;
+        if (focusedWindow)
+          docCharset = "charset=" + focusedWindow.document.characterSet;
+        var stolenTag = focusedWindow.__proto__.getSelection.call(focusedWindow);
+        
+        window.openDialog("chrome://tagzilla/content/tagzillaSteal.xul",
+          "_blank", "chrome,all,dialog", stolenTag);
+      }
+
+    ]]>
+  </script>
+
+  <keyset>
+    <key id="key_tagzilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
+         key="&tagzilla.keybinding;" modifiers="&tagzilla.keymods;"/>
+  </keyset>
+
+  <menupopup id="menu_FilePopup">
+    <menuseparator/>
+    <menuitem id="tasksMenuTagZilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
+      class="menuitem-iconic menu-iconic icon-tagzilla16"
+      key="key_tagzilla" label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
+  </menupopup>
+
+  <popup id="contentAreaContextMenu"
+         onpopupshown="gContextMenu.showItem('tagzilla-context',
+         gContextMenu.isTextSelected);">
+    <menuitem id="tagzilla-context" insertafter="context-sep-properties"
+              class="menuitem-iconic menu-iconic icon-tagzilla16"
+              label="&tzSteal.label;" accesskey="&tzSteal.accessKey;"
+              oncommand="tzStealTagline()"/>
+  </popup>
+
+</overlay>
