@@ -85,7 +85,7 @@
                prefattribute="value"/>
       <button label="&chooseFile.label;"
               accesskey="&chooseFile.accesskey;"
-              oncommand="pickFile()"/>
+              oncommand="pickFile(document.getElementById('tzPref-defaultFile'))"/>
     </hbox>
     <checkbox id="tzPref-defaultSave"
               label="&saveDefault.label;"
@@ -101,6 +101,17 @@
       <menulist id="msgIdentity" label="..." flex="1"><!--onCommand="popupCommand()"-->
         <menupopup id="msgIdentityPopup"/>
       </menulist>
+    </hbox>
+    <hbox autostretch="never" align="center">
+      <text class="label" value="&mailFile.label;"/>
+      <textbox id="mailFile"
+               flex="1"
+               autostretch="never"
+               align="center"
+               size="100%"/>
+      <button label="&chooseFile.label;"
+              accesskey="&chooseFile.accesskey;"
+              oncommand="pickFile(document.getElementById('mailFile'))"/>
     </hbox>
     <vbox>
     <checkbox id="mailAuto"

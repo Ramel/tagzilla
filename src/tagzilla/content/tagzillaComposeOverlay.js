@@ -74,7 +74,8 @@ function tzComposeLoad() {
 function tzSendButton(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
-    var tFile = readMyPref("tagzilla.default.file","string","");
+    var tFile = readMyPref(prefPrefix+".mailFile","string","");
+    if(tFile=="") tFile = readMyPref("tagzilla.default.file","string","");
     if(readMyPref(prefPrefix+".mailPick","bool",false)) {
       try {
         var tag = tzRandTaglineFromFile(tFile);
@@ -100,6 +101,7 @@ function tzSendButton(aCmd) {
       }
     }
     else {
+      document.firstChild.setAttribute("tzPrefPrefix",prefPrefix); // hack, but it works
       tzCmd=aCmd;
       tagzillaWindow=toTagZilla(aCmd);
       tagzillaWindow.addEventListener("unload",tzPickedTagline, true);

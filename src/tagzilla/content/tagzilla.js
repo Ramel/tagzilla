@@ -111,7 +111,14 @@ function tzOnLoad() {
     insButton.setAttribute("label",getText("clipboardLabel"));
   }
 
-  var tFile = readMyPref("tagzilla.default.file","string","");
+  var tFile = "";
+  if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
+    var prefPrefix = tzDoc.firstChild.getAttribute("tzPrefPrefix");
+    tFile = readMyPref(prefPrefix+".mailFile","string","");
+  }
+  if(tFile == "") {
+    tFile = readMyPref("tagzilla.default.file","string","");
+  }
   if(tFile == "") {
     loadList();
   }
@@ -203,8 +210,22 @@ function tzExit() {
   if(notSaved==0 && !saveList()) return false;  // save
 
   if(readMyPref("tagzilla.default.autosave","bool",true)) {
-    writePref("string", "tagzilla.default.file",
-      document.getElementById("tzListHead").getAttribute("label"));
+    if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
+      var prefPrefix = tzDoc.firstChild.getAttribute("tzPrefPrefix");
+      // only overwrite the pref it it's not blank (meaning use the default)
+      if(readMyPref(prefPrefix+".mailFile","string","")=="") {
+        writePref("string", "tagzilla.default.file",
+          document.getElementById("tzListHead").getAttribute("label"));
+      }
+      else {
+        writePref("string", prefPrefix+".mailFile",
+          document.getElementById("tzListHead").getAttribute("label"));
+      }
+    }
+    else {
+      writePref("string", "tagzilla.default.file",
+        document.getElementById("tzListHead").getAttribute("label"));
+    }
   }
   window.close();
 }

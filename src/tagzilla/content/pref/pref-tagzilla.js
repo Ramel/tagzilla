@@ -84,6 +84,8 @@ function onLoad() {
 ////////////////////////////////////////////////////////////////////////////////
 function onUnload() {
   clearInterval(popupTimer);
+  writeSettings();
+
 
   var idStr = gIdentities[popupCurIndex].key;
   writePref("bool",String("tagzilla."+idStr+".mailAuto"),
@@ -150,10 +152,10 @@ function FillIdentityListPopup(popup)
 ////////////////////////////////////////////////////////////////////////////////
 // pickFile
 //
-// Parameters: none
+// Parameters: aTarget: textbox to hold the value
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
-function pickFile() {
+function pickFile(aTarget) {
   try { 
     var fName = txtFilePicker(getText("chooseFile"),0);
     if(fName==null) {
@@ -161,7 +163,7 @@ function pickFile() {
     else {
       var fUtils = new FileUtils();
       var aPath = fUtils.urlToPath(fName);
-      document.getElementById("tzPref-defaultFile").value=aPath;
+      aTarget.value=aPath;
     }
   }
   catch(e) {dump(e+'\n');}
@@ -202,6 +204,29 @@ function checkTextPrefs() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// writeSettings
+//
+// Parameters: none
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function writeSettings() {
+  var idStr;
+  if(popupCurIndex!=null) {
+    var mailAuto = document.getElementById("mailAuto");
+    var mailPick = document.getElementById("mailPick");
+    var mailFile = document.getElementById("mailFile");
+
+    var idStr = gIdentities[popupCurIndex].key;
+    writePref("bool",String("tagzilla."+idStr+".mailAuto"),
+      Boolean(mailAuto.hasAttribute("checked")));
+    writePref("bool",String("tagzilla."+idStr+".mailPick"),
+      Boolean(mailPick.hasAttribute("checked")));
+    writePref("string",String("tagzilla."+idStr+".mailFile"),
+      mailFile.value);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // popupCommand
 //
 // Parameters: none
@@ -211,16 +236,10 @@ function popupCommand() {
   if(popupCurIndex != gIDpopup.selectedIndex) {
     var mailAuto = document.getElementById("mailAuto");
     var mailPick = document.getElementById("mailPick");
+    var mailFile = document.getElementById("mailFile");
 
-    var idStr;
-    if(popupCurIndex!=null) {
-      // save the old account settings
-      var idStr = gIdentities[popupCurIndex].key;
-      writePref("bool",String("tagzilla."+idStr+".mailAuto"),
-        Boolean(mailAuto.hasAttribute("checked")));
-      writePref("bool",String("tagzilla."+idStr+".mailPick"),
-        Boolean(mailPick.hasAttribute("checked")));
-    }
+    // save the old account settings
+    writeSettings();
 
     // load the new account settings
     popupCurIndex = gIDpopup.selectedIndex;
@@ -236,6 +255,8 @@ function popupCommand() {
       mailPick.setAttribute("checked","true");
     else
       mailPick.removeAttribute("checked");
+
+    mailFile.value = readMyPref("tagzilla."+idStr+".mailFile","string","");
 
     // update checkboxes
     setTimeout(checkMailPrefs,10);
