@@ -48,10 +48,11 @@
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaComposeOverlay.js"/>
   <script type="application/x-javascript">
   <![CDATA[
-    window.addEventListener("load",tzComposeLoad,true);
+    window.addEventListener("load",tzFakeLoad,true);
   ]]>
   </script>
 
+  <!-- These aren't used anymore; see tzComposeLoad() in tagzillaComposeOverlay.js
   <commandset id="composeCommands">
     <command id="cmd_sendNow" oncommand="tzSendButton('cmd_sendNow');"/>
     <command id="cmd_sendLater" oncommand="tzSendButton('cmd_sendLater');"/>
@@ -59,6 +60,7 @@
     <command id="cmd_sendWithCheck" oncommand="tzSendButton('cmd_sendWithCheck');"/>
     <command id="cmd_sendTagZilla" oncommand="tzSendButton('cmd_sendButton');"/>
   </commandset>
+  -->
 
   <keyset id="editorKeys">
     <key id="key_tagzilla_mail" observes="cmd_tagzilla_mail"

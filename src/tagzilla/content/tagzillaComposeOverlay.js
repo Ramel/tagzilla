@@ -36,42 +36,61 @@
 ////////////////////////////////////////////////////////////////////////////////
 var tagzillaWindow;     // reference to the TagZilla window
 var tzCmd;              // stores the mail command used (eg, cmd_sendButton)
-var enigButton;         // reference to the EnigSend button provided by EnigMail
 var haveJSlib = true;   // whether JSLib is installed
+var tzCmdActions;       // Array storing the send commands we're overriding
 //  gCurrentIdentity;   // from parent window
+var tzTimer;            // hold timer of setTimeout so it doesn't get set off prematurely
 
 ////////////////////////////////////////////////////////////////////////////////
-// tzComposeLoad
+// tzFakeLoad
 //
 // Parameters: none
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
-function tzComposeLoad() {
-  window.removeEventListener("load",tzComposeLoad,true);
+function tzFakeLoad() {
+  window.removeEventListener("load",tzFakeLoad,true);
+  tzTimer=setTimeout(tzComposeLoad, 1000, window);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// tzComposeLoad
+//
+// Parameters:
+//   aWin: the window whose variables are to be set
+// Returns: nothing
+////////////////////////////////////////////////////////////////////////////////
+function tzComposeLoad(aWin) {
   try {
     include('chrome://jslib/content/io/file.js');
   }
   catch(ex) {
-    alert(getText("noJSlib"));
-    haveJSlib = false;
+    //alert(getText("noJSlib"));
+    aWin.haveJSlib = false;
     return;
   }
-  enigButton = document.getElementById("button-enigmail-send");
-  if(enigButton) {
-    var origCmd = enigButton.getAttribute("command");
-    enigButton.setAttribute("command","cmd_sendTagZilla");
-    document.getElementById("button-send").setAttribute("command","cmd_sendTagZilla");
+  /*
+     The following method of overriding the commands was found in EnigMail.
+     A bit ironic, considering I'm doing this to be able to coexist with EnigMail.
+     Check them out: http://enigmail.mozdev.org
+  */
+  aWin.tzCmdActions = new Object();
+  var cmdIDs = ["cmd_sendButton", "cmd_sendNow", "cmd_sendWithCheck", "cmd_sendLater"];
+  for (var i=0; i<cmdIDs.length; i++) {
+    var id=cmdIDs[i];
+    var el=aWin.document.getElementById(id);
+    aWin.tzCmdActions[id]=el.getAttribute("oncommand");
+    el.setAttribute("oncommand","tzSendCmd('"+id+"')");
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// tzSendButton
+// tzSendCmd
 //
 // Parameters:
 //  aCmd: the mail command intended to be run
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
-function tzSendButton(aCmd) {
+function tzSendCmd(aCmd) {
   var prefPrefix = "tagzilla."+gCurrentIdentity.key;
   if(haveJSlib && readMyPref(prefPrefix+".mailAuto","bool",true)) {
     var tFile = readMyPref(prefPrefix+".mailFile","string","");
@@ -89,10 +108,7 @@ function tzSendButton(aCmd) {
           controller.doCommand('cmd_moveBottom');
           msgPane.editorShell.InsertText(prefix+tag+suffix);
         }
-        if(enigButton)
-          enigSendCommand(aCmd);
-        else
-          goDoCommand(aCmd);
+        eval(tzCmdActions[aCmd]);
       }
       catch(ex) {
         //alert(getText("cantRead"));
@@ -108,10 +124,7 @@ function tzSendButton(aCmd) {
     }
   }
   else {
-    if(enigButton)
-      enigSendCommand(aCmd);
-    else
-      goDoCommand(aCmd);
+    eval(tzCmdActions[aCmd]);
   }
 }
 
@@ -123,9 +136,5 @@ function tzSendButton(aCmd) {
 ////////////////////////////////////////////////////////////////////////////////
 function tzPickedTagline() {
   tagzillaWindow.removeEventListener("unload", tzPickedTagline, true);
-  dump("enigButton = "+enigButton+"!\n");
-  if(enigButton)
-    enigSendCommand(tzCmd);
-  else
-    goDoCommand(tzCmd);
+  eval(tzCmdActions[tzCmd]);
 }

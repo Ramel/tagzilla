@@ -45,6 +45,7 @@
 ]>
 
 <window id="tagzilla"
+  windowtype="tagzilla"
   title="&tzWindow.title;"
   orient="vertical"
   autostretch="always"
