@@ -36,6 +36,10 @@ Mode.  This means that, when you finally select a tagline, it is automatically
 tacked on to the end of your message.<br><i>(Note: it will be tacked on <em>after</em> the
 signature placed there by Mozilla, if you use one.)</i></p>
 
+<p>Starting with TagZilla 0.025, you can insert taglines directly into textboxes
+without having to go through the clipboard.  Just make sure the text box is focused
+(that is, the cursor is there and you can type in it), and press <em>Ctrl-T</em>.</p>
+
 <h5><a name="basics">Basic Usage</a></h5>
 <p>When you start TagZilla, it will open a file picker, where you can choose a
 tagline file to use (unless you specified a default tagline file in the
@@ -62,7 +66,7 @@ button, discussed <a href="#list">below</a>.</p>
 
 <h5><a name="list">Tagline Management</a></h5>
 
-<p>To the left of the text box are four useful buttons:
+<p>To the left of the text box, or above it in recent versions, are four useful buttons:
 </p><ul>
 <li><img src="tz-rand.png" width="16" height="16" alt="T?"> <em>Select</em> a random
 tagline.</li>
@@ -79,10 +83,10 @@ that will be grabbed when you exit TagZilla.</p>
 <p>At the top of the window is the <em>List</em> menu.  It has three useful options:
 <em>Load List</em>, <em>Save List</em>, and <em>Sort List</em>.  Their functions
 are self-explanatory.  However, be warned that <em>sorting a long list can take
-a long time</em>.</p>
+a long time</em> if you're using an older version of TagZilla (0.011 or below).</p>
 
 <h5><a name="prefs">TagZilla Preferences</a></h5>
-<p>TagZilla has two preference panels.  These can be accessed by the Preferences
+<p>TagZilla has three preference panels.  These can be accessed by the Preferences
 button within TagZilla, or elsewhere in Mozilla by <em>Edit | Preferences</em>.</p>
 <p>The main TagZilla pref panel has the following settings:
 </p><ul>
@@ -91,6 +95,13 @@ when TagZilla starts up.  Set it to blank to be prompted each time.</li>
 <li><b>Set this default to the last loaded tagline file.</b> When TagZilla closes,
 whichever file is currently open will be used as the default tagline file
 for the next time TagZilla starts, unless you clear this checkbox.</li>
+<li><b>Ctrl-T within a textarea inserts a tagline.</b> If you have TagZilla 0.025
+or higher, you can insert a tagline into a text box as <a href="#invocation">described
+above</a>.  However, this feature comes with a slight performance hit (~2% increase
+in page load times, YMMV).  You can turn off this feature, but you need to restart
+Mozilla for it to take effect.</li>
+<li><b>...without opening TagZilla Window.</b> If you just want a random tagline when
+you press Ctrl-T, check this box.</li>
 </ul>
 <p>Starting with TagZilla 0.014, these next few settings can be set differently
 for each of your mail accounts:</p>
@@ -105,12 +116,22 @@ you send, without the inconvenience of actually having to choose one yourself.</
 </ul><p>
 <p>The Formatting pref panel lets you choose how your tagline will appear when you
 use it.  Type in one prefix and suffix to surround your tagline when it's inserted
-in Composer, and another for when it's copied to the clipboard.  The text boxes
+in Composer, and another for when it's copied to the clipboard or inserted in text
+boxes.  The sample text boxes
 at the bottom of the pref panel show you how it will look.</p>
 <p>Note that entering "\n" will insert a carriage return in both Composer <em>and</em>
 in the clipboard.  If you use version 0.008 or later, you also have the option of
 having "\n" become a carriage return <em>within a tagline</em>.  Simply check or
 uncheck the box at the top of the pref panel.</p>
+<p>The Multi-Line pref panel, which debuted in 0.025, gives a brief explanation of
+how TagZilla determines if more than one line should be used for a tagline. It's
+fairly smart, but it needs your help.  Specifically, there must be a standard
+text string inserted between taglines in your tagline file, or else it will be
+read as a bunch of one-liners.  The default text string is a "%" symbol all by
+itself on a line.  This standard comes from the <tt>fortune(6)</tt> file format.</p>
+<p>Fortunately, if you want to convert your tagline files over, it's very simple.
+Simply set the "Save in multiple-line format" option on this pref panel.  Then
+open TagZilla, load your tagline file, and save it again.</p>
 
 <h5><a name="theft">Tagline Theft</a></h5>
 <p>Starting with TagZilla 0.005, you can now <em>steal taglines</em> you like from
