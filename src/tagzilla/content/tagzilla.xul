@@ -34,6 +34,7 @@
 -->
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
 <?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
 <?xul-overlay href="chrome://communicator/content/communicatorOverlay.xul"?>
@@ -58,6 +59,14 @@
   <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzilla.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
+
+  <commandset id="taglineCmds">
+    <command id="tzRand" oncommand="selRandTagline()"/>
+    <command id="tzAdd" oncommand="addTagline(textBox.value, true)"/>
+    <command id="tzModify" oncommand="changeTagline(textBox.value)"/>
+    <command id="tzDel" oncommand="delTaglines()"/>
+
+  </commandset>
   <toolbox>
     <menubar id="tzMenuBar">
       <menu id="menu_List" label="&listMenu.label;" accesskey="&listMenu.accessKey;">
@@ -91,58 +100,21 @@
     </splitter>
 -->
     <vbox flex="1" width="400" persist="width">
-      <hbox autostretch="never" flex="1" height="64" persist="height">
-        <vbox flex="1">
-          <hbox>
-          <toolbarbutton id="tzRand" flex="0"
-            label="&randButton.label;" tooltiptext="&randButton.tooltip;"
-            accesskey="&randButton.accessKey;" oncommand="selRandTagline()">
-            <image src="chrome://tagzilla/content/tz-rand.png"/>
-          </toolbarbutton>
-          <deck id="tzAdd">
-            <toolbarbutton id="tzAddEn" flex="0"
-              label="&addButton.label;" tooltiptext="&addButton.tooltip;"
-              accesskey="&addButton.accessKey;" oncommand="addTagline(textBox.value, true)">
-                <image src="chrome://tagzilla/content/tz-add.png"/>
-            </toolbarbutton>
-            <toolbarbutton id="tzAddDis" flex="0" disabled="true"
-              label="&addButton.label;" tooltiptext="&addButton.tooltip;"
-              accesskey="&addButton.accessKey;">
-                <image src="chrome://tagzilla/content/tz-add-dis.png"/>
-            </toolbarbutton>
-          </deck>
-          <deck id="tzModify">
-            <toolbarbutton id="tzModifyEn" flex="0"
-              label="&modButton.label;" tooltiptext="&modButton.tooltip;"
-              accesskey="&modButton.accessKey;"
-              oncommand="changeTagline(textBox.value)">
-                <image src="chrome://tagzilla/content/tz-mod.png"/>
-            </toolbarbutton>
-            <toolbarbutton id="tzModifyDis" flex="0" disabled="true"
-              label="&modButton.label;" tooltiptext="&modButton.tooltip;"
-              accesskey="&modButton.accessKey;">
-                <image src="chrome://tagzilla/content/tz-mod-dis.png"/>
-            </toolbarbutton>
-          </deck>
-          <deck id="tzDel">
-            <toolbarbutton id="tzDelEn" flex="0"
-              label="&delButton.label;" tooltiptext="&delButton.tooltip;"
-              accesskey="&delButton.accessKey;"
-              oncommand="delTaglines()">
-                <image src="chrome://tagzilla/content/tz-del.png"/>
-            </toolbarbutton>
-            <toolbarbutton id="tzDelDis" flex="0" disabled="true"
-              label="&delButton.label;" tooltiptext="&delButton.tooltip;"
-              accesskey="&delButton.accessKey;">
-                <image src="chrome://tagzilla/content/tz-del-dis.png"/>
-            </toolbarbutton>
-          </deck>
-        </hbox>
-        <textbox id="tagline" flex="1" autostretch="never" width="100%"
-          changed="false" oninput="taglineChanged(true)"
-          height="54" persist="height" multiline="true"/>
-        </vbox>
-      </hbox>
+      <toolbox autostretch="never">
+        <toolbar id="taglineBtns">
+          <toolbarbutton id="tzRandBtn" command="tzRand"
+            label="&randButton.label;" tooltiptext="&randButton.tooltip;"/>
+          <toolbarbutton id="tzAddBtn" command="tzAdd"
+            label="&addButton.label;" tooltiptext="&addButton.tooltip;"/>
+          <toolbarbutton id="tzModifyBtn" command="tzModify"
+            label="&modButton.label;" tooltiptext="&modButton.tooltip;"/>
+          <toolbarbutton id="tzDelBtn" command="tzDel"
+            label="&delButton.label;" tooltiptext="&delButton.tooltip;"/>
+        </toolbar>
+      </toolbox>
+      <textbox id="tagline" flex="1" autostretch="never" width="100%"
+        changed="false" oninput="taglineChanged(true)"
+        height="54" persist="height" multiline="true"/>
       <splitter/>
       <tree id="tzListBox" flex="1" seltype="multiple" hidecolumnpicker="false"
         enableColumnDrag="true"

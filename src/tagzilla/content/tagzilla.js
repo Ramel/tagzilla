@@ -700,13 +700,10 @@ function showAboutDialog() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function disableButton(aBut, aDis) {
-  if(aBut && (aBut==addButton || aBut==delButton || aBut==modButton)) {
-    if(aDis) {
-      aBut.selectedIndex=1;
-    }
-    else {
-      aBut.selectedIndex=0;
-    }
-  }
+  if( aBut )
+    if( aDis )
+      aBut.setAttribute( "disabled", "true" );
+    else
+      aBut.removeAttribute( "disabled" );
   return;
 }

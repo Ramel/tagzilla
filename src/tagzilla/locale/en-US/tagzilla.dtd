@@ -22,17 +22,17 @@
 <!ENTITY tzMail.keymods        "accel">
 
 <!ENTITY tzWindow.title        "TagZilla">
-<!ENTITY randButton.label      "?">
+<!ENTITY randButton.label      "Random">
 <!ENTITY randButton.accessKey  "R">
 <!ENTITY randButton.tooltip    "Select a random tagline from list">
-<!ENTITY addButton.label       "A">
+<!ENTITY addButton.label       "Add">
 <!ENTITY addButton.accessKey   "A">
 <!ENTITY addButton.tooltip     "Add tagline to list">
-<!ENTITY modButton.label       "M">
+<!ENTITY modButton.label       "Modify">
 <!ENTITY modButton.accessKey   "M">
 <!ENTITY modButton.tooltip     "Replace selected tagline">
-<!ENTITY delButton.label       "X">
-<!ENTITY delButton.accessKey   "X">
+<!ENTITY delButton.label       "Delete">
+<!ENTITY delButton.accessKey   "D">
 <!ENTITY delButton.tooltip     "Delete selected taglines">
 
 <!ENTITY listMenu.label        "List">

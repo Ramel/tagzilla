@@ -29,3 +29,36 @@ toolbar[iconsize="small"] #launchTagzilla:hover {
 toolbar[iconsize="small"] #launchTagzilla:active {
   -moz-image-region: rect(0px 75px 25px 50px);
 }
+
+/* Tagline modification buttons */
+#taglineBtns > toolbarbutton > .toolbarbutton-text {
+    display: none;
+}
+
+#tzRandBtn {
+    list-style-image: url("chrome://tagzilla/skin/tz-rand.png");
+}
+
+#tzAddBtn {
+    list-style-image: url("chrome://tagzilla/skin/tz-add.png");
+}
+
+#tzAddBtn[disabled] {
+    list-style-image: url("chrome://tagzilla/skin/tz-add-dis.png");
+}
+
+#tzModifyBtn {
+    list-style-image: url("chrome://tagzilla/skin/tz-mod.png");
+}
+
+#tzModifyBtn[disabled] {
+    list-style-image: url("chrome://tagzilla/skin/tz-mod-dis.png");
+}
+
+#tzDelBtn {
+    list-style-image: url("chrome://tagzilla/skin/tz-del.png");
+}
+
+#tzDelBtn[disabled] {
+    list-style-image: url("chrome://tagzilla/skin/tz-del-dis.png");
+}
