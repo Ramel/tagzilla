@@ -118,6 +118,7 @@ function onLoad() {
 
   if( parent.tzDIYdialog ) {
     // if we're our own dialog, we have to init our own prefs
+
     for (i = 0; i < _elementIDs.length; i++) {
       var curEl = document.getElementById(_elementIDs[i]);
       var prefstring = curEl.getAttribute("prefstring");
@@ -132,8 +133,9 @@ function onLoad() {
           }
         }
       }
-      else if(prefattr == "value")
+      else if(prefattr == "value") {
         curEl.value = result;
+      }
       else
         curEl.setAttribute(prefattr, result);
     }
@@ -142,6 +144,13 @@ function onLoad() {
     // Otherwise, let Mozilla handle it
     parent.initPanel("chrome://tagzilla/content/pref/tagzillaBirdPrefs.xul");
   }
+
+  // Voodoo taken from ChatZilla to make the charset picker work
+  const OSBS_CTRID = "@mozilla.org/observer-service;1";
+  const nsIObserverService = Components.interfaces.nsIObserverService;
+  var observerService =
+     Components.classes[OSBS_CTRID].getService(nsIObserverService);
+  observerService.notifyObservers(null, "charsetmenu-selected", "other");
 
   onMailUpdate();
   onClipUpdate();

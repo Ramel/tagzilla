@@ -60,6 +60,7 @@
         window.removeEventListener("load",tzOverlayLoad,true);
         // initialize default preferences
         readMyPref("tagzilla.default.file","string","");
+        readMyPref("tagzilla.file.charset","string","UTF-8");
         readMyPref("tagzilla.default.autosave","bool",true);
         readMyPref("tagzilla.mail.prefix","string","\\n-=-=-\\n... ");
         readMyPref("tagzilla.mail.suffix","string","\\n* TagZilla 0.049");

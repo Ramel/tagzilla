@@ -61,6 +61,7 @@
         window.removeEventListener("load",tzOverlayLoad,true);
         // initialize default preferences
         readMyPref("tagzilla.default.file","string","");
+        readMyPref("tagzilla.file.charset","string","UTF-8");
         readMyPref("tagzilla.default.autosave","bool",true);
         readMyPref("tagzilla.clipboard.prefix","string","");
         readMyPref("tagzilla.clipboard.suffix","string","");

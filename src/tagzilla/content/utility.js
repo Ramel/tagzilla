@@ -366,10 +366,13 @@ function tzUnescape(aStr){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// ucConverter -- a class to convert to/from unicode (hopefully)
+// ucConverter -- a class to convert to/from unicode
 //
 // Based on MessageManager() from chatzilla, by Rob Ginda
 // Used here under the terms of the GPL
+//
+// The name's a bit of a misnomer now, as it reads a pref to determine
+// what charset (UTF-8 or other) to convert to/from
 ////////////////////////////////////////////////////////////////////////////////
 function ucConverter()
 {
@@ -382,32 +385,26 @@ function ucConverter()
   this.defaultBundle = null;
   this.bundleList = new Array();
 
-  this.toUnicode = function (msg, charset) {
-    if (!charset)
-      charset = "UTF-8";
-      //return msg;
-
+  this.toUnicode = function (msg) {
+    this.charset = readMyPref("tagzilla.file.charset","string","UTF-8");
     try
     {
-      this.ucConverter.charset = charset;
+      this.ucConverter.charset = this.charset;
       msg = this.ucConverter.ConvertToUnicode(msg);
     }
     catch (ex)
     {
       tzDump ("caught exception " + ex + " converting '" + msg
-        + "' to charset " + charset);
+        + "' to charset " + this.charset);
     }
 
     return msg;
   };
 
-  this.fromUnicode = function (msg, charset) {
-    if (!charset)
-      charset = "UTF-8";
-      //return msg;
-
-    if (charset != this.ucConverter.charset)
-      this.ucConverter.charset = charset;
+  this.fromUnicode = function (msg) {
+    this.charset = readMyPref("tagzilla.file.charset","string","UTF-8");
+    if (this.charset != this.ucConverter.charset)
+      this.ucConverter.charset = this.charset;
 
     try
     {
@@ -425,7 +422,7 @@ function ucConverter()
     catch (ex)
     {
       tzDump ("caught exception " + ex + " converting '" + msg
-        + "' to charset " + charset);
+        + "' to charset " + this.charset);
     }
 
     return msg;

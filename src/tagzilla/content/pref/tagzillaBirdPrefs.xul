@@ -55,6 +55,7 @@
   <![CDATA[
     var _elementIDs = [ "tzPref-defaultFile",
                         "tzPref-defaultSave",
+                        "tzPref-fileCharset",
                         "tzPref-textkey",
                         "tzPref-convNewline",
                         "tzPref-mailPrefix",
@@ -113,6 +114,20 @@
                     prefstring="tagzilla.default.autosave"
                     preftype="bool"
                     prefattribute="checked"/>
+          <hbox autostretch="never" align="center">
+            <caption label="&charsetCaption.label;"
+              accesskey="&charsetCaption.accesskey;"/>
+            <menulist id="tzPref-fileCharset"
+                ref="NC:DecodersRoot" datasources="rdf:charset-menu"
+                prefstring="tagzilla.file.charset" preftype="string"
+                prefattribute="value">
+              <template>
+                <menupopup>
+                  <menuitem label="rdf:http://home.netscape.com/NC-rdf#Name" value="..." uri="rdf:*"/>
+                </menupopup>
+              </template>
+            </menulist>
+          </hbox>
         </groupbox>
 
         <groupbox orient="vertical" id="tzMultiLine" align="start">
