@@ -60,6 +60,13 @@
 <!ENTITY tzAbout.title         "About TagZilla">
 <!ENTITY author.label          "Created By">
 <!ENTITY home.label            "Home page">
-<!ENTITY aClose.label          "Cool">
-<!ENTITY aClose.accessKey      "C">
+<!ENTITY aClose.label          "Alright, already">
+<!ENTITY aClose.accessKey      "A">
 
+<!ENTITY madprops.label        "With Thanks To">
+<!ENTITY mozdev.label          "mozdev.org">
+<!ENTITY mozdev.desc           "for the hosting, and its developers for the help">
+<!ENTITY mozgest.label         "MozGest">
+<!ENTITY mozgest.desc          "for the inspiration for the unified prefs page">
+<!ENTITY mozillazine.label     "MozillaZine Forums">
+<!ENTITY mozillazine.desc      "for help with my questions">
