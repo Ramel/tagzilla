@@ -95,6 +95,8 @@ function smLinkAdded(evt){
     return;
 
   var menu = document.getElementById("stylesheets-menu-popup");
+  if(menu.getElementsByAttribute("label", element.title).length > 0)
+    return;
   var item = document.createElement("menuitem");
   item.setAttribute("label",element.title);
   item.setAttribute("type","radio");
