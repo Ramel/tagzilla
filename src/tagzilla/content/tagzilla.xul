@@ -73,14 +73,12 @@
         </menupopup>
       </menu>
       <spring flex="1"/>
-      <menu id="openPrefs" 
-            label="&prefs.label;" accesskey="&prefs.accessKey;">
-        <menupopup onpopupshowing="goPreferences('tagzilla.xul','chrome://tagzilla/content/pref/pref-tagzilla.xul','tagzilla');return false"/>
-      </menu>
-      <menu id="aboutTagzilla" onclick="showAboutDialog()" oncommand="showAboutDialog()"
-            label="&about.label;" accesskey="&about.accessKey;">
-        <menupopup onpopupshowing="showAboutDialog();return false"/>
-      </menu>
+      <toolbarbutton id="openPrefs" label="&prefs.label;"
+                     accesskey="&prefs.accessKey;"
+                     oncommand="goPreferences('tagzilla.xul','chrome://tagzilla/content/pref/pref-tagzilla.xul','tagzilla')"/>
+      <toolbarbutton id="aboutTagzilla" label="&about.label;"
+                     accesskey="&about.accessKey;"
+                     oncommand="showAboutDialog()"/>
     </menubar>
   </toolbox>
   <hbox flex="1">
