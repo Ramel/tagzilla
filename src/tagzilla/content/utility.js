@@ -168,7 +168,7 @@ function writePref( prefType, prefString, prefValue )
         }
       default:
         {
-          alert( 'Error: Unsupported pref type used!' );
+          dump( 'writePref: Unsupported pref type "'+prefType+'" used\n' );
         }
     }
   }
