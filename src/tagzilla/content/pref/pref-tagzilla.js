@@ -142,8 +142,8 @@ function FillIdentityListPopup(popup)
     var accountName = " - "+result.prettyName;
 
         var item=document.createElement('menuitem');
-        //item.setAttribute('label', identity.identityName);
-        item.setAttribute('label', result.prettyName);
+        item.setAttribute('label', identity.identityName+accountName);
+        //item.setAttribute('label', result.prettyName);
         item.setAttribute('class', 'identity-popup-item');
         item.setAttribute('accountname', accountName);
         item.setAttribute('id', identity.key);
