@@ -33,11 +33,14 @@ logComment("initInstall: " + err);
 
 var fProgram = getFolder("Program");
 var fChrome = getFolder("Chrome");
+var fIcons = getFolder("Chrome","icons");
 
 if (verifyDiskSpace(fProgram, srDest))
 {
   err = addDirectory("", gVersion, shortName, fChrome, shortName, true);
   logComment("addDirectory: " + err);
+  err = addDirectory("", "", "icons", fIcons, "", true);
+  logComment("addDirectory(2): " + err);
 
   registerChrome(CONTENT | DELAYED_CHROME, getFolder(fChrome, shortName),
     "content/");
