@@ -215,3 +215,5 @@ This tagline is true --&gt; &lt;-- This tagline is false.
 Tagline Will Self Implode -- &lt;mooB&gt;
 I just steal 'em, I don't explain 'em.
 I can trace my taglines back 8 generations
+Hey, who spilled coffee on my tagline?
+Operator out of coffee, taglines may become irrational
