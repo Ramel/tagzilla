@@ -8,8 +8,7 @@
 
   $old_error_handler = set_error_handler("myErrHandler");
   $tfile = file('http://tagzilla.mozdev.org/taglines.txt');
-  $ntags = count($tfile);
-  $rnum  = rand(1,$ntags);
+  $rnum  = array_rand($tfile);
   echo trim($tfile[$rnum]);
 ?></div>
 
