@@ -16,9 +16,9 @@
 <!ENTITY cancel.label          "Cancel">
 <!ENTITY cancel.accessKey      "C">
 
-<!ENTITY tagzilla.keybinding   "K">
+<!ENTITY tagzilla.keybinding   "J">
 <!ENTITY tagzilla.keymods      "accel, shift">
-<!ENTITY tzMail.keybinding     "K">
+<!ENTITY tzMail.keybinding     "J">
 <!ENTITY tzMail.keymods        "accel">
 
 <!ENTITY tzWindow.title        "TagZilla">
