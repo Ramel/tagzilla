@@ -54,6 +54,8 @@
                     label="&loadList.label;" accesskey="&loadList.accessKey;"/>
           <menuitem id="menu_SaveList" oncommand="saveList()"
                     label="&saveList.label;" accesskey="&saveList.accessKey;"/>
+          <menuitem id="menu_SaveListAs" oncommand="saveListAs()"
+                    label="&saveListAs.label;" accesskey="&saveListAs.accessKey;"/>
           <menuseparator/>
           <menuitem id="menu_SortList" oncommand="sortList()"
                     label="&sortList.label;" accesskey="&sortList.accessKey;"/>
@@ -122,13 +124,6 @@
   </listbox>
 
   <hbox autostretch="never">
-<!--    <button id="sortList" label="&sort.label;"
-      accesskey="&sort.accessKey;" oncommand="sortList()"/>
-    <button id="loadList" label="&load.label;"
-      accesskey="&load.accessKey;" oncommand="loadList()"/>
-    <button id="saveList" label="&save.label;"
-      accesskey="&save.accessKey;" oncommand="saveList()"/>
--->
     <spring flex="1"/>
     <button id="insert-button" label="&insert.label;" disabled="true"
       accesskey="&insert.accessKey;" default="true" oncommand="tzInsert()"/>

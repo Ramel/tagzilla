@@ -212,6 +212,36 @@ function loadTaglineFile(aUrl) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// saveTaglineFile
+//
+// Parameters:
+//  aUrl: string name of file to open, in platform-specific or file:// format
+//
+// Returns: true if list saved, false otherwise
+////////////////////////////////////////////////////////////////////////////////
+function saveTaglineFile(aUrl) {
+
+  var aFile=aUrl;
+  if(aUrl.substring(0,4)=="file") {
+    var fUtils = new FileUtils();
+    aFile = fUtils.urlToPath(aUrl);
+  }
+
+  var f = new File(aFile);
+  if(!f.open("w")) {
+    alert(getText("saveErrMsg"));
+    return false;
+  }
+  for(var i=1; i<=lBox.getRowCount(); i++) {
+    f.write(lBox.childNodes[i].firstChild.getAttribute("label")+"\n");
+  }
+  f.close();
+
+  lBox.setAttribute("changed","false");
+  return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // taglineChanged
 //
 // Parameters:
@@ -371,23 +401,35 @@ function loadList() {
 // Returns: true if list saved, false otherwise
 ////////////////////////////////////////////////////////////////////////////////
 function saveList() {
+  var fName = document.getElementById("tzListHead").getAttribute("label");
+  if(fName==null)
+    return false;
+  
+  var isSaved = saveTaglineFile(fName);
+
+  if(isSaved)
+    lBox.setAttribute("changed","false");
+
+  return isSaved;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// saveListAs
+//
+// Parameters: none
+// Returns: true if list saved, false otherwise
+////////////////////////////////////////////////////////////////////////////////
+function saveListAs() {
   var fName = txtFilePicker(getText("saveFile"),1);
   if(fName==null)
     return false;
+  
+  var isSaved = saveTaglineFile(fName);
 
-  var fUtils = new FileUtils();
-  var f = new File(fUtils.urlToPath(fName));
-  if(!f.open("w")) {
-    alert(getText("saveErrMsg"));
-    return false;
-  }
-  for(var i=1; i<=lBox.getRowCount(); i++) {
-    f.write(lBox.childNodes[i].firstChild.getAttribute("label")+"\n");
-  }
-  f.close();
+  if(isSaved)
+    lBox.setAttribute("changed","false");
 
-  lBox.setAttribute("changed","false");
-  return true;
+  return isSaved;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
