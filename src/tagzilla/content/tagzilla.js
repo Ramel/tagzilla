@@ -399,7 +399,9 @@ function saveTaglineFile(aUrl) {
   }
 
   var f = new File(aFile);
-  if(!f.open("w")) {
+  var rv = f.open("w");
+  if( (JS_LIB_VERSION >= "0.1.187" && rv != JS_LIB_OK ) ||
+      (JS_LIB_VERSION < "0.1.187" && !rv) ) {
     alert(getText("saveErrMsg"));
     return false;
   }

@@ -128,9 +128,15 @@ function doSteal() {
     else {
       oldFile += tzEscape(tagline.value)+tzNL;
     }
-    f.open("w");
-    f.write(oldFile);
-    f.close();
+    var rv = f.open("w");
+    if( (JS_LIB_VERSION >= "0.1.187" && rv != JS_LIB_OK ) ||
+        (JS_LIB_VERSION < "0.1.187" && !rv) ) {
+      alert(getText("saveErrMsg"));
+    }
+    else {
+      f.write(oldFile);
+      f.close();
+    }
   }
   catch (ex) {
     dump("doSteal: "+ex+"\n");
