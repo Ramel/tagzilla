@@ -1,6 +1,6 @@
 <!-- MAIN CONTENT -->
 <h3 class="page-header">Mozilla-SpamAssassin-HOWDID</h3>
-<a class="h3" name="#toc">Table of Contents</a>
+<a class="h3" name="toc">Table of Contents</a>
 <ul>
 <li><a href="#intro">Introduction</a></li>
 <li><a href="#start">Starting Point</a></li>
@@ -10,7 +10,7 @@
 <li><a href="#filter">Filtering out Spam</a></li>
 </ul>
 
-<a class="h3" name="#intro" href="#toc">Introduction</a>
+<a class="h3" name="intro" href="#toc">Introduction</a>
 <p>This document aims to describe how I combined the stealth ninja goodness of
 <a href="http://spamassassin.org/">SpamAssassin</a> with the sweet sugar-coated
 UI of <a href="http://mozilla.org/">Mozilla</a> Mail.  It's not intended to be
@@ -20,7 +20,7 @@ did, that perhaps you can learn from.  If you try anything you read here, you're
 doing it at your own risk; I hereby accept absolutely <b>no</b> responsibility
 for whatever you do to your computer.</p>
 
-<a class="h3" name="#start" href="#toc">Starting Point</a>
+<a class="h3" name="start" href="#toc">Starting Point</a>
 <p>Here is what I started off with:</p><ul>
 <li>A Pentium-III computer, running at 666MHz (no kidding)</li>
 <li>A reasonably fresh (less than one month old) install of
@@ -204,7 +204,7 @@ fetchmail-5.9.0-21</tt>
 <p>SpamAssassin hadn't been installed, but the package (and the packages upon which
 it depended) were all found on disc 3 of the free download of the RedHat 8.0 distro.</p>
 
-<a class="h3" name="#setupfm" href="#toc">Setting up FetchMail</a>
+<a class="h3" name="setupfm" href="#toc">Setting up FetchMail</a>
 <p><b>...to use SpamAssassin.</b> FetchMail, apparently, applies the same filtering
 mechanism as does procmail, so following Mark's instructions, I created the file
 <tt>/root/.procmailrc</tt> with these contents:</p>
@@ -229,7 +229,7 @@ and all the email waiting in both mailboxes were pulled off and moved to my
 user account's mail file (in my case, <tt>/var/spool/mail/smiley</tt> since
 <tt>smiley</tt> is my 'normal' username).</p>
 
-<a class="h3" name="#setupmoz" href="#toc">Mozilla reading Unix mail</a>
+<a class="h3" name="setupmoz" href="#toc">Mozilla reading Unix mail</a>
 <p>With my mail going to my Linux mail file, the quickest way to read it was with the
 <tt>mail(1)</tt> program.  I was able to see all the mail headers, and could tell
 that SpamAssassin had scanned my mail.  But what I really wanted was to be able to
@@ -259,7 +259,7 @@ Being "sticky" means that any user can create a file in that directory, but only
 a file's owner can read or delete it.  Once I did that, Mozilla was able to read my
 mail, just like in the good old days.</li></ul>
 
-<a class="h3" name="#ipupdown" href="#toc">Checking for Mail</a>
+<a class="h3" name="ipupdown" href="#toc">Checking for Mail</a>
 <p>FetchMail can be run as a daemon to check mailboxes at regular intervals.
 I could have just added a call to '<tt>/usr/bin/fetchmail -d 600</tt>' to one
 of my startup scripts, and it would automatically check my mail every 600 seconds.
@@ -310,7 +310,7 @@ if [ $1 == ppp0 ]; then
     killall fetchmail
     service spamassassin stop
 fi</pre>
-<a class="h3" name="#filter" href="#toc">Filtering out Spam</a>
+<a class="h3" name="filter" href="#toc">Filtering out Spam</a>
 <p>SpamAssassin doesn't actually kill spam it finds, it just flags it for you.
 You still have to tell Mozilla to filter out the stuff SpamAssassin flags.
 Fortunately, that's really simple.  In Mozilla Mail, I went to Tools | Message Filters,
