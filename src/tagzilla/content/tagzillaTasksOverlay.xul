@@ -71,7 +71,7 @@
   <menupopup id="windowPopup">
     <menuitem id="tasksMenuTagZilla" command="Tasks:TagZilla"
       class="menuitem-iconic menu-iconic icon-tagzilla16"
-      insertafter="tasksMenuAddressBook" key="key_tagzilla"
+      insertafter="tasksMenuNavigator" key="key_tagzilla"
       label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
   </menupopup>
 </overlay>
