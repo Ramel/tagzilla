@@ -32,7 +32,7 @@
 <window id="aboutTagzilla"
   title="&tzAbout.title;"
   orient="vertical"
-  width="225" height="160"
+  width="225" height="180"
   autostretch="always"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml">
