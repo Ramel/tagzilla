@@ -1,0 +1,72 @@
+<!ENTITY tagzilla.appName "TagZilla">
+<!ENTITY tagzilla.accessKey "T">
+<!ENTITY tzCommand.label "Inserer une Tagline">
+<!ENTITY tzCommand.accessKey "T">
+<!ENTITY tzSteal.title "Prendre une Tagline">
+<!ENTITY tzSteal.label "Prendre une Tagline">
+<!ENTITY tzSteal.accessKey "P">
+
+<!ENTITY tagline.label "Tagline">
+<!ENTITY tagline.accessKey "T">
+<!ENTITY saveTo.label "Sauver Tagline vers">
+<!ENTITY choose.label "Choisir Fichier...">
+<!ENTITY choose.accessKey "F">
+<!ENTITY save.label "Prendre">
+<!ENTITY save.accessKey "P">
+<!ENTITY cancel.label "Annuler">
+<!ENTITY cancel.accessKey "A">
+
+<!ENTITY tagzilla.keybinding "J">
+<!ENTITY tagzilla.keymods "accel, shift">
+<!ENTITY tzMail.keybinding "J">
+<!ENTITY tzMail.keymods "accel">
+
+<!ENTITY tzWindow.title "TagZilla">
+<!ENTITY randButton.label "?">
+<!ENTITY randButton.accessKey "R">
+<!ENTITY randButton.tooltip "Selection aléatoire de tagline dans la liste">
+<!ENTITY addButton.label "+">
+<!ENTITY addButton.accessKey "A">
+<!ENTITY addButton.tooltip "Ajoure une tagline a la liste">
+<!ENTITY modButton.label "m">
+<!ENTITY modButton.accessKey "J">
+<!ENTITY modButton.tooltip "Remplacer la tagline selectionnée">
+<!ENTITY delButton.label "X">
+<!ENTITY delButton.accessKey "X">
+<!ENTITY delButton.tooltip "Supprimer les taglines selectionnées">
+
+<!ENTITY listMenu.label "Liste">
+<!ENTITY listMenu.accessKey "L">
+<!ENTITY sortList.label "Trier la Liste">
+<!ENTITY sortList.accessKey "T">
+<!ENTITY loadList.label "Charger la Liste">
+<!ENTITY loadList.accessKey "C">
+<!ENTITY saveList.label "Enregistrer la Liste">
+<!ENTITY saveList.accessKey "E">
+<!ENTITY saveListAs.label "Enregistrer sous...">
+<!ENTITY saveListAs.accessKey "S">
+<!ENTITY insert.label "Inserer">
+<!ENTITY insert.accessKey "I">
+<!ENTITY close.label "Quitter">
+<!ENTITY close.accessKey "Q">
+
+<!ENTITY helpMenu.label "Aide">
+<!ENTITY helpMenu.accessKey "A">
+<!ENTITY prefs.label "Preferences">
+<!ENTITY prefs.accessKey "P">
+<!ENTITY about.label "A propos">
+<!ENTITY about.accessKey "A">
+
+<!ENTITY tzAbout.title "A propos de TagZilla">
+<!ENTITY author.label "Crèe Par">
+<!ENTITY home.label "Site web">
+<!ENTITY aClose.label "Ok , Prêt">
+<!ENTITY aClose.accessKey "O">
+
+<!ENTITY madprops.label "Avec remerciements A">
+<!ENTITY mozdev.label "mozdev.org">
+<!ENTITY mozdev.desc "pour l'hébergement, et à ses developpeurs pour leur aide">
+<!ENTITY mozgest.label "MozGest">
+<!ENTITY mozgest.desc "pour l'inspiration pour les prefs pages unifiées">
+<!ENTITY mozillazine.label "MozillaZine Forums">
+<!ENTITY mozillazine.desc "pour l'aide et réponses a mes questions">
