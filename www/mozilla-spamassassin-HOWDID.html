@@ -29,7 +29,9 @@ to filter, not <tt>root</tt>'s.  Also added lots of little tweaks and
 clarifications.<br>
 <b>2002-10-20</b> I'm told that Netscape 7 hides the Filter menu if you set an
 account to be of type 'movemail'.  You might want to make your filter(s) before
-you do that.<br><br>
+you do that.<br>
+<b>2002-11-01</b> Added an addendum from Mark Smitka to the
+<a href="#filter">filtering</a> section.<br><br>
 
 <a class="h3" name="start" href="#toc">Starting Point</a>
 <p>Here is what I started off with:</p><ul>
@@ -343,5 +345,41 @@ the X-Spam-Flag header.</p>
 (and as user <tt>root</tt>), but SpamAssassin is smart enough to use each user's
 settings to filter their own mail.  And since FetchMail is sending the mail to
 <tt>smiley</tt> because of the "is" in <tt>.fetchmailrc</tt>, it's all good.</p>
+<p><i>Added 2002-11-01:</i><br>
+<tt>From: Mark Smitka &lt;mrksmtka@newsguy.com&gt;<br>
+To: David Perry &lt;d.perry@utoronto.ca&gt;<br>
+Subject: Another Tweak to SpamAssassin<br><br>
+Hi David,<br><br>
+
+Something you may want to do and/or add to the document:<br><br>
+
+You can eliminate mail client filtering of spamassassin tagged spam all together if you tweak your procmailrc to divert it at that point, rather than passing it to the mail client. Getting this to work properly involved two steps:<br><br>
+
+1) Update to the latest version of spamassassin (I had problems with the version packaged with RH8)<br>
+2) Add the following (or a variation that suits you) to your procmailrc:<br><br>
+
+--------sample procmailrc-----------------<br>
+<br>
+LOGFILE=/var/log/procmaillog<br>
+LOGABSTRACT=all<br>
+VERBOSE=on<br>
+#<br>
+:0fw<br>
+| /usr/bin/spamassassin<br>
+#<br>
+:0:<br>
+* ^X-Spam-Status: Yes<br>
+spam<br>
+#<br>
+:0:<br>
+* ^Subject: [SPAM]<br>
+spam<br>
+-------------------------end sample procmailrc--------------------------<br>
+<br>
+This will divert any message identified by spamassassin as spam, based on the spamassassin header. I have the subject recipe in there as well, but that's probably redundant. In my example, spam messages will end up in the "spam" mailbox/file, instead of the mail client.  That makes life a lot nicer, as Mozilla, KDE and most linux mail clients I've tried, have no method of eliminating the "new mail" notification, even if that new mail is spam. This takes care of that. Just be sure to scan the spam file now and then to be sure something important didn't land there in error.<br>
+<br>
+Mark<br>
+</tt>
+Thanks for the tip!</p>
 <hr>
 <p>And that's it!  All done.  I hope that was as educational for you as it was for me.</p>
