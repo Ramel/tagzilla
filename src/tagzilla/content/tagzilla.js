@@ -167,7 +167,9 @@ function tzInsert() {
     var msgPane = tzDoc.getElementById("content-frame");
     if(msgPane) {
       var controller = tzDoc.commandDispatcher.getControllerForCommand('cmd_moveBottom');
-      controller.doCommand('cmd_moveBottom');
+      if(controller) {
+        controller.doCommand('cmd_moveBottom');
+      }
       msgPane.editorShell.InsertText(prefix+selTagline+suffix);
       setTimeout(tzExit, 10);
     }
