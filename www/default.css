@@ -60,7 +60,7 @@
 }
 
 #main-content ul{
- font-size: smaller;
+ /* font-size: smaller; */
  list-style-type: square;
  list-style-image: url("http://www.mozdev.org/sharedimages/bullet.gif");
  list-style-position: inside;
@@ -97,6 +97,7 @@ strong {
 p {
   text-align: justify;
   padding-right: 1em;
+  font-size: medium;
 }
 
 p:active {
