@@ -19,6 +19,7 @@
     <RDF:li resource="chrome://communicator/content/tasksOverlay.xul"/>
     <RDF:li resource="chrome://communicator/content/contentAreaContextOverlay.xul"/>
     <RDF:li resource="chrome://communicator/content/pref/preftree.xul"/>
+    <RDF:li resource="chrome://messenger/content/mailWindowOverlay.xul"/>
     <RDF:li resource="chrome://messenger/content/messengercompose/messengercompose.xul"/>
   </RDF:Seq>
 
@@ -28,6 +29,10 @@
 
   <RDF:Seq about="chrome://communicator/content/contentAreaContextOverlay.xul">
     <RDF:li>chrome://tagzilla/content/tagzillaContextOverlay.xul</RDF:li>
+  </RDF:Seq>
+
+  <RDF:Seq about="chrome://messenger/content/mailWindowOverlay.xul">
+    <RDF:li>chrome://tagzilla/content/tagzillaMailOverlay.xul</RDF:li>
   </RDF:Seq>
 
   <RDF:Seq about="chrome://messenger/content/messengercompose/messengercompose.xul">

@@ -28,7 +28,7 @@
 %tagzillaDTD;
 ]>
 
-<overlay id="tagzillaContextOverlay"
+<overlay id="tagzillaMailOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
@@ -56,10 +56,12 @@
     ]]>
   </script>
 
-  <popup id="contentAreaContextMenu"
-         onpopupshown="gContextMenu.showItem('tagzilla-context',
-         gContextMenu.isTextSelected);">
-    <menuitem id="tagzilla-context" insertafter="context-sep-properties"
+  <popup id="messagePaneContext"
+         onpopupshown="gContextMenu.showItem('tagzilla-mail-context',
+                         gContextMenu.isTextSelected);
+                       gContextMenu.showItem('messagePaneContext-sep-open',
+                         gContextMenu.isTextSelected);">
+    <menuitem id="tagzilla-mail-context" insertafter="context-copy"
               class="menuitem-iconic menu-iconic icon-tagzilla16"
               label="&tzSteal.label;" accesskey="&tzSteal.accessKey;"
               oncommand="tzStealTagline()"/>
