@@ -264,12 +264,17 @@ function openUrl(aUrl) {
 
   // if not, get the most recently used browser window
   if (!navWindow) {
-    var wm = Components.classes["@mozilla.org/rdf/datasource;1?name=window-mediator"]
-      .getService(Components.interfaces.nsIWindowMediator);
-    navWindow = wm.getMostRecentWindow("navigator:browser");
+    try {
+      var wm = Components.classes["@mozilla.org/rdf/datasource;1?name=window-mediator"]
+        .getService(Components.interfaces.nsIWindowMediator);
+      navWindow = wm.getMostRecentWindow("navigator:browser");
+    }
+    catch (ex) { }
   }
   if (navWindow) {
-    if ("loadURI" in navWindow)
+    if ("delayedOpenTab" in navWindow)
+      navWindow.delayedOpenTab(aUrl);
+    else if ("loadURI" in navWindow)
       navWindow.loadURI(aUrl);
     else
       navWindow._content.location.href = aUrl;

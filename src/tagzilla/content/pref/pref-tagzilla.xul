@@ -89,25 +89,6 @@
       catch(e) {dump(e+'\n');}
     }
 
-    function showWebPage(pageUrl) {
-      //check for an existing browser window
-      const kWindowMediatorContractID = "@mozilla.org/rdf/datasource;1?name=window-mediator";
-      const kWindowMediatorIID = Components.interfaces.nsIWindowMediator;
-      const kWindowMediator = Components.classes[kWindowMediatorContractID].getService(kWindowMediatorIID);
-      var browserWindow = kWindowMediator.getMostRecentWindow("navigator:browser");
-      if (browserWindow) {
-        try {
-          browserWindow.delayedOpenTab(pageUrl);
-        }
-        catch(e) {
-          browserWindow.loadURI(pageUrl);
-        }
-      }
-      else {
-        window.open(pageUrl);
-      }
-    }
-
     function checkMailPrefs() {
       var mailAuto = document.getElementById("tzPref-mailAuto");
       var mailPick = document.getElementById("tzPref-mailPick");
@@ -128,7 +109,7 @@
     <hbox align="center">
       <spring flex="1"/>
       <text value="http://jslib.mozdev.org" class="url"
-          onclick="showWebPage('http://jslib.mozdev.org')"/>
+          onclick="openUrl('http://jslib.mozdev.org')"/>
       <spring flex="1"/>
     </hbox>
   </groupbox>

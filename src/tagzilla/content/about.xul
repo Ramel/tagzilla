@@ -49,29 +49,9 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml">
 
+<script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
 <script type="application/x-javascript">
 <![CDATA[
-// function showWebPage originally appeared in MozGest, http://optimoz.mozdev.org
-// Used here under the terms of the MPL.
-function showWebPage(pageUrl) {
-  //check for an existing browser window
-  const kWindowMediatorContractID = "@mozilla.org/rdf/datasource;1?name=window-mediator";
-  const kWindowMediatorIID = Components.interfaces.nsIWindowMediator;
-  const kWindowMediator = Components.classes[kWindowMediatorContractID].getService(kWindowMediatorIID);
-  var browserWindow = kWindowMediator.getMostRecentWindow("navigator:browser");
-  if (browserWindow) {
-    try {
-      browserWindow.delayedOpenTab(pageUrl);
-    }
-    catch(e) {
-      browserWindow.loadURI(pageUrl);
-    }
-  }
-  else {
-    window.open(pageUrl);
-  }
-}
-
 ]]>
 </script>
 
@@ -86,7 +66,7 @@ function showWebPage(pageUrl) {
   <text value="&home.label;" style="font-weight: bold;"/>
   <text value="http://tagzilla.mozdev.org"
         class="url"
-        onclick="showWebPage('http://tagzilla.mozdev.org');window.close()"/>
+        onclick="openUrl('http://tagzilla.mozdev.org');window.close()"/>
 </vbox>
 <spring flex="1"/>
 <image src="chrome://tagzilla/content/tagzilla-big.png"/>
