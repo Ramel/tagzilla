@@ -54,7 +54,7 @@
   <groupbox orient="vertical" align="start">
     <caption label="&saveTo.label;"/>
     <hbox autostretch="never" align="center">
-      <textbox id="filename" flex="1" autostretch="never" align="center" size="100%"/>
+      <textbox id="filename" flex="1" autostretch="never" align="center" size="60%"/>
       <button label="&choose.label;" accesskey="&choose.accessKey;"
               oncommand="chooseFile()"/>
     </hbox>
