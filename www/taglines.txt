@@ -99,7 +99,7 @@ I came.  I saw.  I stole your tagline.
 You mean everything above the Tagline ISN'T line noise?
 Unauthorized Taglines will be spirited away at owner's expense.
 Meaningless tagline attached to pointless message.
-[5mMy tagline is on the blink again.[0m
+<blink>My tagline is on the blink again.</blink>
 HUMOROUS TAGLINE FOUND--INITIATING THEFT SEQUENCE
 . &lt;- grain of salt. Take as needed with above message.
 Actually it's not replying that takes time, it's choosing a tagline.
