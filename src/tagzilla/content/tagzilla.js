@@ -190,8 +190,8 @@ function tzInsert() {
 
       var trans = Components.classes[ "@mozilla.org/widget/transferable;1" ]
                             .createInstance(Components.interfaces.nsITransferable);
-      var tagString = Components.classes["@mozilla.org/supports-wstring;1"]
-                               .createInstance(Components.interfaces.nsISupportsWString);
+      var tagString = Components.classes["@mozilla.org/supports-string;1"]
+                               .createInstance(Components.interfaces.nsISupportsString);
 
       trans.addDataFlavor( "text/unicode" );
       tagString.data=textToAdd;
@@ -327,7 +327,6 @@ function loadTaglineFile(aUrl) {
   f.open("r");
   var fContents = f.read();
   f.close();
-  fContents = fContents.replace(/\r\n/g,"\n");
 
   var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
   if(delim!="\n\n" && fContents.indexOf(delim)>=0) {
