@@ -1,6 +1,9 @@
 <h4 class="project-name"><img src="tagzilla-big.png" width="55" height="56" alt="T" align="left" valign="top">agZilla &nbsp;&nbsp;&nbsp; <img src="http://www.mozdev.org/sharedimages/boxes.gif" alt=""></h4>
 <div class="tagline"><?php
-  echo "This is a php-generated tagline.";
+  $tfile = file('taglines.txt');
+  $ntags = count($tfile);
+  $rnum  = rand(1,$ntags);
+  echo strip($tfile[$rnum]);
 ?></div>
 
 <table id="project-navigation">
