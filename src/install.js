@@ -1,7 +1,7 @@
 const APP_DISPLAY_NAME = "TagZilla";
 const APP_NAME = "tagzilla";
 const APP_PACKAGE = "/tagzilla.mozdev.org/tagzilla";
-const APP_VERSION = "0.052";
+const APP_VERSION = "0.056";
 
 const APP_JAR_FILE = "tagzilla.jar";
 const APP_CONTENT_FOLDER = "tagzilla/content/";

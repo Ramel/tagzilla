@@ -8,15 +8,15 @@
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:tagzilla"
-    chrome:displayName="TagZilla 0.052"
+    chrome:displayName="TagZilla 0.056"
     chrome:author="David Perry - d.perry@utoronto.ca"
     chrome:name="tagzilla"
     chrome:extension="true"
     chrome:description="A tagline theft and management system for Mozilla Browser, Firebird and Thunderbird."
     chrome:authorURL="http://tagzilla.mozdev.org"
     chrome:settingsURL="chrome://tagzilla/content/pref/tagzillaPrefDialog.xul"
-    chrome:localeVersion="0.052"
-    chrome:skinVersion="0.052">
+    chrome:localeVersion="0.056"
+    chrome:skinVersion="0.056">
   </RDF:Description>
 
   <RDF:Seq about="urn:mozilla:overlays">

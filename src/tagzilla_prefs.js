@@ -21,7 +21,7 @@ pref("tagzilla.clipboard.suffix", "");
 
 // Prefix and suffix added to taglines inserted into email
 pref("tagzilla.mail.prefix", "\\n-=-=-\\n... ");
-pref("tagzilla.mail.suffix", "\\n* TagZilla 0.052 * http://tagzilla.mozdev.org");
+pref("tagzilla.mail.suffix", "\\n* TagZilla 0.056 * http://tagzilla.mozdev.org");
 
 // Convert '\n' to a newline character in taglines?
 pref("tagzilla.newline.convert", true);
