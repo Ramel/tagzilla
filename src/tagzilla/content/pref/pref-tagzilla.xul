@@ -98,7 +98,7 @@
     <caption label="&message.label;"/>
     <hbox align="center">
       <label value="&forAccount.label;"/>
-      <menulist id="msgIdentity" label="..." flex="1"><!--onCommand="popupCommand()"-->
+      <menulist id="msgIdentity" label="..." style="min-width: 175px" flex="1"><!--onCommand="popupCommand()"-->
         <menupopup id="msgIdentityPopup"/>
       </menulist>
     </hbox>
