@@ -327,6 +327,7 @@ function loadTaglineFile(aUrl) {
   f.open("r");
   var fContents = f.read();
   f.close();
+  fContents = fContents.replace(/\r\n/g,"\n");
 
   var delim="\n"+readMyPref("tagzilla.multiline.delimiter","string","%")+"\n";
   if(delim!="\n\n" && fContents.indexOf(delim)>=0) {
