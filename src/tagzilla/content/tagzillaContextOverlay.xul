@@ -50,7 +50,10 @@
         var docCharset = null;
         if (focusedWindow)
           docCharset = "charset=" + focusedWindow.document.characterSet;
-        alert(focusedWindow.__proto__.getSelection.call(focusedWindow));
+        var stolenTag = focusedWindow.__proto__.getSelection.call(focusedWindow);
+        
+        window.openDialog("chrome://tagzilla/content/tagzillaSteal.xul",
+          "_blank", "chrome,all,dialog", stolenTag);
       }
 
     ]]>

@@ -2,8 +2,19 @@
 <!ENTITY tagzilla.accessKey    "T">
 <!ENTITY tzCommand.label       "Insert Tagline">
 <!ENTITY tzCommand.accessKey   "T">
+<!ENTITY tzSteal.title         "Steal Tagline">
 <!ENTITY tzSteal.label         "Steal Tagline">
 <!ENTITY tzSteal.accessKey     "S">
+
+<!ENTITY tagline.label         "Tagline">
+<!ENTITY tagline.accessKey     "T">
+<!ENTITY saveTo.label          "Save Tagline To">
+<!ENTITY choose.label          "Choose File...">
+<!ENTITY choose.accessKey      "F">
+<!ENTITY save.label            "Steal">
+<!ENTITY save.accessKey        "S">
+<!ENTITY cancel.label          "Cancel">
+<!ENTITY cancel.accessKey      "C">
 
 <!ENTITY tagzilla.keybinding   "T">
 <!ENTITY tagzilla.keymods      "accel, shift">
@@ -26,12 +37,12 @@
 
 <!ENTITY listMenu.label        "List">
 <!ENTITY listMenu.accessKey    "L">
-<!ENTITY sort.label            "Sort List">
-<!ENTITY sort.accessKey        "O">
-<!ENTITY load.label            "Load List...">
-<!ENTITY load.accessKey        "L">
-<!ENTITY save.label            "Save List...">
-<!ENTITY save.accessKey        "S">
+<!ENTITY sortList.label        "Sort List">
+<!ENTITY sortList.accessKey    "O">
+<!ENTITY loadList.label        "Load List...">
+<!ENTITY loadList.accessKey    "L">
+<!ENTITY saveList.label        "Save List...">
+<!ENTITY saveList.accessKey    "S">
 <!ENTITY insert.label          "Insert">
 <!ENTITY insert.accessKey      "I">
 <!ENTITY close.label           "Close">
