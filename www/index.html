@@ -4,6 +4,8 @@
 <div class="infoTab" id="whats-new">
 <h5 class="infoHeader">News</h5>
 <ul>
+<li><b>Aug 8</b>
+TagZilla 0.056 <a href="installation.html">released</a></li>
 <li><b>Jul 2</b>
 TagZilla 0.052 finally <a href="installation.html">released</a></li>
 </ul>
@@ -35,44 +37,22 @@ this page's taglines</li>
 <!-- ***************** INFO/NEWS *************** -->
 
 <!-- MAIN CONTENT -->
-<h3>TagZilla 0.052 released</h3>
-<p>
-After over a year, TagZilla has <i>finally</i> been updated!
-</p>
+<h3>TagZilla 0.056 released</h3>
 <ul>
 <li>One xpi, three platforms: supports
 <a href="http://mozilla.org">Mozilla Suite</a>,
 <a href="http://mozilla.org/projects/firefox/">Firefox</a> and
 <a href="http://mozilla.org/projects/thunderbird/">Thunderbird</a>
 </li>
-<li>Supports Firefox 0.9 and Thunderbird 0.7's <a href="http://www.bengoodger.com/software/mb/extensions/packaging/extensions.html">new installer format</a></li>
-<li>Automated uninstall button (requires suitably recent version of JSLib)</li>
-<li>Several bugfixes, hopefully tagline insertion won't be so broken now</li>
-<li>Ability to select the character set used in your tagline files</li>
-<li>Seems to work with <a href="http://enigmail.mozdev.org">EnigMail</a>
-(On my computer, anyway; your mileage may vary!
-Install EnigMail <i>before</i> TagZilla for best results)</li>
+<li>TagZilla's Mail/News preferences now appear in the Account Manager</li>
+<li>Fixed <a href="http://bugzilla.mozdev.org/show_bug.cgi?id=6782">bug 6782</a>:
+    Unable to save tag list</li>
+<li>(Hopefully) fixed <a href="http://bugzilla.mozdev.org/show_bug.cgi?id=6715">bug 6715</a>:
+    Only inserts tagline for the first message</li>
+<li>Minor bugfixes</li>
 </ul>
 Known bugs/issues:
 <ul>
-<li>Despite being over a year in coming, this release was still "rushed".
-(That's the downside to being gainfully employed.)
-You may encounter strange behaviour.  If you do, email me or file a bug.</li>
-<li>In Firefox 0.9+ and Thunderbird 0.7+, you <b style="font-size:larger">absolutely positively
-<u style="font-size:larger">MUST</u></b> install
-<a href="http://jslib.mozdev.org/installation.html">JSLib</a>
-<b style="font-size:larger">BEFORE</b> you install TagZilla!  Otherwise, the program won't appear
-to start once you install TagZilla.  If you get yourself stuck like this,
-here's how to recover:
-    <ol>
-    <li>Ensure the program isn't running at all (check your process list,
-        however your host OS makes you do that, to be sure)</li>
-    <li>Run the program in Safe Mode (there's a shortcut in Windows, or
-        use the <code>--safe-mode</code> option on the command line)</li>
-    <li>Either install JSLib now, or uninstall TagZilla</li>
-    <li>Exit the program and restart it normally</li>
-    </ol>
-</li>
 <li>In Firefox and Thunderbird, the character set selector in the Preferences
 window will show up as empty the first time
 (<a href="http://mozdev.org/bugs/show_bug.cgi?id=2098">Bug 2098</a>).
