@@ -67,20 +67,22 @@ function chooseFile() {
 function doSteal() {
   try {
     var f = new File(tagFile.value);
+    var oldFile = "";
     /*
      * Ideally, this would work:
      *  f.open("a");
      *  f.write(tagline.value);
      *  f.close();
-     * Unfortunately, it seems to have the same effect as
-     * opening "w" (for writing).  Hence the read/write we do here.
-     * It's very slow for long files, but it's better than wiping them out.
+     * Unfortunately, f.open("a") and f.open("w") seem to behave the same.
+     * Hence the read/write we do here.
+     * It's probably very slow for long files, but it's better than wiping them out.
      */
-    f.open();
-    var oldFile=f.read();
-    f.close();
-
-    oldFile += "\n"+tagline.value;
+    if(f.exists()) {
+      f.open();
+      oldFile=f.read();
+      f.close();
+    }
+    oldFile += tagline.value+"\n";
     f.open("w");
     f.write(oldFile);
     f.close();
