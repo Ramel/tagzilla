@@ -341,6 +341,7 @@ function sortList() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function clearList() {
+  lBox.ensureElementIsVisible(lBox.childNodes[1]);
   while(lBox.childNodes.length > 1) {
     lBox.removeChild(lBox.lastChild);
   }
