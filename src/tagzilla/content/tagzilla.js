@@ -111,7 +111,7 @@ function tzOnLoad() {
   delButton = document.getElementById("tzDel");
   insButton = document.getElementById("insert-button");
 
-  lBox.treeBoxObject.view = tzTreeView;
+  lBox.view = tzTreeView;
 
   tzCmd = window.arguments[0];
   tzDoc = window.arguments[1];
@@ -403,8 +403,7 @@ function taglineChanged(aChg) {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzRefresh() {
-  lBox.treeBoxObject.invalidateScrollbar();
-  lBox.treeBoxObject.invalidate();
+  lBox.view = tzTreeView;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
