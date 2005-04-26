@@ -60,11 +60,8 @@
         var focusedWindow = document.commandDispatcher.focusedWindow;
         if (focusedWindow == window)
           focusedWindow = _content;
-        var docCharset = null;
-        if (focusedWindow)
-          docCharset = "charset=" + focusedWindow.document.characterSet;
-        var stolenTag = focusedWindow.__proto__.getSelection.call(focusedWindow);
-        
+        var stolenTag = focusedWindow.getSelection().toString();
+
         window.openDialog("chrome://tagzilla/content/tagzillaSteal.xul",
           "_blank", "chrome,all,dialog", stolenTag);
       }
