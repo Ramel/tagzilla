@@ -10,7 +10,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  * 
- * The Original Code in this file was released on August 27, 2004
+ * The Original Code in this file was released on April 25, 2005
  * 
  * Unless otherwise stated, the Initial Developer of the
  * Original Code is David Perry.  Portions created by David Perry are
