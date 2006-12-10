@@ -42,6 +42,7 @@
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       buttons="accept,cancel"
       width="600" height="450"
+      onload="window.sizeToContent();"
       ondialogaccept="document.getElementById('panel').contentDocument.defaultView.savePrefs()"
       title="&prefMain.label;">
 

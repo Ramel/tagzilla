@@ -48,7 +48,7 @@ function onInit() {
     //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
-    var page=document.firstChild;
+    var page=document.documentElement;
 
     for(var i=0; i<page.childNodes.length; i++) {
       if(page.childNodes[i].getAttribute("id") != "noJSlib")

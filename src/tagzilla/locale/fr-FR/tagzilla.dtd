@@ -59,6 +59,7 @@
 
 <!ENTITY tzAbout.title "A propos de TagZilla">
 <!ENTITY author.label "Crèe Par">
+<!ENTITY fixer.label           "Fixed By (and many thanks to)">
 <!ENTITY home.label "Site web">
 <!ENTITY aClose.label "Ok , Prêt">
 <!ENTITY aClose.accessKey "O">

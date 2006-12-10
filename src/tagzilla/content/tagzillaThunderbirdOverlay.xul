@@ -50,7 +50,7 @@
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
   <script type="application/x-javascript">
     <![CDATA[
-      function toTagZilla(aAction) {
+      function toTagZilla(aAction, callback) {
         /* Allow manually inserting mail taglines without popping up the
            TagZilla window
            Keep this function in line with the same one in
@@ -58,10 +58,10 @@
         if( ! (aAction == 'TZ_MAIL' && readMyPref("tagzilla."+gCurrentIdentity.key+".mailPick","bool",false)) )
         {
           return window.openDialog("chrome://tagzilla/content/tagzilla.xul",
-            "_blank", "chrome,all,dialog", aAction, window);
+            "_blank", "chrome,all,dialog", aAction, window, callback);
         }
 
-        include( "chrome://tagzilla/content/tagzillaComposeOverlay.js" );
+        //include( "chrome://tagzilla/content/tagzillaComposeOverlay.js" );
         tzInsertTagline();
 
         return null;

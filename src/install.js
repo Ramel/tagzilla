@@ -1,13 +1,13 @@
 const APP_DISPLAY_NAME = "TagZilla";
 const APP_NAME = "tagzilla";
 const APP_PACKAGE = "/tagzilla.mozdev.org/tagzilla";
-const APP_VERSION = "0.059";
+const APP_VERSION = "0.064";
 
 const APP_JAR_FILE = "tagzilla.jar";
 const APP_CONTENT_FOLDER = "tagzilla/content/";
 
 const APP_LOCALE_FOLDER  = "tagzilla/locale/"
-const APP_LOCALES = [ "en-US", "de-DE", "de-AT", "fr-FR" ];
+const APP_LOCALES = [ "en-US", "de-DE", "de-AT", "fr-FR", "ru-RU" ];
 // See below for how these are put together
 
 const APP_SKIN_FOLDER = "tagzilla/skin/"

@@ -48,6 +48,8 @@ var tzWin;      // window's calling window
 var tzList = []; // the actual tagline list
 var tzNL = "\n"; // newline flavour of the current file (defaults to unix)
 
+var tzCallback;  // callback function from opener
+
 ////////////////////////////////////////////////////////////////////////////////
 // tzTreeView object
 //
@@ -59,7 +61,8 @@ var tzTreeView = {
     var tzCol = col;
     if ("nsITreeColumn" in Components.interfaces)
       tzCol = col.id;
-    if(tzCol=="tzListHead") { if(tzList[row].indexOf("\n") >= 0) {
+    if(tzCol=="tzListHead") {
+      if(tzList[row].indexOf("\n") >= 0) {
         return tzList[row].substring(0,tzList[row].indexOf("\n"));
       }
       return tzList[row];
@@ -74,7 +77,7 @@ var tzTreeView = {
   isContainer: function(row) {
     return false;
   },
-  setTree: function(tree) {},
+  setTree: function(treebox) {},
   getImageSrc : function(row,column) {},
   getProgressMode : function(row,column) {},
   getCellValue : function(row,column) {},
@@ -126,7 +129,10 @@ function tzOnLoad() {
     tzWin = window.arguments[1];
     tzDoc = tzWin.document;
   }
-
+  if (window.arguments.length > 2 &&
+      typeof window.arguments[2] == "function") {
+      tzCallback = window.arguments[2];
+  }
 
   //tzList = new Array();
 
@@ -136,7 +142,7 @@ function tzOnLoad() {
 
   var tFile = "";
   if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
-    var prefPrefix = tzDoc.firstChild.getAttribute("tzPrefPrefix");
+    var prefPrefix = tzDoc.documentElement.getAttribute("tzPrefPrefix");
     tFile = readMyPref(prefPrefix+".mailFile","string","");
   }
   if(tFile == "") {
@@ -191,6 +197,7 @@ function tzInsert() {
       else if(tzWin.GetCurrentEditor)
       {
         var ed = tzWin.GetCurrentEditor();
+        ed.endOfDocument();
         ed.insertText(prefix+selTagline+suffix);
       }
       else {
@@ -249,7 +256,7 @@ function tzExit() {
 
   if(readMyPref("tagzilla.default.autosave","bool",true)) {
     if(tzCmd=="TZ_MAIL" || tzCmd.substring(0,8)=='cmd_send') {
-      var prefPrefix = tzDoc.firstChild.getAttribute("tzPrefPrefix");
+      var prefPrefix = tzDoc.documentElement.getAttribute("tzPrefPrefix");
       // only overwrite the pref it it's not blank (meaning use the default)
       if(readMyPref(prefPrefix+".mailFile","string","")=="") {
         writePref("string", "tagzilla.default.file",
@@ -264,6 +271,9 @@ function tzExit() {
       writePref("string", "tagzilla.default.file",
         document.getElementById("tzListHead").getAttribute("label"));
     }
+  }
+  if (tzCallback) {
+    tzCallback();
   }
   window.close();
 }

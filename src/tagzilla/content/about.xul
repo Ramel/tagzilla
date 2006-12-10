@@ -70,10 +70,12 @@ function uninstallTagzilla() {
 <groupbox align="center" orient="horizontal">
 <vbox>
   <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
-  <text value="0.059"/>
+  <text value="0.064"/>
   <separator class="thin"/>
   <text value="&author.label;" style="font-weight: bold;"/>
   <text value="David Perry"/>
+  <text value="&fixer.label;" style="font-weight: bold;"/>
+  <text value="Philip Chee"/>
   <separator class="thin"/>
   <text value="&home.label;" style="font-weight: bold;"/>
   <text value="http://tagzilla.mozdev.org"

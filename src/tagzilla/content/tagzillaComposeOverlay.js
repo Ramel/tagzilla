@@ -191,10 +191,14 @@ function tzSendCmd(aCmd) {
     }
     else {
     */
-      document.firstChild.setAttribute("tzPrefPrefix",prefPrefix); // hack, but it works
+      document.documentElement.setAttribute("tzPrefPrefix",prefPrefix); // hack, but it works
       tzCmd=aCmd;
-      tagzillaWindow=toTagZilla(aCmd);
-      tagzillaWindow.addEventListener("unload",tzPickedTagline, true);
+      tagzillaWindow=toTagZilla(aCmd, tzPickedTagline);
+      if (!tagzillaWindow)
+      {
+        tzAddedTagline = true;
+        eval(tzCmdActions[aCmd]);
+      }
     //}
   }
   else {

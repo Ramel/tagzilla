@@ -35,7 +35,6 @@
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
-<!-- ?xul-overlay href="chrome://global/content/globalOverlay.xul"? -->
 
 <!DOCTYPE page [
   <!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" > %brandDTD;
@@ -43,10 +42,8 @@
   <!ENTITY % tzprefsDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" > %tzprefsDTD;
 ]>
 
-<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-      onload="onLoad()"
-      onunload="onUnload()"
-      headertitle="&prefMain.label;">
+<overlay id="tagzillaPrefCommon"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
 <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
@@ -72,6 +69,8 @@
     observerService.notifyObservers(null, "charsetmenu-selected", "other");
   ]]>
 </script>
+
+<vbox id="tagzillaPrefContainer">
 
   <groupbox orient="vertical" id="noJSlib">
     <caption label="&noJSlib.caption;"/>
@@ -247,7 +246,7 @@
           </grid>
           <vbox>
             <textbox multiline="true" readonly="true" flex="1" size="100%"
-              oninput="onClipUpdate()" rows="3" cols="25"
+              oninput="onClipUpdate()" rows="3" cols="64"
               wrap="off" value="&sample.tagline;" id="clipSample"/>
           </vbox>
           <description disabled="true">&newline.desc;</description>
@@ -329,7 +328,7 @@
           </grid>
           <vbox>
             <textbox multiline="true" readonly="true" flex="1" size="100%"
-              oninput="onMailUpdate()" rows="3" cols="25"
+              oninput="onMailUpdate()" rows="3" cols="64"
               wrap="off" value="&sample.tagline;" id="mailSample"/>
           </vbox>
           <description disabled="true">&newline.desc;</description>
@@ -340,5 +339,6 @@
     </tabpanels>
   </tabbox>
 
+</vbox>
 
-</page>
+</overlay>

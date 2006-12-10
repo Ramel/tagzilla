@@ -1,0 +1,81 @@
+<!ENTITY treeMain.label        "TagZilla">
+<!ENTITY prefMain.label        "TagZilla">
+
+<!ENTITY noJSlib.caption       "Требуется JSLib">
+<!ENTITY noJSlib.desc          "Расширение JSLib не установленно. TagZilla не сможет работать без него.">
+
+<!ENTITY fileCaption.label     "Файл тэгов по умолчанию">
+<!ENTITY chooseFile.label      "Выбор...">
+<!ENTITY chooseFile.accesskey  "В">
+<!ENTITY saveDefault.label     "При закрытии TagZilla, установить последний загруженный файл">
+<!ENTITY saveDefault.accesskey "T">
+<!ENTITY charsetCaption.label  "Кодировка файла:">
+<!ENTITY charsetCaption.accesskey "К">
+
+<!ENTITY message.label         "Отправка сообщений">
+<!ENTITY mailAuto.label        "Автоматически вставлять тэг перед отправкой сообщения">
+<!ENTITY mailAuto.accesskey    "А">
+<!ENTITY mailPick.label        "Вставлять тэг без открытия TagZilla">
+<!ENTITY mailPick.accesskey    "В">
+<!ENTITY mailFile.label        "Файл:">
+
+<!ENTITY forAccount.label      "Аккаунт:">
+
+<!ENTITY textarea.caption      "Текстовые области">
+<!ENTITY textkey.label         "Ctrl-J внутри текстоввого полядля вставки тэга*">
+<!ENTITY textkey.accesskey     "C">
+<!ENTITY textPick.label        "Не открывать TagZilla">
+<!ENTITY textPick.accesskey    "Н">
+<!ENTITY needRestart.label     "*Изменения будут применены после перезапуска Mozilla.">
+
+<!ENTITY leaveBlank.tooltip    "Оставьте пустым для использования тэга по умолчанию.">
+
+
+<!ENTITY treeFormat.label      "Форматирование">
+<!ENTITY prefFormat.label      "TagZilla: Форматирование">
+
+<!ENTITY mailCaption.label     "Отправить сообщение">
+<!ENTITY prefix.label          "Префикс тэга">
+<!ENTITY mailPrefix.accesskey  "ф">
+<!ENTITY clipPrefix.accesskey  "П">
+<!ENTITY suffix.label          "Суффикс тэга">
+<!ENTITY mailSuffix.accesskey  "С">
+<!ENTITY clipSuffix.accesskey  "к">
+
+<!ENTITY clipCaption.label     "Буфер обмена и текстовые поля">
+
+<!ENTITY samples.label         "Предпросмотр">
+<!ENTITY sample.tagline        "Это ваш тэг.">
+<!ENTITY newline.desc          "(Символ переноса строки \n)">
+
+<!ENTITY appearance.label      "Предпросмотр">
+
+<!ENTITY treeMultiline.label   "Многострочные тэги">
+<!ENTITY prefMultiline.label   "TagZilla: Многострочные тэги">
+<!ENTITY multiline.caption     "Многострочные тэги">
+
+<!ENTITY convNewline.label     "Преобразовать \n в перенос строки в тэгах">
+<!ENTITY convNewline.accesskey "n">
+
+<!ENTITY multiType.caption     "Сохранение файлов">
+<!ENTITY singleLine.label      "Однострочный формат">
+<!ENTITY singleLine.accesskey  "О">
+<!ENTITY multiLine.label       "Многострочный формат (разделитель между тэгами)">
+<!ENTITY multiLine.accesskey   "М">
+
+<!ENTITY separator.label       "Разделитель строк:">
+<!ENTITY separator.accesskey   "т">
+
+<!ENTITY multi.desc "Содержат ли файлы тэгов  многострочные тэги будет определено,
+основываясь на настройках разделителя. Если разделитель будет найден в файле, то
+он будет использоваться для разделения тэгов. Иначе, файл будет загружен как однострочный.">
+
+<!ENTITY tab.general            "Основные">
+<!ENTITY tab.browser            "Браузер">
+<!ENTITY tab.mailnews           "Почта/Новости">
+<!ENTITY tab.about              "О TagZilla">
+
+<!ENTITY amPrefTitle.label      "TagZilla">
+<!ENTITY amTagOpts.caption      "Настройка тэгов">
+<!ENTITY amFullPrefs.label      "Больше настроек...">
+<!ENTITY amFullPrefs.accesskey  "Б">

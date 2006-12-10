@@ -63,7 +63,7 @@ function onLoad() {
     //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
-    var page=document.firstChild;
+    var page=document.documentElement;
 
     for(var i=0; i<page.childNodes.length; i++) {
       if(page.childNodes[i].getAttribute("id") != "noJSlib")
@@ -131,7 +131,7 @@ function onLoad() {
     document.getElementById("tzBrowserTab").setAttribute("collapsed", "true");
   }
 
-  if( parent.tzDIYdialog ) {
+  if( tzDIYdialog ) {
     // if we're our own dialog, we have to init our own prefs
 
     for (i = 0; i < _elementIDs.length; i++) {
@@ -161,11 +161,7 @@ function onLoad() {
   }
 
   // Voodoo taken from ChatZilla to make the charset picker work
-  const OSBS_CTRID = "@mozilla.org/observer-service;1";
-  const nsIObserverService = Components.interfaces.nsIObserverService;
-  var observerService =
-     Components.classes[OSBS_CTRID].getService(nsIObserverService);
-  observerService.notifyObservers(null, "charsetmenu-selected", "other");
+  // Phil: Voodoo moved to inline script in tagzillaBirdPrefs.xul
 
   onMailUpdate();
   onClipUpdate();
@@ -180,12 +176,6 @@ function onUnload() {
   if(haveMail) {
     clearInterval(popupTimer);
     writeAccountSettings();
-
-    var idStr = gIdentities[popupCurIndex].key;
-    writePref("bool",String("tagzilla."+idStr+".mailAuto"),
-      Boolean(document.getElementById("mailAuto").hasAttribute("checked")));
-    writePref("bool",String("tagzilla."+idStr+".mailPick"),
-      Boolean(document.getElementById("mailPick").hasAttribute("checked")));
   }
 }
 
