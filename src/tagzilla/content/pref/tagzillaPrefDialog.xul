@@ -35,6 +35,8 @@
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
 
+<?xul-overlay href="chrome://tagzilla/content/pref/tagzillaPrefCommon.xul"?>
+
 <!DOCTYPE dialog [
   <!ENTITY % tzprefsDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" > %tzprefsDTD;
 ]>
@@ -42,8 +44,9 @@
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       buttons="accept,cancel"
       width="600" height="450"
-      onload="window.sizeToContent();"
-      ondialogaccept="document.getElementById('panel').contentDocument.defaultView.savePrefs()"
+      onload="onLoad()"
+      onunload="onUnload()"
+      ondialogaccept="savePrefs()"
       title="&prefMain.label;">
 
   <script type="application/x-javascript">
@@ -51,7 +54,6 @@
     var tzDIYdialog = true;
   ]]>
   </script>
-  <iframe id="panel" flex="1"
-    src="chrome://tagzilla/content/pref/tagzillaBirdPrefs.xul"/>
+  <vbox id="tagzillaPrefContainer"/>
 
 </dialog>
