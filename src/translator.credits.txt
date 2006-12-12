@@ -1,0 +1,2 @@
+ru-RU: Denis Barov <dindin at dindin.ru>
+es-AR: ZuGro < at gmail com>

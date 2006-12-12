@@ -1,0 +1,76 @@
+<!ENTITY tagzilla.appName      "TagZilla">
+<!ENTITY tagzilla.accessKey    "T">
+<!ENTITY tzCommand.label       "Insertar cita">
+<!ENTITY tzCommand.accessKey   "I">
+<!ENTITY tzSteal.title         "Plagiar cita">
+<!ENTITY tzSteal.label         "Plagiar cita">
+<!ENTITY tzSteal.accessKey     "P">
+
+<!ENTITY tagline.label         "Cita Textual">
+<!ENTITY tagline.accessKey     "T">
+<!ENTITY saveTo.label          "Guardar cita a">
+<!ENTITY choose.label          "Elegir archivo...">
+<!ENTITY choose.accessKey      "E">
+<!ENTITY save.label            "Plagiarla">
+<!ENTITY save.accessKey        "P">
+<!ENTITY cancel.label          "Cancelar">
+<!ENTITY cancel.accessKey      "C">
+
+<!ENTITY tagzilla.keybinding   "J">
+<!ENTITY tagzilla.keymods      "accel, shift">
+<!ENTITY tzMail.keybinding     "J">
+<!ENTITY tzMail.keymods        "accel">
+
+<!ENTITY tzWindow.title        "TagZilla">
+<!ENTITY randButton.label      "Aleatoria">
+<!ENTITY randButton.accessKey  "A">
+<!ENTITY randButton.tooltip    "Selecciona una cita aleatoria de la lista">
+<!ENTITY addButton.label       "Agregar">
+<!ENTITY addButton.accessKey   "g">
+<!ENTITY addButton.tooltip     "Agregar una cita a la lista">
+<!ENTITY modButton.label       "Modificar">
+<!ENTITY modButton.accessKey   "M">
+<!ENTITY modButton.tooltip     "Reemplazar la cita seleccionada">
+<!ENTITY delButton.label       "Eliminar">
+<!ENTITY delButton.accessKey   "E">
+<!ENTITY delButton.tooltip     "Elimina las citas seleccionadas">
+
+<!ENTITY listMenu.label        "Lista">
+<!ENTITY listMenu.accessKey    "L">
+<!ENTITY sortList.label        "Ordenar lista">
+<!ENTITY sortList.accessKey    "O">
+<!ENTITY loadList.label        "Cargar lista">
+<!ENTITY loadList.accessKey    "C">
+<!ENTITY saveList.label        "Guardar lista">
+<!ENTITY saveList.accessKey    "G">
+<!ENTITY saveListAs.label      "Guardar como...">
+<!ENTITY saveListAs.accessKey  "u">
+<!ENTITY insert.label          "Insertar">
+<!ENTITY insert.accessKey      "I">
+<!ENTITY close.label           "Cerrar">
+<!ENTITY close.accessKey       "C">
+
+<!ENTITY helpMenu.label        "Ayuda">
+<!ENTITY helpMenu.accessKey    "y">
+<!ENTITY prefs.label           "Preferencias">
+<!ENTITY prefs.accessKey       "P">
+<!ENTITY about.label           "Acerca de">
+<!ENTITY about.accessKey       "A">
+
+<!ENTITY tzAbout.title         "Acerca de TagZilla">
+<!ENTITY author.label          "Creada por">
+<!ENTITY home.label            "Página Oficial">
+<!ENTITY aClose.label          "De acuerdo, es todo">
+<!ENTITY aClose.accessKey      "a">
+<!ENTITY tzUninstall.label     "Desinstalar">
+<!ENTITY tzUninstall.accessKey "D">
+
+<!ENTITY madprops.label        "Con agradecimientos para">
+<!ENTITY mozdev.label          "mozdev.org">
+<!ENTITY mozdev.desc           "por el hospedaje, y a sus desarrolladores por su ayuda">
+<!ENTITY mozgest.label         "MozGest">
+<!ENTITY mozgest.desc          "por la inspiración para unificar las preferencias en una sola página">
+<!ENTITY enigmail.label        "EnigMail">
+<!ENTITY enigmail.desc         "por la inspiración para incluir a TagZilla en el administrador de cuentas">
+<!ENTITY mozillazine.label     "Foros MozillaZine">
+<!ENTITY mozillazine.desc      "por ayudarme en mis interrogantes y dudas">

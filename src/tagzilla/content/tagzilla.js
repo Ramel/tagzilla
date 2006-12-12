@@ -187,6 +187,7 @@ function tzInsert() {
 
     var msgPane = tzDoc.getElementById("content-frame");
     if(msgPane) {
+      var tzAddedTagline = true;
       var controller = tzDoc.commandDispatcher.getControllerForCommand('cmd_moveBottom');
       if(controller) {
         controller.doCommand('cmd_moveBottom');
@@ -203,6 +204,10 @@ function tzInsert() {
       else {
         alert("I'm afraid I don't know how to insert taglines in this version\n"+
               "of Mozilla. File a bug on it, and use Clipboard Mode in the meantime.");
+        tzAddedTagline = false;
+      }
+      if(tzWin && tzAddedTagline) {
+        tzWin.tzAddedTagline = true;
       }
       setTimeout(tzExit, 10);
     }

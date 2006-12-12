@@ -43,7 +43,7 @@
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       buttons="accept,cancel"
-      width="600" height="450"
+      style="width:32em"
       onload="onLoad()"
       onunload="onUnload()"
       ondialogaccept="savePrefs()"

@@ -95,6 +95,7 @@
     <toolbarbutton id="launchTagzilla"
                    class="toolbarbutton-1"
                    label="&tagzilla.appName;"
+                   tooltiptext="&tagzilla.appName;"
                    oncommand="toTagZilla('TZ_CLIPBOARD')"/>
   </toolbarpalette>
 

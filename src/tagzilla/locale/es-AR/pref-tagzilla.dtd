@@ -1,0 +1,83 @@
+<!ENTITY treeMain.label        "TagZilla">
+<!ENTITY prefMain.label        "TagZilla">
+
+<!ENTITY noJSlib.caption       "Se necesita JSLib">
+<!ENTITY noJSlib.desc          "Usted no tiene JSLib instalada en esta máquina.  TagZilla no funcionará si ella.">
+
+<!ENTITY fileCaption.label     "Archivo de Citas Textuales predeterminado">
+<!ENTITY chooseFile.label      "Elegir...">
+<!ENTITY chooseFile.accesskey  "E">
+<!ENTITY saveDefault.label     "Cuando se cierre TagZilla, ajustar el último archivo de citas cargado como predeterminado">
+<!ENTITY saveDefault.accesskey "C">
+<!ENTITY charsetCaption.label  "Codificación de caracteres del archivo:">
+<!ENTITY charsetCaption.accesskey "o">
+
+<!ENTITY message.label         "Enviando Mensajes">
+<!ENTITY mailAuto.label        "Agregar automáticamente una cita cuando se envia un mensaje">
+<!ENTITY mailAuto.accesskey    "A">
+<!ENTITY mailPick.label        "Agregar la cita sin abrir la ventana de TagZilla">
+<!ENTITY mailPick.accesskey    "v">
+<!ENTITY mailFile.label        "Archivo:">
+
+<!ENTITY forAccount.label      "Cuenta:">
+
+<!ENTITY textarea.caption      "Areas de texto">
+<!ENTITY textkey.label         "Pulsando Ctrl+J dentro de un área de texto se insertará una cita*">
+<!ENTITY textkey.accesskey     "P">
+<!ENTITY textPick.label        "Sin abrir la ventana de TagZilla">
+<!ENTITY textPick.accesskey    "S">
+<!ENTITY needRestart.label     "*Los cambios en ésta opción tendrán efecto después de reiniciar el navegador.">
+
+<!ENTITY leaveBlank.tooltip    "Dejar en blanco para usar el archivo de citas predeterminado.">
+
+
+<!ENTITY treeFormat.label      "Formato">
+<!ENTITY prefFormat.label      "TagZilla: Formato">
+
+<!ENTITY mailCaption.label     "Mensaje de correo electrónico">
+<!ENTITY prefix.label          "Prefijo de la cita">
+<!ENTITY mailPrefix.accesskey  "P">
+<!ENTITY clipPrefix.accesskey  "r">
+<!ENTITY suffix.label          "Sufijo de la cita">
+<!ENTITY mailSuffix.accesskey  "S">
+<!ENTITY clipSuffix.accesskey  "u">
+
+<!ENTITY clipCaption.label     "Portapapeles y áreas de texto">
+
+<!ENTITY samples.label         "Como aparecerá">
+<!ENTITY sample.tagline        "Esta es su cita.">
+<!ENTITY newline.desc          "(Al escribir \n se introduce un &quot;Retorno de carro&quot;)">
+
+<!ENTITY appearance.label      "Apariencia">
+
+<!ENTITY treeMultiline.label   "Multi-citas">
+<!ENTITY prefMultiline.label   "TagZilla: Citas Múltiples">
+<!ENTITY multiline.caption     "Citas Múltiples">
+
+<!ENTITY convNewline.label     "Convertir \n en una nueva línea en las citas">
+<!ENTITY convNewline.accesskey "n">
+
+<!ENTITY multiType.caption     "Guardar archivos en">
+<!ENTITY singleLine.label      "Formato de Cita Única">
+<!ENTITY singleLine.accesskey  "C">
+<!ENTITY multiLine.label       "Formato de Citas Múltiples (inserta un separador entre cada cita)">
+<!ENTITY multiLine.accesskey   "M">
+
+<!ENTITY separator.label       "Identificador de línea de separación de citas:">
+<!ENTITY separator.accesskey   "I">
+
+<!ENTITY multi.desc "Los archivos de citas textuales que contienen citas múltiples son detectados en base a la presencia
+del identificador usado como línea de separación mostrado abajo.  Si éste es detectado, es usado para separar cada cita
+individualmente, una de cada otra sin importar si cada cita es de una sola línea o de múltiples líneas. Pero si el 
+identificador no es encontrado, el archivo será cargado como si contuviera una sola cita (como archivo de Cita Única).
+Los archivos de Cita Única incluyen una sola cita, independientemente de que ésta esté formada por una o varias líneas.">
+
+<!ENTITY tab.general            "General">
+<!ENTITY tab.browser            "Navegador">
+<!ENTITY tab.mailnews           "Correo/Noticias">
+<!ENTITY tab.about              "Acerca de">
+
+<!ENTITY amPrefTitle.label      "TagZilla">
+<!ENTITY amTagOpts.caption      "Opciones de las citas">
+<!ENTITY amFullPrefs.label      "Más preferencias...">
+<!ENTITY amFullPrefs.accesskey  "M">

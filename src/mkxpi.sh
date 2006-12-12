@@ -4,7 +4,7 @@
 
 WORKDIR=xpiwork
 mkdir -p $WORKDIR/chrome $WORKDIR/components $WORKDIR/defaults/preferences
-cp install.js install.rdf $WORKDIR
+cp install.js install.rdf translator.credits.txt $WORKDIR
 mv tagzilla.jar $WORKDIR/chrome
 cp tagzilla_prefs.js $WORKDIR/defaults/preferences
 cp components/tzprefs-service.js $WORKDIR/components

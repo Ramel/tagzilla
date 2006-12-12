@@ -4,30 +4,30 @@
 
 #launchTagzilla {
   list-style-image: url("chrome://tagzilla/skin/tagzilla-toolbar.png");
-  -moz-image-region: rect(0px 43px 43px 0px);
+  -moz-image-region: rect(0px 24px 24px 0px);
 }
 
 #launchTagzilla:hover {
-  -moz-image-region: rect(0px 86px 43px 43px);
+  -moz-image-region: rect(0px 48px 24px 24px);
 }
 
 #launchTagzilla:active {
-  -moz-image-region: rect(0px 129px 43px 86px);
+  -moz-image-region: rect(0px 72px 24px 48px);
 }
 
 /* Small Bird toolbar icon */
 
 toolbar[iconsize="small"] #launchTagzilla {
   list-style-image: url("chrome://tagzilla/skin/tagzilla-toolbar-small.png");
-  -moz-image-region: rect(0px 25px 25px 0px);
+  -moz-image-region: rect(0px 16px 16px 0px);
 }
 
 toolbar[iconsize="small"] #launchTagzilla:hover {
-  -moz-image-region: rect(0px 50px 25px 25px);
+  -moz-image-region: rect(0px 32px 16px 16px);
 }
 
 toolbar[iconsize="small"] #launchTagzilla:active {
-  -moz-image-region: rect(0px 75px 25px 50px);
+  -moz-image-region: rect(0px 48px 16px 32px);
 }
 
 /* Tagline modification buttons */
