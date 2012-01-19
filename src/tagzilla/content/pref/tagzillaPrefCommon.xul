@@ -78,7 +78,7 @@
     <separator />
     <hbox align="center">
       <spring flex="1"/>
-      <text value="http://jslib.mozdev.org" class="url"
+      <text value="http://jslib.mozdev.org" class="tagzilla-url"
           onclick="openUrl('http://jslib.mozdev.org')"/>
       <spring flex="1"/>
     </hbox>

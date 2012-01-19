@@ -63,7 +63,8 @@ function onLoad() {
     //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
-    var page=document.documentElement;
+    //var page=document.documentElement;
+    var page = document.getElementById("tagzillaPrefContainer");
 
     for(var i=0; i<page.childNodes.length; i++) {
       if(page.childNodes[i].getAttribute("id") != "noJSlib")
@@ -121,15 +122,8 @@ function onLoad() {
 
   // Testing for browser support isn't quite so easy --
   //  is this guaranteed to fail in Thunderbird?
-  try {
-    var browserInstance = Components
-      .classes['@mozilla.org/appshell/component/browser/instance;1']
-      .getService(Components.interfaces.nsIBrowserInstance);
-  }
-  catch(ex) {
-    haveBrowser = false;
-    document.getElementById("tzBrowserTab").setAttribute("collapsed", "true");
-  }
+  haveBrowser = ('@mozilla.org/appshell/component/browser/instance;1' in Components.classes);
+  document.getElementById("tzBrowserTab").setAttribute("collapsed", !haveBrowser);
 
   if( tzDIYdialog ) {
     // if we're our own dialog, we have to init our own prefs
@@ -161,7 +155,7 @@ function onLoad() {
   }
 
   // Voodoo taken from ChatZilla to make the charset picker work
-  // Phil: Voodoo moved to inline script in tagzillaBirdPrefs.xul
+  // Phil: Voodoo moved to inline script in tagzillaPrefCommon.xul
 
   onMailUpdate();
   onClipUpdate();
@@ -307,7 +301,7 @@ function checkTextPrefs() {
  * called when we're our own prefs dialog, so we can save our prefs
  */
 function savePrefs() {
-  for (i = 0; i < _elementIDs.length; i++) {
+  for (var i = 0; i < _elementIDs.length; i++) {
     var curEl = document.getElementById(_elementIDs[i]);
     var prefstring = curEl.getAttribute("prefstring");
     var preftype = curEl.getAttribute("preftype");
@@ -349,7 +343,7 @@ function writeAccountSettings() {
 // Returns: No clue
 //
 // This function originally appeared in MsgComposeCommands.js
-// Used here under the terms of the NPL
+// Used here under the terms of the MPL
 ////////////////////////////////////////////////////////////////////////////////
 function queryISupportsArray(supportsArray, iid) {
     var result = new Array;
