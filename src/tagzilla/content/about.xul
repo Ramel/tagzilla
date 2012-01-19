@@ -70,7 +70,7 @@ function uninstallTagzilla() {
 <groupbox align="center" orient="horizontal">
 <vbox>
   <text value="&tagzilla.appName;" style="font-weight: bold; font-size: x-large;"/>
-  <text value="0.066"/>
+  <text value="0.064"/>
   <separator class="thin"/>
   <text value="&author.label;" style="font-weight: bold;"/>
   <text value="David Perry"/>
@@ -79,24 +79,24 @@ function uninstallTagzilla() {
   <separator class="thin"/>
   <text value="&home.label;" style="font-weight: bold;"/>
   <text value="http://tagzilla.mozdev.org"
-        class="url"
+        class="tagzilla-url"
         onclick="openUrl('http://tagzilla.mozdev.org');window.close()"/>
   <separator class="thin"/>
   <text value="&madprops.label;" style="font-weight: bold;"/>
   <text value="&mozdev.label;"
-        class="url"
+        class="tagzilla-url"
         onclick="openUrl('http://www.mozdev.org');"/>
   <description>&mozdev.desc;</description>
   <text value="&mozgest.label;"
-        class="url"
+        class="tagzilla-url"
         onclick="openUrl('http://optimoz.mozdev.org/gestures/index.html');"/>
   <description>&mozgest.desc;</description>
   <text value="&enigmail.label;"
-        class="url"
+        class="tagzilla-url"
         onclick="openUrl('http://enigmail.mozdev.org/');"/>
   <description>&enigmail.desc;</description>
   <text value="&mozillazine.label;"
-        class="url"
+        class="tagzilla-url"
         onclick="openUrl('http://forums.mozillazine.org/index.php');"/>
   <description>&mozillazine.desc;</description>
 </vbox>

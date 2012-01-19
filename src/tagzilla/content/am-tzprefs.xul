@@ -33,6 +33,7 @@
 -->
 
 <?xml-stylesheet href="chrome://messenger/skin/accountManage.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
 
 <!DOCTYPE page SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd">
 
@@ -54,7 +55,7 @@
     <separator />
     <hbox align="center">
       <spring flex="1"/>
-      <text value="http://jslib.mozdev.org" class="url"
+      <text value="http://jslib.mozdev.org" class="tagzilla-url"
           onclick="openUrl('http://jslib.mozdev.org')"/>
       <spring flex="1"/>
     </hbox>

@@ -8,11 +8,11 @@
 
 /* XUL-clickable URLs */
 
-.url {
+.tagzilla-url {
   color: blue;
 }
 
-.url:hover {
+.tagzilla-url:hover {
   text-decoration: underline;
   cursor: pointer;
 }
