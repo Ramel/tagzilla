@@ -1,4 +1,9 @@
-content	tagzilla	jar:chrome/tagzilla.jar!/tagzilla/content/
+content	tagzilla	jar:chrome/tagzilla.jar!/content/
+
+# Component Registration
+component {4eac6fec-f68b-4797-be7a-ffeea73e1495}  components/tzprefs-service.js
+contract @mozilla.org/accountmanager/extension;1?name=tzprefs  {4eac6fec-f68b-4797-be7a-ffeea73e1495}
+category mailnews-accountmanager-extensions  TagZilla-account-manager-extension  @mozilla.org/accountmanager/extension;1?name=tzprefs 
 
 # Thunderbird and SeaMonkey
 overlay	chrome://messenger/content/mailWindowOverlay.xul	chrome://tagzilla/content/tagzillaMailOverlay.xul
@@ -17,13 +22,12 @@ overlay chrome://tagzilla/content/tagzillaSteal.xul chrome://communicator/conten
 # Firefox
 overlay	chrome://browser/content/browser.xul	chrome://tagzilla/content/tagzillaFirebirdOverlay.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 
-skin	tagzilla	classic/1.0	jar:chrome/tagzilla.jar!/tagzilla/skin/classic/
+skin	tagzilla	classic/1.0	jar:chrome/tagzilla.jar!/skin/classic/
 style	chrome://global/content/customizeToolbar.xul	chrome://tagzilla/skin/tagzilla.css
-style	chrome://browser/content/browser.xul	chrome://tagzilla/skin/tagzilla.css
 
-locale	tagzilla	en-US	jar:chrome/tagzilla.jar!/tagzilla/locale/en-US/
-locale	tagzilla	de-AT	jar:chrome/tagzilla.jar!/tagzilla/locale/de-AT/
-locale	tagzilla	de-DE	jar:chrome/tagzilla.jar!/tagzilla/locale/de-DE/
-locale	tagzilla	es-AR	jar:chrome/tagzilla.jar!/tagzilla/locale/es-AR/
-locale	tagzilla	fr-FR	jar:chrome/tagzilla.jar!/tagzilla/locale/fr-FR/
-locale	tagzilla	ru-RU	jar:chrome/tagzilla.jar!/tagzilla/locale/ru-RU/
+locale	tagzilla	en-US	jar:chrome/tagzilla.jar!/locale/en-US/
+locale	tagzilla	de-AT	jar:chrome/tagzilla.jar!/locale/de-AT/
+locale	tagzilla	de-DE	jar:chrome/tagzilla.jar!/locale/de-DE/
+locale	tagzilla	es-AR	jar:chrome/tagzilla.jar!/locale/es-AR/
+locale	tagzilla	fr-FR	jar:chrome/tagzilla.jar!/locale/fr-FR/
+locale	tagzilla	ru-RU	jar:chrome/tagzilla.jar!/locale/ru-RU/
