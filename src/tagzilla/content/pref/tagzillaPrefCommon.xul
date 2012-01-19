@@ -108,7 +108,7 @@
                      prefattribute="value"/>
             <button label="&chooseFile.label;"
                     accesskey="&chooseFile.accesskey;"
-                    oncommand="pickFile(document.getElementById('tzPref-defaultFile'))"/>
+                    oncommand="Tagzilla.pickFile(document.getElementById('tzPref-defaultFile'))"/>
           </hbox>
 
           <checkbox id="tzPref-defaultSave"

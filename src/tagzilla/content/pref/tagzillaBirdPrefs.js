@@ -59,7 +59,7 @@ var haveMail;                 // Boolean: should we show mail/news prefs?
  */
 function onLoad() {
   try {
-    include('chrome://jslib/content/io/dir.js');
+    //include('chrome://jslib/content/io/dir.js');
     //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
@@ -102,7 +102,7 @@ function onLoad() {
     var catStr;
     try {
       catStr = catman.getCategoryEntry("mailnews-accountmanager-extensions",
-                            "TagZilla account manager extension");
+                            "TagZilla-account-manager-extension");
     }
     catch(ex2) { }
 
@@ -122,7 +122,9 @@ function onLoad() {
 
   // Testing for browser support isn't quite so easy --
   //  is this guaranteed to fail in Thunderbird?
-  haveBrowser = ('@mozilla.org/appshell/component/browser/instance;1' in Components.classes);
+  haveBrowser = ("@mozilla.org/appshell/component/browser/instance;1" in Components.classes) ||
+                ("@mozilla.org/suite/suiteglue;1" in Components.classes) ||
+                ("@mozilla.org/browser/clh;1" in Components.classes);
   document.getElementById("tzBrowserTab").setAttribute("collapsed", !haveBrowser);
 
   if( tzDIYdialog ) {
@@ -193,35 +195,6 @@ function onMailUpdate() {
   mailSample.value=mailPrefix.value.replace(/\\n/g,"\n")+
                    sampleText+
                    mailSuffix.value.replace(/\\n/g,"\n");
-}
-
-/*
- * pickFile()
- *  aTarget: textbox where the chosen filename should go
- *
- * Shows a dialog for the user to pick a tagline file
- */
-function pickFile(aTarget) {
-  try {
-    var oldDir = aTarget.value;
-    var newDir = null;
-    oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
-    if(oldDir) {
-      newDir = new Dir(oldDir);
-    }
-    var fName = txtFilePicker(getText("chooseFile"),0,newDir);
-    if(fName==null) {
-    }
-    else {
-      aTarget.value=fName;
-      /*
-      var fUtils = new FileUtils();
-      var aPath = fUtils.urlToPath(fName);
-      aTarget.value=aPath;
-      */
-    }
-  }
-  catch(e) {dump(e+'\n');}
 }
 
 /*
@@ -301,7 +274,7 @@ function checkTextPrefs() {
  * called when we're our own prefs dialog, so we can save our prefs
  */
 function savePrefs() {
-  for (var i = 0; i < _elementIDs.length; i++) {
+  for (i = 0; i < _elementIDs.length; i++) {
     var curEl = document.getElementById(_elementIDs[i]);
     var prefstring = curEl.getAttribute("prefstring");
     var preftype = curEl.getAttribute("preftype");
