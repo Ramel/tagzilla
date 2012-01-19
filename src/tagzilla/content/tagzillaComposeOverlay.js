@@ -242,6 +242,15 @@ tzComposeStateListener.prototype = {
     var docStateListener = new tzDocStateListener();
     tzEditorObj.addDocumentStateListener(docStateListener);
     tzOverrideCommands(window);
+  },
+
+  NotifyComposeBodyReady: function() {
+  },
+
+  ComposeProcessDone: function(aResult) {
+  },
+
+  SaveInFolderDone: function(folderURI) {
   }
 };
 
@@ -306,6 +315,12 @@ tzDocStateListener.prototype = {
         setTimeout(tzInsertTagline, 150);
       }
     }
+  },
+
+  NotifyDocumentCreated: function() {
+  },
+
+  NotifyDocumentWillBeDestroyed: function() {
   }
 };
 
