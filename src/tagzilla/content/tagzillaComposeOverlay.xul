@@ -71,6 +71,10 @@
          key="&tzMail.keybinding;" modifiers="&tzMail.keymods;"/>
   </keyset>
 
+  <!-- Disable the SeaMonkey Download Manager hotkey -->
+  <key id="key_downloadManager" key="" command=""/>
+
+
   <popup id="msgComposeContext">
     <menuseparator />
     <menuitem id="edContextTagzilla" key="key_tagzilla_mail"
