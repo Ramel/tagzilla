@@ -1,6 +1,6 @@
 <!ENTITY tagzilla.appName      "TagZilla">
 <!ENTITY tagzilla.accessKey    "T">
-<!ENTITY tzCommand.label       "Tagline einfügen">
+<!ENTITY tzCommand.label       "Tagline einfÃ¼gen">
 <!ENTITY tzCommand.accessKey   "T">
 <!ENTITY tzSteal.title         "Tagline stehlen">
 <!ENTITY tzSteal.label         "Tagline stehlen">
@@ -9,7 +9,7 @@
 <!ENTITY tagline.label         "Tagline">
 <!ENTITY tagline.accessKey     "T">
 <!ENTITY saveTo.label          "Tagline speichern unter">
-<!ENTITY choose.label          "Datei wählen...">
+<!ENTITY choose.label          "Datei wÃ¤hlen...">
 <!ENTITY choose.accessKey      "F">
 <!ENTITY save.label            "Stehle">
 <!ENTITY save.accessKey        "S">
@@ -24,16 +24,16 @@
 <!ENTITY tzWindow.title        "TagZilla">
 <!ENTITY randButton.label      "?">
 <!ENTITY randButton.accessKey  "R">
-<!ENTITY randButton.tooltip    "Zufällige Tagline wählen">
+<!ENTITY randButton.tooltip    "ZufÃ¤llige Tagline wÃ¤hlen">
 <!ENTITY addButton.label       "A">
 <!ENTITY addButton.accessKey   "A">
-<!ENTITY addButton.tooltip     "Tagline hinzufügen">
+<!ENTITY addButton.tooltip     "Tagline hinzufÃ¼gen">
 <!ENTITY modButton.label       "M">
 <!ENTITY modButton.accessKey   "M">
 <!ENTITY modButton.tooltip     "Selektierte Tagline ersetzen">
 <!ENTITY delButton.label       "X">
 <!ENTITY delButton.accessKey   "X">
-<!ENTITY delButton.tooltip     "Selektierte Taglines löschen">
+<!ENTITY delButton.tooltip     "Selektierte Taglines lÃ¶schen">
 
 <!ENTITY listMenu.label        "List">
 <!ENTITY listMenu.accessKey    "L">
@@ -45,29 +45,33 @@
 <!ENTITY saveList.accessKey    "S">
 <!ENTITY saveListAs.label      "Specihern unter...">
 <!ENTITY saveListAs.accessKey  "A">
-<!ENTITY insert.label          "Einfügen">
+<!ENTITY insert.label          "EinfÃ¼gen">
 <!ENTITY insert.accessKey      "I">
-<!ENTITY close.label           "Schließen">
+<!ENTITY close.label           "SchlieÃŸen">
 <!ENTITY close.accessKey       "C">
 
 <!ENTITY helpMenu.label        "Hilfe">
 <!ENTITY helpMenu.accessKey    "H">
 <!ENTITY prefs.label           "Einstellungen">
 <!ENTITY prefs.accessKey       "P">
-<!ENTITY about.label           "Über">
+<!ENTITY about.label           "Ãœber">
 <!ENTITY about.accessKey       "A">
 
-<!ENTITY tzAbout.title         "Über TagZilla">
+<!ENTITY tzAbout.title         "Ãœber TagZilla">
 <!ENTITY author.label          "Created By">
-<!ENTITY fixer.label           "Fixed By (and many thanks to)">
+<!ENTITY fixer.label           "Gefixt von (und vielen Dank an)">
 <!ENTITY home.label            "Home page">
 <!ENTITY aClose.label          "Alright, already">
 <!ENTITY aClose.accessKey      "A">
+<!ENTITY tzUninstall.label     "Uninstall">
+<!ENTITY tzUninstall.accessKey "U">
 
-<!ENTITY madprops.label        "With Thanks To">
+<!ENTITY madprops.label        "Vielen Dank an">
 <!ENTITY mozdev.label          "mozdev.org">
-<!ENTITY mozdev.desc           "for the hosting, and its developers for the help">
+<!ENTITY mozdev.desc           "fÃ¼r das Hosting und an die Mozdev-Entwickler fÃ¼r die Hilfe">
 <!ENTITY mozgest.label         "MozGest">
-<!ENTITY mozgest.desc          "for the inspiration for the unified prefs page">
-<!ENTITY mozillazine.label     "MozillaZine Forums">
-<!ENTITY mozillazine.desc      "for help with my questions">
+<!ENTITY mozgest.desc          "fÃ¼r die Idee der einheitlichen Einstellungsseite">
+<!ENTITY enigmail.label        "EnigMail">
+<!ENTITY enigmail.desc         "fÃ¼r die Idee Tagzilla in die Account-Einstellungen zu verschieben">
+<!ENTITY mozillazine.label     "MozillaZine Foren">
+<!ENTITY mozillazine.desc      "fÃ¼r Hilfe bei meinen Fragen">

@@ -1,30 +1,32 @@
 <!ENTITY treeMain.label        "TagZilla">
 <!ENTITY prefMain.label        "TagZilla">
 
-<!ENTITY noJSlib.caption       "JSLib wird benötigt">
-<!ENTITY noJSlib.desc          "JSLib ist auf diesem Computer nicht installiert.  TagZilla kann nicht ausgeführt werden..">
+<!ENTITY noJSlib.caption       "JSLib wird benÃ¶tigt">
+<!ENTITY noJSlib.desc          "JSLib ist auf diesem Computer nicht installiert.  TagZilla kann nicht ausgefÃ¼hrt werden..">
 
 <!ENTITY fileCaption.label     "Standard Datei">
-<!ENTITY chooseFile.label      "Wähle...">
+<!ENTITY chooseFile.label      "WÃ¤hle...">
 <!ENTITY chooseFile.accesskey  "C">
-<!ENTITY saveDefault.label     "Beim Schließen von TagZilla wird die zuletzt geladene Datei als Standard verwendet.">
+<!ENTITY saveDefault.label     "Beim SchlieÃŸen von TagZilla wird die zuletzt geladene Datei als Standard verwendet.">
 <!ENTITY saveDefault.accesskey "T">
+<!ENTITY charsetCaption.label  "Dateikodierung:">
+<!ENTITY charsetCaption.accesskey "F">
 
 <!ENTITY message.label         "Sende Nachrichten">
-<!ENTITY mailAuto.label        "Tagline automatisch beim Senden einer Nachricht anhängen">
+<!ENTITY mailAuto.label        "Tagline automatisch beim Senden einer Nachricht anhÃ¤ngen">
 <!ENTITY mailAuto.accesskey    "A">
-<!ENTITY mailPick.label        "TagZilla-Fenster wird dabei nicht geöffnet">
+<!ENTITY mailPick.label        "TagZilla-Fenster wird dabei nicht geÃ¶ffnet">
 <!ENTITY mailPick.accesskey    "W">
 <!ENTITY mailFile.label        "Datei:">
 
 <!ENTITY forAccount.label      "Benutzer:">
 
 <!ENTITY textarea.caption      "Textbereiche">
-<!ENTITY textkey.label         "Ctrl-J innerhalb eines Textbereiches fügt eine tagline ein*">
+<!ENTITY textkey.label         "Ctrl-J innerhalb eines Textbereiches fÃ¼gt eine tagline ein*">
 <!ENTITY textkey.accesskey     "C">
-<!ENTITY textPick.label        "TagZilla-Fenster wird dabei nicht geöffnet">
+<!ENTITY textPick.label        "TagZilla-Fenster wird dabei nicht geÃ¶ffnet">
 <!ENTITY textPick.accesskey    "W">
-<!ENTITY needRestart.label     "*Veränderungen werden erst nach dem Neustart gültig.">
+<!ENTITY needRestart.label     "*VerÃ¤nderungen werden erst nach dem Neustart gÃ¼ltig.">
 
 <!ENTITY leaveBlank.tooltip    "Standard-Datei, wenn Feld leer bleibt.">
 
@@ -58,7 +60,7 @@
 <!ENTITY multiType.caption     "Datei speichern unter">
 <!ENTITY singleLine.label      "Einzeiliges Format">
 <!ENTITY singleLine.accesskey  "S">
-<!ENTITY multiLine.label       "Mehrzeiliges Format (fügt Trennzeichen zwischen Taglines ein)">
+<!ENTITY multiLine.label       "Mehrzeiliges Format (fÃ¼gt Trennzeichen zwischen Taglines ein)">
 <!ENTITY multiLine.accesskey   "M">
 
 <!ENTITY separator.label       "Tagline Trennlinie:">
@@ -69,4 +71,9 @@
 <!ENTITY tab.general            "Allgemein">
 <!ENTITY tab.browser            "Browser">
 <!ENTITY tab.mailnews           "Mail/News">
-<!ENTITY tab.about              "Über">
+<!ENTITY tab.about              "Ãœber">
+
+<!ENTITY amPrefTitle.label      "TagZilla">
+<!ENTITY amTagOpts.caption      "Tagline Optionen">
+<!ENTITY amFullPrefs.label      "Erweiterte Einstellungen...">
+<!ENTITY amFullPrefs.accesskey  "P">

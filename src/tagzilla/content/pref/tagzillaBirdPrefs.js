@@ -105,14 +105,14 @@ function onLoad() {
     }
     catch(ex2) { }
 
-    if( catStr == "@mozilla.org/accountmanager/extension;1?name=tzprefs" ) {
-      document.getElementById("tzAccounts").setAttribute("collapsed", "true");
-    }
-    else
-    {
+    //if( catStr == "@mozilla.org/accountmanager/extension;1?name=tzprefs" ) {
+    //  document.getElementById("tzAccounts").setAttribute("collapsed", "true");
+    //}
+    //else
+    //{
       FillIdentityListPopup(gIDpopup.childNodes[0]);
       setInterval(popupCommand,50);
-    }
+    //}
   }
   catch(ex) {
     haveMail = false;
