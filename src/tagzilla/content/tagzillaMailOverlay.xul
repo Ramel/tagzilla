@@ -72,4 +72,18 @@
               oncommand="tzStealTagline()"/>
   </popup>
 
+  <popup id="mailContext"
+         onpopupshown="gContextMenu.isTextSelected = document.commandDispatcher.focusedWindow.getSelection() != '';
+                       gContextMenu.showItem('tagzilla-mail-context',
+                         gContextMenu.isTextSelected);
+                       gContextMenu.showItem('mailContext-sep-open',
+                         gContextMenu.isTextSelected);">
+    <menuitem id="tagzilla-mail-context"
+              insertafter="mailContext-copy"
+              class="menuitem-iconic menu-iconic icon-tagzilla16"
+              label="&tzSteal.label;"
+              accesskey="&tzSteal.accessKey;"
+              oncommand="tzStealTagline()"/>
+  </popup>
+
 </overlay>
