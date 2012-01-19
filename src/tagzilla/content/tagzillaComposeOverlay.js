@@ -63,6 +63,10 @@ function tzComposeLoad() {
   var compStateListener = new tzComposeStateListener();
   gMsgCompose.RegisterStateListener(compStateListener);
 
+  var dlmgKey = document.getElementById("key_downloadManager");
+  if (dlmgKey)
+    dlmgKey.parentNode.removeChild(dlmgKey);
+
   //tzOverrideCommands(aWin);
 }
 
@@ -323,5 +327,8 @@ tzDocStateListener.prototype = {
   NotifyDocumentWillBeDestroyed: function() {
   }
 };
+
+window.addEventListener("load",tzComposeLoad,false);
+window.addEventListener("compose-window-reopen",tzComposeReload,true);
 
 // EOF

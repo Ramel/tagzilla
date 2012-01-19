@@ -47,14 +47,6 @@
   <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaComposeOverlay.js"/>
-  <script type="application/x-javascript">
-  <![CDATA[
-    if( ! window.tzLoaded ) {
-        window.addEventListener("load",tzComposeLoad,false);
-        window.addEventListener("compose-window-reopen",tzComposeReload,true);
-    }
-  ]]>
-  </script>
 
   <!-- These aren't used anymore; see tzComposeLoad() in tagzillaComposeOverlay.js
   <commandset id="composeCommands">
@@ -70,10 +62,6 @@
     <key id="key_tagzilla_mail" observes="cmd_tagzilla_mail"
          key="&tzMail.keybinding;" modifiers="&tzMail.keymods;"/>
   </keyset>
-
-  <!-- Disable the SeaMonkey Download Manager hotkey -->
-  <key id="key_downloadManager" key="" command=""/>
-
 
   <popup id="msgComposeContext">
     <menuseparator />
