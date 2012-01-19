@@ -76,7 +76,7 @@
                size="100%"/>
       <button label="&chooseFile.label;"
               accesskey="&chooseFile.accesskey;"
-              oncommand="pickFile(document.getElementById('mailFile'))"/>
+              oncommand="Tagzilla.pickFile(document.getElementById('mailFile'))"/>
     </hbox>
     <label value="&leaveBlank.tooltip;"/>
     <checkbox id="mailAuto"

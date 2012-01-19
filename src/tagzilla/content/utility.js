@@ -496,5 +496,54 @@ function tzDumpObj( aObj, objName )
   tzDump( "--- "+objName+" dump end ---\n" );
 }
 
-
 tzDump( "tagzilla/utility.js loaded\n" );
+
+var Tagzilla = {
+
+/*
+ * pickFile(aTarget)
+ *  aTarget: textbox where the chosen filename should go
+ *
+ * Shows a dialog for the user to pick a tagline file
+ */
+  pickFile: function(aTarget) {
+  	const nsILocalFile = Components.interfaces.nsILocalFile;
+    try {
+      var dir = Components.classes["@mozilla.org/file/local;1"]
+                          .createInstance(nsILocalFile);
+      var newDir = null;
+      var oldDir = dir.initWithPath(aTarget.value);
+      if(oldDir && oldDir.parent)
+        newDir = oldDir.parent;
+      var fName = this.txtFilePicker(getText("chooseFile"), false, newDir);
+      if(fName)
+        aTarget.value = fName;
+    }
+    catch(e) {
+      tzDump(e + "\n");
+    }
+  },
+
+  txtFilePicker: function (aTitle, aSave, aStart) {
+    var retVal = null;
+    try {
+      const nsIFilePicker = Components.interfaces.nsIFilePicker;
+      var fp = Components.classes["@mozilla.org/filepicker;1"]
+                         .createInstance(nsIFilePicker);
+      fp.init(window, aTitle, (aSave ? nsIFilePicker.modeSave : nsIFilePicker.modeOpen));
+      fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
+      if(aStart) {
+        fp.displayDirectory = aStart;
+      }
+      var result = fp.show();
+
+      if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace) {
+        retVal = fp.file.path;
+      }
+    }
+    catch (ex) {
+    }
+    return retVal;
+  }
+
+}

@@ -44,7 +44,7 @@ function onPreInit(account, accountValues)
 
 function onInit() {
   try {
-    include('chrome://jslib/content/io/dir.js');
+    //include('chrome://jslib/content/io/dir.js');
     //include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
@@ -84,33 +84,4 @@ function onSave() {
     var result = (prefattr == "value") ? els[i].value : els[i].getAttribute(prefattr);
     writePref( preftype, prefstring, result );
   }
-}
-
-/*
- * pickFile()
- *  aTarget: textbox where the chosen filename should go
- *
- * Shows a dialog for the user to pick a tagline file
- */
-function pickFile(aTarget) {
-  try {
-    var oldDir = aTarget.value;
-    var newDir = null;
-    oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
-    if(oldDir) {
-      newDir = new Dir(oldDir);
-    }
-    var fName = txtFilePicker(getText("chooseFile"),0,newDir);
-    if(fName==null) {
-    }
-    else {
-      aTarget.value=fName;
-      /*
-      var fUtils = new FileUtils();
-      var aPath = fUtils.urlToPath(fName);
-      aTarget.value=aPath;
-      */
-    }
-  }
-  catch(e) {dump(e+'\n');}
 }
