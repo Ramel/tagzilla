@@ -48,7 +48,9 @@ TagzillaPrefService.prototype.name = "tzprefs";
 TagzillaPrefService.prototype.chromePackageName = "tagzilla";
 TagzillaPrefService.prototype.showPanel = function(server) {
     // Show TagZilla panel for all account types
-    return true;
+    // return true;
+    // don't show the panel for rss, or local accounts
+    return (server.type != "rss" && server.type != "none");
 };
 
 // factory for command line handler service (TagzillaPrefService)
