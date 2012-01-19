@@ -68,7 +68,7 @@
     ]]>
   </script>
 
-  <keyset>
+  <keyset id="mainKeyset">
     <key id="key_tagzilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
          key="&tagzilla.keybinding;" modifiers="&tagzilla.keymods;"/>
   </keyset>
