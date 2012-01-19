@@ -48,4 +48,12 @@
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaAuto.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/tagzillaNavigatorOverlay.js"/>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="launchTagzilla"
+                   class="toolbarbutton-1"
+                   label="&tagzilla.appName;"
+                   tooltiptext="&tagzilla.appName;"
+                   oncommand="toTagZilla('TZ_CLIPBOARD')"/>
+  </toolbarpalette>
 </overlay>
