@@ -36,7 +36,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 if(readMyPref("tagzilla.textbox.trapkey","bool",true)) {
-    window.addEventListener("load", tagzillaNavLoad, true);
+    window.addEventListener("load", function() {
+      getBrowser().addEventListener("load", tagzillaNavLoad, true);
+    }, false);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,8 +66,10 @@ function tagzillaNavLoad() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function tzTextarea(e) {
-    if(!(e.ctrlKey && (e.charCode == 74 || e.charCode==106))) return;
+    if(!(e.ctrlKey && (e.charCode == 74 || e.charCode==106)))
+      return;
     e.preventDefault();
+    e.stopPropagation();
     if(readMyPref("tagzilla.textbox.pick","bool",false)) {
       var tag = tzRandTaglineFromFile(readMyPref("tagzilla.default.file","string",""));
       if(tag) {
