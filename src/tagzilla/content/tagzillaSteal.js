@@ -88,10 +88,8 @@ function chooseFile() {
     newDir = new Dir(oldDir);
   }
   var fName = txtFilePicker(getText("chooseFile"),0,newDir);
-  if(fName!=null) {
+  if(fName) {
     tagFile.value=fName;
-//    var fUtils = new FileUtils();
-//    tagFile.value=fUtils.urlToPath(fName);
   }
 }
 

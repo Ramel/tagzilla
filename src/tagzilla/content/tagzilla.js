@@ -104,7 +104,7 @@ function tzOnLoad() {
   try {
     include('chrome://jslib/content/io/file.js');
     include('chrome://jslib/content/io/dir.js');
-    //include('chrome://jslib/content/io/fileUtils.js');
+    include('chrome://jslib/content/io/fileUtils.js');
   }
   catch(ex) {
     alert(getText("noJSlib"));
