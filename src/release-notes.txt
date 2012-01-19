@@ -9,3 +9,5 @@ Release 0.066.2
   We grab this key back for Tagzilla.
 * Updated the fr-FR locale (see translator.credits.txt)
 
+Release 0.066.3a1
+
