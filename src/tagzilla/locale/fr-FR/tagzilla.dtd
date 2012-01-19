@@ -63,11 +63,15 @@
 <!ENTITY home.label "Site web">
 <!ENTITY aClose.label "Ok , Prêt">
 <!ENTITY aClose.accessKey "O">
+<!ENTITY tzUninstall.label     "Désinstaller">
+<!ENTITY tzUninstall.accessKey "U">
 
 <!ENTITY madprops.label "Avec remerciements A">
 <!ENTITY mozdev.label "mozdev.org">
 <!ENTITY mozdev.desc "pour l'hébergement, et à ses developpeurs pour leur aide">
 <!ENTITY mozgest.label "MozGest">
 <!ENTITY mozgest.desc "pour l'inspiration pour les prefs pages unifiées">
+<!ENTITY enigmail.label        "EnigMail">
+<!ENTITY enigmail.desc         "pour l'inspiration pour mettre TagZilla dans le paramétrage des comptes">
 <!ENTITY mozillazine.label "MozillaZine Forums">
 <!ENTITY mozillazine.desc "pour l'aide et réponses a mes questions">

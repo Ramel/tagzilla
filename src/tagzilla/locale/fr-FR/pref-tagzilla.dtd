@@ -1,73 +1,79 @@
 <!ENTITY treeMain.label "TagZilla">
 <!ENTITY prefMain.label "TagZilla">
 
-<!ENTITY noJSlib.caption "JSLib Necessaire">
-<!ENTITY noJSlib.desc "Vous n'avez pas JSLib installe sur cette machine. TagZilla ne fonctionnera pas sans JSLib.">
+<!ENTITY noJSlib.caption "JSLib Nécessaire">
+<!ENTITY noJSlib.desc "JSLib n'est pas installé sur cette machine. TagZilla ne fonctionnera pas sans JSLib.">
 
-<!ENTITY fileCaption.label "Fichier defaut">
+<!ENTITY fileCaption.label "Fichier Taglines par défaut">
 <!ENTITY chooseFile.label "Choisir...">
 <!ENTITY chooseFile.accesskey "C">
-<!ENTITY saveDefault.label "Quand TagZilla se ferme, set ce default au fichier tagline chargé en dernier">
+<!ENTITY saveDefault.label "Quand TagZilla se ferme, définir le dernier fichier Taglines chargé comme le défaut">
 <!ENTITY saveDefault.accesskey "T">
+<!ENTITY charsetCaption.label  "Codage des caractères :">
+<!ENTITY charsetCaption.accesskey "d">
 
-<!ENTITY message.label "Envoyer Messages">
-<!ENTITY mailAuto.label "Automatiquement ajoute une tagline quand un message est envoyé">
+<!ENTITY message.label "Envoi de messages en cours">
+<!ENTITY mailAuto.label "Ajoute automatiquement une tagline quand un message est envoyé">
 <!ENTITY mailAuto.accesskey "A">
-<!ENTITY mailPick.label "Sans ouvrir la fenetre TagZilla">
+<!ENTITY mailPick.label "Sans ouvrir la fenêtre TagZilla">
 <!ENTITY mailPick.accesskey "S">
-<!ENTITY mailFile.label "Fichier:">
+<!ENTITY mailFile.label "Fichier :">
 
-<!ENTITY forAccount.label "Compte:">
+<!ENTITY forAccount.label "Compte :">
 
-<!ENTITY textarea.caption "Espace de textes">
-<!ENTITY textkey.label "Ctrl-J dans &quot;Espace de textes&quot; insert une tagline*">
+<!ENTITY textarea.caption "Zones de texte">
+<!ENTITY textkey.label "Ctrl-J dans &quot;Zone de textes&quot; insère une tagline*">
 <!ENTITY textkey.accesskey "C">
-<!ENTITY textPick.label "Sans ouvrir la fenetre TagZilla ">
+<!ENTITY textPick.label "Sans ouvrir la fenêtre TagZilla">
 <!ENTITY textPick.accesskey "a">
-<!ENTITY needRestart.label "Les modifications de ces parametrages ne seront prises en compte qu'apres le redémarrage de Mozilla.">
+<!ENTITY needRestart.label "Les modifications apportées à ces paramétrages ne seront prises en compte qu'après le redémarrage de Mozilla.">
 
-<!ENTITY leaveBlank.tooltip "Laisser en blanc pour utiliser le fichier tagline defaut.">
+<!ENTITY leaveBlank.tooltip "Laisser en blanc pour utiliser le fichier Taglines par défaut.">
 
 
-<!ENTITY treeFormat.label "Formatant">
-<!ENTITY prefFormat.label "TagZilla: Formatant">
+<!ENTITY treeFormat.label "Mise en forme en cours">
+<!ENTITY prefFormat.label "TagZilla: Mise en forme en cours">
 
-<!ENTITY mailCaption.label "Message couriel">
-<!ENTITY prefix.label "Tagline Prefix">
+<!ENTITY mailCaption.label "Message courriel">
+<!ENTITY prefix.label "Préfixe de Tagline">
 <!ENTITY mailPrefix.accesskey "P">
 <!ENTITY clipPrefix.accesskey "r">
-<!ENTITY suffix.label "Tagline Suffix">
+<!ENTITY suffix.label "Suffixe de Tagline">
 <!ENTITY mailSuffix.accesskey "S">
 <!ENTITY clipSuffix.accesskey "u">
 
-<!ENTITY clipCaption.label "Presse-Papiers et Espace de textes">
+<!ENTITY clipCaption.label "Presse-Papiers et Zone de texte">
 
-<!ENTITY samples.label "Comment cela apparaitra">
-<!ENTITY sample.tagline "Cela est votre tagline.">
+<!ENTITY samples.label "Comment cela apparaîtra">
+<!ENTITY sample.tagline "Ceci est votre tagline.">
 <!ENTITY newline.desc "(En tapant \n on obtient un retour chariot)">
 
 <!ENTITY appearance.label "Apparence">
 
-<!ENTITY treeMultiline.label "Multi-line">
-<!ENTITY prefMultiline.label "TagZilla: Multi-line taglines">
-<!ENTITY multiline.caption "Multi-line taglines">
+<!ENTITY treeMultiline.label "Multiligne">
+<!ENTITY prefMultiline.label "TagZilla: Taglines multilignes">
+<!ENTITY multiline.caption "Taglines multilignes">
 
-<!ENTITY convNewline.label "Convert \n vers une nouvelle ligne dans taglines">
+<!ENTITY convNewline.label "Convertir \n en une nouvelle ligne dans la tagline">
 <!ENTITY convNewline.accesskey "n">
 
-<!ENTITY multiType.caption "Sauve fichiers en">
-<!ENTITY singleLine.label "Single-line format">
-<!ENTITY singleLine.accesskey "S">
-<!ENTITY multiLine.label "Multiple-line format (insert un separateur entre les taglines)">
-<!ENTITY multiLine.accesskey "M">
+<!ENTITY multiType.caption "Sauvegarde les fichiers Tagline sous le format">
+<!ENTITY singleLine.label "Une ligne par tagline">
+<!ENTITY singleLine.accesskey "U">
+<!ENTITY multiLine.label "Plusieurs lignes par tagline (avec séparateur entre les taglines)">
+<!ENTITY multiLine.accesskey "P">
 
-<!ENTITY separator.label "Tagline separator line:">
-<!ENTITY separator.accesskey "T">
+<!ENTITY separator.label "Séparateur de taglines :">
+<!ENTITY separator.accesskey "S">
 
-<!ENTITY multi.desc "Fichiers Tagline comprenant des multi-line taglines, detectés
-grace à la presence de séparateur sur la ligne en dessous. Dans ce cas, il faut séparer chaque tagline d'une autre. Dans le cas contraire, le fichier est chargé comme s'il contenait une single-line tagline.">
+<!ENTITY multi.desc "Les fichiers Taglines comprenant des taglines multilignes sont détectés grâce à la présence de séparateurs. Si le séparateur est détecté, il est utilisé pour séparer chaque tagline de l'autre. S'il n'est pas détecté, le fichier est chargé comme s'il contenait des taglines à une seule ligne.">
 
-<!ENTITY tab.general "General">
+<!ENTITY tab.general "Général">
 <!ENTITY tab.browser "Navigateur">
 <!ENTITY tab.mailnews "Mail/News">
-<!ENTITY tab.about "A propos">
+<!ENTITY tab.about "À propos">
+
+<!ENTITY amPrefTitle.label      "TagZilla">
+<!ENTITY amTagOpts.caption      "Options Tagline">
+<!ENTITY amFullPrefs.label      "Plus de préférences...">
+<!ENTITY amFullPrefs.accesskey  "P">
