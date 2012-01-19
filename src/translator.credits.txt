@@ -1,2 +1,5 @@
 ru-RU: Denis Barov <dindin at dindin.ru>
 es-AR: ZuGro < at gmail com>
+de-AT and de-DE updated by Johannes Kastl <ojkastl at gmx.de>
+fr-FR updated by Claude Fortier <claude.fortier@uqtr.ca> and
+      worms invasion <wormsxulla@yahoo.com>

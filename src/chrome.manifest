@@ -1,0 +1,29 @@
+content	tagzilla	jar:chrome/tagzilla.jar!/tagzilla/content/
+
+# Thunderbird and SeaMonkey
+overlay	chrome://messenger/content/mailWindowOverlay.xul	chrome://tagzilla/content/tagzillaMailOverlay.xul
+overlay	chrome://messenger/content/mailWindowOverlay.xul	chrome://tagzilla/content/tagzillaThunderbirdOverlay.xul
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://tagzilla/content/tagzillaComposeOverlay.xul
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://tagzilla/content/tagzillaThunderbirdOverlay.xul
+
+# SeaMonkey
+overlay	chrome://communicator/content/tasksOverlay.xul	chrome://tagzilla/content/tagzillaTasksOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+overlay	chrome://navigator/content/navigator.xul	chrome://tagzilla/content/tagzillaNavigatorOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+overlay	chrome://communicator/content/contentAreaContextOverlay.xul	chrome://tagzilla/content/tagzillaContextOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+# overlay	chrome://communicator/content/pref/preftree.xul	chrome://tagzilla/content/pref/tagzillaPrefOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+overlay chrome://tagzilla/content/tagzilla.xul chrome://communicator/content/platformCommunicatorOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+overlay chrome://tagzilla/content/tagzillaSteal.xul chrome://communicator/content/platformCommunicatorOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+
+# Firefox
+overlay	chrome://browser/content/browser.xul	chrome://tagzilla/content/tagzillaFirebirdOverlay.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+
+skin	tagzilla	classic/1.0	jar:chrome/tagzilla.jar!/tagzilla/skin/classic/
+style	chrome://global/content/customizeToolbar.xul	chrome://tagzilla/skin/tagzilla.css
+style	chrome://browser/content/browser.xul	chrome://tagzilla/skin/tagzilla.css
+
+locale	tagzilla	en-US	jar:chrome/tagzilla.jar!/tagzilla/locale/en-US/
+locale	tagzilla	de-AT	jar:chrome/tagzilla.jar!/tagzilla/locale/de-AT/
+locale	tagzilla	de-DE	jar:chrome/tagzilla.jar!/tagzilla/locale/de-DE/
+locale	tagzilla	es-AR	jar:chrome/tagzilla.jar!/tagzilla/locale/es-AR/
+locale	tagzilla	fr-FR	jar:chrome/tagzilla.jar!/tagzilla/locale/fr-FR/
+locale	tagzilla	ru-RU	jar:chrome/tagzilla.jar!/tagzilla/locale/ru-RU/

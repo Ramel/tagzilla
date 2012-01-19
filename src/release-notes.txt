@@ -1,0 +1,11 @@
+Release 0.066.2
+
+* Updated for SeaMonkey 2.0 and Thunderbird 3.0.
+* Added a chrome.manifest to the XPI.
+* Activated the existing de-AT, de-DE, es-AR, fr-FR, and ru-RU locales.
+* Fixed various non-fatal error console messages.
+* Increased the width of the options dialog to 36em.
+* In the SeaMonkey message compose window CTRL-J invokes the Download Manager.
+  We grab this key back for Tagzilla.
+* Updated the fr-FR locale (see translator.credits.txt)
+

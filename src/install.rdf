@@ -5,7 +5,7 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:id>{4eac6fec-f68b-4797-be7a-ffeea73e1495}</em:id>
-    <em:version>0.066.1</em:version>
+    <em:version>0.066.2</em:version>
 
     <!-- Target Application this extension can install into,
         with minimum and maximum supported versions. -->
@@ -14,7 +14,7 @@
         <!-- Firefox -->
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>0.7</em:minVersion>
-        <em:maxVersion>3.0.*</em:maxVersion>
+        <em:maxVersion>8.0.*</em:maxVersion>
       </Description>
     </em:targetApplication>
     <em:targetApplication>
@@ -22,7 +22,7 @@
         <!-- Thunderbird -->
         <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
         <em:minVersion>0.4</em:minVersion>
-        <em:maxVersion>3.0.*</em:maxVersion>
+        <em:maxVersion>8.0</em:maxVersion>
       </Description>
     </em:targetApplication>
     <em:targetApplication>
@@ -30,7 +30,7 @@
         <!-- SeaMonkey -->
         <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
         <em:minVersion>1.0</em:minVersion>
-        <em:maxVersion>2.0.*</em:maxVersion>
+        <em:maxVersion>3.0.*</em:maxVersion>
       </Description>
     </em:targetApplication>
     <!-- For future expansion
@@ -60,6 +60,11 @@
       <Description about="urn:mozilla:extension:file:tagzilla.jar">
         <em:package>tagzilla/content/</em:package>
         <em:locale>tagzilla/locale/en-US/</em:locale>
+        <em:locale>tagzilla/locale/de-AT/</em:locale>
+        <em:locale>tagzilla/locale/de-DE/</em:locale>
+        <em:locale>tagzilla/locale/es-AR/</em:locale>
+        <em:locale>tagzilla/locale/fr-FR/</em:locale>
+        <em:locale>tagzilla/locale/ru-RU/</em:locale>
         <em:skin>tagzilla/skin/classic/</em:skin>
       </Description>
     </em:file>
