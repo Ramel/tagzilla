@@ -31,12 +31,6 @@
  */
 
 
-// components defined in this file
-const TAGZILLA_PREFS_EXTENSION_SERVICE_CONTRACTID =
-    "@mozilla.org/accountmanager/extension;1?name=tzprefs";
-const TAGZILLA_PREFS_EXTENSION_SERVICE_CID =
-    Components.ID("{4eac6fec-f68b-4797-be7a-ffeea73e1495}");
-
 // interafces used in this file
 const nsIMsgAccountManagerExtension  = Components.interfaces.nsIMsgAccountManagerExtension;
 const nsICategoryManager = Components.interfaces.nsICategoryManager;
@@ -44,82 +38,132 @@ const nsISupports        = Components.interfaces.nsISupports;
 
 function TagzillaPrefService() {}
 
-TagzillaPrefService.prototype.name = "tzprefs";
-TagzillaPrefService.prototype.chromePackageName = "tagzilla";
-TagzillaPrefService.prototype.showPanel = function(server) {
-    // Show TagZilla panel for all account types
-    // return true;
-    // don't show the panel for rss, or local accounts
+TagzillaPrefService.prototype = {
+  name: "tzprefs",
+  chromePackageName: "tagzilla",
+  showPanel: function(server)
+  {
+    // Show TagZilla panel for all account types except rss and
+    // local accounts.
     return (server.type != "rss" && server.type != "none");
-};
-
-// factory for command line handler service (TagzillaPrefService)
-var TagzillaPrefFactory = new Object();
-
-TagzillaPrefFactory.createInstance =
-function (outer, iid) {
-  if (outer != null)
-    throw Components.results.NS_ERROR_NO_AGGREGATION;
-
-  if (!iid.equals(nsIMsgAccountManagerExtension) && !iid.equals(nsISupports))
-    throw Components.results.NS_ERROR_INVALID_ARG;
-
-  return new TagzillaPrefService();
+  }
 }
 
+// factory for TagzillaPrefService.
+var TagzillaPrefFactory = {
+  createInstance: function (outer, iid) {
+    if (outer != null)
+      throw Components.results.NS_ERROR_NO_AGGREGATION;
+    if (!iid.equals(nsIMsgAccountManagerExtension) &&
+        !iid.equals(nsISupports))
+      throw Components.results.NS_ERROR_INVALID_ARG;
+    return new TagzillaPrefService();
+  },
 
-var TagzillaPrefsModule = new Object();
-
-TagzillaPrefsModule.registerSelf =
-function (compMgr, fileSpec, location, type)
-{
-  dump("Registering TagZilla account manager extension.\n");
-
-  compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-  compMgr.registerFactoryLocation(TAGZILLA_PREFS_EXTENSION_SERVICE_CID,
-                                  "TagZilla Account Manager Extension Service",
-                                  TAGZILLA_PREFS_EXTENSION_SERVICE_CONTRACTID,
-                                  fileSpec,
-                                  location,
-                                  type);
-  catman = Components.classes["@mozilla.org/categorymanager;1"].getService(nsICategoryManager);
-  catman.addCategoryEntry("mailnews-accountmanager-extensions",
-                            "TagZilla account manager extension",
-                            TAGZILLA_PREFS_EXTENSION_SERVICE_CONTRACTID, true, true);
-  dump("TagZilla account manager extension registered.\n");
+  lockFactory: function lockFactory(aLock) { }
 }
 
-TagzillaPrefsModule.unregisterSelf =
-function(compMgr, fileSpec, location)
-{
-  compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-  compMgr.unregisterFactoryLocation(TAGZILLA_PREFS_EXTENSION_SERVICE_CID, fileSpec);
-  catman = Components.classes["@mozilla.org/categorymanager;1"].getService(nsICategoryManager);
-  catman.deleteCategoryEntry("mailnews-accountmanager-extensions",
-                             TAGZILLA_PREFS_EXTENSION_SERVICE_CONTRACTID, true);
-}
+function TagzillaPrefsModule() {}
 
-TagzillaPrefsModule.getClassObject =
-function (compMgr, cid, iid) {
-  if (cid.equals(TAGZILLA_PREFS_EXTENSION_SERVICE_CID))
+TagzillaPrefsModule.prototype = {
+
+  // TAGZILLA_PREFS_EXTENSION_SERVICE_CID
+  classID: Components.ID("{4eac6fec-f68b-4797-be7a-ffeea73e1495}"),
+  // TAGZILLA_PREFS_EXTENSION_SERVICE_CONTRACTID
+  contractID: "@mozilla.org/accountmanager/extension;1?name=tzprefs",
+  mCategory: "TagZilla-account-manager-extension",
+  classDescription: "TagZilla Account Manager Extension Service",
+
+  _xpcom_categories: [{
+    category: "mailnews-accountmanager-extensions",
+    entry: this.mCategory
+  }],
+
+  registerSelf: function (compMgr, fileSpec, location, type)
+  {
+    //dump("Registering TagZilla account manager extension.\n");
+    compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
+    compMgr.registerFactoryLocation(this.classID,
+                                    this.mCategory,
+                                    thi.contractID,
+                                    fileSpec,
+                                    location,
+                                    type);
+    Components.classes["@mozilla.org/categorymanager;1"]
+              .getService(nsICategoryManager)
+              .addCategoryEntry("mailnews-accountmanager-extensions",
+                                this.mCategory,
+                                this.contractID, true, true);
+    //dump("TagZilla account manager extension registered.\n");
+  },
+
+  unregisterSelf: function(compMgr, fileSpec, location)
+  {
+    compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
+    compMgr.unregisterFactoryLocation(this.classID, fileSpec);
+    Components.classes["@mozilla.org/categorymanager;1"]
+              .getService(nsICategoryManager)
+              .deleteCategoryEntry("mailnews-accountmanager-extensions",
+                                   this.mCategory, true);
+  },
+
+
+  getClassObject: function (compMgr, cid, iid)
+  {
+    if (!iid.equals(Components.interfaces.nsIFactory))
+      throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
+    if (!cid.equals(this.classID))
+      throw Components.results.NS_ERROR_NO_INTERFACE;    
     return TagzillaPrefFactory;
+  },
 
+  canUnload: function(compMgr)
+  {
+    return true;
+  },
 
-  if (!iid.equals(Components.interfaces.nsIFactory))
-    throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
+  /* QueryInterface */
+  QueryInterface: function(aIID)
+  {
+    if (aIID.equals(Components.interfaces.nsISupports) ||
+        aIID.equals(nsIMsgAccountManagerExtension))
+    {
+      return new TagzillaPrefService();
+    }
+    throw Components.results.NS_ERROR_NO_INTERFACE;
+  },
 
-  throw Components.results.NS_ERROR_NO_INTERFACE;    
+  /* nsIFactory for TagzillaPrefService */
+  createInstance: function (outer, iid)
+  {
+    if (outer != null)
+      throw Components.results.NS_ERROR_NO_AGGREGATION;
+    return this.QueryInterface(aIID);
+  }
 }
 
-TagzillaPrefsModule.canUnload =
-function(compMgr)
+/*
+ * entrypoint
+ * XPCOMUtils.generateNSGetFactory was introduced in Mozilla 2 (Firefox 4, SeaMonkey 2.1).
+ * XPCOMUtils.generateNSGetModule is for Mozilla 1.9.1 (Firefox 3.5).
+ */
+
+try
 {
-  return true;
+  Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+}
+catch(e) { }
+
+if ("undefined" == typeof XPCOMUtils) // Firefox <= 2.0
+{
+  function NSGetModule(aComMgr, aFileSpec)
+  {
+    return new TagzillaPrefsModule();
+  }
 }
 
-// entrypoint
-function NSGetModule(compMgr, fileSpec) {
-  return TagzillaPrefsModule;
-}
-
-
+var NSGetFactory, NSGetModule;
+if (XPCOMUtils.generateNSGetFactory)
+  NSGetFactory = XPCOMUtils.generateNSGetFactory([TagzillaPrefsModule]);
+else
+  NSGetModule = XPCOMUtils.generateNSGetModule([TagzillaPrefsModule]);
