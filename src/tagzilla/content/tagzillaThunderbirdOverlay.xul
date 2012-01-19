@@ -51,6 +51,8 @@
   <script type="application/x-javascript">
     <![CDATA[
       function toTagZilla(aAction, callback) {
+        var prefPrefix = "tagzilla."+gCurrentIdentity.key;
+        document.documentElement.setAttribute("tzPrefPrefix",prefPrefix); // hack, but it works
         /* Allow manually inserting mail taglines without popping up the
            TagZilla window
            Keep this function in line with the same one in
@@ -69,7 +71,7 @@
     ]]>
   </script>
 
-  <keyset>
+  <keyset id="tasksKeys">
     <key id="key_tagzilla" oncommand="toTagZilla('TZ_CLIPBOARD');"
          key="&tagzilla.keybinding;" modifiers="&tagzilla.keymods;"/>
   </keyset>
