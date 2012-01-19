@@ -79,9 +79,12 @@
   </commandset>
 
   <menupopup id="windowPopup">
-    <menuitem id="tasksMenuTagZilla" command="Tasks:TagZilla"
-      class="menuitem-iconic menu-iconic icon-tagzilla16"
-      insertafter="tasksMenuNavigator" key="key_tagzilla"
-      label="&tagzilla.appName;" accesskey="&tagzilla.accessKey;" />
+    <menuitem id="tasksMenuTagZilla"
+              class="menuitem-iconic menu-iconic icon-tagzilla16"
+              label="&tagzilla.appName;"
+              insertbefore="sep-window-list"
+              command="Tasks:TagZilla"
+              key="key_tagzilla"
+              accesskey="&tagzilla.accessKey;" />
   </menupopup>
 </overlay>
