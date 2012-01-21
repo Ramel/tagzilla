@@ -1,3 +1,20 @@
+Release 0.7a1
+
+* Make version number saner. By now we should be approaching a 1.0 release!
+* Updated for SeaMonkey 2.6 and Thunderbird 9.
+* Repack the JAR file in a saner format.
+* Move javascript addEventListeners from XUL to JS file.
+* Overlay the tasksKeys keyset instead of creating out own keyset.
+* Move the tagzillaNavLoad event listener from the window to the tabbrowser.
+* Update the account manager service for Gecko 2.0+ but retain backward
+  compatibility.
+* Centralize the file picker code in utility.js.
+* Start to wrap loose variables and functions in an object.
+* Update browser detection code for newer Gecko versions.
+* Fix strict warning undeclared variable i.
+* Open the Tagzilla picker window with the current identity when called from
+  the Compose window.
+
 Release 0.066.2
 
 * Updated for SeaMonkey 2.0 and Thunderbird 3.0.
@@ -8,6 +25,6 @@ Release 0.066.2
 * In the SeaMonkey message compose window CTRL-J invokes the Download Manager.
   We grab this key back for Tagzilla.
 * Updated the fr-FR locale (see translator.credits.txt)
-
-Release 0.066.3a1
-
+* Add Customizable Toolbar button to SeaMonkey and Firefox.
+* Added support for the new context menu popup ID in Thunderbird 3.0 and
+  SeaMonkey 2.0.
