@@ -476,6 +476,7 @@ function showTagline(aIndex) {
   var tbo = lBox.treeBoxObject;
   if(aIndex >= 0)
     tbo.ensureRowIsVisible(aIndex);
+  lBox.focus();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -618,23 +619,19 @@ function notSavedDlg() {
 ////////////////////////////////////////////////////////////////////////////////
 function loadList() {
   var notSaved = notSavedDlg();
-  if(notSaved==1) return false;                 // cancel
-  if(notSaved==0 && !saveList()) return false;  // save
+  if(notSaved == 1)
+    return false;  // cancel
+  if(notSaved == 0 && !saveList())
+    return false;  // save
 
   var oldDir = document.getElementById("tzListHead").getAttribute("label");
-  var newDir = null;
-  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
-  if(oldDir) {
-    newDir = new Dir(oldDir);
-  }
-
-  var fName=txtFilePicker(getText("loadFile"),0,newDir);
-  if(fName==null)
+  var fName = Tagzilla.txtFilePicker(getText("loadFile"), false, oldDir);
+  if (!fName)
     return false;
 
   clearList();
   loadTaglineFile(fName);
-  setTimeout(tzOnSel,10);
+  setTimeout(tzOnSel, 10);
   return true;
 }
 
@@ -646,7 +643,7 @@ function loadList() {
 ////////////////////////////////////////////////////////////////////////////////
 function saveList() {
   var fName = document.getElementById("tzListHead").getAttribute("label");
-  if(fName==null)
+  if(!fName)
     return false;
   
   var isSaved = saveTaglineFile(fName);
@@ -665,13 +662,8 @@ function saveList() {
 ////////////////////////////////////////////////////////////////////////////////
 function saveListAs() {
   var oldDir = document.getElementById("tzListHead").getAttribute("label");
-  var newDir = null;
-  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
-  if(oldDir) {
-    newDir = new Dir(oldDir);
-  }
-  var fName = txtFilePicker(getText("saveFile"),1,newDir);
-  if(fName==null)
+  var fName = Tagzilla.txtFilePicker(getText("saveFile"), true, oldDir);
+  if (!fName)
     return false;
   
   var isSaved = saveTaglineFile(fName);
@@ -689,9 +681,10 @@ function saveListAs() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function selRandTagline() {
-  var rv=parseInt(Math.round(Math.random() * (tzList.length-1)));
-  lBox.treeBoxObject.view.selection.select(rv);
-  showTagline(rv);
+  // Using Math.round() will give you a non-uniform distribution!
+  var tag = parseInt(Math.floor(Math.random() * (tzList.length-1)));
+  lBox.treeBoxObject.view.selection.select(tag);
+  showTagline(tag);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

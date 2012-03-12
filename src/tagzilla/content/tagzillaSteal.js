@@ -81,16 +81,7 @@ function OnLoad() {
 // Returns: nothing
 ////////////////////////////////////////////////////////////////////////////////
 function chooseFile() {
-  var oldDir = tagFile.value;
-  var newDir = null;
-  oldDir = oldDir.substring(0,oldDir.lastIndexOf("/")+1);
-  if(oldDir) {
-    newDir = new Dir(oldDir);
-  }
-  var fName = txtFilePicker(getText("chooseFile"),0,newDir);
-  if(fName) {
-    tagFile.value=fName;
-  }
+  Tagzilla.pickFile(tagFile);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

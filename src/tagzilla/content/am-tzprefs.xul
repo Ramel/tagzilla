@@ -44,12 +44,11 @@
 
   <script type="application/x-javascript" src="chrome://messenger/content/AccountManager.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/am-tzprefs.js"/>
-  <script type="application/x-javascript" src="chrome://jslib/content/jslib.js"/>
   <script type="application/x-javascript" src="chrome://tagzilla/content/utility.js"/>
 
   <dialogheader title="&amPrefTitle.label;"/>
 
-  <groupbox orient="vertical" id="noJSlib">
+  <groupbox orient="vertical" id="noJSlib" collapsed="true">
     <caption label="&noJSlib.caption;"/>
     <description>&noJSlib.desc;</description>
     <separator />

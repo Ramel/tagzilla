@@ -260,39 +260,7 @@ function getText(aStr) {
   return null;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// txtFilePicker
-//
-// Parameters:
-//  aTitle: title to go on file picker window
-//  aSave: 1 if picking file to save/overwrite, 0 if picking file to load
-//  aStart: directory to start from
-//    This must be an nsILocalFile.  new Dir("foo") in jslib/io/dir.js will
-//    do the trick, but you have to do it yourself.
-// Returns:
-//  Name of file picked, in path format, or null if cancelled
-////////////////////////////////////////////////////////////////////////////////
-function txtFilePicker(aTitle, aSave, aStart) {
-  var retVal = null;
-  try {
-    const nsIFilePicker = Components.interfaces.nsIFilePicker;
-    var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(window, aTitle, (aSave ? nsIFilePicker.modeSave : nsIFilePicker.modeOpen));
-    fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
-    if(aStart) {
-      fp.displayDirectory = aStart;
-    }
-    var result=fp.show();
-
-    if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace) {
-      //retVal=fp.fileURL.spec;
-      retVal=fp.file.path;
-    }
-  }
-  catch (ex) {
-  }
-  return retVal;
-}
+// txtFilePicker was here.
 
 ////////////////////////////////////////////////////////////////////////////////
 // openUrl
@@ -326,8 +294,8 @@ function openUrl(aUrl) {
     catch (ex) { }
   }
   if (navWindow) {
-    if ("delayedOpenTab" in navWindow)
-      navWindow.delayedOpenTab(aUrl);
+    if ("gBrowser" in navWindow)
+      navWindow.gBrowser.loadOneTab(aUrl);
     else if ("loadURI" in navWindow)
       navWindow.loadURI(aUrl);
     else
@@ -507,33 +475,42 @@ var Tagzilla = {
  * Shows a dialog for the user to pick a tagline file
  */
   pickFile: function(aTarget) {
-  	const nsILocalFile = Components.interfaces.nsILocalFile;
-    try {
-      var dir = Components.classes["@mozilla.org/file/local;1"]
-                          .createInstance(nsILocalFile);
-      var newDir = null;
-      var oldDir = dir.initWithPath(aTarget.value);
-      if(oldDir && oldDir.parent)
-        newDir = oldDir.parent;
-      var fName = this.txtFilePicker(getText("chooseFile"), false, newDir);
-      if(fName)
-        aTarget.value = fName;
-    }
-    catch(e) {
-      tzDump(e + "\n");
-    }
+    var fName = this.txtFilePicker(getText("chooseFile"), false, aTarget.value);
+    if(fName)
+      aTarget.value = fName;
   },
 
+/* txtFilePicker
+ *
+ * Parameters:
+ *  aTitle: title to go on file picker window
+ *  aSave:
+ *    true if picking file to save/overwrite.
+ *    false if picking file to load.
+ *  aStart: directory to start from
+ *    This must be an nsILocalFile.
+ * Returns:
+ *   Name of file picked, in path format, or null if cancelled.
+ */
+
   txtFilePicker: function (aTitle, aSave, aStart) {
+    const nsILocalFile = Components.interfaces.nsILocalFile;
+    const nsIFilePicker = Components.interfaces.nsIFilePicker;
+    var dir = Components.classes["@mozilla.org/file/local;1"]
+                        .createInstance(nsILocalFile);
     var retVal = null;
     try {
-      const nsIFilePicker = Components.interfaces.nsIFilePicker;
+      var newDir = null;
+      var oldDir = dir.initWithPath(aStart);
+      if(oldDir && oldDir.parent)
+        newDir = oldDir.parent;
+
       var fp = Components.classes["@mozilla.org/filepicker;1"]
                          .createInstance(nsIFilePicker);
       fp.init(window, aTitle, (aSave ? nsIFilePicker.modeSave : nsIFilePicker.modeOpen));
       fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
-      if(aStart) {
-        fp.displayDirectory = aStart;
+      if(newDir) {
+        fp.displayDirectory = newDir;
       }
       var result = fp.show();
 
@@ -542,6 +519,7 @@ var Tagzilla = {
       }
     }
     catch (ex) {
+      tzDump("txtFilePicker error" + ex + "\n"); 
     }
     return retVal;
   }

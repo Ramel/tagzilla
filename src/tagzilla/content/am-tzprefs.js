@@ -43,21 +43,6 @@ function onPreInit(account, accountValues)
 }
 
 function onInit() {
-  try {
-    //include('chrome://jslib/content/io/dir.js');
-    //include('chrome://jslib/content/io/fileUtils.js');
-  }
-  catch(ex) {
-    var page=document.documentElement;
-
-    for(var i=0; i<page.childNodes.length; i++) {
-      if(page.childNodes[i].getAttribute("id") != "noJSlib")
-        page.childNodes[i].setAttribute("collapsed","true");
-    }
-    return;
-  }
-  document.getElementById("noJSlib").setAttribute("collapsed","true");
-
   /* This probably isn't the desired way to save mail preferences,
      but it is backward-compatible with TagZilla's old way of doing it */
   var els = document.getElementsByAttribute("prefstring","*");
