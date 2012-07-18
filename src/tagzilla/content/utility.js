@@ -411,7 +411,7 @@ function ucConverter()
  */
 
 function tzClipboardSaver() {
-  this.dataStack = new Array();
+  this.dataStack = [];
   this.clipBoard = Components.classes["@mozilla.org/widget/clipboard;1"]
     .getService(Components.interfaces.nsIClipboard);
   this.needed = this.clipBoard.supportsSelectionClipboard();
@@ -420,11 +420,14 @@ function tzClipboardSaver() {
 tzClipboardSaver.prototype = {
   save: function()
   {
-    if( !this.needed ) return;
+    if (!this.needed)
+      return;
     try
     {
       var transferable = Components.classes["@mozilla.org/widget/transferable;1"]
-        .createInstance(Components.interfaces.nsITransferable);
+                                   .createInstance(Components.interfaces.nsITransferable);
+      if ("init" in transferable)
+        transferable.init(null);
       transferable.addDataFlavor("text/unicode");
       this.clipBoard.getData(transferable, this.clipBoard.kSelectionClipboard);
       var flavour = {};
@@ -433,11 +436,12 @@ tzClipboardSaver.prototype = {
       transferable.getAnyTransferData(flavour, data, length);
       this.dataStack.push(data);
     }
-    catch(ex) { }
+    catch (ex) { }
   },
   restore: function()
   {
-    if( !this.needed ) return;
+    if (!this.needed)
+      return;
     try
     {
       var data = this.dataStack.pop();
@@ -446,7 +450,7 @@ tzClipboardSaver.prototype = {
       data = data.value.QueryInterface(Components.interfaces.nsISupportsString).data;
       pasteClipboard.copyStringToClipboard(data, this.clipBoard.kSelectionClipboard);
     }
-    catch(ex) { }
+    catch (ex) { }
   }
 };
 
@@ -467,6 +471,23 @@ function tzDumpObj( aObj, objName )
 tzDump( "tagzilla/utility.js loaded\n" );
 
 var Tagzilla = {
+
+  urlToPath: function(aUrl) {
+    var rv;
+    if (!aURL || !/^file:/.test(aUrl))
+      return null;
+
+    var fph = Components.classes["@mozilla.org/network/io-service;1"]
+                        .getService(Components.interfaces.nsIIOService)
+                        .getProtocolHandler("file")
+                        .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    try {
+      fph.getFileFromURLSpec(aUrl).path;
+    }
+    catch (e) {}
+
+    return rv;
+  },
 
 /*
  * pickFile(aTarget)

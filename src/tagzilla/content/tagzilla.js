@@ -352,11 +352,10 @@ function tzOnSel() {
 ////////////////////////////////////////////////////////////////////////////////
 function loadTaglineFile(aUrl) {
 
-  var aFile=aUrl;
-  if(aUrl.substring(0,4)=="file") {
-    var fUtils = new FileUtils();
-    aFile = fUtils.urlToPath(aUrl);
-  }
+  var aFile = aUrl;
+  if (/^file:/.test(aUrl))
+    aFile = Tagzilla.urlToPath(aUrl);
+
   var f = new File(aFile);
   var lTitle = document.getElementById("tzListHead");
 
@@ -410,11 +409,9 @@ function loadTaglineFile(aUrl) {
 ////////////////////////////////////////////////////////////////////////////////
 function saveTaglineFile(aUrl) {
 
-  var aFile=aUrl;
-  if(aUrl.substring(0,4)=="file") {
-    var fUtils = new FileUtils();
-    aFile = fUtils.urlToPath(aUrl);
-  }
+  var aFile = aUrl;
+  if (/^file:/.test(aUrl))
+    aFile = Tagzilla.urlToPath(aUrl);
 
   var f = new File(aFile);
   var rv = f.open("w");
