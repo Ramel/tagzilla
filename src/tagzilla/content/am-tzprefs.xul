@@ -33,7 +33,7 @@
 -->
 
 <?xml-stylesheet href="chrome://messenger/skin/accountManage.css" type="text/css"?>
-<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
 <!DOCTYPE page SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd">
 

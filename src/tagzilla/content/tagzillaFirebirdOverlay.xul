@@ -33,10 +33,9 @@
  * GPL.
 -->
 
-<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
 <?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
-<!DOCTYPE window [
+<!DOCTYPE overlay [
 <!ENTITY % tagzillaDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" >
 %tagzillaDTD;
 ]>

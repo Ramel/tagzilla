@@ -34,9 +34,9 @@
    -->
 
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://tagzilla/content/tagzilla.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagzilla/skin/tagzilla.css" type="text/css"?>
 
-<!DOCTYPE page [
+<!DOCTYPE overlay [
   <!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" > %brandDTD;
   <!ENTITY % tzmainDTD SYSTEM "chrome://tagzilla/locale/tagzilla.dtd" > %tzmainDTD;
   <!ENTITY % tzprefsDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" > %tzprefsDTD;

@@ -62,3 +62,20 @@ toolbar[iconsize="small"] #launchTagzilla:active {
 #tzDelBtn[disabled] {
     list-style-image: url("chrome://tagzilla/skin/tz-del-dis.png");
 }
+
+/* The TagZilla icon on menus */
+
+.icon-tagzilla16 {
+  list-style-image: url("chrome://tagzilla/content/tagzilla-16.png");
+}
+
+/* XUL-clickable URLs */
+
+.tagzilla-url {
+  color: blue;
+}
+
+.tagzilla-url:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

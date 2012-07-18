@@ -33,7 +33,7 @@
  * GPL.
    -->
 
-<!DOCTYPE window [
+<!DOCTYPE overlay [
 <!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
 %brandDTD;
 <!ENTITY % identityDTD SYSTEM "chrome://tagzilla/locale/pref-tagzilla.dtd" >
